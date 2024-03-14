@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+li {
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+#heading {
+
+}
+
+.head-top-blc {
+    height: 75px;
+    padding: 17px 100px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.head-top-blc .logo {
+    padding: 10.5px;
+}
+
+.head-top-blc .logo img {
+    height: 20px;
+}
+
+.head-top-blc .user-dropdown {
+    display: flex;
+}
+
+.head-top-blc .user-img {
+
+}
+
+.head-top-blc .user-img img {
+    width: 40px;
+    height: 40px;
+    border-radius: 90%;
+    border: 1px #333 solid;
+    margin-right: 5px;
+}
+
+.head-top-blc .user-dis .user-name{
+    font-size: 16px;
+}
+
+.head-top-blc .dropdown-btn{
+    margin: 12px;
+}
+
+.head-navbar{
+    background-color: #435EBE;
+    height: 65px;
+    display: flex;
+    padding: 0 100px;
+}
+
+.head-navbar ul{
+    color: #fff;
+    display: flex;
+    margin: 21px 10px;
+    font-size: 16px;
+    position: relative;
+}
+
+.head-navbar ul span{
+    margin: 0 5px;
+}
+
+.head-navbar .submenu{
+    display: none;
+    position: absolute;
+    left: -13px;
+    flex-direction: column;
+    background-color: #fff;
+    width: 200px;
+    height: auto;
+    border-radius: 5px;
+}
+
+.head-navbar .submenu li{
+    font-size: 16px;
+    height: 45px;
+    padding: 15px 15px;
+}
+
+.head-navbar ul:hover .submenu{
+    display: flex;
+    animation: slideup 0.4s;
+}
+
+#content {
+    background-color: #dddeeb;
+    min-height: 1000px;
+}
+
+.content-head {
+    width: 100vw;
+    padding: 50px 7vw;
+    margin: 0 10px;
+    font-size: 27px;
+}
+
+.content-main{
+    width: 100vw;
+    padding: 50px 7vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.content-left-blc{
+    width: 75%;
+    min-height: 100px;
+    background-color: #333;
+}
+
+.content-right-blc{
+    width: 23%;
+    min-height: 100px;
+    background-color: #333;
+}
+
+
+
+@keyframes slideup {
+    from{
+        transform: translateY(20px);
+    }
+
+    to{
+        transform: translateY(0);
+    }
+}
