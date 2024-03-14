@@ -111,7 +111,7 @@ a{
 
 .content-main{
     width: 100vw;
-    padding: 50px 7vw;
+    padding: 0 7vw;
     display: flex;
     justify-content: space-between;
 }
@@ -119,13 +119,32 @@ a{
 .content-left-blc{
     width: 75%;
     min-height: 100px;
-    background-color: #333;
+}
+
+.content-left-blc .top-cnt-main{
+    display: flex;
+    justify-content: space-between;
+}
+
+.top-cnt-main .pf-view{
+    display: flex;
+    justify-content: space-between;
+    width: 20%;
+    height: 130px;
+    padding: 32px 24px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.top-cnt-main .pf-view .i-wrapper{
+    width: 48px;
+    height: 48px;
+    background-color: purple;
 }
 
 .content-right-blc{
     width: 23%;
     min-height: 100px;
-    background-color: #333;
 }
 
 
