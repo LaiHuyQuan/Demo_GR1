@@ -131,13 +131,13 @@ a{
 
 .top-cnt-main .prj-view{
     display: flex;
-    justify-content: space-between;
     width: 23.5%;
     height: 130px;
     padding: 32px 24px;
     background-color: #fff;
     border-radius: 5%;
     margin: 20px 0px;
+    gap: 15px;
 }
 
 .top-cnt-main .prj-view .i-wrapper{
@@ -158,7 +158,8 @@ a{
 
 .top-cnt-main .prj-view .prj-main{
     width: 60%;
-    padding: 5%;
+    display: flex;
+    flex-direction: column;
 }
 
 .content-left-blc .prj-chart-js {
