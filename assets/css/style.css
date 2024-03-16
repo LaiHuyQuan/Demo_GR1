@@ -124,10 +124,12 @@ a{
 
 .content-left-blc .top-cnt-main{
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    flex-wrap: wrap;
+    gap: 2%
 }
 
-.top-cnt-main .pf-view{
+.top-cnt-main .prj-view{
     display: flex;
     justify-content: space-between;
     width: 23.5%;
@@ -138,7 +140,7 @@ a{
     margin: 20px 0px;
 }
 
-.top-cnt-main .pf-view .i-wrapper{
+.top-cnt-main .prj-view .i-wrapper{
     width: 48px !important;
     height: 48px !important; 
     border-radius: 10px;
@@ -154,37 +156,38 @@ a{
     color: #fff;
 }
 
-.top-cnt-main .pf-view .pf-main{
+.top-cnt-main .prj-view .prj-main{
     width: 60%;
     padding: 5%;
 }
 
-.content-left-blc .pf-chart {
+.content-left-blc .prj-chart-js {
     margin: 20px 0;
     width: 100%;
-    min-height: 200px;
     background-color: #fff;
     border-radius: 10px;
+    flex-direction: column;
 }
 
-.content-left-blc .pf-chart .pf-chart-hd{
+.content-left-blc .prj-chart-js .prj-chart-hd{
     height: 80px;
     padding: 24px;
     font-size: 20px;
     font-weight: bold;
 }
 
-.content-left-blc .pf-chart .pf-chart-main {
+.content-left-blc .prj-chart-js .prj-chart-main {
+    /* display: block; */
     padding: 0 24px 24px;
     position: relative;
 }
 
-.pf-chart-main i{
+.prj-chart-main i{
     position: absolute;
     right: 24px;
 }
 
-.pf-chart-main .chart-menu{
+.prj-chart-main .chart-menu{
     position: absolute;
     border: 1px #000 solid;
     border-radius: 2px;
@@ -197,10 +200,10 @@ a{
     justify-content: space-around;
     right: 25px;
     top: 20px;
-    display: none;
+    /* display: none; */
 }
 
-.pf-chart-main i:hover .chart-menu {
+.prj-chart-main i:hover .chart-menu {
     /* margin: 0 5px; */
     display: flex;
 }
@@ -210,7 +213,7 @@ a{
     min-height: 100px;
 }
 
-.content-right-blc .user-pf{
+.content-right-blc .user-prj{
     width: 100%;
     height: 108px;
     padding: 24px 48px;
@@ -221,7 +224,7 @@ a{
     /* justify-content: space-between; */
 }
 
-.user-pf .user-pf-img img{
+.user-prj .user-prj-img img{
     width: 60px;
     height: 60px;
     border-radius: 90%;
@@ -229,13 +232,13 @@ a{
     margin-right: 20px;
 }
 
-.user-pf-main{
+.user-prj-main{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
 
-.userpf-name, .userpf-name-tag{
+.userprj-name, .userprj-name-tag{
     font-weight: 900;
 }
 
@@ -274,16 +277,32 @@ a{
     border: none;
 }
 
+.hide {
+    display: none;
+}
+
 .show {
     display: flex;
+    animation: slidedown 0.3s;
 }
 
 @keyframes slideup {
     from{
-        transform: translateY(20px);
+        transform: translateY(20%);
     }
 
     to{
         transform: translateY(0);
     }
+}
+
+@keyframes slidedown {
+    from {
+        transform: translateY(-50%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+    
 }
