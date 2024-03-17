@@ -172,10 +172,18 @@ a{
 }
 
 .content-left-blc .prj-chart-js .prj-chart-hd{
+    display: flex;
+    justify-content: space-between;
     height: 80px;
     padding: 24px;
     font-size: 20px;
     font-weight: bold;
+}
+
+.prj-chart-hd i:hover{
+    height: 19px;
+    background-color: rgba(0,0,0,0.1);
+    cursor: pointer;
 }
 
 .content-left-blc .prj-chart-js .project-table{

@@ -77,13 +77,14 @@ const projectDis = document.querySelector('.prj-chart-js')
 let currentTable = null;
 
 test.addEventListener('click', function (e) {
-    if (e.target && e.target.matches('.prj-view-js')) {
+    if (e.target.matches('.prj-view-js')) {
         const projectData = JSON.parse(e.target.getAttribute('data-project'));
         console.log(projectData);
 
         let tableHTML = `
             <div class="prj-chart-hd">
                 <span>Project Visit</span>
+                <i class="fa-solid fa-x"></i>
             </div>
             <table class="project-table" border="1" cellpadding="5" cellspacing="0" width="50%" align="center">
                 <thead>
@@ -127,13 +128,15 @@ test.addEventListener('click', function (e) {
             currentTable.classList.add('hide');
         }
         projectDis.classList.remove('hide');
+        projectDis.classList.add('show');
         currentTable = projectDis;
     }
 });
 
-document.addEventListener('click', function (e) {
-    if (currentTable && !e.target.matches('.prj-chart-js, .prj-view-js')) {
-        currentTable.classList.add('hide');
+projectDis.addEventListener('click', function (e) {
+    if(e.target.matches('.fa-x')){
+        projectDis.classList.add('hide');
+        projectDis.classList.remove('show');
     }
 });
 
