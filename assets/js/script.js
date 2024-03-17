@@ -1,6 +1,8 @@
 $(document).ready(function() {
-    function addProject(project, online, total){
-        var htmlString = '<div class="col-6 col-lg-3 col-md-6 prjBtn">' +
+    var Glodata;
+
+    function addProject(project, online, total) {
+        var htmlString = '<div class="col-6 col-lg-3 col-md-6 prjBtn" data-info="' + project + '" >' +
                             '<div class="card">' +
                                 '<div class="card-body px-4 py-4-5">' +
                                     '<div class="row">' +
@@ -10,14 +12,14 @@ $(document).ready(function() {
                                             '</div>' +
                                         '</div>' +
                                         '<div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">' +
-                                            '<h6 class="text-muted font-semibold">' + project +'</h6>' +
-                                            '<h6 class="font-extrabold mb-0">On:'+ online +'/'+ total+'</h6>' +
+                                            '<h6 class="text-muted font-semibold">' + project + '</h6>' +
+                                            '<h6 class="font-extrabold mb-0">On:' + online + '/' + total + '</h6>' +
                                         '</div>' +
                                     '</div>' +
                                 '</div>' +
                             '</div>' +
                         '</div>';
-    
+
         $('.prjList').append(htmlString);
     }
 
@@ -29,56 +31,85 @@ $(document).ready(function() {
             json: '{"token":"O1L486UPS9MVY7jcihhe4idshRBb0TyD"}'
         },
         success: function(data) {
-            console.log(data); 
+            console.log(data);
+            Glodata = data;
             var result = countOnlineElements(data);
             console.log(result);
+            createTable(data);
         },
         error: function(xhr, status, error) {
-            // Xử lý lỗi ở đây
             console.error(status, error);
         }
     });
 
     function countOnlineElements(data) {
         var counts = {};
-    
+
         $.each(data, function(project, projectData) {
             var onlineCount = 0;
             var totalCount = projectData.length;
-    
+
             $.each(projectData, function(index, item) {
                 if (item[1] === 'Online') {
                     onlineCount++;
                 }
             });
-    
+
             counts[project] = {
                 online: onlineCount,
                 total: totalCount
             };
             addProject(project, onlineCount, totalCount);
         });
-    
         return counts;
     };
-    
-    $('.prjList').on('click', '.prjBtn', function() {
-        alert('Button clicked!');
-    });
 
-    function createTableRowHTML(id, status) {
-        var htmlString = '<tr>' +
-                            '<td class="text-bold-500">' + id + '</td>' +
-                            '<td>' + status + '</td>' +
-                        '</tr>';
-        return htmlString;
+    function createTable(data) {
+        $.each(data, function(parentName, childrenData) {
+            var tableNameCSS = convertToValidCSSClass(parentName);
+            var tableHTML = '<div class="table-container hide ' + tableNameCSS + '" >' + 
+                                '<h3 class="table-hd ">' + parentName + '</h3>' +
+                                '<table class="table table-lg">' +
+                                    '<thead>' +
+                                        '<tr>' +
+                                            '<th>ID</th>' +
+                                            '<th>STATUS</th>' +
+                                        '</tr>' +
+                                    '</thead>' +
+                                    '<tbody>';
+
+            $.each(childrenData, function(index, childData) {
+                tableHTML += '<tr>' +
+                                '<td class="text-bold-500">' + childData[0] + '</td>' +
+                                '<td>' + childData[1] + '</td>' +
+                            '</tr>';
+            });
+
+            tableHTML += '</tbody></table></div>';
+
+            $('.table-responsive').append(tableHTML);
+        });
+    }
+
+    $('.prjList').on('click', '.prjBtn', function() {
+        var tableName = $(this).data('info');
+        console.log(tableName)
+    
+        var tableNameCSS = convertToValidCSSClass(tableName);
+        console.log(tableNameCSS)
+
+        $('.table-container:not(.hide)').addClass('hide');
+    
+        var tableContainer = $('.table-container.' + tableNameCSS);
+        if (tableContainer.hasClass('hide')) {
+            tableContainer.removeClass('hide');
+        } else {
+            tableContainer.addClass('hide');
+        }
+    });
+    
+    function convertToValidCSSClass(str) {
+        return str.replace(/\W+/g, '-').toLowerCase();
     }
     
-    var idValue = 'Michael Right';
-    var statusValue = '$15/hr';
-    var newTableRowHTML = createTableRowHTML(idValue, statusValue);
-    
-    $('.table tbody').append(newTableRowHTML);
-    
 });
-
