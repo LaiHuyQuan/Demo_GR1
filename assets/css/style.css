@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: sans-serif;
 }
 
 li {
@@ -175,7 +175,7 @@ a{
     display: flex;
     justify-content: space-between;
     height: 80px;
-    padding: 24px;
+    padding: 24px 24px 0 24px;
     font-size: 20px;
     font-weight: bold;
 }
@@ -190,9 +190,17 @@ a{
     margin: 30px;
 }
 
+.project-table th{
+    padding: 5px 10px;
+    text-align: left;
+    border-bottom: 1px #dedede solid;
+    color: #607080;
+}
+
 .project-table td{
     padding: 4px 10px; 
-    text-align: center;
+    border-bottom: 1px #dedede solid;
+    color: #607080;
 }
 
 .content-right-blc{

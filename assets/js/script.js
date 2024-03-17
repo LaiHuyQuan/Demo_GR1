@@ -24,7 +24,7 @@ fetch(apiURL)
                                         </div>
                                         <div class="prj-main prj-view-js">
                                             <span class="prj-cnt prj-view-js">${key}</span>
-                                            <span class="prj-info prj-view-js">On: ${onlineCount}/${totalCount}</span>
+                                            <span class="prj-info prj-view-js">Online: ${onlineCount}/${totalCount}</span>
                                         </div>
                                     </div>`;
             }
@@ -86,11 +86,11 @@ test.addEventListener('click', function (e) {
                 <span>Project Visit</span>
                 <i class="fa-solid fa-x"></i>
             </div>
-            <table class="project-table" border="1" cellpadding="5" cellspacing="0" width="50%" align="center">
+            <table class="project-table" cellpadding="5" cellspacing="0" width="50%" align="left">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Status</th>
+                        <th>STATUS</th>
                     </tr>
                 </thead>
                 <tbody>
