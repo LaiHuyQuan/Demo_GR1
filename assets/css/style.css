@@ -168,6 +168,7 @@ a{
     background-color: #fff;
     border-radius: 10px;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .content-left-blc .prj-chart-js .prj-chart-hd{
@@ -177,36 +178,13 @@ a{
     font-weight: bold;
 }
 
-.content-left-blc .prj-chart-js .prj-chart-main {
-    /* display: block; */
-    padding: 0 24px 24px;
-    position: relative;
+.content-left-blc .prj-chart-js .project-table{
+    margin: 30px;
 }
 
-.prj-chart-main i{
-    position: absolute;
-    right: 24px;
-}
-
-.prj-chart-main .chart-menu{
-    position: absolute;
-    border: 1px #000 solid;
-    border-radius: 2px;
-    width: 150px;
-    height: 90px;
-    background-color: #fff;
+.project-table td{
+    padding: 4px 10px; 
     text-align: center;
-    /* display: flex; */
-    flex-direction: column;
-    justify-content: space-around;
-    right: 25px;
-    top: 20px;
-    /* display: none; */
-}
-
-.prj-chart-main i:hover .chart-menu {
-    /* margin: 0 5px; */
-    display: flex;
 }
 
 .content-right-blc{
@@ -285,6 +263,12 @@ a{
 .show {
     display: flex;
     animation: slidedown 0.3s;
+}
+
+.online{
+    background-color: rgb(50, 195, 50);
+    border-radius: 20%;
+    padding: 1px 7px;
 }
 
 @keyframes slideup {
