@@ -67,7 +67,7 @@ $(document).ready(function() {
     function createTable(data) {
         $.each(data, function(parentName, childrenData) {
             var tableNameCSS = convertToValidCSSClass(parentName);
-            var tableHTML = '<div class="table-container hide ' + tableNameCSS + '" >' + 
+            var tableHTML = '<div class="table-container hide ' + tableNameCSS + ' " >' + 
                                 '<h3 class="table-hd ">' + parentName + '</h3>' +
                                 '<table class="table table-lg">' +
                                     '<thead>' +
@@ -79,9 +79,14 @@ $(document).ready(function() {
                                     '<tbody>';
 
             $.each(childrenData, function(index, childData) {
+                if(childData[1] == 'Online'){
+                    childStatus = '<td>' +'<span class="online">' + childData[1] +'</span>' + '</td>'
+                }else{
+                    childStatus = '<td>' +'<span style="padding: 10px 15px">' + childData[1] +'</span>' + '</td>'
+                }
                 tableHTML += '<tr>' +
                                 '<td class="text-bold-500">' + childData[0] + '</td>' +
-                                '<td>' + childData[1] + '</td>' +
+                                childStatus +
                             '</tr>';
             });
 
@@ -98,14 +103,14 @@ $(document).ready(function() {
         var tableNameCSS = convertToValidCSSClass(tableName);
         console.log(tableNameCSS)
 
-        $('.table-container:not(.hide)').addClass('hide');
-    
         var tableContainer = $('.table-container.' + tableNameCSS);
-        if (tableContainer.hasClass('hide')) {
-            tableContainer.removeClass('hide');
-        } else {
-            tableContainer.addClass('hide');
-        }
+        tableContainer.toggleClass('show');
+        $('.table-container:not(.show)').addClass('hide');
+    
+        tableContainer.toggleClass('hide');
+        tableContainer.toggleClass('show');
+
+        
     });
     
     function convertToValidCSSClass(str) {

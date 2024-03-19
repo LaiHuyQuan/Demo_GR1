@@ -14,5 +14,11 @@
 }
 
 .show{
-    display: flex !important;
+   /* â  */
+}
+
+.online{
+    padding: 10px 15px;
+    background-color: green;
+    border-radius: 45%;
 }
