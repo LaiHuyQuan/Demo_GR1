@@ -1,6 +1,5 @@
 $(document).ready(function() {
-    var Glodata;
-
+    // tạo khối project(prjList)
     function addProject(project, online, total) {
         var htmlString = '<div class="col-6 col-lg-3 col-md-6 prjBtn" data-info="' + project + '" >' +
                             '<div class="card">' +
@@ -20,9 +19,10 @@ $(document).ready(function() {
                             '</div>' +
                         '</div>';
 
-        $('.prjList').append(htmlString);
+        $('.prjList').append(htmlString); //thêm khối vào prjList
     }
 
+    // API
     $.ajax({
         url: 'https://ems.ioteamvn.com//test/test1',
         method: 'GET',
@@ -31,39 +31,39 @@ $(document).ready(function() {
             json: '{"token":"O1L486UPS9MVY7jcihhe4idshRBb0TyD"}'
         },
         success: function(data) {
-            console.log(data);
-            Glodata = data;
             var result = countOnlineElements(data);
             console.log(result);
-            createTable(data);
+            createTable(data);  // tạp bảng dữ liệu
         },
         error: function(xhr, status, error) {
             console.error(status, error);
         }
     });
 
+    // đếm thiết bị trong project || tạo khối
     function countOnlineElements(data) {
         var counts = {};
 
         $.each(data, function(project, projectData) {
             var onlineCount = 0;
             var totalCount = projectData.length;
-
+            
+            // đếm số thiết bị online
             $.each(projectData, function(index, item) {
                 if (item[1] === 'Online') {
                     onlineCount++;
                 }
             });
-
+            // thông tin project
             counts[project] = {
                 online: onlineCount,
                 total: totalCount
             };
-            addProject(project, onlineCount, totalCount);
+            addProject(project, onlineCount, totalCount); // tạo khối project
         });
         return counts;
     };
-
+    // tạo bảng theo dõi thiết bị
     function createTable(data) {
         $.each(data, function(parentName, childrenData) {
             var tableNameCSS = convertToValidCSSClass(parentName);
@@ -77,7 +77,7 @@ $(document).ready(function() {
                                         '</tr>' +
                                     '</thead>' +
                                     '<tbody>';
-
+            // kiểm tra trạng thái thiêt bị
             $.each(childrenData, function(index, childData) {
                 if(childData[1] == 'Online'){
                     childStatus = '<td>' +'<span class="online">' + childData[1] +'</span>' + '</td>'
@@ -91,30 +91,31 @@ $(document).ready(function() {
             });
 
             tableHTML += '</tbody></table></div>';
-
+            // tạo bảng
             $('.table-responsive').append(tableHTML);
         });
     }
 
+    // hiển thị bảng theo dõi thiết bị
     $('.prjList').on('click', '.prjBtn', function() {
+        // tìm đối tượng
         var tableName = $(this).data('info');
-        console.log(tableName)
-    
+        // console.log(tableName)
         var tableNameCSS = convertToValidCSSClass(tableName);
-        console.log(tableNameCSS)
-
+        // console.log(tableNameCSS)
         var tableContainer = $('.table-container.' + tableNameCSS);
-        tableContainer.toggleClass('show');
-        $('.table-container:not(.show)').addClass('hide');
+
+        tableContainer.toggleClass('show'); // đánh dấu đối tượng
+        $('.table-container:not(.show)').addClass('hide'); // ẩn bảng 
     
-        tableContainer.toggleClass('hide');
-        tableContainer.toggleClass('show');
+        tableContainer.toggleClass('hide');// hiện đối tượng
+        tableContainer.toggleClass('show');// xóa đánh dấu
 
         
     });
-    
+    // chuyển đổi tên dự án --> class
     function convertToValidCSSClass(str) {
-        return str.replace(/\W+/g, '-').toLowerCase();
+        return str.replace(/\W+/g, '-').toLowerCase(); 
     }
     
 });
