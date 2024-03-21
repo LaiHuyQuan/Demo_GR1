@@ -22,3 +22,14 @@
     background-color: green;
     border-radius: 45%;
 }
+
+.table-hd-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.fa-sort, .fa-x{
+    padding: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+}

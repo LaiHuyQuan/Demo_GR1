@@ -68,15 +68,25 @@ $(document).ready(function() {
         $.each(data, function(parentName, childrenData) {
             var tableNameCSS = convertToValidCSSClass(parentName);
             var tableHTML = '<div class="table-container hide ' + tableNameCSS + ' " >' + 
-                                '<h3 class="table-hd ">' + parentName + '</h3>' +
-                                '<table class="table table-lg">' +
+                                '<div class ="table-hd-container">' +
+                                    '<h3 class="table-hd ">' + parentName + '</h3>' +
+                                    '<div>' +
+                                        '<i class="fa-solid fa-sort" " data-info="' + tableNameCSS + '"></i>' +
+                                        '<i class="fa-solid fa-x" " data-info="' + tableNameCSS + '"></i>' +
+                                        '</div>' +
+                                '</div>' +
+                                '<table class="table table-lg '+tableNameCSS+'">' +
                                     '<thead>' +
                                         '<tr>' +
                                             '<th>ID</th>' +
                                             '<th>STATUS</th>' +
+                                            '<th>Lv1</th>' +
+                                            '<th>Lv2</th>' +
+                                            '<th>Lv3</th>' +
+                                            '<th>Lv4</th>' +
                                         '</tr>' +
                                     '</thead>' +
-                                    '<tbody>';
+                                    '<tbody class="'+tableNameCSS+'">';
             // kiểm tra trạng thái thiêt bị
             $.each(childrenData, function(index, childData) {
                 if(childData[1] == 'Online'){
@@ -87,6 +97,10 @@ $(document).ready(function() {
                 tableHTML += '<tr>' +
                                 '<td class="text-bold-500">' + childData[0] + '</td>' +
                                 childStatus +
+                                '<td class="text-bold-500">' + childData[2] + '</td>' +
+                                '<td class="text-bold-500">' + childData[3] + '</td>' +
+                                '<td class="text-bold-500">' + childData[4] + '</td>' +
+                                '<td class="text-bold-500">' + childData[5] + '</td>' +
                             '</tr>';
             });
 
@@ -97,7 +111,7 @@ $(document).ready(function() {
     }
 
     // hiển thị bảng theo dõi thiết bị
-    $('.prjList').on('click', '.prjBtn', function() {
+    $('.prjList').on('click', '.prjBtn', function closeTable() {
         // tìm đối tượng
         var tableName = $(this).data('info');
         // console.log(tableName)
@@ -110,12 +124,43 @@ $(document).ready(function() {
     
         tableContainer.toggleClass('hide');// hiện đối tượng
         tableContainer.toggleClass('show');// xóa đánh dấu
-
-        
     });
     // chuyển đổi tên dự án --> class
     function convertToValidCSSClass(str) {
         return str.replace(/\W+/g, '-').toLowerCase(); 
     }
+
+    // sắp xếp thiết bị
+    function sortDiviceByStatus(tableName) {
+        var $tbody = $('.' + tableName + ' tbody');
+        console.log($tbody)
+        
+        $tbody.find('tr').sort(function(a, b) {
+          var statusA = $(a).find('td:eq(1) span').text().trim();
+          var statusB = $(b).find('td:eq(1) span').text().trim();
+          
+          // Sắp xếp online trước, sau đó là offline
+          if (statusA === 'Online' && statusB === 'Offline') {
+            return -1;
+          } else if (statusA === 'Offline' && statusB === 'Online') {
+            return 1;
+          } else {
+            return 0;
+          }
+        }).appendTo($tbody);
+    }
     
+    // click nút sort
+    $('.card-body').on('click', '.fa-sort', function(){
+        var tableName = $(this).data('info');
+        console.log('ok');
+        sortDiviceByStatus(tableName);
+    })
+    // click nút close
+    $('.card-body').on('click', '.fa-x', function(){
+        console.log('ok')
+        var tableName = $(this).data('info');
+        var tableContainer = $('.table-container.' + tableName);
+        tableContainer.toggleClass('hide');
+    })
 });
