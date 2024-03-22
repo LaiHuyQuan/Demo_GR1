@@ -94,7 +94,7 @@ $(document).ready(function() {
                 }else{
                     childStatus = '<td>' +'<span style="padding: 10px 15px">' + childData[1] +'</span>' + '</td>'
                 }
-                tableHTML += '<tr>' +
+                tableHTML += '<tr data-original-index="' + index + '">' +
                                 '<td class="text-bold-500">' + childData[0] + '</td>' +
                                 childStatus +
                                 '<td class="text-bold-500">' + childData[2] + '</td>' +
@@ -124,6 +124,9 @@ $(document).ready(function() {
     
         tableContainer.toggleClass('hide');// hiện đối tượng
         tableContainer.toggleClass('show');// xóa đánh dấu
+
+        resetTable(tableNameCSS); //reset bảng
+        $('.' + tableNameCSS).removeClass('sorted');
     });
     // chuyển đổi tên dự án --> class
     function convertToValidCSSClass(str) {
@@ -150,12 +153,31 @@ $(document).ready(function() {
         }).appendTo($tbody);
     }
     
+    function resetTable(tableName) {
+        var $tbody = $('.' + tableName + ' tbody');
+        var $originalRows = $tbody.find('tr').toArray().sort(function(a, b) {
+            return $(a).data('original-index') - $(b).data('original-index');
+        });
+        $tbody.empty().append($originalRows);
+    }
+
     // click nút sort
     $('.card-body').on('click', '.fa-sort', function(){
         var tableName = $(this).data('info');
         console.log('ok');
-        sortDiviceByStatus(tableName);
+        if(!$('.' + tableName).hasClass('sorted')){
+            sortDiviceByStatus(tableName); // xếp bảng
+            $('.' + tableName).addClass('sorted');
+            // console.log('1')
+
+        }else{
+            resetTable(tableName); //reset bảng
+            $('.' + tableName).removeClass('sorted');
+            // console.log('2')
+        }
+
     })
+
     // click nút close
     $('.card-body').on('click', '.fa-x', function(){
         console.log('ok')
