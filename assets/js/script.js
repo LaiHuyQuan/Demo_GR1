@@ -31,7 +31,7 @@ $(document).ready(function() {
             json: '{"token":"O1L486UPS9MVY7jcihhe4idshRBb0TyD"}'
         },
         success: function(data) {
-            var result = countOnlineElements(data);
+            var result = countOnlineElements(data);// dếm và tạo nút dự án
             console.log(result);
             createTable(data);  // tạp bảng dữ liệu
         },

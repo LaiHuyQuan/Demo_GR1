@@ -4,6 +4,9 @@
     box-sizing: border-box;
     font-family: sans-serif;
 }
+ul{
+    list-style: none;
+}
 
 .page-heading{
     margin-top: 30px;
@@ -19,6 +22,12 @@
 
 .sorted{
     /* */
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .online{
