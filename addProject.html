@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=chanel -width, initial-scale=1.0">
     <title>Document</title>
     <link rel="shortcut icon" href="./assets/svg/favicon.svg" type="image/x-icon">
     <link rel="shortcut icon"
@@ -43,80 +43,55 @@
                 <i class="fa-solid fa-plus add-device-btn"></i>
             </div>
             <div class="add-device-main">
-                <table class="table table-lg">
-                    <thead>
-                        <tr>
-                            <th>LoadID</th>
-                            <th>Tên</th>
-                            <th>Kênh</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-bold-500">0</td>
-                            <td>abcsd</td>
-                            <td>A11</td>
-                            <td><span>sửa</span></td>
-                            <td><span>xóa</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="device-added">
+                    <div class="device-hd">
+                        <span>Mã - Cabinet - Ngày - Loại thiết bị</span>
+                        <i class="fa-solid fa-caret-down" data-info="123"></i>
+                    </div>
+                    <table class="table table-lg 123 hide">
+                        <thead>
+                            <tr>
+                                <th>LoadID</th>
+                                <th>Tên</th>
+                                <th>Kênh</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-bold-500">0</td>
+                                <td>abcsd</td>
+                                <td>A11</td>
+                                <td class="add-chanel-btn">sửa</td>
+                                <td>xóa</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <!-- structure mockup -->
         <div class="structure-mockup hide">
-            <ul>
-                <li><i class="fa-solid fa-plus"></i>
-                    lv1
-                    <ul id="level1">
-                        <li>
-                            <i class="fa-solid fa-plus"></i>
-                            lv2
-                            <ul id="level2">
-                                <li>
-                                    <i class="fa-solid fa-plus"></i>
-                                    lv3
-                                    <ul id="level3">
-                                        <li>lv4</li>
-                                        <li>lv4</li>
-                                        <li>lv4</li>
-                                        <li><input type="text" name="" id=""></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-plus"></i>
-                                    lv3
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-plus"></i>
-                                    lv3
-                                </li>
-                                <li><input type="text" name="" id=""></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <i class="fa-solid fa-plus"></i>
-                            lv2
-                        </li>
-                        <li>
-                            <i class="fa-solid fa-plus"></i>
-                            lv2
-                        </li>
-                        <li><input type="text" name="" id=""></li>
-                    </ul>
-                </li>
-                <li>
-                    <i class="fa-solid fa-plus"></i>
-                    lv1
-                </li>
-                <li>
-                    <i class="fa-solid fa-plus"></i>
-                    lv1
-                </li>
-                <li><input type="text" name="" id=""></li>
-            </ul>
+            <div class="lv1" style="margin-left: 10px;">
+                <span>lv1</span>
+                <div class="sublv1" style="margin-left: 30px;">
+                    <span>lv1.1</span>
+                    <div class="subsublv1" style="margin-left: 50px;">
+                        <span>lv1.1.1</span>
+                        <div class="subsubsublv1" style="margin-left: 70px;">
+                            <span>lv1.1.1.1</span>
+                            <span>lv1.1.1.2</span>
+                            <span>lv1.1.1.3</span>
+                            <span>lv1.1.1.4</span>
+                        </div>
+                        <span>lv1.1.2</span>
+                    </div>
+                    <span>lv2</span>
+                    <span>lv3</span>
+                </div>
+
+            </div>
             <div class="structure-bot">
                 <button class="struc-save">save</button>
                 <button class="struc-close">close</button>
@@ -124,32 +99,103 @@
         </div>
         <!-- end structure mockup -->
 
-        <!-- add device mockup-->
+        <!-- add device mockup -->
         <div class="add-device-mockup hide">
-            <div class="add-device-left">
-                <div><button>mã ch</button>
-                    <!-- <button>pha</button> -->
+            <div class="add-device-hd">
+                <span>Device</span>
+                <button class="device-add">Add</button>
+                <button class="device-close">Close</button>
+            </div>
+            <div><label for="">Mã</label>
+                <input type="text" name="" id="ma">
+            </div>
+            <div><label for="">Cabinet</label>
+                <input type="text" name="" id="cabinet">
+            </div>
+            <div><label for="">Ngày</label>
+                <input type="text" name="" id="ngay">
+            </div>
+            <div>
+                <label for="lv1">lv1</label>
+                <select id="lv1" name="lv1">
+                    <option value="nha 1">nhà 1</option>
+                    <option value="nha 2">nhà 2</option>
+                    <option value="nha 3">nhà 3</option>
+                    <option value="nha 4">nhà 4</option>
+                </select>
+            </div>
+            <div>
+                <label for="lv2">lv2</label>
+                <select id="lv2" name="lv2">
+                    <option value="tang 1">tang 1</option>
+                    <option value="tang 2">tang 2</option>
+                    <option value="tang 3">tang 3</option>
+                    <option value="tang 4">tang 4</option>
+                </select>
+            </div>
+            <div>
+                <label for="lv3">lv3</label>
+                <select id="lv3" name="lv3">
+                    <option value="phong 1">phong 1</option>
+                    <option value="phong 2">phong 2</option>
+                    <option value="phong 3">phong 3</option>
+                    <option value="phong 4">phong 4</option>
+                </select>
+            </div>
+            <div>
+                <label for="lv4">lv4</label>
+                <select id="lv4" name="lv4">
+                    <option value="ban 1">ban 1</option>
+                    <option value="ban 2">ban 2</option>
+                    <option value="ban 3">ban 3</option>
+                    <option value="ban 4">ban 4</option>
+                </select>
+            </div>
+            <div>
+                <label for="loaitb">Loại thiết bị</label>
+                <select id="loaitb" name="loaitb">
+                    <option value="1k3p">1k3p</option>
+                    <option value="6k1p">6k1p</option>
+                    <option value="6k3p">6k3p</option>
+                    <option value="12k3p">12k3p</option>
+                </select>
+            </div>
+        </div>
+        <!-- end device mockup -->
+
+        <!-- add chanel  mockup-->
+        <div class="add-chanel-mockup hide">
+                <label for="chonch">Chọn chanel</label>
+                    <select id="chonch" name="chonch">
+                        <option value="ch1">CH1</option>
+                        <option value="ch2">CH2</option>
+                        <option value="ch3">CH3</option>
+                        <option value="ch4">CH4</option>
+                        <option value="ch5">CH5</option>
+                        <option value="ch6">CH6</option>
+                    </select>
+                <button class="chanel-save">save</button>
+                <button class="chanel-close">close</button>
+                <div><label>Itt</label>
+                    <input type="text" name="itt" id="">
                 </div>
-                <div><span>Itt</span>
-                    <input type="text" name="" id="">
+                <div><label>Ptt</label>
+                    <input type="text" name="ptt" id="">
                 </div>
-                <div><span>Ptt</span>
-                    <input type="text" name="" id="">
+                <div><label>Ct</label>
+                    <input type="text" name="ct" id="">
                 </div>
-                <div><span>Ct</span>
-                    <input type="text" name="" id="">
+                <div><label>Type</label>
+                    <input type="text" name="type" id="">
                 </div>
-                <div><span>Type</span>
-                    <input type="text" name="" id="">
+                <div><label>Name</label>
+                    <input type="text" name="name" id="">
                 </div>
-                <div><span>Name</span>
-                    <input type="text" name="" id="">
-                </div>
-                <div><span>Source</span>
-                    <input type="text" name="" id="">
+                <div><label>Source</label>
+                    <input type="text" name="source" id="">
                 </div>
                 <div>
-                    <span for="lv1">Lv1</span>
+                    <label for="lv1">Lv1</label>
                     <select id="lv1" name="lv1">
                         <option value="nha 1">nhà 1</option>
                         <option value="nha 2">nhà 2</option>
@@ -158,7 +204,7 @@
                     </select>
                 </div>
                 <div>
-                    <span for="lv2">lv2</span>
+                    <label for="lv2">lv2</label>
                     <select id="lv2" name="lv2">
                         <option value="tang 1">tang 1</option>
                         <option value="tang 2">tang 2</option>
@@ -167,7 +213,7 @@
                     </select>
                 </div>
                 <div>
-                    <span for="lv3">lv3</span>
+                    <label for="lv3">lv3</label>
                     <select id="lv3" name="lv3">
                         <option value="phong 1">phong 1</option>
                         <option value="phong 2">phong 2</option>
@@ -176,7 +222,7 @@
                     </select>
                 </div>
                 <div>
-                    <span for="lv4">lv4</span>
+                    <label for="lv4">lv4</label>
                     <select id="lv4" name="lv4">
                         <option value="ban 1">ban 1</option>
                         <option value="ban 2">ban 2</option>
@@ -185,38 +231,20 @@
                     </select>
                 </div>
                 <div class="checkbox">
-                    <span style="margin-right: 10px;">includeS</span>
-                    <input type="checkbox" id="checkbox" name="checkbox">
-                    <span style="margin:0 10px;">includeL</span>
-                    <input type="checkbox" id="checkbox" name="checkbox">
-                    <span style="margin:0 10px;">SourceFr</span>
-                    <input type="checkbox" id="checkbox" name="checkbox">
+                    <label style="margin-right: 10px;">includeS</label>
+                    <input type="checkbox" id="includeS" name="checkbox">
+                    <label style="margin:0 10px;">includeL</label>
+                    <input type="checkbox" id="includeL" name="checkbox">
+                    <label style="margin:0 10px;">SourceFr</label>
+                    <input type="checkbox" id="sourceFr" name="checkbox">
                 </div>
-            </div>
-            <!-- end add device mockup -->
-            <div class="add-device-right">
-                <div>
-                    <button class="device-save">save</button>
-                    <button class="device-close">close</button>
-                </div>
-                <div>
-                    <select id="1pha" name="1pha">
-                        <option value="1 pha">1 pha</option>
-                    </select>
-                    <select id="3pha" name="3pha">
-                        <option value="3 pha">3 pha</option>
-                        <option value="1k3p">1k3p</option>
-                        <option value="6k3p">6k3p</option>
-                        <option value="12k3p">12k3p</option>
-                    </select>
-                </div>
-            </div>
+            <!-- end add chanel  mockup -->
         </div>
     </div>
     <!-- end addProject mockup -->
 
     <script src="./assets/js/app.js"></script>
-    <script src="./assets/js/script.js"></script>
+    <!-- <script src="./assets/js/script.js"></script> -->
     <script src="./assets/js/addproject.js"></script>
 
 </body>

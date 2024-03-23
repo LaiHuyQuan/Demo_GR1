@@ -175,7 +175,6 @@ $(document).ready(function() {
             $('.' + tableName).removeClass('sorted');
             // console.log('2')
         }
-
     })
 
     // click nút close
