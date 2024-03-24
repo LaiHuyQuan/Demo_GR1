@@ -43,25 +43,67 @@ $(document).ready(function () {
         $('.structure-mockup').addClass('hide');
     })
 
-    // mockup thêm thiết bị
+// mockup thêm thiết bị
     // mở 
     $('#add-project').on('click', '.add-device-btn', function () {
         $('.add-device-mockup').removeClass('hide');
-        // set thông tin trong form về null
+        var addDeviceIndex = '<span class="device-add">Add</span>'
+        $('.device-btns').append(addDeviceIndex);
     })
 
-    // thêm dòng vào bảng kênh
-    function addChanel(tableName) {
-        var index = '<tr>' +
-            '<td class="text-bold-500">' + i + '</td>' +
-            '<td>null</td>' +
-            '<td> CH' + (i + 1) + '</td>' +
-            '<td class="add-chanel-btn" data-info="' + tableName + 'load' + i + '">sửa</td>' +
-            '<td>xóa</td>' +
-            '</tr>';
-        $('.' + tableName).append(index);
-    }
+    // sửa
+    $('#add-project').on('click', '.edit-device-btn', function () {
+        $(this).parent().addClass('editing')        
+        $('.add-device-mockup').removeClass('hide');
+        var deviceCode = $(this).data('info');
+        for (var i = 0; i < projectData.devices.length; i++) {
+            var device = projectData.devices[i];
+            if (device.code == deviceCode) {
+            $('#ma').val(device.code);
+            $('#cabinet').val(device.cabinet);
+            $('#ngay').val(device.date);
+            $('#lv1').val(device.lv1);
+            $('#lv2').val(device.lv2);
+            $('#lv3').val(device.lv3);
+            $('#lv4').val(device.lv4);
+            $('#loaitb').val(device.deviceType);
+            }
+        }
+        var editDeviceIndex = '<span class="edit-device-save data-info="'+ deviceCode +'">Save</span>';
+        $('.device-btns').append(editDeviceIndex)
+    })
 
+    // lưu sau khi sửa
+    $('.add-device-mockup').on('click', '.edit-device-save', function () {
+        deviceCode = $('.editing').data('info')
+        for (var i = 0; i < projectData.devices.length; i++) {
+            var device = projectData.devices[i];
+            if (device.code == deviceCode) {
+                device.code = $('#ma').val();
+                device.cabinet = $('#cabinet').val();
+                device.date = $('#ngay').val();
+                device.lv1 = $('#lv1').val();
+                device.lv2 = $('#lv2').val();
+                device.lv3 = $('#lv3').val();
+                device.lv4 = $('#lv4').val();
+            }
+        }
+        $('.editing').removeClass('editing');
+        $('.edit-device-save').remove();
+        $('.add-device-mockup').addClass('hide');
+    })
+
+    // xóa
+    $('#add-project').on('click', '.delete-device-btn', function () {
+        var check = confirm('Are you sure you want to delete?');
+        if (check){
+            $(this).parent().parent().remove();
+        }
+        else{
+            return;
+        }
+    })
+    
     // thêm
     $('.add-device-mockup').on('click', '.device-add', function () {
         // console.log('1')
@@ -93,6 +135,8 @@ $(document).ready(function () {
         var newDevice = '<div class="device-added">' +
             '<div class="device-hd">' +
             '<span>' + device.code + ' - ' + device.cabinet + ' - ' + device.date + ' - ' + device.deviceType + '</span>' +
+            '<span class="edit-device-btn" data-info="' + device.code + '"><i class="fa-solid fa-pen-to-square"></i> Edit Device</span>' +
+            '<span class="delete-device-btn" data-info="' + device.code + '"><i class="fa-solid fa-trash"></i> Delete Device</span>' +
             '<span class="add-chanel-btn" style="margin-right:10px" data-info="' + device.code + '" data-maxch="'+maxch +'"><i class="fa-solid fa-plus"></i> Add Chanel</span>' +
             '<i class="fa-solid fa-caret-down" data-info="' + device.code + '"></i>' +
             '</div>' +
@@ -124,12 +168,16 @@ $(document).ready(function () {
         $('#lv3').val('');
         $('#lv4').val('');
         $('#loaitb').val('');
+
         // ẩn mockup
+        $('.device-add').remove();
         $('.add-device-mockup').addClass('hide');
     })
 
     // đóng
     $('.add-device-mockup').on('click', '.device-close', function () {
+        $('.edit-device-save').remove();
+        $('.device-add').remove();
         $('.add-device-mockup').addClass('hide');
         console.log('2')
     })
@@ -177,16 +225,14 @@ $(document).ready(function () {
             sourceFr: $('#sourceFr').is(':checked')
         };
 
-        var find;
         for (var i = 0; i < projectData.devices.length; i++) {
             var device = projectData.devices[i];
             if (device.code == deviceID) {
                 // console.log(device.code)
-                find = i;
+                projectData.devices[i].chanels.push(chanel);
                 break; // Thoát khỏi vòng lặp sau khi thêm kênh
             }
         }
-        projectData.devices[find].chanels.push(chanel);
         var newRowHTML = '<tr>' +
             '<td class="text-bold-500">' + rowCount + '</td>' +
             '<td>' + chanel.name + '</td>' +
@@ -220,15 +266,11 @@ $(document).ready(function () {
 
     // đóng
     $('.add-chanel-mockup').on('click', '.chanel-close', function () {
-        $('.chanel-save').attr('data-info', "");
+        // $('.chanel-save').attr('data-info', "");
         $('.chanel-save').remove();
         $('.add-chanel-mockup').addClass('hide');
         console.log('2')
     })
 
     //kiểm tra
-    function checkNewChanel(){
-
-    }
 });
-

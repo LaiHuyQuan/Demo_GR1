@@ -24,6 +24,10 @@ button{
     padding: 1%;
 }
 
+.add-device-btn{
+    cursor: pointer;
+}
+
 .add-device-hd span{
     font-weight: bold;
     font-size: 30px;
@@ -36,7 +40,7 @@ button{
     font-weight: bold;
 }
 
-.device-hd .add-chanel-btn{
+.device-hd .add-chanel-btn, .edit-device-btn{
     cursor: pointer;
 }
 
@@ -89,11 +93,11 @@ button{
     width: 60px !important;
 }
 
-.add-chanel-mockup .chanel-btns{
+.chanel-btns, .device-btns{
     justify-content: right;
 }
 
-.chanel-btns span{
+.chanel-btns span, .device-btns span{
     padding: 8px 12px;
     margin-left: 10px;
     cursor: pointer;
@@ -102,7 +106,7 @@ button{
     transition: all 0.3s;
 }
 
-.chanel-btns span:hover{
+.chanel-btns span:hover, .device-btns span:hover{
     color: #302d2d;
     background-color: #949494;
 }
