@@ -89,3 +89,22 @@ button{
     width: 60px !important;
 }
 
+.add-chanel-mockup .chanel-btns{
+    justify-content: right;
+}
+
+.chanel-btns span{
+    padding: 8px 12px;
+    margin-left: 10px;
+    cursor: pointer;
+    border: #949494 1px solid;
+    border-radius: 45%;
+    transition: all 0.3s;
+}
+
+.chanel-btns span:hover{
+    color: #302d2d;
+    background-color: #949494;
+}
+
+
