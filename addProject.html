@@ -75,24 +75,17 @@
         </div>
         <!-- structure mockup -->
         <div class="structure-mockup hide">
-            <div class="lv1" style="margin-left: 10px;">
-                <span>lv1</span>
-                <div class="sublv1" style="margin-left: 30px;">
-                    <span>lv1.1</span>
-                    <div class="subsublv1" style="margin-left: 50px;">
-                        <span>lv1.1.1</span>
-                        <div class="subsubsublv1" style="margin-left: 70px;">
-                            <span>lv1.1.1.1</span>
-                            <span>lv1.1.1.2</span>
-                            <span>lv1.1.1.3</span>
-                            <span>lv1.1.1.4</span>
+            <div class="container">
+                <div class="block block-level-1">Cấp Độ 1
+                    <button class="add-button" data-level="2">Thêm</button>
+                    <div class="block block-level-2">Cấp Độ 2
+                        <button class="add-button" data-level="3">Thêm</button>
+                        <div class="block block-level-3">Cấp Độ 3
+                            <button class="add-button" data-level="4">Thêm</button>
+                            <div class="block block-level-4">Cấp Độ 4</div>
                         </div>
-                        <span>lv1.1.2</span>
                     </div>
-                    <span>lv2</span>
-                    <span>lv3</span>
                 </div>
-
             </div>
             <div class="structure-bot">
                 <button class="struc-save">save</button>
@@ -117,7 +110,7 @@
             </div>
             <div>
                 <label for="lv1">lv1</label>
-                <select id="lv1" name="lv1">
+                <select id="lv1" name="">
                     <option value="nha 1">nhà 1</option>
                     <option value="nha 2">nhà 2</option>
                     <option value="nha 3">nhà 3</option>
@@ -126,7 +119,7 @@
             </div>
             <div>
                 <label for="lv2">lv2</label>
-                <select id="lv2" name="lv2">
+                <select id="lv2" name="">
                     <option value="tang 1">tang 1</option>
                     <option value="tang 2">tang 2</option>
                     <option value="tang 3">tang 3</option>
@@ -135,7 +128,7 @@
             </div>
             <div>
                 <label for="lv3">lv3</label>
-                <select id="lv3" name="lv3">
+                <select id="lv3" name="">
                     <option value="phong 1">phong 1</option>
                     <option value="phong 2">phong 2</option>
                     <option value="phong 3">phong 3</option>
@@ -144,7 +137,7 @@
             </div>
             <div>
                 <label for="lv4">lv4</label>
-                <select id="lv4" name="lv4">
+                <select id="lv4" name="">
                     <option value="ban 1">ban 1</option>
                     <option value="ban 2">ban 2</option>
                     <option value="ban 3">ban 3</option>
@@ -168,80 +161,80 @@
 
         <!-- add chanel  mockup-->
         <div class="add-chanel-mockup hide">
-                <label for="chonch">Chọn chanel</label>
-                    <select id="chonch" name="chonch">
-                        <option value="CH1">CH1</option>
-                        <option value="CH2">CH2</option>
-                        <option value="CH3">CH3</option>
-                        <option value="CH4">CH4</option>
-                        <option value="CH5">CH5</option>
-                        <option value="CH6">CH6</option>
-                    </select>
-                <div><label>Itt</label>
-                    <input type="text" name="itt" id="">
-                </div>
-                <div><label>Ptt</label>
-                    <input type="text" name="ptt" id="">
-                </div>
-                <div><label>Ct</label>
-                    <input type="text" name="ct" id="">
-                </div>
-                <div><label>Type</label>
-                    <input type="text" name="type" id="">
-                </div>
-                <div><label>Name</label>
-                    <input type="text" name="name" id="">
-                </div>
-                <div><label>Source</label>
-                    <input type="text" name="source" id="">
-                </div>
-                <div>
-                    <label for="lv1">Lv1</label>
-                    <select id="lv1" name="lv1">
-                        <option value="nha 1">nhà 1</option>
-                        <option value="nha 2">nhà 2</option>
-                        <option value="nha 3">nhà 3</option>
-                        <option value="nha 4">nhà 4</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="lv2">lv2</label>
-                    <select id="lv2" name="lv2">
-                        <option value="tang 1">tang 1</option>
-                        <option value="tang 2">tang 2</option>
-                        <option value="tang 3">tang 3</option>
-                        <option value="tang 4">tang 4</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="lv3">lv3</label>
-                    <select id="lv3" name="lv3">
-                        <option value="phong 1">phong 1</option>
-                        <option value="phong 2">phong 2</option>
-                        <option value="phong 3">phong 3</option>
-                        <option value="phong 4">phong 4</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="lv4">lv4</label>
-                    <select id="lv4" name="lv4">
-                        <option value="ban 1">ban 1</option>
-                        <option value="ban 2">ban 2</option>
-                        <option value="ban 3">ban 3</option>
-                        <option value="ban 4">ban 4</option>
-                    </select>
-                </div>
-                <div class="checkbox">
-                    <label style="margin-right: 10px;">includeS</label>
-                    <input type="checkbox" id="includeS" name="checkbox">
-                    <label style="margin:0 10px;">includeL</label>
-                    <input type="checkbox" id="includeL" name="checkbox">
-                    <label style="margin:0 10px;">SourceFr</label>
-                    <input type="checkbox" id="sourceFr" name="checkbox">
-                </div>
-                <div class="chanel-btns">
-                    <span class="chanel-close">Close</span>
-                </div>
+            <label for="chonch">Chọn chanel</label>
+            <select id="chonch" name="chonch">
+                <option value="CH1">CH1</option>
+                <option value="CH2">CH2</option>
+                <option value="CH3">CH3</option>
+                <option value="CH4">CH4</option>
+                <option value="CH5">CH5</option>
+                <option value="CH6">CH6</option>
+            </select>
+            <div><label>Itt</label>
+                <input type="text" name="itt" id="">
+            </div>
+            <div><label>Ptt</label>
+                <input type="text" name="ptt" id="">
+            </div>
+            <div><label>Ct</label>
+                <input type="text" name="ct" id="">
+            </div>
+            <div><label>Type</label>
+                <input type="text" name="type" id="">
+            </div>
+            <div><label>Name</label>
+                <input type="text" name="name" id="">
+            </div>
+            <div><label>Source</label>
+                <input type="text" name="source" id="">
+            </div>
+            <div>
+                <label for="lv1">Lv1</label>
+                <select id="" name="lv1">
+                    <option value="nha 1">nhà 1</option>
+                    <option value="nha 2">nhà 2</option>
+                    <option value="nha 3">nhà 3</option>
+                    <option value="nha 4">nhà 4</option>
+                </select>
+            </div>
+            <div>
+                <label for="lv2">lv2</label>
+                <select id="" name="lv2">
+                    <option value="tang 1">tang 1</option>
+                    <option value="tang 2">tang 2</option>
+                    <option value="tang 3">tang 3</option>
+                    <option value="tang 4">tang 4</option>
+                </select>
+            </div>
+            <div>
+                <label for="lv3">lv3</label>
+                <select id="" name="lv3">
+                    <option value="phong 1">phong 1</option>
+                    <option value="phong 2">phong 2</option>
+                    <option value="phong 3">phong 3</option>
+                    <option value="phong 4">phong 4</option>
+                </select>
+            </div>
+            <div>
+                <label for="lv4">lv4</label>
+                <select id="" name="lv4">
+                    <option value="ban 1">ban 1</option>
+                    <option value="ban 2">ban 2</option>
+                    <option value="ban 3">ban 3</option>
+                    <option value="ban 4">ban 4</option>
+                </select>
+            </div>
+            <div class="checkbox">
+                <label style="margin-right: 10px;">includeS</label>
+                <input type="checkbox" id="includeS" name="checkbox">
+                <label style="margin:0 10px;">includeL</label>
+                <input type="checkbox" id="includeL" name="checkbox">
+                <label style="margin:0 10px;">SourceFr</label>
+                <input type="checkbox" id="sourceFr" name="checkbox">
+            </div>
+            <div class="chanel-btns">
+                <span class="chanel-close">Close</span>
+            </div>
             <!-- end add chanel  mockup -->
         </div>
     </div>

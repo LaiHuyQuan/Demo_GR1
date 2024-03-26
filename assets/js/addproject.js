@@ -23,8 +23,9 @@ $(document).ready(function () {
     $('.add-device-main').on('click', '.fa-caret-down', function () {
         var deviceName = $(this).data('info');
         var table = $('.table.table-lg.' + deviceName);
-        table.toggleClass('hide');
-        console.log('ok')
+        if (table.find('tbody tr').length > 0) {
+            table.toggleClass('hide');
+        }
     })
 
     //mockup structure
@@ -43,7 +44,7 @@ $(document).ready(function () {
         $('.structure-mockup').addClass('hide');
     })
 
-// mockup thêm thiết bị
+    // mockup thêm thiết bị
     // mở 
     $('#add-project').on('click', '.add-device-btn', function () {
         $('.add-device-mockup').removeClass('hide');
@@ -53,23 +54,23 @@ $(document).ready(function () {
 
     // sửa
     $('#add-project').on('click', '.edit-device-btn', function () {
-        $(this).parent().addClass('editing')        
+        $(this).parent().addClass('editing')
         $('.add-device-mockup').removeClass('hide');
         var deviceCode = $(this).data('info');
         for (var i = 0; i < projectData.devices.length; i++) {
             var device = projectData.devices[i];
             if (device.code == deviceCode) {
-            $('#ma').val(device.code);
-            $('#cabinet').val(device.cabinet);
-            $('#ngay').val(device.date);
-            $('#lv1').val(device.lv1);
-            $('#lv2').val(device.lv2);
-            $('#lv3').val(device.lv3);
-            $('#lv4').val(device.lv4);
-            $('#loaitb').val(device.deviceType);
+                $('#ma').val(device.code);
+                $('#cabinet').val(device.cabinet);
+                $('#ngay').val(device.date);
+                $('#lv1').val(device.lv1);
+                $('#lv2').val(device.lv2);
+                $('#lv3').val(device.lv3);
+                $('#lv4').val(device.lv4);
+                $('#loaitb').val(device.deviceType);
             }
         }
-        var editDeviceIndex = '<span class="edit-device-save data-info="'+ deviceCode +'">Save</span>';
+        var editDeviceIndex = '<span class="edit-device-save data-info="' + deviceCode + '">Save</span>';
         $('.device-btns').append(editDeviceIndex)
     })
 
@@ -96,17 +97,24 @@ $(document).ready(function () {
     // xóa
     $('#add-project').on('click', '.delete-device-btn', function () {
         var check = confirm('Are you sure you want to delete?');
-        if (check){
+        if (check) {
             $(this).parent().parent().remove();
         }
-        else{
+        else {
             return;
         }
     })
-    
+
     // thêm
     $('.add-device-mockup').on('click', '.device-add', function () {
         // console.log('1')
+        // kiểm tra trường nhập vào
+        if (!checkDeviceInput()) {
+            alert('Vui lòng điền đầy đủ thông tin');
+            return;
+        }
+
+        // đọc dữ liệu 
         var maxch;
         var device = {
             code: $('#ma').val(),
@@ -120,24 +128,26 @@ $(document).ready(function () {
             chanels: []
         };
 
-        if(device.deviceType == '1k3p'){
+        // kiểm tra loại thiết bị
+        if (device.deviceType == '1k3p') {
             maxch = 1;
         }
-        if(device.deviceType == '6k3p' || device.deviceType == '6k1p'){
+        if (device.deviceType == '6k3p' || device.deviceType == '6k1p') {
             maxch = 6;
         }
-        if(device.deviceType == '12k3p'){
-            maxch =12;
+        if (device.deviceType == '12k3p') {
+            maxch = 12;
         }
-        
+
+        // thêm thiết bị vào data
         projectData.devices.push(device);
-        console.log(device)
+        // thêm thiết bị vào DOM
         var newDevice = '<div class="device-added">' +
             '<div class="device-hd">' +
             '<span>' + device.code + ' - ' + device.cabinet + ' - ' + device.date + ' - ' + device.deviceType + '</span>' +
             '<span class="edit-device-btn" data-info="' + device.code + '"><i class="fa-solid fa-pen-to-square"></i> Edit Device</span>' +
             '<span class="delete-device-btn" data-info="' + device.code + '"><i class="fa-solid fa-trash"></i> Delete Device</span>' +
-            '<span class="add-chanel-btn" style="margin-right:10px" data-info="' + device.code + '" data-maxch="'+maxch +'"><i class="fa-solid fa-plus"></i> Add Chanel</span>' +
+            '<span class="add-chanel-btn" style="margin-right:10px" data-info="' + device.code + '" data-maxch="' + maxch + '"><i class="fa-solid fa-plus"></i> Add Chanel</span>' +
             '<i class="fa-solid fa-caret-down" data-info="' + device.code + '"></i>' +
             '</div>' +
             '<table class="table table-lg ' + device.code + ' hide" >' +
@@ -190,7 +200,7 @@ $(document).ready(function () {
         var maxChanel = $(this).data('maxch')
         // console.log(maxChanel)
         var rowCount = $(tableName + ' tbody tr').length;
-        if (rowCount == maxChanel){
+        if (rowCount == maxChanel) {
             alert('full');
             $('.add-chanel-mockup').addClass('hide');
             return;
@@ -198,12 +208,18 @@ $(document).ready(function () {
 
         $('.add-chanel-mockup').removeClass('hide');
         var deviceCode = $(this).data('info')
-        var chanelSavebtn = '<span class="chanel-save" data-info="' + deviceCode + '" data-maxch="'+ maxChanel + '">Save</span>';
+        var chanelSavebtn = '<span class="chanel-save" data-info="' + deviceCode + '" data-maxch="' + maxChanel + '">Save</span>';
         $('.chanel-btns').append(chanelSavebtn);
     })
 
     // lưu
     $('.add-chanel-mockup').on('click', '.chanel-save', function () {
+        // kiểm tra trường nhập liệu
+        if (!checkChanelInput()) {
+            alert('Vui lòng điền đầy đủ thông tin');
+            return;
+        }
+
         var deviceID = $(this).data('info');
         var tableName = '.table.' + deviceID;
         var rowCount = $(tableName + ' tbody tr').length;
@@ -216,10 +232,10 @@ $(document).ready(function () {
             type: $('input[name="type"]').val(),
             name: $('input[name="name"]').val(),
             source: $('input[name="source"]').val(),
-            lv1: $('#lv1').val(),
-            lv2: $('#lv2').val(),
-            lv3: $('#lv3').val(),
-            lv4: $('#lv4').val(),
+            lv1: $('select[name="lv1"]').val(),
+            lv2: $('select[name="lv2"]').val(),
+            lv3: $('select[name="lv3"]').val(),
+            lv4: $('select[name="lv4"]').val(),
             includeS: $('#includeS').is(':checked'),
             includeL: $('#includeL').is(':checked'),
             sourceFr: $('#sourceFr').is(':checked')
@@ -273,4 +289,53 @@ $(document).ready(function () {
     })
 
     //kiểm tra
+    // kiểm tra trường nhập vào
+    function checkDeviceInput() {
+        var ma = $('#ma').val().trim();
+        var cabinet = $('#cabinet').val().trim();
+        var ngay = $('#ngay').val().trim();
+        var lv1 = $('#lv1').val().trim();
+        var lv2 = $('#lv2').val().trim();
+        var lv3 = $('#lv3').val().trim();
+        var lv4 = $('#lv4').val().trim();
+        var loaitb = $('#loaitb').val().trim();
+
+        if (ma === '' || cabinet === '' || ngay === '' || lv1 === '' || lv2 === '' || lv3 === '' || lv4 === '' || loaitb === '') {
+            return false;
+        }
+        return true;
+    }
+
+    // kiểm tra trường nhập liệu
+    function checkChanelInput() {
+        var chonch = $('#chonch').val().trim();
+        var itt = $('input[name="itt"]').val().trim();
+        var ptt = $('input[name="ptt"]').val().trim();
+        var ct = $('input[name="ct"]').val().trim();
+        var type = $('input[name="type"]').val().trim();
+        var name = $('input[name="name"]').val().trim();
+        var source = $('input[name="source"]').val().trim();
+        var lv1 = $('select[name="lv1"]').val().trim();
+        var lv2 = $('select[name="lv2"]').val().trim();
+        var lv3 = $('select[name="lv3"]').val().trim();
+        var lv4 = $('select[name="lv4"]').val().trim();
+
+        // Kiểm tra các trường nhập liệu
+        if (chonch === '' || itt === '' || ptt === '' || ct === '' || type === '' || name === '' || source === '' || lv1 === '' || lv2 === '' || lv3 === '' || lv4 === '') {
+            return false;
+        }
+        return true;
+    }
+
+    // test
+    $('.add-button').click(function(){
+        var level = $(this).data('level');
+        var newBlock = $('<div class="block block-level-' + level + '">Cấp Độ ' + level + '</div>');
+        $(this).parent().append(newBlock); // Changed this line to use parent()
+    });
+    $('.block').click(function(event){
+        event.stopPropagation();
+        $(this).children('.block-level-' + (parseInt($(this).attr('class').match(/block-level-(\d+)/)[1]) + 1)).slideToggle();
+    });
+
 });
