@@ -3,46 +3,62 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cấu trúc khối đa cấp với jQuery</title>
-<link rel="stylesheet" href="./assets/css/addProject.css">
+<title>Read InnerText with JavaScript</title>
 </head>
 <body>
+
 <div class="container">
     <div class="block block-level-1">Cấp Độ 1
-        <span class="add-button">+</span>
-        <span class="delete-button">-</span>
+        <button class="add-button">+</button>
+        <button class="delete-button">-</button>
         <div class="block block-level-2">Cấp Độ 2a
-            <span class="add-button">+</span>
-            <span class="delete-button">-</span>
+            <button class="add-button">+</button>
+            <button class="delete-button">-</button>
             <div class="block block-level-3">Cấp Độ 3a
-                <span class="add-button">+</span>
-                <span class="delete-button">-</span>
+                <button class="add-button">+</button>
+                <button class="delete-button">-</button>
                 <div class="block block-level-4">Cấp Độ 4a</div>
             </div>
         </div>
         <div class="block block-level-2">Cấp Độ 2b
-            <span class="add-button">+</span>
-            <span class="delete-button">Del</span>
+            <button class="add-button">+</button>
+            <button class="delete-button">-</button>
             <div class="block block-level-3">Cấp Độ 3b
-                <span class="add-button">+</span>
-                <span class="delete-button">Del</span>
+                <button class="add-button">+</button>
+                <button class="delete-button">-</button>
                 <div class="block block-level-4">Cấp Độ 4b</div>
-            </div>
-        </div>
-        <div class="block block-level-2">Cấp Độ 2d
-            <span class="add-button">+</span>
-            <span class="delete-button">Del</span>
-            <div class="block block-level-3">Cấp Độ 3d
-                <span class="add-button">+</span>
-                <span class="delete-button">Del</span>
-                <div class="block block-level-4">Cấp Độ 4d</div>
             </div>
         </div>
     </div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="./assets/js/test.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var jsonData = readInnerText(document.querySelector('.container')); // Đọc dữ liệu từ container và lưu vào biến jsonData
+    console.log(jsonData); // In ra dữ liệu đã lưu
+    
+    function readInnerText(element) {
+        var block = {}; // Đối tượng để lưu dữ liệu
+        block.name = element.innerText.trim(); // Lưu tên của cấp độ hiện tại
+    
+        block.children = []; // Mảng để lưu các cấp độ con
+        
+        // Lặp qua các cấp độ con của phần tử hiện tại
+        element.querySelectorAll('.block').forEach(function(childElement) {
+            var childBlock = readInnerText(childElement); // Đệ quy để đọc dữ liệu của cấp độ con
+            block.children.push(childBlock); // Thêm cấp độ con vào mảng
+        });
+    
+        return block;
+    }
+    
+    // Sử dụng hàm readInnerText để đọc dữ liệu từ một phần tử block cấp độ 1
+    var container = document.querySelector('.container');
+    var jsonStructure = readInnerText(container.querySelector('.block-level-1'));
+    console.log(jsonStructure);
+    
+});
+</script>
 
 </body>
 </html>
