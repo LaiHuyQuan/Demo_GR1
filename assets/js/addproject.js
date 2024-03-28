@@ -7,18 +7,7 @@ var projectData = {
 
 // structure dự án
 var jsonStructure = {
-    "level0": {
-        "level1" :{
-            "name" : "1233",
-            "level2" :{
-                "name":"",
-                "level3":{
-                    "name":"",
-                    "level4":[]
-                }
-            }       
-        }
-    }
+    "level0": []
 };
 
 var jsonData;
@@ -54,12 +43,14 @@ $(document).ready(function () {
     // lưu
     $('.structure-mockup').on('click', '.struc-save', function () {
         $('.structure-mockup').addClass('hide');
+        SaveStructure();
     })
 
     // mockup thêm thiết bị
     // mở 
     $('#add-project').on('click', '.add-device-btn', function () {
         $('.add-device-mockup').removeClass('hide');
+        createSelectInputsForLevels('.device-lv');
         var addDeviceIndex = '<span class="device-add">Add</span>'
         $('.device-btns').append(addDeviceIndex);
     })
@@ -202,6 +193,9 @@ $(document).ready(function () {
         $('.device-add').remove();
         $('.add-device-mockup').addClass('hide');
         console.log('2')
+        $('.device-lv').find('.select-in').remove();
+        $('.device-lv').find('label').remove();
+        $('.device-lv').find('br').remove();
     })
 
     //mockup thêm chanel
@@ -420,27 +414,177 @@ $(document).ready(function () {
     $('.container').on('click', '.block-level-4', function (event) {
         event.stopPropagation();
     });
+
+
     // test
-    $(document).ready(function() {
-        var jsonData = readData($('.container')); // Đọc dữ liệu từ container và lưu vào biến jsonData
-        console.log(jsonData); // In ra dữ liệu đã lưu
-        
-        function readData($element) {
-            var block = {}; // Đối tượng để lưu dữ liệu
-            block.name = $element.contents().filter(function() {
-                return this.nodeType === 3; // Chỉ lấy text nodes
-            }).text().trim(); // Lưu tên của cấp độ
-    
-            block.children = []; // Mảng để lưu các cấp độ con
-            
-            // Lặp qua các cấp độ con của phần tử hiện tại
-            $element.children('.block').each(function() {
-                var $childElement = $(this);
-                var childBlock = readData($childElement); // Đọc dữ liệu của cấp độ con
-                block.children.push(childBlock); // Thêm cấp độ con vào mảng
+    function SaveStructure(){
+        jsonStructure.level0 = [];
+        $('.container').find('.block-level-1').each(function() {
+            var level1Name = $(this).contents().first().text().trim();
+            jsonStructure.level0.push({
+                "name": level1Name,
+                "children": []
             });
     
-            return block;
+            // Duyệt qua các khối cấp độ 2 và lưu tên của mỗi khối vào jsonStructure
+            $(this).find('.block-level-2').each(function() {
+                var level2Name = $(this).contents().first().text().trim();
+                jsonStructure.level0[jsonStructure.level0.length - 1].children.push({
+                    "name": level2Name,
+                    "children": []
+                });
+    
+                // Duyệt qua các khối cấp độ 3 và lưu tên của mỗi khối vào jsonStructure
+                $(this).find('.block-level-3').each(function() {
+                    var level3Name = $(this).contents().first().text().trim();
+                    jsonStructure.level0[jsonStructure.level0.length - 1].children[jsonStructure.level0[jsonStructure.level0.length - 1].children.length - 1].children.push({
+                        "name": level3Name,
+                        "children": []
+                    });
+    
+                    // Duyệt qua các khối cấp độ 4 và lưu tên của mỗi khối vào jsonStructure
+                    $(this).find('.block-level-4').each(function() {
+                        var level4Name = $(this).contents().first().text().trim();
+                        jsonStructure.level0[jsonStructure.level0.length - 1].children[jsonStructure.level0[jsonStructure.level0.length - 1].children.length - 1].children[jsonStructure.level0[jsonStructure.level0.length - 1].children[jsonStructure.level0[jsonStructure.level0.length - 1].children.length - 1].children.length - 1].children.push({
+                            "name": level4Name
+                        });
+                    });
+                });
+            });
+        });
+    }
+
+    function printData(data, level) {
+        if (data instanceof jsonStructure) {
+            data.forEach(function(item, index) {
+                console.log("level" + level + ":", item.name);
+                printData(item.children, level + 1);
+            });
+        } else if (typeof data === 'object') {
+            console.log("level" + level + ":", data.name);
+            printData(data.children, level + 1);
         }
-    });
+    }
+    
+    // In dữ liệu theo các cấp độ
+    printData(jsonStructure.level0, 0);
+
+// test phase 2
+function createSelectInputs(level, data) {
+    var selectInputs = $('<select>');
+    selectInputs.addClass('level' + level + '-inputs select-in');
+    selectInputs.prepend('<option value="">-- Select --</option>'); // Add an empty option initially
+
+    // Thêm các lựa chọn cho cấp độ hiện tại
+    if (data && data.length > 0) {
+        data.forEach(function(item) {
+            var option = $('<option>');
+            option.text(item.name);
+            option.val(item.name);
+            selectInputs.append(option);
+        });
+    }
+
+    return selectInputs;
+}
+
+// Tạo các ô lựa chọn cho mỗi cấp độ và thêm vào .container
+function createSelectInputsForLevels(blockName) {
+    var container = $(blockName);
+    var level0Data = jsonStructure.level0;
+
+    // Tạo ô lựa chọn cho cấp độ 1
+    var level1Select = createSelectInputs(1, level0Data);
+    container.append('<label for="lv1">lv1</label>')
+    container.append(level1Select);
+    container.append('</br>')
+
+    // Tạo ô lựa chọn cho cấp độ 2
+    var level2Select = createSelectInputs(2, []);
+    container.append('<label for="lv2">lv2</label>')
+    container.append(level2Select);
+    container.append('</br>')
+
+
+    // Tạo ô lựa chọn cho cấp độ 3
+    var level3Select = createSelectInputs(3, []);
+    container.append('<label for="lv3">lv3</label>')
+    container.append(level3Select);
+    container.append('</br>')
+
+    // Tạo ô lựa chọn cho cấp độ 4
+    var level4Select = createSelectInputs(4, []);
+    container.append('<label for="lv4">lv4</label>')
+    container.append(level4Select);
+    container.append('</br>')
+}
+
+// Hàm cập nhật ô lựa chọn cho các cấp độ tiếp theo dựa trên giá trị đã chọn ở cấp độ trước
+function populateSelectOptionsForLevel(selectedValue, level) {
+    var dataForLevel = getDataForLevel(selectedValue, level);
+    var selectInputs = $('.level' + level + '-inputs');
+
+    // Xóa các lựa chọn hiện có
+    selectInputs.empty();
+    selectInputs.append('<option value="">-- Select --</option>'); // Thêm một lựa chọn rỗng
+
+    // Thêm các lựa chọn cho cấp độ hiện tại dựa trên giá trị đã chọn ở cấp độ trước
+    if (dataForLevel && dataForLevel.length > 0) {
+        dataForLevel.forEach(function(item) {
+            var option = $('<option>');
+            option.text(item.name);
+            option.val(item.name);
+            selectInputs.append(option);
+        });
+    }
+}
+
+// Sự kiện thay đổi cho các ô lựa chọn
+$('.mockup').on('change', 'select', function() {
+    var selectedValue = $(this).val();
+    var level = parseInt($(this).attr('class').match(/level(\d+)-inputs/)[1]);
+    for (var i = level + 1; i <= 4; i++) {
+        var selectInput = $('.level' + i + '-inputs');
+        selectInput.empty();
+        selectInput.append('<option value="">-- Select --</option>');
+    }
+    // Cập nhật các ô lựa chọn cho các cấp độ tiếp theo dựa trên giá trị đã chọn
+    populateSelectOptionsForLevel(selectedValue, level + 1);
+});
+
+// Hàm lấy dữ liệu cho mỗi cấp độ từ biến jsonStructure
+function getDataForLevel(selectedValue, level) {
+var dataForLevel = [];
+switch (level) {
+    case 2:
+        var level1Data = jsonStructure.level0;
+        level1Data.forEach(function(item) {
+            if (item.name === selectedValue && item.children) {
+                dataForLevel = item.children;
+            }
+        });
+        break;
+    case 3:
+        var level2Data = jsonStructure.level0.flatMap(level1 => level1.children);
+        level2Data.forEach(function(item) {
+            if (item.name === selectedValue && item.children) {
+                dataForLevel = item.children;
+            }
+        });
+        break;
+    case 4:
+        var level3Data = jsonStructure.level0.flatMap(level1 => level1.children).flatMap(level2 => level2.children);
+        level3Data.forEach(function(item) {
+            if (item.name === selectedValue && item.children) {
+                dataForLevel = item.children;
+            }
+        });
+        break;
+    default:
+        break;
+}
+return dataForLevel;
+}
+    
+// end
 });
