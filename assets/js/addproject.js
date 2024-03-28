@@ -60,16 +60,17 @@ $(document).ready(function () {
         $(this).parent().addClass('editing')
         $('.add-device-mockup').removeClass('hide');
         var deviceCode = $(this).data('info');
+        createSelectInputsForLevels('.device-lv');
         for (var i = 0; i < projectData.devices.length; i++) {
             var device = projectData.devices[i];
             if (device.code == deviceCode) {
                 $('#ma').val(device.code);
                 $('#cabinet').val(device.cabinet);
                 $('#ngay').val(device.date);
-                $('#lv1').val(device.lv1);
-                $('#lv2').val(device.lv2);
-                $('#lv3').val(device.lv3);
-                $('#lv4').val(device.lv4);
+                $('.level1-inputs').val(device.lv1);
+                $('.level2-inputs').val(device.lv2);
+                $('.level3-inputs').val(device.lv3);
+                $('.level4-inputs').val(device.lv4);
                 $('#loaitb').val(device.deviceType);
             }
         }
@@ -123,10 +124,10 @@ $(document).ready(function () {
             code: $('#ma').val(),
             cabinet: $('#cabinet').val(),
             date: $('#ngay').val(),
-            lv1: $('#lv1').val(),
-            lv2: $('#lv2').val(),
-            lv3: $('#lv3').val(),
-            lv4: $('#lv4').val(),
+            lv1: $('.level1-inputs').val(),
+            lv2: $('.level2-inputs').val(),
+            lv3: $('.level3-inputs').val(),
+            lv4: $('.level4-inputs').val(),
             deviceType: $('#loaitb').val(),
             chanels: []
         };
@@ -176,13 +177,14 @@ $(document).ready(function () {
         $('#ma').val('');
         $('#cabinet').val('');
         $('#ngay').val('');
-        $('#lv1').val('');
-        $('#lv2').val('');
-        $('#lv3').val('');
-        $('#lv4').val('');
+        $('.level1-inputs').val('');
+        $('.level2-inputs').val('');
+        $('.level3-inputs').val('');
+        $('.level4-inputs').val('');
         $('#loaitb').val('');
 
         // ẩn mockup
+        $('.device-lv').find('.mockup').remove();
         $('.device-add').remove();
         $('.add-device-mockup').addClass('hide');
     })
@@ -193,9 +195,7 @@ $(document).ready(function () {
         $('.device-add').remove();
         $('.add-device-mockup').addClass('hide');
         console.log('2')
-        $('.device-lv').find('.select-in').remove();
-        $('.device-lv').find('label').remove();
-        $('.device-lv').find('br').remove();
+        $('.device-lv').find('.mockup').remove();
     })
 
     //mockup thêm chanel
@@ -300,10 +300,10 @@ $(document).ready(function () {
         var ma = $('#ma').val().trim();
         var cabinet = $('#cabinet').val().trim();
         var ngay = $('#ngay').val().trim();
-        var lv1 = $('#lv1').val().trim();
-        var lv2 = $('#lv2').val().trim();
-        var lv3 = $('#lv3').val().trim();
-        var lv4 = $('#lv4').val().trim();
+        var lv1 = $('.level1-inputs').val().trim();
+        var lv2 = $('.level2-inputs').val().trim();
+        var lv3 = $('.level3-inputs').val().trim();
+        var lv4 = $('.level4-inputs').val().trim();
         var loaitb = $('#loaitb').val().trim();
 
         if (ma === '' || cabinet === '' || ngay === '' || lv1 === '' || lv2 === '' || lv3 === '' || lv4 === '' || loaitb === '') {
@@ -454,25 +454,25 @@ $(document).ready(function () {
         });
     }
 
-    function printData(data, level) {
-        if (data instanceof jsonStructure) {
-            data.forEach(function(item, index) {
-                console.log("level" + level + ":", item.name);
-                printData(item.children, level + 1);
-            });
-        } else if (typeof data === 'object') {
-            console.log("level" + level + ":", data.name);
-            printData(data.children, level + 1);
-        }
-    }
+    // function printData(data, level) {
+    //     if (data instanceof jsonStructure) {
+    //         data.forEach(function(item, index) {
+    //             console.log("level" + level + ":", item.name);
+    //             printData(item.children, level + 1);
+    //         });
+    //     } else if (typeof data === 'object') {
+    //         console.log("level" + level + ":", data.name);
+    //         printData(data.children, level + 1);
+    //     }
+    // }
     
-    // In dữ liệu theo các cấp độ
-    printData(jsonStructure.level0, 0);
+    // // In dữ liệu theo các cấp độ
+    // printData(jsonStructure.level0, 0);
 
 // test phase 2
 function createSelectInputs(level, data) {
     var selectInputs = $('<select>');
-    selectInputs.addClass('level' + level + '-inputs select-in');
+    selectInputs.addClass('level' + level + '-inputs');
     selectInputs.prepend('<option value="">-- Select --</option>'); // Add an empty option initially
 
     // Thêm các lựa chọn cho cấp độ hiện tại
@@ -493,30 +493,34 @@ function createSelectInputsForLevels(blockName) {
     var container = $(blockName);
     var level0Data = jsonStructure.level0;
 
+    var selectBlock = $('<div class = "mockup">');
+
     // Tạo ô lựa chọn cho cấp độ 1
     var level1Select = createSelectInputs(1, level0Data);
-    container.append('<label for="lv1">lv1</label>')
-    container.append(level1Select);
-    container.append('</br>')
+    selectBlock.append('<label for="lv1">lv1</label>')
+    selectBlock.append(level1Select);
+    selectBlock.append('</br>')
 
     // Tạo ô lựa chọn cho cấp độ 2
     var level2Select = createSelectInputs(2, []);
-    container.append('<label for="lv2">lv2</label>')
-    container.append(level2Select);
-    container.append('</br>')
+    selectBlock.append('<label for="lv2">lv2</label>')
+    selectBlock.append(level2Select);
+    selectBlock.append('</br>')
 
 
     // Tạo ô lựa chọn cho cấp độ 3
     var level3Select = createSelectInputs(3, []);
-    container.append('<label for="lv3">lv3</label>')
-    container.append(level3Select);
-    container.append('</br>')
+    selectBlock.append('<label for="lv3">lv3</label>')
+    selectBlock.append(level3Select);
+    selectBlock.append('</br>')
 
     // Tạo ô lựa chọn cho cấp độ 4
     var level4Select = createSelectInputs(4, []);
-    container.append('<label for="lv4">lv4</label>')
-    container.append(level4Select);
-    container.append('</br>')
+    selectBlock.append('<label for="lv4">lv4</label>')
+    selectBlock.append(level4Select);
+    selectBlock.append('</br>')
+
+    container.append(selectBlock);
 }
 
 // Hàm cập nhật ô lựa chọn cho các cấp độ tiếp theo dựa trên giá trị đã chọn ở cấp độ trước
