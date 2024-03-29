@@ -30,7 +30,7 @@
                 <span>Dự án</span>
                 <input placeholder="Code" type="text">
                 <input placeholder="Tên" type="text">
-                <button class="structure">Struture</button>
+                <button class="structure">Structure</button>
             </div>
             <div class="addPrj-hd-right">
                 <button>Export</button>
@@ -46,13 +46,13 @@
             </div>
             <div class="add-device-main">
                 <div class="device-added">
-                    <div class="device-hd">
+                    <!-- <div class="device-hd">
                         <span>Mã - Cabinet - Ngày - Loại thiết bị</span>
                         <span class="edit-device-btn" data-info="123"><i class="fa-solid fa-pen-to-square"></i> Edit
                             Device</span>
                         <span class="delete-device-btn" data-info="123"><i class="fa-solid fa-trash"></i> Delete
                             Device</span>
-                        <span class="add-chanel-btn" style="margin-right:10px" data-info="123" data-maxch="6"><i
+                        <span class="add-chanel-btn" style="margin-right:10px" data-info="123" data-maxch="6" data-type="6k3p"><i
                                 class="fa-solid fa-plus"></i> Add Chanel</span>
                         <i class="fa-solid fa-caret-down" data-info="123"></i>
                     </div>
@@ -63,7 +63,6 @@
                                 <th>Tên</th>
                                 <th>Kênh</th>
                                 <th></th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -71,11 +70,10 @@
                                 <td class="text-bold-500">0</td>
                                 <td>abcsd</td>
                                 <td>A11</td>
-                                <td class="add-chanel-btn">sửa</td>
-                                <td>xóa</td>
+                                <td class="delete-chanel-btn">xóa</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table> -->
                 </div>
             </div>
         </div>
@@ -127,15 +125,9 @@
 
         <!-- add chanel  mockup-->
         <div class="add-chanel-mockup mockup hide">
-            <label for="chonch">Chọn chanel</label>
-            <select id="chonch" name="chonch">
-                <option value="CH1">CH1</option>
-                <option value="CH2">CH2</option>
-                <option value="CH3">CH3</option>
-                <option value="CH4">CH4</option>
-                <option value="CH5">CH5</option>
-                <option value="CH6">CH6</option>
-            </select>
+            <div class="chonch">
+                <label for="chonch">Chọn chanel</label>
+            </div>
             <div><label>Itt</label>
                 <input type="text" name="itt" id="">
             </div>
@@ -154,8 +146,7 @@
             <div><label>Source</label>
                 <input type="text" name="source" id="">
             </div>
-            <div class="chanel-lv" style="display: flex;">
-                
+            <div class="chanel-lv">  
             </div>
             <div class="checkbox">
                 <label style="margin-right: 10px;">includeS</label>

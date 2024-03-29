@@ -212,4 +212,23 @@ function getDataForLevel(selectedValue, level) {
 
     // In ra dữ liệu theo các cấp độ
     printData(jsonStructure.level0, 0);
+
+    // Tạo một ô select mới
+var selectBox = $('<select>');
+
+// Mảng chứa các lựa chọn
+var options = ["CH1", "CH2", "CH3", "CH4", "CH5", "CH6"];
+
+// Thêm tất cả các lựa chọn vào ô select
+$.each(options, function(index, value) {
+    var option = $('<option>', {
+        value: value.toLowerCase(), // giá trị lựa chọn, ví dụ: ch1, ch2, ...
+        text: value // Nội dung hiển thị của lựa chọn
+    });
+    selectBox.append(option); // Thêm lựa chọn vào ô select
+});
+
+// Thêm ô select vào một phần tử có id là "container"
+$('.container').append(selectBox);
+
 });

@@ -46,6 +46,9 @@ button{
     cursor: pointer;
 }
 
+.edit-device-btn{
+    display: none;
+}
 .add-device-mockup label{
     width: 120px;
     padding: 10px;
@@ -85,13 +88,19 @@ button{
     margin-right: 20px;
 }
 
+.add-chanel-mockup .chonch label{
+    width: 150px !important;
+    /* padding: 10px; */
+    font-weight: bold;
+    font-size: 20px;
+}
+
 .add-chanel-mockup div{
-    display: flex;
     margin: 10px 10px;
 }
 
 .add-chanel-mockup div label{
-    /* display: block; */
+    /* display: block;  */
     width: 60px !important;
 }
 
@@ -152,4 +161,9 @@ button{
 }
 .block-level-2, .block-level-3, .block-level-4 {
     margin-left: 20px;
+}
+
+.level-select{
+    padding: 5px ;
+    /* align-items: center; */
 }
