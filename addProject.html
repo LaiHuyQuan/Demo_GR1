@@ -45,9 +45,15 @@
                 </span>
             </div>
             <div class="add-device-main">
-                <!-- <div class="device-added">
+                <div class="device-added">
                     <div class="device-hd">
                         <span>Mã - Cabinet - Ngày - Loại thiết bị</span>
+                        <span class="edit-device-btn" data-info="123"><i class="fa-solid fa-pen-to-square"></i> Edit
+                            Device</span>
+                        <span class="delete-device-btn" data-info="123"><i class="fa-solid fa-trash"></i> Delete
+                            Device</span>
+                        <span class="add-chanel-btn" style="margin-right:10px" data-info="123" data-maxch="6"><i
+                                class="fa-solid fa-plus"></i> Add Chanel</span>
                         <i class="fa-solid fa-caret-down" data-info="123"></i>
                     </div>
                     <table class="table table-lg 123 hide">
@@ -70,7 +76,7 @@
                             </tr>
                         </tbody>
                     </table>
-                </div> -->
+                </div>
             </div>
         </div>
         <!-- structure mockup -->
@@ -78,7 +84,7 @@
             <div class="container">
                 <div class="block-level-0">
                     <span class="add-button">Thêm</span>
-                    
+
                 </div>
             </div>
             <div class="structure-bot">
@@ -120,7 +126,7 @@
         <!-- end device mockup -->
 
         <!-- add chanel  mockup-->
-        <div class="add-chanel-mockup hide">
+        <div class="add-chanel-mockup mockup hide">
             <label for="chonch">Chọn chanel</label>
             <select id="chonch" name="chonch">
                 <option value="CH1">CH1</option>
@@ -148,41 +154,8 @@
             <div><label>Source</label>
                 <input type="text" name="source" id="">
             </div>
-            <div>
-                <label for="lv1">Lv1</label>
-                <select id="" name="lv1">
-                    <option value="nha 1">nhà 1</option>
-                    <option value="nha 2">nhà 2</option>
-                    <option value="nha 3">nhà 3</option>
-                    <option value="nha 4">nhà 4</option>
-                </select>
-            </div>
-            <div>
-                <label for="lv2">lv2</label>
-                <select id="" name="lv2">
-                    <option value="tang 1">tang 1</option>
-                    <option value="tang 2">tang 2</option>
-                    <option value="tang 3">tang 3</option>
-                    <option value="tang 4">tang 4</option>
-                </select>
-            </div>
-            <div>
-                <label for="lv3">lv3</label>
-                <select id="" name="lv3">
-                    <option value="phong 1">phong 1</option>
-                    <option value="phong 2">phong 2</option>
-                    <option value="phong 3">phong 3</option>
-                    <option value="phong 4">phong 4</option>
-                </select>
-            </div>
-            <div>
-                <label for="lv4">lv4</label>
-                <select id="" name="lv4">
-                    <option value="ban 1">ban 1</option>
-                    <option value="ban 2">ban 2</option>
-                    <option value="ban 3">ban 3</option>
-                    <option value="ban 4">ban 4</option>
-                </select>
+            <div class="chanel-lv" style="display: flex;">
+                
             </div>
             <div class="checkbox">
                 <label style="margin-right: 10px;">includeS</label>
@@ -203,7 +176,7 @@
     <script src="./assets/js/app.js"></script>
     <!-- <script src="./assets/js/script.js"></script> -->
     <script src="./assets/js/addproject.js"></script>
-    
+
 </body>
 
 </html>

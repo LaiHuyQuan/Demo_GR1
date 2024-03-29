@@ -204,6 +204,7 @@ $(document).ready(function () {
         var deviceID = $(this).data('info');
         var tableName = '.table.' + deviceID;
         var maxChanel = $(this).data('maxch')
+        createSelectInputsForLevels('.chanel-lv');
         // console.log(maxChanel)
         var rowCount = $(tableName + ' tbody tr').length;
         if (rowCount == maxChanel) {
@@ -238,10 +239,10 @@ $(document).ready(function () {
             type: $('input[name="type"]').val(),
             name: $('input[name="name"]').val(),
             source: $('input[name="source"]').val(),
-            lv1: $('select[name="lv1"]').val(),
-            lv2: $('select[name="lv2"]').val(),
-            lv3: $('select[name="lv3"]').val(),
-            lv4: $('select[name="lv4"]').val(),
+            lv1: $('.level1-inputs').val(),
+            lv2: $('.level2-inputs').val(),
+            lv3: $('.level3-inputs').val(),
+            lv4: $('.level4-inputs').val(),
             includeS: $('#includeS').is(':checked'),
             includeL: $('#includeL').is(':checked'),
             sourceFr: $('#sourceFr').is(':checked')
@@ -273,15 +274,16 @@ $(document).ready(function () {
         $('input[name="type"]').val('');
         $('input[name="name"]').val('');
         $('input[name="source"]').val('');
-        $('select[name="lv1"]').val('');
-        $('select[name="lv2"]').val('');
-        $('select[name="lv3"]').val('');
-        $('select[name="lv4"]').val('');
+        $('.level1-inputs').val('');
+        $('.level2-inputs').val('');
+        $('.level3-inputs').val('');
+        $('.level4-inputs').val('');
         $('#includeS').prop('checked', false);
         $('#includeL').prop('checked', false);
         $('#sourceFr').prop('checked', false);
 
         // ẩn mockup
+        $('.chanel-lv').find('.mockup').remove();
         $('.chanel-save').remove();
         $('.add-chanel-mockup').addClass('hide');
     })
@@ -289,6 +291,7 @@ $(document).ready(function () {
     // đóng
     $('.add-chanel-mockup').on('click', '.chanel-close', function () {
         // $('.chanel-save').attr('data-info', "");
+        $('.chanel-lv').find('.mockup').remove();
         $('.chanel-save').remove();
         $('.add-chanel-mockup').addClass('hide');
         console.log('2')
@@ -321,10 +324,10 @@ $(document).ready(function () {
         var type = $('input[name="type"]').val().trim();
         var name = $('input[name="name"]').val().trim();
         var source = $('input[name="source"]').val().trim();
-        var lv1 = $('select[name="lv1"]').val().trim();
-        var lv2 = $('select[name="lv2"]').val().trim();
-        var lv3 = $('select[name="lv3"]').val().trim();
-        var lv4 = $('select[name="lv4"]').val().trim();
+        var lv1 = $('.level1-inputs').val().trim();
+        var lv2 = $('.level2-inputs').val().trim();
+        var lv3 = $('.level3-inputs').val().trim();
+        var lv4 = $('.level4-inputs').val().trim();
 
         // Kiểm tra các trường nhập liệu
         if (chonch === '' || itt === '' || ptt === '' || ct === '' || type === '' || name === '' || source === '' || lv1 === '' || lv2 === '' || lv3 === '' || lv4 === '') {
