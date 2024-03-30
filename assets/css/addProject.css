@@ -42,7 +42,7 @@ button{
     font-weight: bold;
 }
 
-.device-hd .add-chanel-btn, .edit-device-btn, .delete-device-btn{
+.device-hd .add-channel-btn, .edit-device-btn, .delete-device-btn{
     cursor: pointer;
 }
 
@@ -70,7 +70,7 @@ button{
     display: block;
 }
 
-.add-chanel-mockup{
+.add-channel-mockup{
     position: fixed;
     top: 10%;
     left: 20%;
@@ -82,33 +82,33 @@ button{
     overflow-y: scroll;
 }
 
-.add-chanel-mockup > label{
+.add-channel-mockup > label{
     font-size: 30px;
     font-weight: bold;
     margin-right: 20px;
 }
 
-.add-chanel-mockup .chonch label{
+.add-channel-mockup .chonch label{
     width: 150px !important;
     /* padding: 10px; */
     font-weight: bold;
     font-size: 20px;
 }
 
-.add-chanel-mockup div{
+.add-channel-mockup div{
     margin: 10px 10px;
 }
 
-.add-chanel-mockup div label{
+.add-channel-mockup div label{
     /* display: block;  */
-    width: 60px !important;
+    width: 80px !important;
 }
 
-.chanel-btns, .device-btns{
+.channel-btns, .device-btns{
     justify-content: right;
 }
 
-.chanel-btns span, .device-btns span{
+.channel-btns span, .device-btns span{
     padding: 8px 12px;
     margin-left: 10px;
     cursor: pointer;
@@ -117,7 +117,7 @@ button{
     transition: all 0.3s;
 }
 
-.chanel-btns span:hover, .device-btns span:hover{
+.channel-btns span:hover, .device-btns span:hover{
     color: #302d2d;
     background-color: #949494;
 }
