@@ -23,15 +23,22 @@ $(document).ready(function () {
 
     // ẩn/hiện danh sách kênh
     $('.add-device-main').on('click', '.fa-caret-down', function () {
-        var deviceName = $(this).data('info');
+        var deviceID = $(this).data('info');
         var $table = $(this).parent().parent().find('table');
         if ($table.length > 0) {
             $table.remove();
         } else {
-            $(this).parent().parent().append(createchannelTable(deviceName));
+            $(this).parent().parent().append(createchannelTable(deviceID));
+        }
+        var newTable = $('.device-added-' + deviceID).find('table');
+
+        // Kiểm tra xem bảng mới có hàng nào không
+        if (newTable.find('tbody tr').length == 0) {
+            newTable.remove(); // Nếu không có hàng nào, loại bỏ bảng mới
+            alert("Thiết bị chưa có kênh nào");
+
         }
     });
-
 
     //mockup structure
     // mở
@@ -64,6 +71,8 @@ $(document).ready(function () {
     $('#add-project').on('click', '.edit-device-btn', function () {
         $(this).parent().addClass('editing')
         $('.add-device-mockup').removeClass('hide');
+        $('.add-device-mockup').find('.loaitb').prop('disabled', true);
+
         var deviceCode = $(this).data('info');
         createSelectInputsForLevels('.device-lv');
         for (var i = 0; i < projectData.devices.length; i++) {
@@ -79,6 +88,7 @@ $(document).ready(function () {
                 $('#loaitb').val(device.deviceType);
             }
         }
+
         var editDeviceIndex = '<span class="edit-device-save data-info="' + deviceCode + '">Save</span>';
         $('.device-btns').append(editDeviceIndex)
     })
@@ -86,6 +96,7 @@ $(document).ready(function () {
     // lưu sau khi sửa
     $('.add-device-mockup').on('click', '.edit-device-save', function () {
         deviceCode = $('.editing').data('info')
+        $('.add-device-mockup').find('.loaitb').prop('disabled', false);
         for (var i = 0; i < projectData.devices.length; i++) {
             var device = projectData.devices[i];
             if (device.code == deviceCode) {
@@ -101,6 +112,7 @@ $(document).ready(function () {
         $('.editing').removeClass('editing');
         $('.edit-device-save').remove();
         $('.add-device-mockup').addClass('hide');
+        $('.device-lv').find('.mockup').remove();
     })
 
     // xóa
@@ -190,8 +202,8 @@ $(document).ready(function () {
     $('.add-device-mockup').on('click', '.device-close', function () {
         $('.edit-device-save').remove();
         $('.device-add').remove();
+        $('.add-device-mockup').find('.loaitb').prop('disabled', false);
         $('.add-device-mockup').addClass('hide');
-        console.log('2')
         $('.device-lv').find('.mockup').remove();
     })
 
@@ -203,20 +215,27 @@ $(document).ready(function () {
         var deviceID = $(this).data('info');
         var deviceType = $(this).data('type');
         checkDeviceType(deviceType);
-        var tableName = '.table.' + deviceID;
         var maxchannel = $(this).data('maxch')
         createSelectInputsForLevels('.channel-lv');
         // console.log(maxchannel)
 
         $('.add-channel-mockup').removeClass('hide');
-        var deviceCode = $(this).data('info')
-        var channelSavebtn = '<span class="channel-save" data-info="' + deviceCode + '" data-maxch="' + maxchannel + '">Save</span>';
+        var channelSavebtn = '<span class="channel-save" data-info="' + deviceID + '" data-maxch="' + maxchannel + '">Save</span>';
         $('.channel-btns').append(channelSavebtn);
-    })
+    });
 
     // lưu
     $('.add-channel-mockup').on('click', '.channel-save', function () {
         var deviceID = $(this).data('info');
+        if ($('#chonch').val() == '') {
+            alert('Hãy chọn kênh');
+            return;
+        };
+        if (!checkChannel($('#chonch').val(), deviceID)) {
+            alert('Kênh đã tồn tại');
+            return;
+        }
+
         // console.log(deviceID)
         var channel = {
             chonch: $('#chonch').val(),
@@ -241,8 +260,8 @@ $(document).ready(function () {
                 // console.log(device.code)
                 projectData.devices[i].channels.push(channel);
                 break; // Thoát khỏi vòng lặp sau khi thêm kênh
-            }
-        }
+            };
+        };
         // đặt form về mặc định
         $('#chonch').val('');
         $('input[name="itt"]').val('');
@@ -261,59 +280,55 @@ $(document).ready(function () {
 
         // thêm vào bảng
         var $table = $('.device-added-' + deviceID).find('table');
-            $('.device-added-' + deviceID).find('table').remove();
-            $('.device-added-' + deviceID).append(createchannelTable(deviceID));
+        $('.device-added-' + deviceID).find('table').remove();
+        $('.device-added-' + deviceID).append(createchannelTable(deviceID));
 
         // ẩn mockup
+        $('.add-channel-mockup').find('#chonpha').remove();
         $('.add-channel-mockup').find('#chonch').remove();
         $('.channel-lv').find('.mockup').remove();
         $('.channel-save').remove();
         $('.add-channel-mockup').addClass('hide');
-    })
+    });
 
     // đóng
     $('.add-channel-mockup').on('click', '.channel-close', function () {
         // $('.channel-save').attr('data-info', "");
+        $('.add-channel-mockup').find('#chonpha').remove();
         $('.add-channel-mockup').find('#chonch').remove();
         $('.channel-lv').find('.mockup').remove();
         $('.channel-save').remove();
         $('.add-channel-mockup').addClass('hide');
-        console.log('2')
-    })
+    });
 
     // xóa
     $('.add-device-main').on('click', '.delete-channel-btn', function () {
         var channelID = $(this).data('info');
         var deviceID = $(this).data('deviceid');
         if (confirm('Bạn có chắc chắn muốn xóa kênh này không?')) {
-            // Lặp qua mảng devices trong projectData
             for (var i = 0; i < projectData.devices.length; i++) {
                 var device = projectData.devices[i];
-                // Kiểm tra xem mã thiết bị có trùng khớp với deviceID không
                 if (device.code == deviceID) {
-                    console.log(2)
                     for (var j = 0; j < device.channels.length; j++) {
                         if (device.channels[j].chonch == channelID) {
                             device.channels.splice(j, 1);
-                            break; // Thoát khỏi vòng lặp sau khi xóa kênh
+                            break;
                         }
                     }
-                    // Sau khi xóa kênh, có thể thoát khỏi vòng lặp vì chỉ cần xóa một kênh duy nhất
                     break;
                 }
             }
         }
         var $table = $('.device-added-' + deviceID).find('table');
+        $table.remove();
+        $('.device-added-' + deviceID).append(createchannelTable(deviceID));
+        var newTable = $('.device-added-' + deviceID).find('table');
+
+        // Kiểm tra xem bảng mới có hàng nào không
+        if (newTable.find('tbody tr').length == 0) {
             console.log(2);
-            $table.remove();
-            var newTable = createchannelTable(deviceID);
-            $('.device-added-' + deviceID).append(newTable);
-         $table = $('.device-added-' + deviceID).find('table');
-            
-            // Kiểm tra xem bảng mới có hàng nào không
-            if ($table.find('tbody tr').length == 0) {
-                $Table.remove(); // Nếu không có hàng nào, loại bỏ bảng mới
-            }
+            newTable.remove(); // Nếu không có hàng nào, loại bỏ bảng mới
+        }
     });
 
     // tạo bảng kênh
@@ -321,7 +336,7 @@ $(document).ready(function () {
         var newDevice;
         for (var i = 0; i < projectData.devices.length; i++) {
             if (projectData.devices[i].code == deviceName) {
-                console.log(1)
+                // console.log(1)
                 var foundDevice = projectData.devices[i];
                 newDevice =
                     '</div>' +
@@ -347,7 +362,7 @@ $(document).ready(function () {
                     newDevice += '<tr>' +
                         '<td class="text-bold-500">' + index + '</td>' +
                         '<td>' + channel.name + '</td>' +
-                        '<td>' + channel.chonch + '</td>' +
+                        '<td>' + channel.chonch.toUpperCase() + '</td>' +
                         '<td>' + channel.lv1 + '</td>' +
                         '<td>' + channel.lv2 + '</td>' +
                         '<td>' + channel.lv3 + '</td>' +
@@ -368,39 +383,176 @@ $(document).ready(function () {
     //kiểm tra
     // kiểm tra loại thiết bị || thêm các channel vào thiết bị 
     function checkDeviceType(deviceType) {
-        // Tạo một ô select mới
+        var chonPha = $('<select id="chonpha" name="chonpha" data-info="' + deviceType + '">');
         var channelList = $('<select id="chonch" name="chonch">');
+        channelList.prepend('<option value="">-- Select --</option>');
 
-        var options;
+        var pha, options1;
         if (deviceType == '1k3p') {
-            options = ["CH1"];
+            pha = ['1 pha', '3 pha'];
+            options1 = ["CH1"];
         }
         if (deviceType == '6k3p') {
-            options = ["CH1", "CH2", "CH3", "CH4", "CH5", "CH6"];
+            pha = ['1 pha', '3 pha'];
+            options1 = ["CH1", "CH2", "CH3", "CH4", "CH5", "CH6"];
         }
         if (deviceType == '6k1p') {
-            options = ["A11", "A12", "A13", "A14", "A15", "A16"];
+            pha = ['1 pha'];
+            options1 = ["A11", "A12", "A13", "A14", "A15", "A16"];
         }
         if (deviceType == '12k3p') {
-            options = ["CH1", "CH2", "CH3", "CH4", "CH5", "CH6", "CH7", "CH8", "CH9", "CH10", "CH11", "CH12"];
+            pha = ['1 pha', '3 pha'];
+            options1 = ["CH1", "CH2", "CH3", "CH4", "CH5", "CH6", "CH7", "CH8", "CH9", "CH10", "CH11", "CH12"];
         }
 
-        // Thêm các lựa chọn vào ô select
+        pha.forEach(function (item) {
+            var phase = $('<option>', {
+                value: item.toLowerCase().replace(' ', ''),
+                text: item
+            });
+            chonPha.append(phase);
+        });
+
+        $.each(options1, function (index, value) {
+            var option = $('<option>', {
+                value: value.toLowerCase(),
+                text: value
+            });
+            channelList.append(option);
+        });
+
+        // Thêm ô select pha vào DOM
+        $('.chonch').append(chonPha);
+        $('.chonch').append(channelList);
+    }
+
+    // kiểm tra pha 
+    $(document).on('change', '#chonpha', function () {
+        var deviceType = $(this).data('info');
+        var selectedPhase = $(this).val();
+        var channelList = $('#chonch');
+
+        var options1, options2;
+        // console.log(deviceType)
+        if (deviceType == '1k3p') {
+            options1 = ["CH1"];
+            options2 = ["P1", "P2", "P3"];
+        }
+        if (deviceType == '6k3p') {
+            options1 = ["CH1", "CH2", "CH3", "CH4", "CH5", "CH6"];
+            options2 = ["A11", "A21", "A31", "A12", "A22", "A32", "A31", "A32", "A33", "A14", "A24", "A34", "A15", "A25", "A35", "A16", "A26", "A36"];
+        }
+        if (deviceType == '6k1p') {
+            options1 = ["A11", "A12", "A13", "A14", "A15", "A16"];
+        }
+        if (deviceType == '12k3p') {
+            options1 = ["CH1", "CH2", "CH3", "CH4", "CH5", "CH6", "CH7", "CH8", "CH9", "CH10", "CH11", "CH12"];
+            options2 = ["A11", "A21", "A31", "A12", "A22", "A32", "A13", "A33", "A33", "A14", "A24", "A34", "A15", "A25", "A35", "A16", "A26", "A36",
+                "A41", "A51", "A61", "A42", "A52", "A62", "A43", "A53", "A63", "A44", "A54", "A64", "A45", "A55", "A65", "A46", "A56", "A66"];
+        }
+
+        var options;
+        if (selectedPhase == '1pha') {
+            options = options1;
+        } else if (selectedPhase == '3pha') {
+            options = options2;
+        }
+        // console.log(options)
+
+        // Xóa các option hiện có trong select
+        channelList.empty();
+
+        // Thêm các option mới vào select
         $.each(options, function (index, value) {
             var option = $('<option>', {
                 value: value.toLowerCase(),
                 text: value
             });
-            channelList.append(option); // Thêm lựa chọn vào ô select
+            channelList.append(option);
         });
+    });
 
-        // Trả về ô select đã được tạo
-        $('.chonch').append(channelList);
+    // kiểm tra list kênh
+    function checkChannel(channelID, deviceID) {
+        var mapping = {
+            "ch1": ["a11", "a21", "a31"],
+            "ch2": ["a12", "a22", "a32"],
+            "ch3": ["a13", "a23", "a33"],
+            "ch4": ["a14", "a24", "a34"],
+            "ch5": ["a15", "a25", "a35"],
+            "ch6": ["a16", "a26", "a36"],
+            "ch7": ["a41", "a51", "a61"],
+            "ch8": ["a42", "a52", "a62"],
+            "ch9": ["a43", "a53", "a63"],
+            "ch10": ["a44", "a54", "a64"],
+            "ch11": ["a45", "a55", "a65"],
+            "ch12": ["a46", "a56", "a66"]
+        };
+        var reversedMapping = {};
+        for (var key in mapping) {
+            if (mapping.hasOwnProperty(key)) {
+                var values = mapping[key];
+                for (var i = 0; i < values.length; i++) {
+                    var value = values[i];
+                    if (!reversedMapping.hasOwnProperty(value)) {
+                        reversedMapping[value] = [];
+                    }
+                    reversedMapping[value].push(key);
+                }
+            }
+        }
+
+        var Values = mapping[channelID];
+        var result = checkChannelExistence(channelID, deviceID);
+
+        if (!result) {
+            return false; // Nếu kết quả là false, trả về false ngay lập tức
+        }
+
+        if (channelID in mapping) {
+            for (var i = 0; i < Values.length; i++) {
+                result = checkChannelExistence(Values[i], deviceID);
+                if (!result) {
+                    return false; // Nếu kết quả là false, trả về false ngay lập tức
+                }
+            }
+        } else {
+            for (var key in reversedMapping) {
+                if (reversedMapping.hasOwnProperty(key)) {
+                    var values = reversedMapping[key];
+                    if (values.includes(channelID)) {
+                        result = checkChannelExistence(key, deviceID);
+                        if (!result) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
     }
+
+    // kiểm tra chọn kênh
+    function checkChannelExistence(selectedValue, deviceID) {
+        for (var i = 0; i < projectData.devices.length; i++) {
+            var device = projectData.devices[i];
+            if (device.code == deviceID) {
+                for (var j = 0; j < device.channels.length; j++) {
+                    var channel = device.channels[j];
+                    if (channel.chonch == selectedValue) {
+                        console.log(false)
+                        return false;
+                    }
+                }
+            }
+        }
+        console.log(true)
+        return true;
+    }
+
 
     // Structure
     var isAdding = false; // Biến để kiểm tra trạng thái đang thêm mới hay không
-
     $('.container').on('click', '.add-button', function () {
         var parentBlock = $(this).parent(); // Lưu trữ khối cha
         if (parentBlock.find('.add-input').length) {
@@ -536,7 +688,7 @@ $(document).ready(function () {
     function createSelectInputs(level, data) {
         var selectInputs = $('<select class="select-lv">');
         selectInputs.addClass('level' + level + '-inputs');
-        selectInputs.prepend('<option value="">-- Select --</option>'); // Add an empty option initially
+        selectInputs.prepend('<option value="">-- Select --</option>');
 
         // Thêm các lựa chọn cho cấp độ hiện tại
         if (data && data.length > 0) {

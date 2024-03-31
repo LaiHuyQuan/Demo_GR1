@@ -46,9 +46,6 @@ button{
     cursor: pointer;
 }
 
-.edit-device-btn{
-    display: none;
-}
 .add-device-mockup label{
     width: 120px;
     padding: 10px;
@@ -80,6 +77,10 @@ button{
     border: 2px #000 solid;
     padding: 3%;
     overflow-y: scroll;
+}
+
+#chonch {
+    min-width: 64px;
 }
 
 .add-channel-mockup > label{
