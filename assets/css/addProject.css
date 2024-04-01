@@ -155,9 +155,7 @@ button{
 }
 
 .block .add-button, .delete-button {
-    /* background-color: #007bff; */
     color: #ccc;
-    /* background: none; */
     padding: 0px 10px;
     border: none;
     cursor: pointer;

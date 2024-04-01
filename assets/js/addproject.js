@@ -10,16 +10,45 @@ var jsonStructure = {
     "level0": []
 };
 
-var jsonData;
-// danh sách mã thiết bị
-var deviceCodeList = [];
-
 $(document).ready(function () {
     // thêm dự án
-    // lưu 
+    // dự án
+    function saveProject(){
+        projectData.projectName = $('#ProjectName').val();
+        projectData.projectCode = $('#ProjectCode').val();
+    }
+
+    // lưu biến 
     $('#add-project').on('click', '.save', function () {
-        console.log(luu);
+        console.log('luu');
+        saveProject();
+        var jsonData = JSON.stringify(projectData);
+        jsonData += JSON.stringify(jsonStructure);
+
+
+        // Tạo và tải xuống tệp văn bản
+        download('projectData.txt', jsonData);
     })
+
+    // xuất dữ liệu
+    $('#add-project').on('click', '.export', function () {
+        saveProject();
+        alert('export')
+    })
+
+    function download(filename, text) {
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+    }
+
 
     // ẩn/hiện danh sách kênh
     $('.add-device-main').on('click', '.fa-caret-down', function () {
@@ -59,6 +88,178 @@ $(document).ready(function () {
         $('.structure-mockup').addClass('hide');
         SaveStructure();
     })
+
+    function SaveStructure() {
+        jsonStructure.level0 = [];
+        $('.container').find('.block-level-1').each(function () {
+            var levelInfo = $(this).contents().first().text().trim();
+            var match = levelInfo.match(/^(.+?)\s*\(code:\s*(.+?)\)$/);
+
+            jsonStructure.level0.push({
+                "name": match[1],
+                "code": match[2],
+                "children": []
+            });
+
+            // Duyệt qua các khối cấp độ 2 và lưu tên của mỗi khối vào jsonStructure
+            $(this).find('.block-level-2').each(function () {
+                var levelInfo = $(this).contents().first().text().trim();
+                var match = levelInfo.match(/^(.+?)\s*\(code:\s*(.+?)\)$/);
+                jsonStructure.level0[jsonStructure.level0.length - 1].children.push({
+                    "name": match[1],
+                    "code": match[2],
+                    "children": []
+                });
+
+                // Duyệt qua các khối cấp độ 3 và lưu tên của mỗi khối vào jsonStructure
+                $(this).find('.block-level-3').each(function () {
+                    var levelInfo = $(this).contents().first().text().trim();
+                    var match = levelInfo.match(/^(.+?)\s*\(code:\s*(.+?)\)$/);
+                    jsonStructure.level0[jsonStructure.level0.length - 1].children[jsonStructure.level0[jsonStructure.level0.length - 1].children.length - 1].children.push({
+                        "name": match[1],
+                        "code": match[2],
+                        "children": []
+                    });
+
+                    // Duyệt qua các khối cấp độ 4 và lưu tên của mỗi khối vào jsonStructure
+                    $(this).find('.block-level-4').each(function () {
+                        var levelInfo = $(this).contents().first().text().trim();
+                        var match = levelInfo.match(/^(.+?)\s*\(code:\s*(.+?)\)$/);
+                        jsonStructure.level0[jsonStructure.level0.length - 1].children[jsonStructure.level0[jsonStructure.level0.length - 1].children.length - 1].children[jsonStructure.level0[jsonStructure.level0.length - 1].children[jsonStructure.level0[jsonStructure.level0.length - 1].children.length - 1].children.length - 1].children.push({
+                            "name": match[1],
+                            "code": match[2],
+                        });
+                    });
+                });
+            });
+        });
+    }
+
+    var isAdding = false; // Biến để kiểm tra trạng thái đang thêm mới hay không
+    $('.container').on('click', '.add-button', function () {
+        var parentBlock = $(this).parent(); // Lưu trữ khối cha
+        if (parentBlock.find('.add-input').length) {
+            parentBlock.find('.add-input').remove(); // Xóa input hiện có nếu đang tồn tại trong khối cha
+            parentBlock.find('.add-code').remove(); // Xóa input hiện có nếu đang tồn tại trong khối cha
+            parentBlock.find('.cancel-button').remove(); // Xóa nút hủy trong khối cha
+        }
+        isAdding = true; // Thiết lập trạng thái đang thêm mới
+        var level = parseInt(parentBlock.attr('class').match(/block-level-(\d+)/)[1]) + 1;
+        parentBlock.append('<input type="text" class="add-input" placeholder="Nhập tên cho Cấp Độ ' + level + '">');
+        parentBlock.append('<input type="text" class="add-code" placeholder="Nhập mã cho Cấp Độ ' + level + '">'); // Thêm input cho mã vào khối cha
+        parentBlock.append('<button class="ok-button">OK</button>'); // Thêm nút OK vào khối cha
+        parentBlock.append('<button class="cancel-button">Hủy</button>'); // Thêm nút hủy vào khối cha
+        parentBlock.children('.block-level-' + (level - 1) + ' > .block').each(function () {
+            if (!$(this).is(':visible')) {
+                $(this).slideToggle(); // Nếu không, hiện chúng ra
+            }
+        });
+        $('.add-input').first().focus(); // Focus vào input mới (tên)
+    });
+
+    $('.container').on('click', '.cancel-button', function (event) {
+        event.stopPropagation(); // Ngăn chặn sự kiện click lan truyền tới các khối cha
+        $('.add-input').remove(); // Xóa input
+        $('.add-code').remove(); // Xóa input nhập mã
+        $(this).remove(); // Xóa nút hủy
+        $('.ok-button').remove(); // Xóa nút OK
+        isAdding = false; // Trở lại trạng thái không thêm mới
+    });
+
+    $('.container').on('click', '.delete-button', function (event) {
+        event.stopPropagation(); // Ngăn chặn sự kiện click lan truyền tới các khối cha
+        $(this).parent().remove(); // Xóa cấp độ hiện tại khi nút xóa được nhấn
+    });
+
+    $('.container').on('keydown', '.add-input', function (event) {
+        if (event.keyCode === 13) { // Kiểm tra nếu là phím Enter
+            $('.add-code').focus(); // Chuyển focus sang input nhập mã
+        }
+    });
+
+    $('.container').on('keydown', '.add-code', function (event) {
+        event.stopPropagation(); // Ngăn chặn sự kiện click từ nút thêm input truyền vào
+        if (event.which === 13) { // Kiểm tra nếu phím Enter được nhấn
+            var inputText = $(this).prev('.add-input').val();
+            var inputCode = $(this).val(); // Lấy mã cấp độ từ input mã
+
+            var level = parseInt($(this).parent().attr('class').match(/block-level-(\d+)/)[1]);
+            var newBlock;
+            if (level < 3) {
+                newBlock = '<div class="block block-level-' + (level + 1) + '">' + inputText + ' (code: ' + inputCode + ')' +
+                    '<i class="fa-solid fa-plus fa-sm add-button"></i>' +
+                    '<i class="fa-solid fa-minus fa-sm delete-button"></i>' +
+                    '</div>';
+            } else {
+                newBlock = '<div class="block block-level-' + (level + 1) + '">' + inputText + ' (code: ' + inputCode + ')' +
+                    '<i class="fa-solid fa-minus fa-sm delete-button"></i>' +
+                    '</div>';
+            }
+
+            $(this).parent().append(newBlock);
+            $(this).remove(); // Xóa input sau khi thêm cấp độ mới
+            $('.add-input').remove(); // Xóa input tên
+            $('.ok-button').remove(); // Xóa nút OK
+            $('.cancel-button').remove(); // Xóa nút hủy
+            isAdding = false; // Trở lại trạng thái không thêm mới
+        }
+    });
+
+    $('.container').on('click', '.ok-button', function (event) {
+        event.stopPropagation(); // Ngăn chặn sự kiện click từ nút thêm input truyền vào
+        var parentBlock = $(this).parent();
+        var inputText = parentBlock.find('.add-input').val();
+        var inputCode = parentBlock.find('.add-code').val();
+        var level = parseInt(parentBlock.attr('class').match(/block-level-(\d+)/)[1]);
+        var newBlock;
+
+        if (checkDuplicateNameAndCodeInBlock($(this).parent())) {
+            alert('không hợp lệ')
+            return; // Nếu có trùng lặp hoặc giá trị rỗng, dừng lại
+        }
+
+        if (level < 3) {
+            newBlock = '<div class="block block-level-' + (level + 1) + '">' + inputText + ' (code: ' + inputCode + ')' +
+                '<i class="fa-solid fa-plus fa-sm add-button"></i>' +
+                '<i class="fa-solid fa-minus fa-sm delete-button"></i>' +
+                '</div>';
+        } else {
+            newBlock = '<div class="block block-level-' + (level + 1) + '">' + inputText + ' (code :' + inputCode + ')' +
+                '<i class="fa-solid fa-minus fa-sm delete-button"></i>' +
+                '</div>';
+        }
+
+        parentBlock.append(newBlock);
+        parentBlock.find('.add-input').remove(); // Xóa input tên
+        parentBlock.find('.add-code').remove(); // Xóa input mã
+        $(this).remove(); // Xóa nút OK
+        parentBlock.find('.cancel-button').remove(); // Xóa nút hủy
+        isAdding = false; // Trở lại trạng thái không thêm mới
+    });
+
+    $('.container').on('click', '.block', function () {
+        if (!isAdding) {
+            $(this).children('.block-level-2').slideToggle();
+        }
+    });
+
+    $('.container').on('click', '.block-level-2', function (event) {
+        event.stopPropagation();
+        if (!isAdding) {
+            $(this).children('.block-level-3').slideToggle();
+        }
+    });
+
+    $('.container').on('click', '.block-level-3', function (event) {
+        event.stopPropagation();
+        if (!isAdding) {
+            $(this).children('.block-level-4').slideToggle();
+        }
+    });
+
+    $('.container').on('click', '.block-level-4', function (event) {
+        event.stopPropagation();
+    });
 
     // mockup thêm thiết bị
     // mở 
@@ -109,10 +310,10 @@ $(document).ready(function () {
                 device.code = $('#ma').val();
                 device.cabinet = $('#cabinet').val();
                 device.date = $('#ngay').val();
-                device.lv1 = $('#lv1').val();
-                device.lv2 = $('#lv2').val();
-                device.lv3 = $('#lv3').val();
-                device.lv4 = $('#lv4').val();
+                device.lv1 = $('.level1-inputs').val();
+                device.lv2 = $('.level2-inputs').val();
+                device.lv3 = $('.level3-inputs').val();
+                device.lv4 = $('.level4-inputs').val();
                 break; // Kết thúc vòng lặp khi tìm thấy thiết bị cần chỉnh sửa
             }
         }
@@ -124,6 +325,8 @@ $(document).ready(function () {
 
     // xóa
     $('#add-project').on('click', '.delete-device-btn', function () {
+        var deviceID = $(this).data('info')
+        console.log(deviceID)
         var check = confirm('Are you sure you want to delete?');
         if (check) {
             $(this).parent().parent().remove();
@@ -131,6 +334,15 @@ $(document).ready(function () {
         else {
             return;
         }
+        for (var i = 0; i < projectData.devices.length; i++) {
+            var device = projectData.devices[i];
+            if (device.code == deviceID) {
+                projectData.devices.splice(i, 1);
+                break;
+            }
+
+        }
+
     })
 
     // thêm
@@ -168,15 +380,16 @@ $(document).ready(function () {
         };
 
         // kiểm tra mã thiết bị
-        if (deviceCodeList.includes(device.code)) {
-            alert('Mã thiết bị đã tồn tại')
-            return;
+        for (var i = 0; i < projectData.devices.length; i++) {
+            var check = projectData.devices[i];
+            if (device.code == check.code) {
+                alert('Mã thiết bị đã tồn tại');
+                return;
+            }
         }
-
 
         // thêm thiết bị vào data
         projectData.devices.push(device);
-        deviceCodeList.push(device.code);
 
         var newDevice = '<div class="device-added-' + device.code + '">' +
             '<div class="device-hd" data-info="' + device.code + '">' +
@@ -257,13 +470,13 @@ $(document).ready(function () {
                     $('input[name="type"]').val(channel.type)
                     $('input[name="name"]').val(channel.name)
                     $('input[name="sourceFr"]').val(channel.sourceFr)
-                    $('.level1-inputs').val(device.lv1);
-                    populateSelectOptionsForLevel(device.lv1, 2);
-                    $('.level2-inputs').val(device.lv2);
-                    populateSelectOptionsForLevel(device.lv2, 3);
-                    $('.level3-inputs').val(device.lv3);
-                    populateSelectOptionsForLevel(device.lv3, 4);
-                    $('.level4-inputs').val(device.lv4);
+                    $('.level1-inputs').val(channel.lv1);
+                    populateSelectOptionsForLevel(channel.lv1, 2);
+                    $('.level2-inputs').val(channel.lv2);
+                    populateSelectOptionsForLevel(channel.lv2, 3);
+                    $('.level3-inputs').val(channel.lv3);
+                    populateSelectOptionsForLevel(channel.lv3, 4);
+                    $('.level4-inputs').val(channel.lv4);
                     $('#loaitb').val(device.deviceType);
                     $('#includeS').prop('checked', channel.includeS)
                     $('#includeL').prop('checked', channel.includeL)
@@ -655,206 +868,37 @@ $(document).ready(function () {
 
     // kiểm tra tên và code cấp độ
     function checkDuplicateNameAndCodeInBlock(block) {
-        var names = {}; // Đối tượng để lưu trữ các tên đã xuất hiện
-        var codes = {}; // Đối tượng để lưu trữ các code đã xuất hiện
-    
-        // Duyệt qua từng phần tử trong khối cha
-        block.find('.block').each(function() {
+        var names = {};
+        var codes = {};
+
+        block.find('.block').each(function () {
             var nameInput = $('.add-input');
             var codeInput = $('.add-code');
-    
+
             var name = nameInput.val().trim();
             var code = codeInput.val().trim();
-    
-            // Kiểm tra xem tên có rỗng không
+
             if (name == "") {
                 return true; // Rỗng, trả về true
             }
-    
-            // Kiểm tra xem mã có rỗng không
+
             if (code == "") {
                 return true; // Rỗng, trả về true
             }
-    
+
             // Kiểm tra xem tên đã tồn tại chưa
             if (names[name]) {
                 return true; // Trùng lặp, trả về true
             } else {
                 names[name] = true; // Lưu trữ tên vào đối tượng
             }
-    
+
             // Kiểm tra xem mã đã tồn tại chưa
             if (codes[code]) {
                 return true; // Trùng lặp, trả về true
             } else {
                 codes[code] = true; // Lưu trữ mã vào đối tượng
             }
-        });
-    }
-    
-    // Structure
-    var isAdding = false; // Biến để kiểm tra trạng thái đang thêm mới hay không
-    $('.container').on('click', '.add-button', function () {
-        var parentBlock = $(this).parent(); // Lưu trữ khối cha
-        if (parentBlock.find('.add-input').length) {
-            parentBlock.find('.add-input').remove(); // Xóa input hiện có nếu đang tồn tại trong khối cha
-            parentBlock.find('.add-code').remove(); // Xóa input hiện có nếu đang tồn tại trong khối cha
-            parentBlock.find('.cancel-button').remove(); // Xóa nút hủy trong khối cha
-        }
-        isAdding = true; // Thiết lập trạng thái đang thêm mới
-        var level = parseInt(parentBlock.attr('class').match(/block-level-(\d+)/)[1]) + 1;
-        parentBlock.append('<input type="text" class="add-input" placeholder="Nhập tên cho Cấp Độ ' + level + '">');
-        parentBlock.append('<input type="text" class="add-code" placeholder="Nhập mã cho Cấp Độ ' + level + '">'); // Thêm input cho mã vào khối cha
-        parentBlock.append('<button class="ok-button">OK</button>'); // Thêm nút OK vào khối cha
-        parentBlock.append('<button class="cancel-button">Hủy</button>'); // Thêm nút hủy vào khối cha
-        parentBlock.children('.block-level-' + (level - 1) + ' > .block').each(function () {
-            if (!$(this).is(':visible')) {
-                $(this).slideToggle(); // Nếu không, hiện chúng ra
-            }
-        });
-        $('.add-input').first().focus(); // Focus vào input mới (tên)
-    });
-
-    $('.container').on('click', '.cancel-button', function (event) {
-        event.stopPropagation(); // Ngăn chặn sự kiện click lan truyền tới các khối cha
-        $('.add-input').remove(); // Xóa input
-        $('.add-code').remove(); // Xóa input nhập mã
-        $(this).remove(); // Xóa nút hủy
-        $('.ok-button').remove(); // Xóa nút OK
-        isAdding = false; // Trở lại trạng thái không thêm mới
-    });
-
-
-    $('.container').on('click', '.delete-button', function (event) {
-        event.stopPropagation(); // Ngăn chặn sự kiện click lan truyền tới các khối cha
-        $(this).parent().remove(); // Xóa cấp độ hiện tại khi nút xóa được nhấn
-    });
-
-    $('.container').on('keydown', '.add-input', function (event) {
-        if (event.keyCode === 13) { // Kiểm tra nếu là phím Enter
-            $('.add-code').focus(); // Chuyển focus sang input nhập mã
-        }
-    });
-
-    $('.container').on('keydown', '.add-code', function (event) {
-        event.stopPropagation(); // Ngăn chặn sự kiện click từ nút thêm input truyền vào
-        if (event.which === 13) { // Kiểm tra nếu phím Enter được nhấn
-            var inputText = $(this).prev('.add-input').val();
-            var inputCode = $(this).val(); // Lấy mã cấp độ từ input mã
-
-            var level = parseInt($(this).parent().attr('class').match(/block-level-(\d+)/)[1]);
-            var newBlock;
-            if (level < 3) {
-                newBlock = '<div class="block block-level-' + (level + 1) + '">' + inputText + ' (code: ' + inputCode + ')' +
-                    '<i class="fa-solid fa-plus fa-sm add-button"></i>' +
-                    '<i class="fa-solid fa-minus fa-sm delete-button"></i>' +
-                    '</div>';
-            } else {
-                newBlock = '<div class="block block-level-' + (level + 1) + '">' + inputText + ' (code: ' + inputCode + ')' +
-                    '<i class="fa-solid fa-minus fa-sm delete-button"></i>' +
-                    '</div>';
-            }
-
-            $(this).parent().append(newBlock);
-            $(this).remove(); // Xóa input sau khi thêm cấp độ mới
-            $('.add-input').remove(); // Xóa input tên
-            $('.ok-button').remove(); // Xóa nút OK
-            $('.cancel-button').remove(); // Xóa nút hủy
-            isAdding = false; // Trở lại trạng thái không thêm mới
-        }
-    });
-
-    $('.container').on('click', '.ok-button', function (event) {
-        event.stopPropagation(); // Ngăn chặn sự kiện click từ nút thêm input truyền vào
-        var parentBlock = $(this).parent();
-        var inputText = parentBlock.find('.add-input').val();
-        var inputCode = parentBlock.find('.add-code').val();
-        var level = parseInt(parentBlock.attr('class').match(/block-level-(\d+)/)[1]);
-        var newBlock;
-
-        if (checkDuplicateNameAndCodeInBlock($(this).parent())) {
-            alert('không hợp lệ')
-            return; // Nếu có trùng lặp hoặc giá trị rỗng, dừng lại
-        }
-    
-        if (level < 3) {
-            newBlock = '<div class="block block-level-' + (level + 1) + '">' + inputText + ' (code: ' + inputCode + ')' +
-                '<i class="fa-solid fa-plus fa-sm add-button"></i>' +
-                '<i class="fa-solid fa-minus fa-sm delete-button"></i>' +
-                '</div>';
-        } else {
-            newBlock = '<div class="block block-level-' + (level + 1) + '">' + inputText + ' (code :' + inputCode + ')' +
-                '<i class="fa-solid fa-minus fa-sm delete-button"></i>' +
-                '</div>';
-        }
-    
-        parentBlock.append(newBlock);
-        parentBlock.find('.add-input').remove(); // Xóa input tên
-        parentBlock.find('.add-code').remove(); // Xóa input mã
-        $(this).remove(); // Xóa nút OK
-        parentBlock.find('.cancel-button').remove(); // Xóa nút hủy
-        isAdding = false; // Trở lại trạng thái không thêm mới
-    });
-
-    $('.container').on('click', '.block', function () {
-        if (!isAdding) {
-            $(this).children('.block-level-2').slideToggle();
-        }
-    });
-
-    $('.container').on('click', '.block-level-2', function (event) {
-        event.stopPropagation();
-        if (!isAdding) {
-            $(this).children('.block-level-3').slideToggle();
-        }
-    });
-
-    $('.container').on('click', '.block-level-3', function (event) {
-        event.stopPropagation();
-        if (!isAdding) {
-            $(this).children('.block-level-4').slideToggle();
-        }
-    });
-
-    $('.container').on('click', '.block-level-4', function (event) {
-        event.stopPropagation();
-    });
-
-    // test
-    function SaveStructure() {
-        jsonStructure.level0 = [];
-        $('.container').find('.block-level-1').each(function () {
-            var level1Name = $(this).contents().first().text().trim();
-            jsonStructure.level0.push({
-                "name": level1Name,
-                "children": []
-            });
-
-            // Duyệt qua các khối cấp độ 2 và lưu tên của mỗi khối vào jsonStructure
-            $(this).find('.block-level-2').each(function () {
-                var level2Name = $(this).contents().first().text().trim();
-                jsonStructure.level0[jsonStructure.level0.length - 1].children.push({
-                    "name": level2Name,
-                    "children": []
-                });
-
-                // Duyệt qua các khối cấp độ 3 và lưu tên của mỗi khối vào jsonStructure
-                $(this).find('.block-level-3').each(function () {
-                    var level3Name = $(this).contents().first().text().trim();
-                    jsonStructure.level0[jsonStructure.level0.length - 1].children[jsonStructure.level0[jsonStructure.level0.length - 1].children.length - 1].children.push({
-                        "name": level3Name,
-                        "children": []
-                    });
-
-                    // Duyệt qua các khối cấp độ 4 và lưu tên của mỗi khối vào jsonStructure
-                    $(this).find('.block-level-4').each(function () {
-                        var level4Name = $(this).contents().first().text().trim();
-                        jsonStructure.level0[jsonStructure.level0.length - 1].children[jsonStructure.level0[jsonStructure.level0.length - 1].children.length - 1].children[jsonStructure.level0[jsonStructure.level0.length - 1].children[jsonStructure.level0[jsonStructure.level0.length - 1].children.length - 1].children.length - 1].children.push({
-                            "name": level4Name
-                        });
-                    });
-                });
-            });
         });
     }
 
@@ -877,7 +921,7 @@ $(document).ready(function () {
     function createSelectInputs(level, data) {
         var selectInputs = $('<select class="select-lv">');
         selectInputs.addClass('level' + level + '-inputs');
-        selectInputs.prepend('<option value="">0</option>');
+        selectInputs.prepend('<option value="0">0</option>');
 
         // Thêm các lựa chọn cho cấp độ hiện tại
         if (data && data.length > 0) {
@@ -888,13 +932,11 @@ $(document).ready(function () {
                 selectInputs.append(option);
             });
         }
-
         return selectInputs;
     }
 
     // Tạo các ô lựa chọn cho mỗi cấp độ và thêm vào .container
     function createSelectInputsForLevels(blockName) {
-
         var container = $(blockName);
         var level0Data = jsonStructure.level0;
 
@@ -935,7 +977,7 @@ $(document).ready(function () {
 
         // Xóa các lựa chọn hiện có
         selectInputs.empty();
-        selectInputs.append('<option value="">0</option>'); // Thêm một lựa chọn rỗng
+        selectInputs.append('<option value="0">0</option>'); // Thêm một lựa chọn rỗng
 
         // Thêm các lựa chọn cho cấp độ hiện tại dựa trên giá trị đã chọn ở cấp độ trước
         if (dataForLevel && dataForLevel.length > 0) {
@@ -955,7 +997,7 @@ $(document).ready(function () {
         for (var i = level + 1; i <= 4; i++) {
             var selectInput = $('.level' + i + '-inputs');
             selectInput.empty();
-            selectInput.append('<option value="">0</option>');
+            selectInput.append('<option value="0">0</option>');
         }
         // Cập nhật các ô lựa chọn cho các cấp độ tiếp theo dựa trên giá trị đã chọn
         populateSelectOptionsForLevel(selectedValue, level + 1);
