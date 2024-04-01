@@ -1,7 +1,7 @@
 //  danh sách các thiết bị
 var projectData = {
-    "projectCode": "ABC123",
-    "projectName": "Project ABC",
+    "projectCode": '',
+    "projectName": '',
     "devices": []
 }
 
@@ -13,7 +13,7 @@ var jsonStructure = {
 $(document).ready(function () {
     // thêm dự án
     // dự án
-    function saveProject(){
+    function saveProject() {
         projectData.projectName = $('#ProjectName').val();
         projectData.projectCode = $('#ProjectCode').val();
     }
@@ -22,9 +22,9 @@ $(document).ready(function () {
     $('#add-project').on('click', '.save', function () {
         console.log('luu');
         saveProject();
-        var jsonData = JSON.stringify(projectData);
-        jsonData += JSON.stringify(jsonStructure);
-
+        var jsonData = projectData.map(obj => JSON.stringify(obj)).join('\n');
+        jsonData += '\n';
+        jsonData += jsonStructure.map(obj => JSON.stringify(obj)).join('\n');
 
         // Tạo và tải xuống tệp văn bản
         download('projectData.txt', jsonData);
@@ -33,8 +33,80 @@ $(document).ready(function () {
     // xuất dữ liệu
     $('#add-project').on('click', '.export', function () {
         saveProject();
-        alert('export')
+        downloadProjectData();
     })
+
+    function downloadProjectData() {
+        var projectInfo = {
+            "projectCode": projectData.projectCode,
+            "projectName": projectData.projectName
+        };
+        
+        // Tạo mảng cho các thiết bị
+        var devices = projectData.devices.map(function (device) {
+            return {
+                "projectCode": projectData.projectCode,
+                "deviceCode": device.code,
+                "lv1name": device.lv1,
+                "lv2name": device.lv2,
+                "lv3name": device.lv3,
+                "lv4name": device.lv4,
+                "lv1Code": device.lv1Code,
+                "lv2Code": device.lv2Code,
+                "lv3Code": device.lv3Code,
+                "lv4Code": device.lv4Code,
+                "cabinet": device.cabinet,
+                "date": device.date,
+                "deviceType": device.deviceType
+            };
+        });
+        
+        // Tạo mảng cho các kênh
+        var channels = [];
+        projectData.devices.forEach(function (device) {
+            var deviceCode = device.code;
+            var loadId = 0; // Biến đếm loadid, bắt đầu từ 1 cho mỗi thiết bị
+            device.channels.forEach(function (channel) {
+                channels.push({
+                    "deviceCode": deviceCode,
+                    "loadId": loadId++, // Tăng giá trị loadId sau mỗi lần sử dụng và gán vào thuộc tính loadId của kênh
+                    "chonch": channel.chonch,
+                    "chonpha": channel.pha,
+                    "itt": channel.itt,
+                    "ptt": channel.ptt,
+                    "ct": channel.ct,
+                    "type": channel.type,
+                    "name": channel.name,
+                    "source": channel.source,
+                    "lv1name": channel.lv1,
+                    "lv2name": channel.lv2,
+                    "lv3name": channel.lv3,
+                    "lv4name": channel.lv4,
+                    "lv1Code": channel.lv1Code,
+                    "lv2Code": channel.lv2Code,
+                    "lv3Code": channel.lv3Code,
+                    "lv4Code": channel.lv4Code,
+                    "includeS": channel.includeS,
+                    "includeL": channel.includeL,
+                    "source": channel.source
+                });
+            });
+        });
+        // Chuỗi dữ liệu cho thông tin dự án
+        var projectInfoText = projectInfo.map(obj => JSON.stringify(obj)).join('\n');
+        
+        // Chuỗi dữ liệu cho danh sách thiết bị
+        var devicesText = devices.map(device => JSON.stringify(device)).join('\n');
+    
+        // Chuỗi dữ liệu cho danh sách kênh
+        var channelsText = channels.map(channel => JSON.stringify(channel)).join('\n');
+    
+        // Kết hợp các chuỗi dữ liệu thành một chuỗi duy nhất
+        var data = projectInfoText + '\n\n' + devicesText + '\n\n' + channelsText;
+    
+        // Tải dữ liệu xuống dưới dạng tệp văn bản
+        download('project_data.txt', data);
+    }
 
     function download(filename, text) {
         var element = document.createElement('a');
@@ -48,7 +120,6 @@ $(document).ready(function () {
 
         document.body.removeChild(element);
     }
-
 
     // ẩn/hiện danh sách kênh
     $('.add-device-main').on('click', '.fa-caret-down', function () {
@@ -104,30 +175,32 @@ $(document).ready(function () {
             // Duyệt qua các khối cấp độ 2 và lưu tên của mỗi khối vào jsonStructure
             $(this).find('.block-level-2').each(function () {
                 var levelInfo = $(this).contents().first().text().trim();
-                var match = levelInfo.match(/^(.+?)\s*\(code:\s*(.+?)\)$/);
+                var match2 = levelInfo.match(/^(.+?)\s*\(code:\s*(.+?)\)$/);
                 jsonStructure.level0[jsonStructure.level0.length - 1].children.push({
-                    "name": match[1],
-                    "code": match[2],
+                    "name": match2[1],
+                    "code": match2[2],
                     "children": []
                 });
 
                 // Duyệt qua các khối cấp độ 3 và lưu tên của mỗi khối vào jsonStructure
                 $(this).find('.block-level-3').each(function () {
                     var levelInfo = $(this).contents().first().text().trim();
-                    var match = levelInfo.match(/^(.+?)\s*\(code:\s*(.+?)\)$/);
+                    var match3 = levelInfo.match(/^(.+?)\s*\(code:\s*(.+?)\)$/);
                     jsonStructure.level0[jsonStructure.level0.length - 1].children[jsonStructure.level0[jsonStructure.level0.length - 1].children.length - 1].children.push({
-                        "name": match[1],
-                        "code": match[2],
+                        "name": match3[1],
+                        "code": match3[2],
                         "children": []
                     });
 
                     // Duyệt qua các khối cấp độ 4 và lưu tên của mỗi khối vào jsonStructure
                     $(this).find('.block-level-4').each(function () {
                         var levelInfo = $(this).contents().first().text().trim();
-                        var match = levelInfo.match(/^(.+?)\s*\(code:\s*(.+?)\)$/);
+                        console.log(levelInfo)
+                        var match4 = levelInfo.match(/^(.+?)\s*\(code:\s*(.+?)\)$/);
+                        console.log(match4)
                         jsonStructure.level0[jsonStructure.level0.length - 1].children[jsonStructure.level0[jsonStructure.level0.length - 1].children.length - 1].children[jsonStructure.level0[jsonStructure.level0.length - 1].children[jsonStructure.level0[jsonStructure.level0.length - 1].children.length - 1].children.length - 1].children.push({
-                            "name": match[1],
-                            "code": match[2],
+                            "name": match4[1],
+                            "code": match4[2]
                         });
                     });
                 });
@@ -138,10 +211,11 @@ $(document).ready(function () {
     var isAdding = false; // Biến để kiểm tra trạng thái đang thêm mới hay không
     $('.container').on('click', '.add-button', function () {
         var parentBlock = $(this).parent(); // Lưu trữ khối cha
-        if (parentBlock.find('.add-input').length) {
-            parentBlock.find('.add-input').remove(); // Xóa input hiện có nếu đang tồn tại trong khối cha
-            parentBlock.find('.add-code').remove(); // Xóa input hiện có nếu đang tồn tại trong khối cha
-            parentBlock.find('.cancel-button').remove(); // Xóa nút hủy trong khối cha
+        if ($('.container').find('.add-input').length) {
+            $('.container').find('.add-input').remove(); // Xóa input hiện có nếu đang tồn tại trong khối cha
+            $('.container').find('.add-code').remove(); // Xóa input hiện có nếu đang tồn tại trong khối cha
+            $('.container').find('.ok-button').remove();
+            $('.container').find('.cancel-button').remove(); // Xóa nút hủy trong khối cha
         }
         isAdding = true; // Thiết lập trạng thái đang thêm mới
         var level = parseInt(parentBlock.attr('class').match(/block-level-(\d+)/)[1]) + 1;
@@ -224,7 +298,7 @@ $(document).ready(function () {
                 '<i class="fa-solid fa-minus fa-sm delete-button"></i>' +
                 '</div>';
         } else {
-            newBlock = '<div class="block block-level-' + (level + 1) + '">' + inputText + ' (code :' + inputCode + ')' +
+            newBlock = '<div class="block block-level-' + (level + 1) + '">' + inputText + ' (code: ' + inputCode + ')' +
                 '<i class="fa-solid fa-minus fa-sm delete-button"></i>' +
                 '</div>';
         }
@@ -272,7 +346,7 @@ $(document).ready(function () {
     })
 
     // sửa
-    $('#add-project').on('click', '.edit-device-btn', function () {
+    $('.add-device').on('click', '.edit-device-btn', function () {
         $(this).parent().addClass('editing')
         $('.add-device-mockup').removeClass('hide');
         $('.add-device-mockup').find('.loaitb').prop('disabled', true);
@@ -314,6 +388,10 @@ $(document).ready(function () {
                 device.lv2 = $('.level2-inputs').val();
                 device.lv3 = $('.level3-inputs').val();
                 device.lv4 = $('.level4-inputs').val();
+                device.lv1code = $('.level1-inputs').find('option:selected').data('code');
+                device.lv2code = $('.level2-inputs').find('option:selected').data('code');
+                device.lv3code = $('.level3-inputs').find('option:selected').data('code');
+                device.lv4code = $('.level4-inputs').find('option:selected').data('code');
                 break; // Kết thúc vòng lặp khi tìm thấy thiết bị cần chỉnh sửa
             }
         }
@@ -354,18 +432,6 @@ $(document).ready(function () {
             return;
         }
 
-        // kiểm tra loại thiết bị
-        if ($('#loaitb').val() == '1k3p') {
-            maxch = 1;
-        }
-        if ($('#loaitb').val() == '6k3p' || $('#loaitb').val() == '6k1p') {
-            maxch = 6;
-        }
-        if ($('#loaitb').val() == '12k3p') {
-            maxch = 12;
-        }
-
-        var maxch;
         var device = {
             code: $('#ma').val(),
             cabinet: $('#cabinet').val() || 0,
@@ -374,9 +440,12 @@ $(document).ready(function () {
             lv2: $('.level2-inputs').val() || 0,
             lv3: $('.level3-inputs').val() || 0,
             lv4: $('.level4-inputs').val() || 0,
+            lv1code: $('.level1-inputs').find('option:selected').data('code'),
+            lv2code: $('.level2-inputs').find('option:selected').data('code'),
+            lv3code: $('.level3-inputs').find('option:selected').data('code'),
+            lv4code: $('.level4-inputs').find('option:selected').data('code'),
             deviceType: $('#loaitb').val(),
             channels: [],
-            maxch: maxch
         };
 
         // kiểm tra mã thiết bị
@@ -391,31 +460,54 @@ $(document).ready(function () {
         // thêm thiết bị vào data
         projectData.devices.push(device);
 
-        var newDevice = '<div class="device-added-' + device.code + '">' +
+        var newDevices = '<div class="device-added">' +
             '<div class="device-hd" data-info="' + device.code + '">' +
-            '<span>' + device.code + ' - ' + device.cabinet + ' - ' + device.date + ' - ' + device.deviceType + '</span>' +
-            '<span class="edit-device-btn" data-info="' + device.code + '"><i class="fa-solid fa-pen-to-square"></i> Edit Device</span>' +
-            '<span class="delete-device-btn" data-info="' + device.code + '"><i class="fa-solid fa-trash"></i> Delete Device</span>' +
-            '<span class="add-channel-btn" style="margin-right:10px" data-info="' + device.code + '" data-maxch="' + maxch + '" data-type="' + device.deviceType + '"><i class="fa-solid fa-plus"></i> Add channel</span>' +
-            '<i class="fa-solid fa-caret-down" data-info="' + device.code + '"></i>';
-
-        // Thêm đối tượng mới vào DOM
-        $('.add-device-main').append(newDevice);
+            '<span>' + device.code + ' - ' + device.deviceType + '</span>'
+        $('.prj-info-left').append(newDevices)
 
         // đặt lại giá trị về mặc định
         $('#ma').val('');
         $('#cabinet').val('');
         $('#ngay').val('');
-        $('.level1-inputs').val('');
-        $('.level2-inputs').val('');
-        $('.level3-inputs').val('');
-        $('.level4-inputs').val('');
         $('#loaitb').val('');
 
         // ẩn mockup
         $('.device-lv').find('.mockup').remove();
         $('.device-add').remove();
         $('.add-device-mockup').addClass('hide');
+    })
+
+    function addProject(device) {
+        var newDevice = '<div class="device-added device-added-' + device.code + '" data-info="' + device.code + '">' +
+            '<div class="device-hd" data-info="' + device.code + '">' +
+            '<span>' + device.code + ' - ' + device.cabinet + ' - ' + device.date + ' - ' + device.deviceType + '</span>' +
+            '<span class="edit-device-btn" data-info="' + device.code + '"><i class="fa-solid fa-pen-to-square"></i> Edit Device</span>' +
+            '<span class="delete-device-btn" data-info="' + device.code + '"><i class="fa-solid fa-trash"></i> Delete Device</span>' +
+            '<span class="add-channel-btn" style="margin-right:10px" data-info="' + device.code + '" data-type="' + device.deviceType + '"><i class="fa-solid fa-plus"></i> Add channel</span>' +
+            '<i class="fa-solid fa-caret-down" data-info="' + device.code + '"></i>';
+
+
+        // Thêm đối tượng mới vào DOM
+        $('.add-device-main').append(newDevice);
+
+        if (device.channels && device.channels.length > 0) {
+            $('.device-added-' + device.code).find('table').remove();
+            $('.device-added-' + device.code).append(createchannelTable(device.code));
+        }
+    }
+
+    $('.prj-info-left').on('click', '.device-hd', function () {
+        $('.color-gray').removeClass('color-gray');
+        $(this).toggleClass('color-gray');
+        var deviceID = $(this).data('info');
+        $('.prj-info-right').find('.device-added').remove();
+        for (var i = 0; i < projectData.devices.length; i++) {
+            var device = projectData.devices[i];
+            if (device.code == deviceID) {
+                addProject(device);
+            }
+
+        }
     })
 
     // đóng
@@ -435,12 +527,10 @@ $(document).ready(function () {
         var deviceID = $(this).data('info');
         var deviceType = $(this).data('type');
         checkDeviceType(deviceType);
-        var maxchannel = $(this).data('maxch')
         createSelectInputsForLevels('.channel-lv');
-        // console.log(maxchannel)
 
         $('.add-channel-mockup').removeClass('hide');
-        var channelSavebtn = '<span class="channel-save" data-info="' + deviceID + '" data-maxch="' + maxchannel + '">Save</span>';
+        var channelSavebtn = '<span class="channel-save" data-info="' + deviceID + '">Save</span>';
         $('.channel-btns').append(channelSavebtn);
     });
 
@@ -514,6 +604,10 @@ $(document).ready(function () {
                     channel.includeS = $('#includeS').is(':checked');
                     channel.includeL = $('#includeL').is(':checked');
                     channel.source = $('#source').is(':checked');
+                    channel.lv1code = $('.level1-inputs').find('option:selected').data('code');
+                    channel.lv2code = $('.level2-inputs').find('option:selected').data('code');
+                    channel.lv3code = $('.level3-inputs').find('option:selected').data('code');
+                    channel.lv4code = $('.level4-inputs').find('option:selected').data('code');
                 }
             }
         }
@@ -558,7 +652,11 @@ $(document).ready(function () {
             lv4: $('.level4-inputs').val() || 0,
             includeS: $('#includeS').is(':checked'),
             includeL: $('#includeL').is(':checked'),
-            source: $('#source').is(':checked')
+            source: $('#source').is(':checked'),
+            lv1code: $('.level1-inputs').find('option:selected').data('code'),
+            lv2code: $('.level2-inputs').find('option:selected').data('code'),
+            lv3code: $('.level3-inputs').find('option:selected').data('code'),
+            lv4code: $('.level4-inputs').find('option:selected').data('code'),
         };
 
         for (var i = 0; i < projectData.devices.length; i++) {
@@ -639,10 +737,10 @@ $(document).ready(function () {
     });
 
     // tạo bảng kênh
-    function createchannelTable(deviceName) {
+    function createchannelTable(deviceID) {
         var newDevice;
         for (var i = 0; i < projectData.devices.length; i++) {
-            if (projectData.devices[i].code == deviceName) {
+            if (projectData.devices[i].code == deviceID) {
                 // console.log(1)
                 var foundDevice = projectData.devices[i];
                 newDevice =
@@ -921,7 +1019,7 @@ $(document).ready(function () {
     function createSelectInputs(level, data) {
         var selectInputs = $('<select class="select-lv">');
         selectInputs.addClass('level' + level + '-inputs');
-        selectInputs.prepend('<option value="0">0</option>');
+        selectInputs.prepend('<option value="0" data-code="0">0</option>');
 
         // Thêm các lựa chọn cho cấp độ hiện tại
         if (data && data.length > 0) {
@@ -929,6 +1027,7 @@ $(document).ready(function () {
                 var option = $('<option>');
                 option.text(item.name);
                 option.val(item.name);
+                option.data('code', item.code);
                 selectInputs.append(option);
             });
         }
@@ -977,7 +1076,7 @@ $(document).ready(function () {
 
         // Xóa các lựa chọn hiện có
         selectInputs.empty();
-        selectInputs.append('<option value="0">0</option>'); // Thêm một lựa chọn rỗng
+        selectInputs.append('<option value="0" data-code="0">0</option>'); // Thêm một lựa chọn rỗng
 
         // Thêm các lựa chọn cho cấp độ hiện tại dựa trên giá trị đã chọn ở cấp độ trước
         if (dataForLevel && dataForLevel.length > 0) {
@@ -985,7 +1084,9 @@ $(document).ready(function () {
                 var option = $('<option>');
                 option.text(item.name);
                 option.val(item.name);
+                option.data('code', item.code);
                 selectInputs.append(option);
+
             });
         }
     }
@@ -997,7 +1098,7 @@ $(document).ready(function () {
         for (var i = level + 1; i <= 4; i++) {
             var selectInput = $('.level' + i + '-inputs');
             selectInput.empty();
-            selectInput.append('<option value="0">0</option>');
+            selectInput.append('<option value="0" data-code="0">0</option>');
         }
         // Cập nhật các ô lựa chọn cho các cấp độ tiếp theo dựa trên giá trị đã chọn
         populateSelectOptionsForLevel(selectedValue, level + 1);

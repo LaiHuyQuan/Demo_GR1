@@ -1,6 +1,9 @@
+
+
 #add-project{
-    width: 100vw;
-    padding: 50px;
+    width: 100%;
+    padding: 30px 5vw 0;
+    margin-bottom: 30px;
 }
 
 .addPrj-hd{
@@ -115,7 +118,7 @@ button{
     justify-content: right;
 }
 
-.channel-btns span, .device-btns span{
+.channel-btns span, .device-btns span, .struc-save, .struc-close{
     padding: 8px 12px;
     margin-left: 10px;
     cursor: pointer;
@@ -182,4 +185,34 @@ button{
 
 .select-lv{
     min-width: 70px;
+}
+
+#project-info{
+    width: 100%;
+    min-height: 1000px;
+    background-color: #3b3c3c;
+    display: flex;
+    border-top: 2px #ccc solid;
+}
+
+.prj-info-left{
+    width: 20%;
+    border-right: 2px #ccc solid;
+    padding: 20px 40px;
+}
+
+.prj-info-left .device-added{
+    border-bottom: 1px #ccc solid;
+    /* margin-left: 10px; */
+    transition: all ease-in-out 0.4s;
+}
+
+.prj-info-right{
+    padding: 20px;
+    width: 80%;
+}
+
+.color-gray{
+    background-color: #636e72;
+    color: #000;
 }

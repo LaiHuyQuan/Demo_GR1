@@ -1,0 +1,113 @@
+{
+    "projectCode": "qưeqe",
+    "projectName": "nhà c7",
+    "devices": [
+        {
+            "code": "m1321",
+            "cabinet": 0,
+            "date": 0,
+            "lv1": "0",
+            "lv2": "0",
+            "lv3": "0",
+            "lv4": "0",
+            "deviceType": "1k3p",
+            "channels": [
+                {
+                    "pha": "3 pha",
+                    "chonch": "p1",
+                    "itt": 0,
+                    "ptt": 0,
+                    "ct": 0,
+                    "type": 0,
+                    "name": "1111",
+                    "sourceFr": 0,
+                    "lv1": "0",
+                    "lv2": "0",
+                    "lv3": "0",
+                    "lv4": "0",
+                    "includeS": false,
+                    "includeL": false,
+                    "source": false
+                },
+                {
+                    "pha": "3 pha",
+                    "chonch": "p3",
+                    "itt": 0,
+                    "ptt": 0,
+                    "ct": 0,
+                    "type": 0,
+                    "name": "Vịt Vụng Về",
+                    "sourceFr": 0,
+                    "lv1": "0",
+                    "lv2": "0",
+                    "lv3": "0",
+                    "lv4": "0",
+                    "includeS": false,
+                    "includeL": false,
+                    "source": false
+                }
+            ]
+        },
+        {
+            "code": "12313213",
+            "cabinet": 0,
+            "date": 0,
+            "lv1": "0",
+            "lv2": "0",
+            "lv3": "0",
+            "lv4": "0",
+            "deviceType": "6k1p",
+            "channels": [
+                {
+                    "pha": "1 pha",
+                    "chonch": "a12",
+                    "itt": "1231",
+                    "ptt": 0,
+                    "ct": 0,
+                    "type": 0,
+                    "name": 0,
+                    "sourceFr": 0,
+                    "lv1": "0",
+                    "lv2": "0",
+                    "lv3": "0",
+                    "lv4": "0",
+                    "includeS": false,
+                    "includeL": false,
+                    "source": false
+                }
+            ]
+        },
+        {
+            "code": "qưqq",
+            "cabinet": "qqq",
+            "date": 0,
+            "lv1": "0",
+            "lv2": "0",
+            "lv3": "0",
+            "lv4": "0",
+            "deviceType": "12k3p",
+            "channels": []
+        }
+    ]
+}
+{
+    "level0": [
+        {
+            "name": "nhà 1",
+            "code": "qưeqwe",
+            "children": [
+                {
+                    "name": "qưeqe",
+                    "code": "qưeqwe",
+                    "children": [
+                        {
+                            "name": "qưeqe",
+                            "code": "qưeqe",
+                            "children": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

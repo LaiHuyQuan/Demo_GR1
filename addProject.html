@@ -22,148 +22,157 @@
 </head>
 
 <body>
-    <!-- addProject mockup -->
-    <div id="add-project">
-        <!-- add project -->
-        <div class="addPrj-hd">
-            <div class="addPrj-hd-left">
-                <span >Dự án</span>
-                <input id="ProjectName" placeholder="Name" type="text">
-                <input id="ProjectCode" placeholder="Code" type="text">
-                <span class="structure">Structure</span>
-            </div>
-            <div class="addPrj-hd-right">
-                <button class="export">Export</button>
-                <button class="save">Save</button>
-            </div>
-        </div>
-        <div class="add-device">
-            <div class="add-decive-hd">
-                <span class="add-device-btn">
-                    <i class="fa-solid fa-plus"></i>
-                    New Device
-                </span>
-            </div>
-            <div class="add-device-main">
-                <div class="device-added">
-                    <!-- <div class="device-hd">
-                        <span>Mã - Cabinet - Ngày - Loại thiết bị</span>
-                        <span class="edit-device-btn" data-info="123"><i class="fa-solid fa-pen-to-square"></i> Edit
-                            Device</span>
-                        <span class="delete-device-btn" data-info="123"><i class="fa-solid fa-trash"></i> Delete
-                            Device</span>
-                        <span class="add-channel-btn" style="margin-right:10px" data-info="123" data-maxch="6" data-type="6k3p"><i
-                                class="fa-solid fa-plus"></i> Add channel</span>
-                        <i class="fa-solid fa-caret-down" data-info="123"></i>
+    <div id="content">
+        <!-- addProject mockup -->
+        <div id="add-project">
+            <!-- add project -->
+            <div class="addPrj-hd">
+                <div class="addPrj-hd-left">
+                    <span >Dự án</span>
+                    <input id="ProjectName" placeholder="Name" type="text">
+                    <input id="ProjectCode" placeholder="Code" type="text">
+                    <span class="structure">Structure</span>
+                </div>
+                <div class="addPrj-hd-right">
+                    <button class="export">Export</button>
+                    <button class="save">Save</button>
+                    <div class="add-decive-hd">
+                        <span class="add-device-btn">
+                            <i class="fa-solid fa-plus"></i>
+                            New Device
+                        </span>
                     </div>
-                    <table class="table table-lg 123 hide">
-                        <thead>
-                            <tr>
-                                <th>LoadID</th>
-                                <th>Tên</th>
-                                <th>Kênh</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="text-bold-500">0</td>
-                                <td>abcsd</td>
-                                <td>A11</td>
-                                <td class="delete-channel-btn">xóa</td>
-                            </tr>
-                        </tbody>
-                    </table> -->
                 </div>
             </div>
-        </div>
-        <!-- structure mockup -->
-        <div class="structure-mockup hide">
-            <div class="container">
-                <div class="block-level-0">
-                    <span class="add-button">Thêm</span>
-
+            <!-- structure mockup -->
+            <div class="structure-mockup hide">
+                <div class="container">
+                    <div class="block-level-0">
+                        <span class="add-button">Thêm</span>
+    
+                    </div>
+                </div>
+                <div class="structure-bot">
+                    <button class="struc-save">save</button>
+                    <button class="struc-close">close</button>
                 </div>
             </div>
-            <div class="structure-bot">
-                <button class="struc-save">save</button>
-                <button class="struc-close">close</button>
+            <!-- end structure mockup -->
+    
+            <!-- add device mockup -->
+            <div class="add-device-mockup mockup hide">
+                <div class="add-device-hd">
+                    <span>Device</span>
+                </div>
+                <div><label for="">Mã</label>
+                    <input type="text" name="" id="ma">
+                </div>
+                <div><label for="">Cabinet</label>
+                    <input type="text" name="" id="cabinet">
+                </div>
+                <div><label for="">Ngày</label>
+                    <input type="date" name="" id="ngay">
+                </div>
+                <div class="device-lv">
+                </div>
+                <div>
+                    <label for="loaitb" class="loaitb">Loại thiết bị</label>
+                    <select id="loaitb" name="loaitb" class="loaitb">
+                        <option value="1k3p">1k3p</option>
+                        <option value="6k1p">6k1p</option>
+                        <option value="6k3p">6k3p</option>
+                        <option value="12k3p">12k3p</option>
+                    </select>
+                </div>
+                <div class="device-btns">
+                    <span class="device-close">Close</span>
+                </div>
+            </div>
+            <!-- end device mockup -->
+    
+            <!-- add channel  mockup-->
+            <div class="add-channel-mockup mockup hide">
+                <div class="chonch">
+                    <label for="chonch">Chọn channel</label>
+                </div>
+                <div><label>Itt</label>
+                    <input type="text" name="itt" id="">
+                </div>
+                <div><label>Ptt</label>
+                    <input type="text" name="ptt" id="">
+                </div>
+                <div><label>Ct</label>
+                    <input type="text" name="ct" id="">
+                </div>
+                <div><label>Type</label>
+                    <input type="text" name="type" id="">
+                </div>
+                <div><label>Name</label>
+                    <input type="text" name="name" id="">
+                </div>
+                <div><label>SourceFr</label>
+                    <input type="text" name="sourceFr" id="">
+                </div>
+                <div class="channel-lv">
+                </div>
+                <div class="checkbox">
+                    <label style="margin-right: 10px;">includeS</label>
+                    <input type="checkbox" id="includeS" name="checkbox">
+                    <label style="margin:0 10px;">includeL</label>
+                    <input type="checkbox" id="includeL" name="checkbox">
+                    <label style="margin:0 10px;">Source</label>
+                    <input type="checkbox" id="source" name="checkbox">
+                </div>
+                <div class="channel-btns">
+                    <span class="channel-close">Close</span>
+                </div>
+                <!-- end add channel  mockup -->
             </div>
         </div>
-        <!-- end structure mockup -->
-
-        <!-- add device mockup -->
-        <div class="add-device-mockup mockup hide">
-            <div class="add-device-hd">
-                <span>Device</span>
+        <!-- end addProject mockup -->
+    
+        <div id="project-info">
+            <div class="prj-info-left">
+                
             </div>
-            <div><label for="">Mã</label>
-                <input type="text" name="" id="ma">
+            <div class="prj-info-right">
+                <div class="add-device">
+                    <div class="add-device-main">
+                        <div class="device-added">
+                            <!-- <div class="device-hd">
+                                <span>Mã - Cabinet - Ngày - Loại thiết bị</span>
+                                <span class="edit-device-btn" data-info="123"><i class="fa-solid fa-pen-to-square"></i> Edit
+                                    Device</span>
+                                <span class="delete-device-btn" data-info="123"><i class="fa-solid fa-trash"></i> Delete
+                                    Device</span>
+                                <span class="add-channel-btn" style="margin-right:10px" data-info="123" data-maxch="6" data-type="6k3p"><i
+                                        class="fa-solid fa-plus"></i> Add channel</span>
+                                <i class="fa-solid fa-caret-down" data-info="123"></i>
+                            </div>
+                            <table class="table table-lg 123 hide">
+                                <thead>
+                                    <tr>
+                                        <th>LoadID</th>
+                                        <th>Tên</th>
+                                        <th>Kênh</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-bold-500">0</td>
+                                        <td>abcsd</td>
+                                        <td>A11</td>
+                                        <td class="delete-channel-btn">xóa</td>
+                                    </tr>
+                                </tbody>
+                            </table> -->
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div><label for="">Cabinet</label>
-                <input type="text" name="" id="cabinet">
-            </div>
-            <div><label for="">Ngày</label>
-                <input type="date" name="" id="ngay">
-            </div>
-            <div class="device-lv">
-            </div>
-            <div>
-                <label for="loaitb" class="loaitb">Loại thiết bị</label>
-                <select id="loaitb" name="loaitb" class="loaitb">
-                    <option value="1k3p">1k3p</option>
-                    <option value="6k1p">6k1p</option>
-                    <option value="6k3p">6k3p</option>
-                    <option value="12k3p">12k3p</option>
-                </select>
-            </div>
-            <div class="device-btns">
-                <span class="device-close">Close</span>
-            </div>
-        </div>
-        <!-- end device mockup -->
-
-        <!-- add channel  mockup-->
-        <div class="add-channel-mockup mockup hide">
-            <div class="chonch">
-                <label for="chonch">Chọn channel</label>
-            </div>
-            <div><label>Itt</label>
-                <input type="text" name="itt" id="">
-            </div>
-            <div><label>Ptt</label>
-                <input type="text" name="ptt" id="">
-            </div>
-            <div><label>Ct</label>
-                <input type="text" name="ct" id="">
-            </div>
-            <div><label>Type</label>
-                <input type="text" name="type" id="">
-            </div>
-            <div><label>Name</label>
-                <input type="text" name="name" id="">
-            </div>
-            <div><label>SourceFr</label>
-                <input type="text" name="sourceFr" id="">
-            </div>
-            <div class="channel-lv">
-            </div>
-            <div class="checkbox">
-                <label style="margin-right: 10px;">includeS</label>
-                <input type="checkbox" id="includeS" name="checkbox">
-                <label style="margin:0 10px;">includeL</label>
-                <input type="checkbox" id="includeL" name="checkbox">
-                <label style="margin:0 10px;">Source</label>
-                <input type="checkbox" id="source" name="checkbox">
-            </div>
-            <div class="channel-btns">
-                <span class="channel-close">Close</span>
-            </div>
-            <!-- end add channel  mockup -->
         </div>
     </div>
-    <!-- end addProject mockup -->
-
     <script src="./assets/js/app.js"></script>
     <!-- <script src="./assets/js/script.js"></script> -->
     <script src="./assets/js/addproject.js"></script>
