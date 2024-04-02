@@ -40,7 +40,7 @@ $(document).ready(function () {
             "projectCode": projectData.projectCode,
             "projectName": projectData.projectName
         };
-        
+
         // Tạo mảng cho các thiết bị
         var devices = projectData.devices.map(function (device) {
             return {
@@ -59,7 +59,7 @@ $(document).ready(function () {
                 "deviceType": device.deviceType
             };
         });
-        
+
         // Tạo mảng cho các kênh
         var channels = [];
         projectData.devices.forEach(function (device) {
@@ -93,16 +93,16 @@ $(document).ready(function () {
         });
         // Chuỗi dữ liệu cho thông tin dự án
         var projectInfoText = projectInfo.map(obj => JSON.stringify(obj)).join('\n');
-        
+
         // Chuỗi dữ liệu cho danh sách thiết bị
         var devicesText = devices.map(device => JSON.stringify(device)).join('\n');
-    
+
         // Chuỗi dữ liệu cho danh sách kênh
         var channelsText = channels.map(channel => JSON.stringify(channel)).join('\n');
-    
+
         // Kết hợp các chuỗi dữ liệu thành một chuỗi duy nhất
         var data = projectInfoText + '\n\n' + devicesText + '\n\n' + channelsText;
-    
+
         // Tải dữ liệu xuống dưới dạng tệp văn bản
         download('project_data.txt', data);
     }
@@ -337,7 +337,7 @@ $(document).ready(function () {
     $('#add-project').on('click', '.add-device-btn', function () {
         $('.add-device-mockup').removeClass('hide');
         createSelectInputsForLevels('.device-lv');
-        var addDeviceIndex = '<button type="reset" class="btn btn-primary me-1 mb-1 device-add">Save</button>' 
+        var addDeviceIndex = '<button type="reset" class="btn btn-primary me-1 mb-1 device-add">Save</button>'
         $('.device-btns').append(addDeviceIndex);
         $('#ma').focus();
     })
@@ -1125,4 +1125,49 @@ $(document).ready(function () {
         }
         return dataForLevel;
     }
+
+
+    // test
+    var drawings = []; // Mảng lưu trữ các hình vẽ
+
+    function updateCanvasSize() {
+        // Lấy canvas
+        var canvas = $('.yourCanvas')[0];
+
+        // Lưu lại dữ liệu đã vẽ
+        var ctx = canvas.getContext('2d');
+        drawings.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+
+        // Cập nhật kích thước cho canvas
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+
+        // Vẽ lại các hình đã vẽ trước đó
+        for (var i = 0; i < drawings.length; i++) {
+            ctx.putImageData(drawings[i], 0, 0);
+        }
+    }
+
+    // Bắt đầu xử lý khi tài liệu đã sẵn sàng
+    var img = new Image();
+    img.onload = function () {
+        var canvas = $('.yourCanvas')[0];
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+
+        // Gọi updateCanvasSize() sau khi canvas đã được vẽ
+        updateCanvasSize();
+
+        // Sự kiện resize
+        $(window).resize(function () {
+            updateCanvasSize();
+        });
+
+        // Sự kiện zoom (mặc định không có sự kiện zoom trong jQuery,
+        // bạn có thể cần sử dụng một thư viện hoặc cách khác để xử lý sự kiện này)
+    };
+
+    // Thay đổi đường dẫn của hình ảnh của bạn ở đây
+    img.src = './assets/img/test.png';
+    // end
 });

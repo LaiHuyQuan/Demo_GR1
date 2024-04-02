@@ -166,3 +166,17 @@ button{
     background-color: #151521;
     color: #ccc;
 }
+
+.device-main{
+    width: 100%;
+    height: 60vh;
+    background-color: #949494;
+}
+
+.yourCanvas{
+    /* width: 25%; */
+}
+
+.main-right{
+    justify-content: right;
+}

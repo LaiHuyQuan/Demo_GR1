@@ -1,68 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Read InnerText with JavaScript</title>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"
-integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read InnerText with JavaScript</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./assets/css/test.css">
 </head>
+
 <body>
-
-<div class="container">
-    <div class="block block-level-1">Cấp Độ 1
-        <button class="add-button">+</button>
-        <button class="delete-button">-</button>
-        <div class="block block-level-2">Cấp Độ 2a
-            <button class="add-button">+</button>
-            <button class="delete-button">-</button>
-            <div class="block block-level-3">Cấp Độ 3a
-                <button class="add-button">+</button>
-                <button class="delete-button">-</button>
-                <div class="block block-level-4">Cấp Độ 4a</div>
-            </div>
-        </div>
-        <div class="block block-level-2">Cấp Độ 2b
-            <button class="add-button">+</button>
-            <button class="delete-button">-</button>
-            <div class="block block-level-3">Cấp Độ 3b
-                <button class="add-button">+</button>
-                <button class="delete-button">-</button>
-                <div class="block block-level-4">Cấp Độ 4b</div>
-            </div>
-        </div>
+    <div class="container">
+        <canvas id="yourCanvas" width="327px" height="122px" style="border:1px solid #000;"></canvas>
     </div>
-</div>
-
-<!-- <script>
-document.addEventListener('DOMContentLoaded', function() {
-    var jsonData = readInnerText(document.querySelector('.container')); // Đọc dữ liệu từ container và lưu vào biến jsonData
-    console.log(jsonData); // In ra dữ liệu đã lưu
-    
-    function readInnerText(element) {
-        var block = {}; // Đối tượng để lưu dữ liệu
-        block.name = element.innerText.trim(); // Lưu tên của cấp độ hiện tại
-    
-        block.children = []; // Mảng để lưu các cấp độ con
-        
-        // Lặp qua các cấp độ con của phần tử hiện tại
-        element.querySelectorAll('.block').forEach(function(childElement) {
-            var childBlock = readInnerText(childElement); // Đệ quy để đọc dữ liệu của cấp độ con
-            block.children.push(childBlock); // Thêm cấp độ con vào mảng
-        });
-    
-        return block;
-    }
-    
-    // Sử dụng hàm readInnerText để đọc dữ liệu từ một phần tử block cấp độ 1
-    var container = document.querySelector('.container');
-    var jsonStructure = readInnerText(container.querySelector('.block-level-1'));
-    console.log(jsonStructure);
-    
-});
-</script> -->
-<script src="./assets/js/test.js"></script>
+    <!-- <img src="./assets/img/test.png" alt=""> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./assets/js/test.js"></script>
 
 </body>
+
 </html>
