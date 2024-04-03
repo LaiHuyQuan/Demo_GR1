@@ -174,9 +174,40 @@ button{
 }
 
 .yourCanvas{
-    /* width: 25%; */
+    width: 25%;
 }
 
 .main-right{
     justify-content: right;
 }
+
+.channel-list{
+    display: flex;
+    flex-direction: row;
+}
+
+.PhaseA, .PhaseB, .PhaseC{
+    display: flex;
+    flex-wrap: wrap;
+    width: 180px;
+    margin: 20px;
+}
+
+.channel{
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: black;
+}
+
+.channel{
+    color: red;
+    font-weight: bold;
+}
+
+.channel img {
+    width: 20px;
+    height: 20px;
+} 
