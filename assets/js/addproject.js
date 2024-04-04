@@ -308,6 +308,8 @@ $(document).ready(function () {
                 break;
         }
 
+        initializeTooltips();
+
         // đặt lại giá trị về mặc định
         $('#ma').val('');
         $('#cabinet').val('');
@@ -327,8 +329,8 @@ $(document).ready(function () {
             '<span>' + device.code + ' - ' + device.cabinet + ' - ' + device.date + ' - ' + device.deviceType + '</span>' +
             '<span class="edit-device-btn" data-info="' + device.code + '"><i class="fa-solid fa-pen-to-square"></i> Edit Device</span>' +
             '<span class="delete-device-btn" data-info="' + device.code + '"><i class="fa-solid fa-trash"></i> Delete Device</span>';
-            // '<span class="add-channel-btn" style="margin-right:10px" data-info="' + device.code + '" data-type="' + device.deviceType + '"><i class="fa-solid fa-plus"></i> Add channel</span>' +
-            // '<i class="fa-solid fa-caret-down" data-info="' + device.code + '"></i>';
+        // '<span class="add-channel-btn" style="margin-right:10px" data-info="' + device.code + '" data-type="' + device.deviceType + '"><i class="fa-solid fa-plus"></i> Add channel</span>' +
+        // '<i class="fa-solid fa-caret-down" data-info="' + device.code + '"></i>';
 
         // Thêm đối tượng mới vào DOM
         $('.add-device-main').append(newDevice);
@@ -364,6 +366,7 @@ $(document).ready(function () {
                 break;
         }
 
+        initializeTooltips();
     })
 
     function addChannelList1k3p(deviceID) {
@@ -426,7 +429,7 @@ $(document).ready(function () {
         }
         for (var i = 1; i <= 6; i++) {
             var chonch = 'A4' + i;
-            var button = createSVGButton(deviceID, chonch, channelList[i + 5]);
+            var button = createSVGButtonBot(deviceID, chonch, channelList[i + 5]);
             PhaseA.append(button);
         }
         $('.channel-list').append(PhaseA);
@@ -438,7 +441,7 @@ $(document).ready(function () {
         }
         for (var i = 1; i <= 6; i++) {
             var chonch = 'A5' + i;
-            var button = createSVGButton(deviceID, chonch, channelList[i + 5]);
+            var button = createSVGButtonBot(deviceID, chonch, channelList[i + 5]);
             PhaseB.append(button);
         }
         $('.channel-list').append(PhaseB);
@@ -449,7 +452,7 @@ $(document).ready(function () {
             PhaseC.append(button);
         } for (var i = 1; i <= 6; i++) {
             var chonch = 'A6' + i;
-            var button = createSVGButton(deviceID, chonch, channelList[i + 5]);
+            var button = createSVGButtonBot(deviceID, chonch, channelList[i + 5]);
             PhaseC.append(button);
         }
         $('.channel-list').append(PhaseC);
@@ -468,7 +471,36 @@ $(document).ready(function () {
     // test
     function createSVGButton(deviceID, chonch, text) {
         // console.log(deviceID)
-        var div = $('<div></div>').addClass('channel').data('chonch', chonch).data('chonpha', '1 pha').data('deviceid', deviceID);
+        var div = $('<div></div>')
+        .addClass('channel')
+        .data('chonch', chonch)
+        .data('chonpha', '1 pha')
+        .data('deviceid', deviceID)
+        .attr('data-bs-toggle', 'tooltip')
+        .attr('data-bs-placement', 'top')
+        .prop('title', chonch);    
+
+        console.log(div.data('deviceid'))
+        console.log(div.data('chonch'))
+        console.log(div.data('chonpha'))
+        var svg = '<img src="./assets/img/test.svg" alt="">'
+        div.append(svg);
+        var span = $('<span></span>').text(text);
+        div.append(span);
+        return div;
+    }
+
+    function createSVGButtonBot(deviceID, chonch, text) {
+        // console.log(deviceID)
+        var div = $('<div></div>')
+        .addClass('channel')
+        .data('chonch', chonch)
+        .data('chonpha', '1 pha')
+        .data('deviceid', deviceID)
+        .attr('data-bs-toggle', 'tooltip')
+        .attr('data-bs-placement', 'bottom')
+        .prop('title', chonch);    
+
         console.log(div.data('deviceid'))
         console.log(div.data('chonch'))
         console.log(div.data('chonpha'))
@@ -484,5 +516,18 @@ $(document).ready(function () {
             event.preventDefault();
         }
     });
+    
+    function initializeTooltips() {
+        $('#main').children().each(function() {
+            $(this).find('.channel').each(function() {
+                $(this).tooltip({
+                    placement: $(this).data('bs-placement'), 
+                    title: $(this).attr('title'), 
+                });
+            });
+        });
+    }
+
     // end
 });
+

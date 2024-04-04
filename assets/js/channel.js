@@ -1,15 +1,4 @@
     // mở
-    $('.add-device').on('click', '.add-channel-btn', function () {
-        $('.channel-lv').find('.mockup').remove();
-        $('.add-channel-mockup').find('#chonch').remove();
-        var deviceID = $(this).data('info');
-        createSelectInputsForLevels('.channel-lv');
-
-        $('.add-channel-mockup').removeClass('hide');
-        var channelSavebtn = '<button type="reset" class="btn btn-primary me-1 mb-1 channel-save" data-info="' + deviceID + '">Save</button>';
-        $('.channel-btns').append(channelSavebtn);
-    });
-
     $('#main').on('click', '.channel', function(){
         console.log(1)
         var deviceID = $(this).data('deviceid')

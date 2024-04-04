@@ -210,10 +210,5 @@
         if (inputText === '' || names[inputText] || inputCode === '' || codes[inputCode]) {
             hasDuplicates = true;
         }
-    
         return hasDuplicates;
     }
-    
-
-    
-    

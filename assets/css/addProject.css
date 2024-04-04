@@ -189,12 +189,12 @@ button{
 .PhaseA, .PhaseB, .PhaseC{
     display: flex;
     flex-wrap: wrap;
-    width: 180px;
+    width: 30%;
     margin: 20px;
 }
 
 .channel{
-    width: 30px;
+    width: calc(100%/6);
     display: flex;
     justify-content: center;
     align-items: center;
