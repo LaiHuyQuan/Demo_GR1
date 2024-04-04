@@ -16,18 +16,20 @@
     })
 
     function SaveStructure() {
+
+    
         jsonStructure.level0 = [];
+    
         $('.container').find('.block-level-1').each(function () {
             var levelInfo = $(this).contents().first().text().trim();
             var match = levelInfo.match(/^(.+?)\s*\(code:\s*(.+?)\)$/);
-
+    
             jsonStructure.level0.push({
                 "name": match[1],
                 "code": match[2],
                 "children": []
             });
-
-            // Duyệt qua các khối cấp độ 2 và lưu tên của mỗi khối vào jsonStructure
+    
             $(this).find('.block-level-2').each(function () {
                 var levelInfo = $(this).contents().first().text().trim();
                 var match2 = levelInfo.match(/^(.+?)\s*\(code:\s*(.+?)\)$/);
@@ -36,22 +38,22 @@
                     "code": match2[2],
                     "children": []
                 });
-
-                // Duyệt qua các khối cấp độ 3 và lưu tên của mỗi khối vào jsonStructure
+    
                 $(this).find('.block-level-3').each(function () {
                     var levelInfo = $(this).contents().first().text().trim();
                     var match3 = levelInfo.match(/^(.+?)\s*\(code:\s*(.+?)\)$/);
-                    jsonStructure.level0[jsonStructure.level0.length - 1].children[jsonStructure.level0[jsonStructure.level0.length - 1].children.length - 1].children.push({
+                    var lastLevel2 = jsonStructure.level0[jsonStructure.level0.length - 1].children.length - 1;
+                    jsonStructure.level0[jsonStructure.level0.length - 1].children[lastLevel2].children.push({
                         "name": match3[1],
                         "code": match3[2],
                         "children": []
                     });
-
-                    // Duyệt qua các khối cấp độ 4 và lưu tên của mỗi khối vào jsonStructure
+    
                     $(this).find('.block-level-4').each(function () {
                         var levelInfo = $(this).contents().first().text().trim();
                         var match4 = levelInfo.match(/^(.+?)\s*\(code:\s*(.+?)\)$/);
-                        jsonStructure.level0[jsonStructure.level0.length - 1].children[jsonStructure.level0[jsonStructure.level0.length - 1].children.length - 1].children[jsonStructure.level0[jsonStructure.level0.length - 1].children[jsonStructure.level0[jsonStructure.level0.length - 1].children.length - 1].children.length - 1].children.push({
+                        var lastLevel3 = jsonStructure.level0[jsonStructure.level0.length - 1].children[lastLevel2].children.length - 1;
+                        jsonStructure.level0[jsonStructure.level0.length - 1].children[lastLevel2].children[lastLevel3].children.push({
                             "name": match4[1],
                             "code": match4[2]
                         });
@@ -60,6 +62,7 @@
             });
         });
     }
+    
 
     var isAdding = false; // Biến để kiểm tra trạng thái đang thêm mới hay không
     $('.container').on('click', '.add-button', function () {
@@ -140,10 +143,12 @@
         var level = parseInt(parentBlock.attr('class').match(/block-level-(\d+)/)[1]);
         var newBlock;
 
-        if (checkDuplicateNameAndCodeInBlock($(this).parent())) {
+        if (checkDuplicateNameAndCodeInBlock($(this).parent(), inputText, inputCode)) {
             alert('không hợp lệ')
             return; // Nếu có trùng lặp hoặc giá trị rỗng, dừng lại
-        }
+        }else(
+            console.log('ok')
+        )
 
         if (level < 3) {
             newBlock = '<div class="block block-level-' + (level + 1) + '">' + inputText + ' (code: ' + inputCode + ')' +
@@ -189,37 +194,26 @@
     });
 
     // kiểm tra tên và code cấp độ
-    function checkDuplicateNameAndCodeInBlock(block) {
+    function checkDuplicateNameAndCodeInBlock(block, inputText, inputCode) {
         var names = {};
         var codes = {};
-
-        block.find('.block').each(function () {
-            var nameInput = $('.add-input');
-            var codeInput = $('.add-code');
-
-            var name = nameInput.val().trim();
-            var code = codeInput.val().trim();
-
-            if (name == "") {
-                return true; // Rỗng, trả về true
-            }
-
-            if (code == "") {
-                return true; // Rỗng, trả về true
-            }
-
-            // Kiểm tra xem tên đã tồn tại chưa
-            if (names[name]) {
-                return true; // Trùng lặp, trả về true
-            } else {
-                names[name] = true; // Lưu trữ tên vào đối tượng
-            }
-
-            // Kiểm tra xem mã đã tồn tại chưa
-            if (codes[code]) {
-                return true; // Trùng lặp, trả về true
-            } else {
-                codes[code] = true; // Lưu trữ mã vào đối tượng
-            }
+        var hasDuplicates = false;
+    
+        block.find('.block').map(function() {
+            console.log(1)
+            var levelInfo = $(this).contents().first().text().trim();
+            var match = levelInfo.match(/^(.+?)\s*\(code:\s*(.+?)\)$/);
+            names[match[1]] = true;
+            codes[match[2]] = true;
         });
+    
+        if (inputText === '' || names[inputText] || inputCode === '' || codes[inputCode]) {
+            hasDuplicates = true;
+        }
+    
+        return hasDuplicates;
     }
+    
+
+    
+    

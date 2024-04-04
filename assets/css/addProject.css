@@ -203,6 +203,7 @@ button{
 }
 
 .channel{
+    font-size: 12px;
     color: red;
     font-weight: bold;
 }
