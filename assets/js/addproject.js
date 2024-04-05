@@ -468,17 +468,17 @@ $(document).ready(function () {
         $('.device-lv').find('.mockup').remove();
     })
 
-    // test
     function createSVGButton(deviceID, chonch, text) {
         // console.log(deviceID)
         var div = $('<div></div>')
-        .addClass('channel')
-        .data('chonch', chonch)
-        .data('chonpha', '1 pha')
-        .data('deviceid', deviceID)
-        .attr('data-bs-toggle', 'tooltip')
-        .attr('data-bs-placement', 'top')
-        .prop('title', chonch);    
+            .addClass('channel')
+            .addClass('channel-' + chonch)
+            .data('chonch', chonch)
+            .data('chonpha', '1 pha')
+            .data('deviceid', deviceID)
+            .attr('data-bs-toggle', 'tooltip')
+            .attr('data-bs-placement', 'top')
+            .prop('title', chonch);
 
         console.log(div.data('deviceid'))
         console.log(div.data('chonch'))
@@ -493,13 +493,14 @@ $(document).ready(function () {
     function createSVGButtonBot(deviceID, chonch, text) {
         // console.log(deviceID)
         var div = $('<div></div>')
-        .addClass('channel')
-        .data('chonch', chonch)
-        .data('chonpha', '1 pha')
-        .data('deviceid', deviceID)
-        .attr('data-bs-toggle', 'tooltip')
-        .attr('data-bs-placement', 'bottom')
-        .prop('title', chonch);    
+            .addClass('channel')
+            .addClass('channel-' + chonch)
+            .data('chonch', chonch)
+            .data('chonpha', '1 pha')
+            .data('deviceid', deviceID)
+            .attr('data-bs-toggle', 'tooltip')
+            .attr('data-bs-placement', 'bottom')
+            .prop('title', chonch);
 
         console.log(div.data('deviceid'))
         console.log(div.data('chonch'))
@@ -516,18 +517,21 @@ $(document).ready(function () {
             event.preventDefault();
         }
     });
-    
+
     function initializeTooltips() {
-        $('#main').children().each(function() {
-            $(this).find('.channel').each(function() {
+        $('#main').children().each(function () {
+            $(this).find('.channel').each(function () {
                 $(this).tooltip({
-                    placement: $(this).data('bs-placement'), 
-                    title: $(this).attr('title'), 
+                    placement: $(this).data('bs-placement'),
+                    title: $(this).attr('title'),
                 });
             });
         });
     }
 
+    // test
+
+    addChannelList12k3p()
     // end
 });
 

@@ -22,6 +22,8 @@
 </head>
 
 <body>
+    <script src="https://cdn.jsdelivr.net/npm/@joint/core@4.0.1/dist/joint.js"></script>
+
     <div id="sidebar">
         <div class="sidebar-wrapper active">
             <div class="sidebar-header position-relative">
@@ -35,6 +37,11 @@
     </div>
 
     <div id="main">
+        <header class="mb-3">
+            <a href="#" class="burger-btn d-block d-xl-none">
+                <i class="fa-solid fa-bars"></i>
+            </a>
+        </header>
         <div id="content">
             <!-- addProject mockup -->
             <div id="add-project">
@@ -58,258 +65,186 @@
                     </div>
                 </div>
 
-                <div class="channel-list" data-info="1231231">
-                    <div class="PhaseA">
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="top"
-                            data-bs-original-title="A11"><img src="./assets/img/test.svg" alt=""><span>01</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="top"
-                            data-bs-original-title="A12"><img src="./assets/img/test.svg" alt=""><span>02</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="top"
-                            data-bs-original-title="A13"><img src="./assets/img/test.svg" alt=""><span>03</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="top"
-                            data-bs-original-title="A14"><img src="./assets/img/test.svg" alt=""><span>04</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="top"
-                            data-bs-original-title="A15"><img src="./assets/img/test.svg" alt=""><span>05</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="top"
-                            data-bs-original-title="A16"><img src="./assets/img/test.svg" alt=""><span>06</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                            data-bs-original-title="A41"><img src="./assets/img/test.svg" alt=""><span>07</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                            data-bs-original-title="A42"><img src="./assets/img/test.svg" alt=""><span>08</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                            data-bs-original-title="A43"><img src="./assets/img/test.svg" alt=""><span>09</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                            data-bs-original-title="A44"><img src="./assets/img/test.svg" alt=""><span>10</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                            data-bs-original-title="A45"><img src="./assets/img/test.svg" alt=""><span>11</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                            data-bs-original-title="A46"><img src="./assets/img/test.svg" alt=""><span>12</span></div>
-                    </div>
-                    <div class="PhaseB">
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="top"
-                            data-bs-original-title="A21"><img src="./assets/img/test.svg" alt=""><span>01</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="top"
-                            data-bs-original-title="A22"><img src="./assets/img/test.svg" alt=""><span>02</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="top"
-                            data-bs-original-title="A23"><img src="./assets/img/test.svg" alt=""><span>03</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="top"
-                            data-bs-original-title="A24"><img src="./assets/img/test.svg" alt=""><span>04</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="top"
-                            data-bs-original-title="A25"><img src="./assets/img/test.svg" alt=""><span>05</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="top"
-                            data-bs-original-title="A26"><img src="./assets/img/test.svg" alt=""><span>06</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                            data-bs-original-title="A51"><img src="./assets/img/test.svg" alt=""><span>07</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                            data-bs-original-title="A52"><img src="./assets/img/test.svg" alt=""><span>08</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                            data-bs-original-title="A53"><img src="./assets/img/test.svg" alt=""><span>09</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                            data-bs-original-title="A54"><img src="./assets/img/test.svg" alt=""><span>10</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                            data-bs-original-title="A55"><img src="./assets/img/test.svg" alt=""><span>11</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                            data-bs-original-title="A56"><img src="./assets/img/test.svg" alt=""><span>12</span></div>
-                    </div>
-                    <div class="PhaseC">
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="top"
-                            data-bs-original-title="A31"><img src="./assets/img/test.svg" alt=""><span>01</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="top"
-                            data-bs-original-title="A32"><img src="./assets/img/test.svg" alt=""><span>02</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="top"
-                            data-bs-original-title="A33"><img src="./assets/img/test.svg" alt=""><span>03</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="top"
-                            data-bs-original-title="A34"><img src="./assets/img/test.svg" alt=""><span>04</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="top"
-                            data-bs-original-title="A35"><img src="./assets/img/test.svg" alt=""><span>05</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="top"
-                            data-bs-original-title="A36"><img src="./assets/img/test.svg" alt=""><span>06</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                            data-bs-original-title="A61"><img src="./assets/img/test.svg" alt=""><span>07</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                            data-bs-original-title="A62"><img src="./assets/img/test.svg" alt=""><span>08</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                            data-bs-original-title="A63"><img src="./assets/img/test.svg" alt=""><span>09</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                            data-bs-original-title="A64"><img src="./assets/img/test.svg" alt=""><span>10</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                            data-bs-original-title="A65"><img src="./assets/img/test.svg" alt=""><span>11</span></div>
-                        <div class="channel" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                            data-bs-original-title="A66"><img src="./assets/img/test.svg" alt=""><span>12</span></div>
+            </div>
+            <div class="channel-link"> 
+                <div style="margin-left: 25px;">
+                    <button class="CH1-channel">ch1</button>
+                </div>
+                <img src="./assets/img/link.svg" alt="" style="margin-left: 20px;" class="ch1-links">
+            </div>
+            <div class="channel-list" data-info="1231231">
+            </div>
+            <!-- structure mockup -->
+            <div class="structure-mockup hide">
+                <div class="container">
+                    <div class="block-level-0">
+                        <span class="add-button">Thêm</span>
+
                     </div>
                 </div>
-                <!-- structure mockup -->
-                <div class="structure-mockup hide">
-                    <div class="container">
-                        <div class="block-level-0">
-                            <span class="add-button">Thêm</span>
-
-                        </div>
-                    </div>
-                    <div class="structure-bot">
-                        <button class="struc-save">save</button>
-                        <button class="struc-close">close</button>
-                    </div>
-                </div>
-                <!-- end structure mockup -->
-
-                <!-- add device mockup -->
-                <div class="add-device-mockup mockup hide">
-                    <section id="basic-vertical-layouts">
-                        <div class="row match-height">
-                            <div class="col-md-6 col-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">New Device</h4>
-                                    </div>
-                                    <div class="card-content">
-                                        <div class="card-body">
-                                            <form class="form form-vertical">
-                                                <div class="form-body">
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <div class="form-group">
-                                                                <label for="first-name-vertical">Mã</label>
-                                                                <input type="text" id="ma" class="form-control"
-                                                                    name="fname" placeholder="Mã">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div class="form-group">
-                                                                <label for="email-id-vertical">Cabinet</label>
-                                                                <input type="text" id="cabinet" class="form-control"
-                                                                    name="email-id" placeholder="Cabinet">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div class="form-group">
-                                                                <label for="contact-info-vertical">Ngày</label>
-                                                                <input type="date" id="ngay" class="form-control"
-                                                                    name="contact" placeholder="Ngày">
-                                                            </div>
-                                                        </div>
-                                                        <div class="device-lv col-12">
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <label for="loaitb" class="loaitb">Loại thiết bị</label>
-                                                            <select id="loaitb" name="loaitb" class="loaitb">
-                                                                <option value="1k3p">1k3p</option>
-                                                                <option value="6k1p">6k1p</option>
-                                                                <option value="6k3p">6k3p</option>
-                                                                <option value="12k3p">12k3p</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="device-btns">
-                                                        <button type="reset"
-                                                            class="btn btn-primary me-1 mb-1">Reset</button>
-                                                        <button type=""
-                                                            class="btn btn-primary me-1 mb-1 device-close">Close</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-                <!-- end device mockup -->
-
-                <!-- add channel  mockup-->
-                <div class="add-channel-mockup mockup hide">
-                    <section id="multiple-column-form">
-                        <div class="row match-height">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title"></h4>
-                                    </div>
-                                    <div class="card-content">
-                                        <div class="card-body">
-                                            <form class="form">
-                                                <div class="row">
-                                                    <div class="col-md-6 col-12">
-                                                        <div class="form-group">
-                                                            <label for="first-name-column">Itt</label>
-                                                            <input type="text" class="form-control" name="itt">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6 col-12">
-                                                        <div class="form-group">
-                                                            <label for="last-name-column">Ptt</label>
-                                                            <input type="text" class="form-control" name="ptt">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6 col-12">
-                                                        <div class="form-group">
-                                                            <label for="city-column">Ct</label>
-                                                            <input type="text" class="form-control" name="ct">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6 col-12">
-                                                        <div class="form-group">
-                                                            <label for="country-floating">Type</label>
-                                                            <input type="text" class="form-control" name="type">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6 col-12">
-                                                        <div class="form-group">
-                                                            <label for="company-column">Name</label>
-                                                            <input type="text" class="form-control" name="name">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6 col-12">
-                                                        <div class="form-group">
-                                                            <label for="email-id-column">SourceFr</label>
-                                                            <input type="email" class="form-control" name="sourceFr">
-                                                        </div>
-                                                    </div>
-                                                    <div class="channel-lv">
-                                                    </div>
-                                                    <div class="form-group col-12">
-                                                        <div class='form-check'>
-                                                            <div class="checkbox">
-                                                                <input type="checkbox" id="includeS"
-                                                                    class='form-check-input'>
-                                                                <label for="checkbox5">includeS</label>
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="checkbox">
-                                                            <input type="checkbox" id="includeL"
-                                                                class='form-check-input'>
-                                                            <label for="checkbox5">includeL</label>
-                                                        </div>
-                                                        <div class="checkbox">
-                                                            <input type="checkbox" id="source" class='form-check-input'>
-                                                            <label for="checkbox5">Source</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 d-flex justify-content-end channel-btns">
-                                                        <button type="reset"
-                                                            class="btn btn-primary me-1 mb-1">Reset</button>
-                                                        <button type=""
-                                                            class="btn btn-primary me-1 mb-1 channel-close">Close</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <!-- end add channel  mockup -->
+                <div class="structure-bot">
+                    <button class="struc-save">save</button>
+                    <button class="struc-close">close</button>
                 </div>
             </div>
-            <!-- end addProject mockup -->
+            <!-- end structure mockup -->
 
-            <div class="add-device">
-                <div class="add-device-main">
-                    <div class="device-added">
-                        <!-- <div class="device-hd">
+            <!-- add device mockup -->
+            <div class="add-device-mockup mockup hide">
+                <section id="basic-vertical-layouts">
+                    <div class="row match-height">
+                        <div class="col-md-6 col-12">
+                            <div class="card">
+                                <div class="card-header" style="padding-bottom: 0;">
+                                    <h4 class="card-title">New Device</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <form class="form form-vertical">
+                                            <div class="form-body">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label for="first-name-vertical">Mã</label>
+                                                            <input type="text" id="ma" class="form-control" name="fname"
+                                                                placeholder="Mã">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label for="email-id-vertical">Cabinet</label>
+                                                            <input type="text" id="cabinet" class="form-control"
+                                                                name="email-id" placeholder="Cabinet">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label for="contact-info-vertical">Ngày</label>
+                                                            <input type="date" id="ngay" class="form-control"
+                                                                name="contact" placeholder="Ngày">
+                                                        </div>
+                                                    </div>
+                                                    <div class="device-lv col-12">
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <label for="loaitb" class="loaitb">Loại thiết bị</label>
+                                                        <select id="loaitb" name="loaitb" class="loaitb">
+                                                            <option value="1k3p">1k3p</option>
+                                                            <option value="6k1p">6k1p</option>
+                                                            <option value="6k3p">6k3p</option>
+                                                            <option value="12k3p">12k3p</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="device-btns">
+                                                    <button type="reset"
+                                                        class="btn btn-primary me-1 mb-1">Reset</button>
+                                                    <button type=""
+                                                        class="btn btn-primary me-1 mb-1 device-close">Close</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!-- end device mockup -->
+
+            <!-- add channel  mockup-->
+            <div class="add-channel-mockup mockup hide">
+                <section id="multiple-column-form">
+                    <div class="row match-height">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title"></h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <form class="form">
+                                            <div class="row">
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="first-name-column">Itt</label>
+                                                        <input type="text" class="form-control" name="itt">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="last-name-column">Ptt</label>
+                                                        <input type="text" class="form-control" name="ptt">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="city-column">Ct</label>
+                                                        <input type="text" class="form-control" name="ct">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="country-floating">Type</label>
+                                                        <input type="text" class="form-control" name="type">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="company-column">Name</label>
+                                                        <input type="text" class="form-control" name="name">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="email-id-column">SourceFr</label>
+                                                        <input type="email" class="form-control" name="sourceFr">
+                                                    </div>
+                                                </div>
+                                                <div class="channel-lv">
+                                                </div>
+                                                <div class="form-group col-12">
+                                                    <div class='form-check'>
+                                                        <div class="checkbox">
+                                                            <input type="checkbox" id="includeS"
+                                                                class='form-check-input'>
+                                                            <label for="checkbox5">includeS</label>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" id="includeL" class='form-check-input'>
+                                                        <label for="checkbox5">includeL</label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" id="source" class='form-check-input'>
+                                                        <label for="checkbox5">Source</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 d-flex justify-content-end channel-btns">
+                                                    <button type="reset"
+                                                        class="btn btn-primary me-1 mb-1">Reset</button>
+                                                    <button type=""
+                                                        class="btn btn-primary me-1 mb-1 channel-close">Close</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- end add channel  mockup -->
+            </div>
+        </div>
+        <!-- end addProject mockup -->
+
+        <div class="add-device">
+            <div class="add-device-main">
+                <div class="device-added">
+                    <!-- <div class="device-hd">
                                     <span>Mã - Cabinet - Ngày - Loại thiết bị</span>
                                     <span class="edit-device-btn" data-info="123"><i class="fa-solid fa-pen-to-square"></i> Edit
                                         Device</span>
@@ -337,10 +272,10 @@
                                         </tr>
                                     </tbody>
                                 </table> -->
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <script src="./assets/js/app.js"></script>
     <!-- <script src="./assets/js/script.js"></script> -->

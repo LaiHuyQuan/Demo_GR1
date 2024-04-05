@@ -25,6 +25,9 @@ button{
     position: fixed;
     top: 5%;
     left: 35%;
+    height: 90vh;
+    overflow-y: scroll !important;
+    overflow-x: hidden;
 }
 
 .add-device-btn{
@@ -184,6 +187,7 @@ button{
 .channel-list{
     display: flex;
     flex-direction: row;
+    /* height: 30vh; */
 }
 
 .PhaseA, .PhaseB, .PhaseC{
@@ -191,6 +195,7 @@ button{
     flex-wrap: wrap;
     width: 30%;
     margin: 20px;
+    margin-top: 0;
 }
 
 .channel{
@@ -200,15 +205,28 @@ button{
     align-items: center;
     flex-direction: column;
     background-color: black;
-}
-
-.channel{
     font-size: 12px;
     color: red;
     font-weight: bold;
+    height: 40px;
 }
 
 .channel img {
     width: 20px;
     height: 20px;
 } 
+
+.pha{
+    width: 1000px;
+    height: 100px;
+}
+
+/* Ẩn hình ảnh ban đầu */
+.ch1-links {
+    visibility: hidden;
+}
+
+/* Hiển thị hình ảnh khi hover vào button */
+.CH1-channel:hover + .ch1-links {
+    visibility: visible;
+}
