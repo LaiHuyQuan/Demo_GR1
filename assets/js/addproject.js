@@ -324,7 +324,11 @@ $(document).ready(function () {
 
     function addProject(device) {
         var newDevice = '<div class="device-added device-added-' + device.code + '" data-info="' + device.code + '">' +
+            '<div style="height: 370px; border:1px #fff solid; padding-top:20px">' +
+            '<div class="channel-diagram"></div>' +
             '<div class="channel-list" data-info="' + device.code + '"></div>' +
+            '<div class="channel-diagram-bot"></div>' +
+            '</div>'+
             '<div class="device-hd" data-info="' + device.code + '">' +
             '<span>' + device.code + ' - ' + device.cabinet + ' - ' + device.date + ' - ' + device.deviceType + '</span>' +
             '<span class="edit-device-btn" data-info="' + device.code + '"><i class="fa-solid fa-pen-to-square"></i> Edit Device</span>' +
@@ -352,11 +356,8 @@ $(document).ready(function () {
                 addProject(device);
             }
         }
-        console.log(2)
         switch (deviceType) {
             case '1k3p': addChannelList1k3p(deviceID);
-                console.log(deviceID);
-                console.log(3)
                 break;
             case '6k1p': addChannelList6k1p(deviceID);
                 break;
@@ -370,7 +371,6 @@ $(document).ready(function () {
     })
 
     function addChannelList1k3p(deviceID) {
-        console.log(deviceID)
         var channelList = ['CT A', 'CT B', 'CT C']
         var PhaseA = $('<div></div>').addClass('PhaseA');
         for (var i = 1; i <= 3; i++) {
@@ -394,7 +394,6 @@ $(document).ready(function () {
     }
 
     function addChannelList6k3p(deviceID) {
-        console.log(deviceID)
         var channelList = ['01', '02', '03', '04', '05', '06']
         var PhaseA = $('<div></div>').addClass('PhaseA');
         for (var i = 1; i <= 6; i++) {
@@ -420,6 +419,19 @@ $(document).ready(function () {
     }
 
     function addChannelList12k3p(deviceID) {
+        $('.channel-diagram').append(createChannelLink(1, 'CH1', deviceID))
+        $('.channel-diagram').append(createChannelLink(2, 'CH2', deviceID))
+        $('.channel-diagram').append(createChannelLink(3, 'CH3', deviceID))
+        $('.channel-diagram').append(createChannelLink(4, 'CH4', deviceID))
+        $('.channel-diagram').append(createChannelLink(5, 'CH5', deviceID))
+        $('.channel-diagram').append(createChannelLink(6, 'CH6', deviceID))
+
+        $('.channel-diagram-bot').append(createChannelLinkBot(1, 'CH7', deviceID))
+        $('.channel-diagram-bot').append(createChannelLinkBot(2, 'CH8', deviceID))
+        $('.channel-diagram-bot').append(createChannelLinkBot(3, 'CH9', deviceID))
+        $('.channel-diagram-bot').append(createChannelLinkBot(4, 'CH10', deviceID))
+        $('.channel-diagram-bot').append(createChannelLinkBot(5, 'CH11', deviceID))
+        $('.channel-diagram-bot').append(createChannelLinkBot(6, 'CH12', deviceID))
         var channelList = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
         var PhaseA = $('<div></div>').addClass('PhaseA');
         for (var i = 1; i <= 6; i++) {
@@ -469,7 +481,6 @@ $(document).ready(function () {
     })
 
     function createSVGButton(deviceID, chonch, text) {
-        // console.log(deviceID)
         var div = $('<div></div>')
             .addClass('channel')
             .addClass('channel-' + chonch)
@@ -480,9 +491,6 @@ $(document).ready(function () {
             .attr('data-bs-placement', 'top')
             .prop('title', chonch);
 
-        console.log(div.data('deviceid'))
-        console.log(div.data('chonch'))
-        console.log(div.data('chonpha'))
         var svg = '<img src="./assets/img/test.svg" alt="">'
         div.append(svg);
         var span = $('<span></span>').text(text);
@@ -491,7 +499,6 @@ $(document).ready(function () {
     }
 
     function createSVGButtonBot(deviceID, chonch, text) {
-        // console.log(deviceID)
         var div = $('<div></div>')
             .addClass('channel')
             .addClass('channel-' + chonch)
@@ -502,9 +509,6 @@ $(document).ready(function () {
             .attr('data-bs-placement', 'bottom')
             .prop('title', chonch);
 
-        console.log(div.data('deviceid'))
-        console.log(div.data('chonch'))
-        console.log(div.data('chonpha'))
         var svg = '<img src="./assets/img/test.svg" alt="">'
         div.append(svg);
         var span = $('<span></span>').text(text);
@@ -529,9 +533,42 @@ $(document).ready(function () {
         });
     }
 
-    // test
+    //  test
+    function createChannelLink(i, chonch, deviceID) {
+        var html = '<div class="channel-link-' + i + '" data-info="' + chonch + '">' +
+            '<div style="margin-left: 25px;">' +
+            '<span class="' + chonch + '-channel channel1phase" data-chonch="' + chonch + '" data-chonpha="3 pha" data-deviceid="'+ deviceID + '">' + chonch + '</span>' +
+            '</div>' +
+            '<img src="./assets/img/link.svg" alt="" style="margin-left: 20px;" class="' + chonch + '-link no-visible links">' +
+            '</div>';
+        return html;
+    }
+    function createChannelLinkBot(i, chonch, deviceID) {
+        var html = '<div class="channel-link-' + i + '" data-info="' + chonch + '">' +
+            '<img src="./assets/img/link-bot.svg" alt="" style="margin-left: 20px;" class="' + chonch + '-link no-visible links">' +
+            '<div style="margin-left: 25px;">' +
+            '<span class="' + chonch + '-channel channel1phase " data-chonch="' + chonch + '" data-chonpha="3 pha" data-deviceid="'+ deviceID + '">' + chonch + '</span>' +
+            '</div>' +
+            '</div>';
+        return html;
+    }
 
-    addChannelList12k3p()
+    var hoverTimer;
+
+    $('#main').on('mouseenter', '.channel1phase', function () {
+        var link = $(this).data('chonch');
+        hoverTimer = setTimeout(function () {
+            $('.' + link + '-link').removeClass('no-visible');
+        }, 200);
+    });
+
+    $('#main').on('mouseleave', '.channel1phase', function () {
+        clearTimeout(hoverTimer);
+        var link = $(this).data('chonch');
+        hoverTimer = setTimeout(function () {
+            $('.' + link + '-link').addClass('no-visible');
+        }, 200);
+    });
     // end
 });
 

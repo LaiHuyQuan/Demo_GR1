@@ -194,8 +194,8 @@ button{
     display: flex;
     flex-wrap: wrap;
     width: 30%;
-    margin: 20px;
-    margin-top: 0;
+    margin: 0 20px;
+    margin-top: 130px;
 }
 
 .channel{
@@ -221,12 +221,50 @@ button{
     height: 100px;
 }
 
-/* Ẩn hình ảnh ban đầu */
-.ch1-links {
-    visibility: hidden;
+.links{
+    /* height: 50px; */
 }
 
-/* Hiển thị hình ảnh khi hover vào button */
-.CH1-channel:hover + .ch1-links {
-    visibility: visible;
+.channel-diagram, .channel-diagram-bot{
+    position: relative;
+}
+
+.no-visible{
+    visibility: hidden;
+}
+.channel-link-1{
+    position: absolute;
+
+}
+
+.channel-link-2{
+    position: absolute;
+    left: 62px;
+}
+
+.channel-link-3{
+    position: absolute;
+    left: 120px;
+}
+.channel-link-4{
+    position: absolute;
+    left: 178px;
+}
+
+.channel-link-5{
+    position: absolute;
+    left: 237px;
+}
+
+.channel-link-6{
+    position: absolute;
+    left: 295px;
+}
+
+
+.channel-diagram span, .channel-diagram-bot span{
+    padding: 5px;
+    border: 1px #ffffff solid;
+    border-radius: 10px;
+    cursor: pointer;
 }

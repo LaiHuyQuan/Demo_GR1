@@ -1,6 +1,5 @@
     // mở
     $('#main').on('click', '.channel', function(){
-        console.log(1)
         var deviceID = $(this).data('deviceid')
         console.log(deviceID)
         var chonch = $(this).data('chonch')
@@ -22,6 +21,18 @@
         var channelSavebtn = '<button type="reset" class="btn btn-primary me-1 mb-1 channel-save" data-info="' + deviceID + '">Save</button>';
         $('.channel-btns').append(channelSavebtn);
     }
+
+    $('#main').on('click', '.channel1phase', function(){
+        var deviceID = $(this).data('deviceid')
+        console.log(deviceID)
+        var chonch = $(this).data('chonch')
+        var chonpha = $(this).data('chonpha')
+        if(!checkChannel(chonch, deviceID)){
+            alert('kênh đã tồn tại!')
+            return;
+        }
+        addChannel(deviceID, chonch, chonpha);
+    })
     // sửa
     $('.add-device').on('click', '.edit-channel-btn', function () {
         // $('.channel-lv').find('.mockup').remove();
