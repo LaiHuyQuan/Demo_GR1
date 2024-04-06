@@ -97,10 +97,10 @@ $(document).ready(function () {
                 "lv2name": device.lv2,
                 "lv3name": device.lv3,
                 "lv4name": device.lv4,
-                "lv1Code": device.lv1Code,
-                "lv2Code": device.lv2Code,
-                "lv3Code": device.lv3Code,
-                "lv4Code": device.lv4Code,
+                "lv1Code": device.lv1Code  || 0,
+                "lv2Code": device.lv2Code  || 0,
+                "lv3Code": device.lv3Code  || 0,
+                "lv4Code": device.lv4Code || 0,
                 "cabinet": device.cabinet,
                 "date": device.date,
                 "deviceType": device.deviceType
@@ -118,6 +118,7 @@ $(document).ready(function () {
                 var loadIdTemp = loadId;
                 var channelData = {
                     "deviceID": deviceCode,
+                    "chonpha": channel.chonpha,
                     "loadId": loadIdTemp,
                     "itt": channel.itt,
                     "ptt": channel.ptt,
@@ -129,21 +130,20 @@ $(document).ready(function () {
                     "lv2name": channel.lv2,
                     "lv3name": channel.lv3,
                     "lv4name": channel.lv4,
-                    "lv1Code": channel.lv1Code,
-                    "lv2Code": channel.lv2Code,
-                    "lv3Code": channel.lv3Code,
-                    "lv4Code": channel.lv4Code,
+                    "lv1Code": channel.lv1Code || 0,
+                    "lv2Code": channel.lv2Code || 0,
+                    "lv3Code": channel.lv3Code || 0,
+                    "lv4Code": channel.lv4Code || 0,
                     "includeS": channel.includeS,
-                    "includeL": channel.includeL
+                    "includeL": channel.includeL,
+                    "sourceFr": channel.sourceFr
                 };
     
                 if (channel.chonpha == "3 pha") {
-                    var Values = mappingchannel[channel.chonch];
-                    if (Values) {
-                        Values.forEach(function (value) {
-                            channels.push(Object.assign({}, channelData, { "chonch": value }));
-                        });
-                    }
+                    var phase = ["A", "B", "C"]
+                        for(var i=0 ; i < 3; i++) {
+                            channels.push(Object.assign({}, channelData, { "chonch": channel.chonch +'-'+ phase[i]}));
+                        };
                 } else {
                     channels.push(Object.assign({}, channelData, { "chonch": channel.chonch }));
                 }

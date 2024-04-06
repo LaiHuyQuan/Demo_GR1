@@ -1,25 +1,25 @@
 {
-    "Anh Phong IFC": [
+    "Project": [
       {
-        "projectCode": "",
-        "projectName": ""
+        "projectCode": "BK2131232",
+        "projectName": "Nhà c7"
       }
     ],
-    "FPT": [
+    "Devices": [
       {
-        "projectCode": "",
-        "deviceCode": "1212312",
+        "projectCode": "BK2131232",
+        "deviceCode": "qưeqweqw",
         "lv1name": "0",
         "lv2name": "0",
         "lv3name": "0",
         "lv4name": "0",
         "cabinet": 0,
         "date": 0,
-        "deviceType": "6k1p"
+        "deviceType": "6k3p"
       },
       {
-        "projectCode": "",
-        "deviceCode": "131231",
+        "projectCode": "BK2131232",
+        "deviceCode": "qưeweq",
         "lv1name": "0",
         "lv2name": "0",
         "lv3name": "0",
@@ -29,5 +29,108 @@
         "deviceType": "6k3p"
       }
     ],
-    "Ftech": []
+    "Channels": [
+      {
+        "deviceID": "qưeqweqw",
+        "loadId": 0,
+        "itt": 0,
+        "ptt": 0,
+        "ct": 0,
+        "type": 0,
+        "name": "qưeqwew",
+        "source": false,
+        "lv1name": "0",
+        "lv2name": "0",
+        "lv3name": "0",
+        "lv4name": "0",
+        "includeS": false,
+        "includeL": false,
+        "chonch": "A16"
+      },
+      {
+        "deviceID": "qưeqweqw",
+        "loadId": 1,
+        "itt": 0,
+        "ptt": 0,
+        "ct": 0,
+        "type": 0,
+        "name": 0,
+        "source": false,
+        "lv1name": "0",
+        "lv2name": "0",
+        "lv3name": "0",
+        "lv4name": "0",
+        "includeS": false,
+        "includeL": false,
+        "chonch": "A26"
+      },
+      {
+        "deviceID": "qưeweq",
+        "loadId": 0,
+        "itt": 0,
+        "ptt": 0,
+        "ct": 0,
+        "type": 0,
+        "name": 0,
+        "source": false,
+        "lv1name": "0",
+        "lv2name": "0",
+        "lv3name": "0",
+        "lv4name": "0",
+        "includeS": false,
+        "includeL": false,
+        "chonch": "A11"
+      },
+      {
+        "deviceID": "qưeweq",
+        "loadId": 0,
+        "itt": 0,
+        "ptt": 0,
+        "ct": 0,
+        "type": 0,
+        "name": 0,
+        "source": false,
+        "lv1name": "0",
+        "lv2name": "0",
+        "lv3name": "0",
+        "lv4name": "0",
+        "includeS": false,
+        "includeL": false,
+        "chonch": "A21"
+      },
+      {
+        "deviceID": "qưeweq",
+        "loadId": 0,
+        "itt": 0,
+        "ptt": 0,
+        "ct": 0,
+        "type": 0,
+        "name": 0,
+        "source": false,
+        "lv1name": "0",
+        "lv2name": "0",
+        "lv3name": "0",
+        "lv4name": "0",
+        "includeS": false,
+        "includeL": false,
+        "chonch": "A31"
+      },
+      {
+        "deviceID": "qưeweq",
+        "loadId": 1,
+        "itt": 0,
+        "ptt": 0,
+        "ct": 0,
+        "type": 0,
+        "name": 0,
+        "source": false,
+        "lv1name": "0",
+        "lv2name": "0",
+        "lv3name": "0",
+        "lv4name": "0",
+        "includeS": false,
+        "includeL": false,
+        "chonch": "A13"
+      }
+    ]
   }

@@ -215,24 +215,6 @@ $('.add-device-main').on('click', '.delete-channel-btn', function () {
     var $table = $('.device-added-' + deviceID).find('table');
     $table.remove();
     $('#main').find('.device-added-' + deviceID).append(createchannelTable(deviceID));
-
-    for (var i = 0; i < projectData.devices.length; i++) {
-        console.log(0)
-        if (projectData.devices[i].code == deviceID) {
-            var foundDevice = projectData.devices[i];
-            for (var j = 0; j < foundDevice.channels.length; j++) {
-                if (mapping.hasOwnProperty(channel.chonch)) {
-                    var Values = mapping[channel.chonch];
-                    for (var k = 0; k < Values.length; k++) {
-                        console.log(1)
-                        $('#main').find('.device-added-' + deviceID).find('.channel-' + Values[k]).addClass('created');
-                    }
-                }
-                $('#main').find('.device-added-' + deviceID).find('.channel-' + channel.chonch).addClass('created');
-            }
-        }
-    }
-
     var newTable = $('.device-added-' + deviceID).find('table');
 
     if (mapping.hasOwnProperty(channelID)) {
