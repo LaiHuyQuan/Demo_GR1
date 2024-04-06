@@ -103,7 +103,7 @@ $(document).ready(function () {
                 "lv4Code": device.lv4Code || 0,
                 "cabinet": device.cabinet,
                 "date": device.date,
-                "deviceType": device.deviceType
+                "deviceType": device.deviceType,
             };
         });
     
@@ -113,12 +113,10 @@ $(document).ready(function () {
         projectData.devices.forEach(function (device) {
             var deviceCode = device.code;
             var loadId = 0;
-    
             device.channels.forEach(function (channel) {
                 var loadIdTemp = loadId;
                 var channelData = {
                     "deviceID": deviceCode,
-                    "chonpha": channel.chonpha,
                     "loadId": loadIdTemp,
                     "itt": channel.itt,
                     "ptt": channel.ptt,
@@ -136,14 +134,17 @@ $(document).ready(function () {
                     "lv4Code": channel.lv4Code || 0,
                     "includeS": channel.includeS,
                     "includeL": channel.includeL,
-                    "sourceFr": channel.sourceFr
+                    "sourceFr": channel.source
                 };
     
                 if (channel.chonpha == "3 pha") {
                     var phase = ["A", "B", "C"]
-                        for(var i=0 ; i < 3; i++) {
-                            channels.push(Object.assign({}, channelData, { "chonch": channel.chonch +'-'+ phase[i]}));
+                    var Values = mappingchannel[channel.chonch];
+                    if (Values) {
+                         for(var i =0; i < Values.length; i++){
+                            channels.push(Object.assign({}, channelData, { "chonch": Values[i], "pha":phase[i]}));
                         };
+                    }
                 } else {
                     channels.push(Object.assign({}, channelData, { "chonch": channel.chonch }));
                 }
