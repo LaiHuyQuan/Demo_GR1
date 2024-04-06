@@ -28,6 +28,7 @@ button{
     height: 90vh;
     overflow-y: scroll !important;
     overflow-x: hidden;
+    z-index: 10;
 }
 
 .add-device-btn{
@@ -161,7 +162,6 @@ button{
 
 .menu .device-added{
     border-bottom: 1px #ccc solid;
-    /* margin-left: 10px; */
     transition: all ease-in-out 0.4s;
 }
 
@@ -194,8 +194,7 @@ button{
     display: flex;
     flex-wrap: wrap;
     width: 30%;
-    margin: 0 20px;
-    margin-top: 130px;
+    margin: 20px 20px;
 }
 
 .channel{
@@ -211,6 +210,10 @@ button{
     height: 40px;
 }
 
+.created{
+    filter: hue-rotate(160deg); 
+}
+
 .channel img {
     width: 20px;
     height: 20px;
@@ -218,53 +221,39 @@ button{
 
 .pha{
     width: 1000px;
-    height: 100px;
+    height: auto;
 }
 
-.links{
-    /* height: 50px; */
+.channel-link{
+    width: 74%;
+    height: auto;
 }
 
-.channel-diagram, .channel-diagram-bot{
-    position: relative;
+.links {
+    display: block;
+    width: calc(100%*1145/1172);
+    /* height: 100px; */ 
+}
+
+.channel-diagram{
+    display: inline-flex;
 }
 
 .no-visible{
     visibility: hidden;
 }
-.channel-link-1{
-    position: absolute;
-
-}
-
-.channel-link-2{
-    position: absolute;
-    left: 62px;
-}
-
-.channel-link-3{
-    position: absolute;
-    left: 120px;
-}
-.channel-link-4{
-    position: absolute;
-    left: 178px;
-}
-
-.channel-link-5{
-    position: absolute;
-    left: 237px;
-}
-
-.channel-link-6{
-    position: absolute;
-    left: 295px;
-}
-
 
 .channel-diagram span, .channel-diagram-bot span{
     padding: 5px;
     border: 1px #ffffff solid;
     border-radius: 10px;
     cursor: pointer;
+}
+
+.channel1phase{
+    margin: 0 10px;
+}
+
+.related-link{
+    background-color: #949494 !important;
 }

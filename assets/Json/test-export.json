@@ -1,100 +1,33 @@
 {
-    "projectCode": "123123",
-    "projectName": "nahf c6"
-}
-
-{
-    "projectCode": "123123",
-    "deviceCode": "123123",
-    "lv1name": "12312",
-    "lv2name": "0",
-    "lv3name": "0",
-    "lv4name": "0",
-    "cabinet": "123123",
-    "date": "",
-    "deviceType": "6k1p"
-}
-{
-    "projectCode": "123123",
-    "deviceCode": "12312311",
-    "lv1name": "0",
-    "lv2name": "0",
-    "lv3name": "0",
-    "lv4name": "0",
-    "cabinet": "123123",
-    "date": 0,
-    "deviceType": "6k1p"
-}
-
-{
-    "deviceCode": "123123",
-    "loadId": 0,
-    "chonch": "a12",
-    "chonpha": "1 pha",
-    "itt": "1231",
-    "ptt": 0,
-    "ct": 0,
-    "type": 0,
-    "name": 0,
-    "source": false,
-    "lv1name": "12312",
-    "lv2name": "1232",
-    "lv3name": "0",
-    "lv4name": "0",
-    "includeS": false,
-    "includeL": false
-}
-{
-    "deviceCode": "123123",
-    "loadId": 1,
-    "chonch": "a15",
-    "chonpha": "1 pha",
-    "itt": 0,
-    "ptt": 0,
-    "ct": 0,
-    "type": 0,
-    "name": 0,
-    "source": false,
-    "lv1name": "0",
-    "lv2name": "0",
-    "lv3name": "0",
-    "lv4name": "0",
-    "includeS": false,
-    "includeL": true
-}
-{
-    "deviceCode": "12312311",
-    "loadId": 0,
-    "chonch": "a12",
-    "chonpha": "1 pha",
-    "itt": 0,
-    "ptt": 0,
-    "ct": 0,
-    "type": 0,
-    "name": 0,
-    "source": false,
-    "lv1name": "0",
-    "lv2name": "0",
-    "lv3name": "0",
-    "lv4name": "0",
-    "includeS": false,
-    "includeL": true
-}
-{
-    "deviceCode": "12312311",
-    "loadId": 1,
-    "chonch": "a15",
-    "chonpha": "1 pha",
-    "itt": 0,
-    "ptt": 0,
-    "ct": 0,
-    "type": 0,
-    "name": 0,
-    "source": false,
-    "lv1name": "12312",
-    "lv2name": "1232",
-    "lv3name": "0",
-    "lv4name": "0",
-    "includeS": false,
-    "includeL": false
-}
+    "Anh Phong IFC": [
+      {
+        "projectCode": "",
+        "projectName": ""
+      }
+    ],
+    "FPT": [
+      {
+        "projectCode": "",
+        "deviceCode": "1212312",
+        "lv1name": "0",
+        "lv2name": "0",
+        "lv3name": "0",
+        "lv4name": "0",
+        "cabinet": 0,
+        "date": 0,
+        "deviceType": "6k1p"
+      },
+      {
+        "projectCode": "",
+        "deviceCode": "131231",
+        "lv1name": "0",
+        "lv2name": "0",
+        "lv3name": "0",
+        "lv4name": "0",
+        "cabinet": 0,
+        "date": 0,
+        "deviceType": "6k3p"
+      }
+    ],
+    "Ftech": []
+  }

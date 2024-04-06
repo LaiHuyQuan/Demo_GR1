@@ -10,6 +10,35 @@ var jsonStructure = {
     "level0": []
 };
 
+//mapping
+var mapping = {
+    "CH1": ["A11", "A21", "A31", "P1", "P2", "P3"],
+    "CH2": ["A12", "A22", "A32"],
+    "CH3": ["A13", "A23", "A33"],
+    "CH4": ["A14", "A24", "A34"],
+    "CH5": ["A15", "A25", "A35"],
+    "CH6": ["A16", "A26", "A36"],
+    "CH7": ["A41", "A51", "A61"],
+    "CH8": ["A42", "A52", "A62"],
+    "CH9": ["A43", "A53", "A63"],
+    "CH10": ["A44", "A54", "A64"],
+    "CH11": ["A45", "A55", "A65"],
+    "CH12": ["A46", "A56", "A66"]
+};
+var reversedMapping = {};
+for (var key in mapping) {
+    if (mapping.hasOwnProperty(key)) {
+        var values = mapping[key];
+        for (var i = 0; i < values.length; i++) {
+            var value = values[i];
+            if (!reversedMapping.hasOwnProperty(value)) {
+                reversedMapping[value] = [];
+            }
+            reversedMapping[value].push(key);
+        }
+    }
+}
+
 $(document).ready(function () {
     // thêm dự án
     // dự án
@@ -36,11 +65,29 @@ $(document).ready(function () {
     })
 
     function downloadProjectData() {
-        var projectInfo = {
-            "projectCode": projectData.projectCode,
-            "projectName": projectData.projectName
+        var mappingchannel = {
+            "CH1": ["A11", "A21", "A31"],
+            "CH2": ["A12", "A22", "A32"],
+            "CH3": ["A13", "A23", "A33"],
+            "CH4": ["A14", "A24", "A34"],
+            "CH5": ["A15", "A25", "A35"],
+            "CH6": ["A16", "A26", "A36"],
+            "CH7": ["A41", "A51", "A61"],
+            "CH8": ["A42", "A52", "A62"],
+            "CH9": ["A43", "A53", "A63"],
+            "CH10": ["A44", "A54", "A64"],
+            "CH11": ["A45", "A55", "A65"],
+            "CH12": ["A46", "A56", "A66"]
         };
-
+    
+        // Tạo mảng cho thông tin dự án
+        var projectInfo = {
+            "Project": [{
+                "projectCode": projectData.projectCode,
+                "projectName": projectData.projectName
+            }]
+        };
+    
         // Tạo mảng cho các thiết bị
         var devices = projectData.devices.map(function (device) {
             return {
@@ -59,98 +106,66 @@ $(document).ready(function () {
                 "deviceType": device.deviceType
             };
         });
-
+    
         // Tạo mảng cho các kênh
         var channels = [];
+    
         projectData.devices.forEach(function (device) {
             var deviceCode = device.code;
-            var loadId = 0; // Biến đếm loadid, bắt đầu từ 1 cho mỗi thiết bị
+            var loadId = 0;
+    
             device.channels.forEach(function (channel) {
+                var loadIdTemp = loadId;
+                var channelData = {
+                    "deviceID": deviceCode,
+                    "loadId": loadIdTemp,
+                    "itt": channel.itt,
+                    "ptt": channel.ptt,
+                    "ct": channel.ct,
+                    "type": channel.type,
+                    "name": channel.name,
+                    "source": channel.source,
+                    "lv1name": channel.lv1,
+                    "lv2name": channel.lv2,
+                    "lv3name": channel.lv3,
+                    "lv4name": channel.lv4,
+                    "lv1Code": channel.lv1Code,
+                    "lv2Code": channel.lv2Code,
+                    "lv3Code": channel.lv3Code,
+                    "lv4Code": channel.lv4Code,
+                    "includeS": channel.includeS,
+                    "includeL": channel.includeL
+                };
+    
                 if (channel.chonpha == "3 pha") {
-                    var mapping = {
-                        "ch1": ["a11", "a21", "a31", "p1", "p2", "p3"],
-                        "ch2": ["a12", "a22", "a32"],
-                        "ch3": ["a13", "a23", "a33"],
-                        "ch4": ["a14", "a24", "a34"],
-                        "ch5": ["a15", "a25", "a35"],
-                        "ch6": ["a16", "a26", "a36"],
-                        "ch7": ["a41", "a51", "a61"],
-                        "ch8": ["a42", "a52", "a62"],
-                        "ch9": ["a43", "a53", "a63"],
-                        "ch10": ["a44", "a54", "a64"],
-                        "ch11": ["a45", "a55", "a65"],
-                        "ch12": ["a46", "a56", "a66"]
-                    };
-                    var Values = mapping[deviceCode]
-                    loadId++
-                    for (var i = 0; i < Values.length; i++) {
-                        channels.push({
-                            "deviceCode": deviceCode,
-                            "loadId": loadId, // Tăng giá trị loadId sau mỗi lần sử dụng và gán vào thuộc tính loadId của kênh
-                            "chonch": Values[i],
-                            "chonpha": channel.pha,
-                            "itt": channel.itt,
-                            "ptt": channel.ptt,
-                            "ct": channel.ct,
-                            "type": channel.type,
-                            "name": channel.name,
-                            "source": channel.source,
-                            "lv1name": channel.lv1,
-                            "lv2name": channel.lv2,
-                            "lv3name": channel.lv3,
-                            "lv4name": channel.lv4,
-                            "lv1Code": channel.lv1Code,
-                            "lv2Code": channel.lv2Code,
-                            "lv3Code": channel.lv3Code,
-                            "lv4Code": channel.lv4Code,
-                            "includeS": channel.includeS,
-                            "includeL": channel.includeL,
-                            "source": channel.source
+                    var Values = mappingchannel[channel.chonch];
+                    if (Values) {
+                        Values.forEach(function (value) {
+                            channels.push(Object.assign({}, channelData, { "chonch": value }));
                         });
                     }
-
+                } else {
+                    channels.push(Object.assign({}, channelData, { "chonch": channel.chonch }));
                 }
-                else {
-                    channels.push({
-                        "deviceCode": deviceCode,
-                        "loadId": loadId++, // Tăng giá trị loadId sau mỗi lần sử dụng và gán vào thuộc tính loadId của kênh
-                        "chonch": channel.chonch,
-                        "chonpha": channel.pha,
-                        "itt": channel.itt,
-                        "ptt": channel.ptt,
-                        "ct": channel.ct,
-                        "type": channel.type,
-                        "name": channel.name,
-                        "source": channel.source,
-                        "lv1name": channel.lv1,
-                        "lv2name": channel.lv2,
-                        "lv3name": channel.lv3,
-                        "lv4name": channel.lv4,
-                        "lv1Code": channel.lv1Code,
-                        "lv2Code": channel.lv2Code,
-                        "lv3Code": channel.lv3Code,
-                        "lv4Code": channel.lv4Code,
-                        "includeS": channel.includeS,
-                        "includeL": channel.includeL,
-                        "source": channel.source
-                    });
-                }
+                loadId++;
             });
         });
-        // Chuỗi dữ liệu cho thông tin dự án
-        var projectInfoText = projectInfo.map(obj => JSON.stringify(obj)).join('\n');
-
+    
         // Chuỗi dữ liệu cho danh sách thiết bị
-        var devicesText = devices.map(device => JSON.stringify(device)).join('\n');
-
+        var devicesText = JSON.stringify(devices, null, 2);
+    
         // Chuỗi dữ liệu cho danh sách kênh
-        var channelsText = channels.map(channel => JSON.stringify(channel)).join('\n');
-
-        // Kết hợp các chuỗi dữ liệu thành một chuỗi duy nhất
-        var data = projectInfoText + '\n\n' + devicesText + '\n\n' + channelsText;
-
+        var channelsText = JSON.stringify(channels, null, 2);
+    
+        // Kết hợp các chuỗi dữ liệu thành một object
+        var data = {
+            ...projectInfo,
+            "Devices": devices,
+            "Channels": channels
+        };
+    
         // Tải dữ liệu xuống dưới dạng tệp văn bản
-        download('project_data.txt', data);
+        download('project_data.txt', JSON.stringify(data, null, 2));
     }
 
     function download(filename, text) {
@@ -324,11 +339,10 @@ $(document).ready(function () {
 
     function addProject(device) {
         var newDevice = '<div class="device-added device-added-' + device.code + '" data-info="' + device.code + '">' +
-            '<div style="height: 370px; border:1px #fff solid; padding-top:20px">' +
+            '<div style="border:1px #fff solid; padding-top:20px">' +
             '<div class="channel-diagram"></div>' +
             '<div class="channel-list" data-info="' + device.code + '"></div>' +
-            '<div class="channel-diagram-bot"></div>' +
-            '</div>'+
+            '</div>' +
             '<div class="device-hd" data-info="' + device.code + '">' +
             '<span>' + device.code + ' - ' + device.cabinet + ' - ' + device.date + ' - ' + device.deviceType + '</span>' +
             '<span class="edit-device-btn" data-info="' + device.code + '"><i class="fa-solid fa-pen-to-square"></i> Edit Device</span>' +
@@ -340,7 +354,7 @@ $(document).ready(function () {
         $('.add-device-main').append(newDevice);
         if (device.channels && device.channels.length > 0) {
             $('.device-added-' + device.code).find('table').remove();
-            $('.device-added-' + device.code).find('table').append(createchannelTable(device.code));
+            $('#main').find('.device-added-' + device.code).append(createchannelTable(device.code));
         }
     }
 
@@ -366,11 +380,38 @@ $(document).ready(function () {
             case '12k3p': addChannelList12k3p(deviceID);
                 break;
         }
+        if (device.channels && device.channels.length > 0) {
+            $('.device-added-' + device.code).find('table').remove();
+            $('#main').find('.device-added-' + device.code).append(createchannelTable(device.code));
+        }
+
+        for (var i = 0; i < projectData.devices.length; i++) {
+            if (projectData.devices[i].code == deviceID) {
+                var foundDevice = projectData.devices[i];
+                for (var j = 0; j < foundDevice.channels.length; j++) {
+                    console.log(0)
+                    if (mapping.hasOwnProperty(foundDevice.channels[j].chonch)) {
+                        console.log(1)
+                        var Values = mapping[foundDevice.channels[j].chonch];
+                        for (var k = 0; k < Values.length; k++) {
+                            $('#main').find('.device-added-' + deviceID).find('.channel-' + Values[k]).addClass('created');
+                        }
+                    }
+                    $('#main').find('.device-added-' + deviceID).find('.channel-' + foundDevice.channels[j].chonch).addClass('created');
+                }
+            }
+        }
 
         initializeTooltips();
     })
 
     function addChannelList1k3p(deviceID) {
+        var list = ['CH1'];
+        for (var i = 0; i < list.length; i++) {
+            var chonch = list[i];
+            var channelID = i + 1;
+            $('.channel-diagram').append(createChannelLink(channelID, chonch, deviceID));
+        }
         var channelList = ['CT A', 'CT B', 'CT C']
         var PhaseA = $('<div></div>').addClass('PhaseA');
         for (var i = 1; i <= 3; i++) {
@@ -394,6 +435,12 @@ $(document).ready(function () {
     }
 
     function addChannelList6k3p(deviceID) {
+        var list = ['CH1', 'CH2', 'CH3', 'CH4', 'CH5', 'CH6'];
+        for (var i = 0; i < list.length; i++) {
+            var chonch = list[i];
+            var channelID = i + 1; // Sử dụng chỉ số i + 1 để tạo ID cho mỗi kênh
+            $('.channel-diagram').append(createChannelLink(channelID, chonch, deviceID));
+        }
         var channelList = ['01', '02', '03', '04', '05', '06']
         var PhaseA = $('<div></div>').addClass('PhaseA');
         for (var i = 1; i <= 6; i++) {
@@ -419,19 +466,13 @@ $(document).ready(function () {
     }
 
     function addChannelList12k3p(deviceID) {
-        $('.channel-diagram').append(createChannelLink(1, 'CH1', deviceID))
-        $('.channel-diagram').append(createChannelLink(2, 'CH2', deviceID))
-        $('.channel-diagram').append(createChannelLink(3, 'CH3', deviceID))
-        $('.channel-diagram').append(createChannelLink(4, 'CH4', deviceID))
-        $('.channel-diagram').append(createChannelLink(5, 'CH5', deviceID))
-        $('.channel-diagram').append(createChannelLink(6, 'CH6', deviceID))
+        var list = ['CH1', 'CH2', 'CH3', 'CH4', 'CH5', 'CH6', 'CH7', 'CH8', 'CH9', 'CH10', 'CH11', 'CH12'];
+        for (var i = 0; i < list.length; i++) {
+            var chonch = list[i];
+            var channelID = i + 1; // Sử dụng chỉ số i + 1 để tạo ID cho mỗi kênh
+            $('.channel-diagram').append(createChannelLink(channelID, chonch, deviceID));
+        }
 
-        $('.channel-diagram-bot').append(createChannelLinkBot(1, 'CH7', deviceID))
-        $('.channel-diagram-bot').append(createChannelLinkBot(2, 'CH8', deviceID))
-        $('.channel-diagram-bot').append(createChannelLinkBot(3, 'CH9', deviceID))
-        $('.channel-diagram-bot').append(createChannelLinkBot(4, 'CH10', deviceID))
-        $('.channel-diagram-bot').append(createChannelLinkBot(5, 'CH11', deviceID))
-        $('.channel-diagram-bot').append(createChannelLinkBot(6, 'CH12', deviceID))
         var channelList = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
         var PhaseA = $('<div></div>').addClass('PhaseA');
         for (var i = 1; i <= 6; i++) {
@@ -535,38 +576,32 @@ $(document).ready(function () {
 
     //  test
     function createChannelLink(i, chonch, deviceID) {
-        var html = '<div class="channel-link-' + i + '" data-info="' + chonch + '">' +
-            '<div style="margin-left: 25px;">' +
-            '<span class="' + chonch + '-channel channel1phase" data-chonch="' + chonch + '" data-chonpha="3 pha" data-deviceid="'+ deviceID + '">' + chonch + '</span>' +
-            '</div>' +
-            '<img src="./assets/img/link.svg" alt="" style="margin-left: 20px;" class="' + chonch + '-link no-visible links">' +
-            '</div>';
-        return html;
-    }
-    function createChannelLinkBot(i, chonch, deviceID) {
-        var html = '<div class="channel-link-' + i + '" data-info="' + chonch + '">' +
-            '<img src="./assets/img/link-bot.svg" alt="" style="margin-left: 20px;" class="' + chonch + '-link no-visible links">' +
-            '<div style="margin-left: 25px;">' +
-            '<span class="' + chonch + '-channel channel1phase " data-chonch="' + chonch + '" data-chonpha="3 pha" data-deviceid="'+ deviceID + '">' + chonch + '</span>' +
-            '</div>' +
-            '</div>';
+        var html = '<div class="channel-link-' + i + ' channel-link" data-info="' + chonch + '">' +
+            '<span class="' + chonch + '-channel channel1phase" data-chonch="' + chonch + '" data-chonpha="3 pha" data-deviceid="' + deviceID + '">' + chonch + '</span> </div>'
         return html;
     }
 
     var hoverTimer;
 
     $('#main').on('mouseenter', '.channel1phase', function () {
-        var link = $(this).data('chonch');
         hoverTimer = setTimeout(function () {
-            $('.' + link + '-link').removeClass('no-visible');
+            var Values = mapping[link];
+            for (var i = 0; i < Values.length; i++) {
+                $('#main').find('.channel-' + Values[i]).addClass('related-link')
+            }
         }, 200);
+
+        var link = $(this).data('chonch');
     });
 
     $('#main').on('mouseleave', '.channel1phase', function () {
         clearTimeout(hoverTimer);
         var link = $(this).data('chonch');
         hoverTimer = setTimeout(function () {
-            $('.' + link + '-link').addClass('no-visible');
+            var Values = mapping[link];
+            for (var i = 0; i < Values.length; i++) {
+                $('#main').find('.channel-' + Values[i]).removeClass('related-link')
+            }
         }, 200);
     });
     // end
