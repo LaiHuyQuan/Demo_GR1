@@ -1,276 +1,296 @@
-
-
-#add-project{
-    padding: 30px;
+#add-project {
+  padding: 30px;
 }
 
-.addPrj-hd{
-    display: flex;
-    justify-content: space-between;
+.addPrj-hd {
+  display: flex;
+  justify-content: space-between;
 }
 
-.addPrj-hd-left span{
-    font-size: 20px;
-    font-weight: bold;
-    padding: 0 10px;
+.addPrj-hd-left span {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 0 10px;
 }
 
-button{
-    padding: 2px 5px;
-    background: none;
-    border: none;
+button {
+  padding: 2px 5px;
+  background: none;
+  border: none;
 }
 
-.add-device-mockup{
-    position: fixed;
-    top: 5%;
-    left: 35%;
-    height: 90vh;
-    overflow-y: scroll !important;
-    overflow-x: hidden;
-    z-index: 10;
+.device-container,
+.structure-container,
+.channel-container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 11;
+  /* background-color: #302d2d; */
 }
 
-.add-device-btn{
-    cursor: pointer;
+.add-device-mockup {
+  position: fixed;
+  top: 5%;
+  left: 35%;
+  height: 90vh;
+  z-index: 12;
 }
 
-.add-device-hd span{
-    font-weight: bold;
-    font-size: 30px;
-    padding-left: 10px;
-    padding-right: 75%;
+.add-device-btn {
+  cursor: pointer;
 }
 
-.device-hd span{
-    margin-right: 30px;
-    font-weight: bold;
+.add-device-hd span {
+  font-weight: bold;
+  font-size: 30px;
+  padding-left: 10px;
+  padding-right: 75%;
 }
 
-.device-hd .add-channel-btn, .edit-device-btn, .delete-device-btn{
-    cursor: pointer;
+.device-hd span {
+  margin-right: 30px;
+  font-weight: bold;
 }
 
-.add-device-mockup label{
-    width: 120px;
-    padding: 10px;
+.device-hd .add-channel-btn,
+.edit-device-btn,
+.delete-device-btn {
+  cursor: pointer;
 }
 
-.structure-mockup{
-    position: fixed;
-    top: 20%;
-    left: 20%;
-    width: 60%;
-    height: 60%;
-    background-color: #1E1E2D;
-    border: 2px #ffffff solid;
-    overflow-y: scroll;
-    padding: 50px;
-    z-index: 100;
+.add-device-mockup label {
+  width: 120px;
+  padding: 10px;
 }
 
-.add-channel-mockup .card{
-    border: 2px #ccc solid !important;
+.structure-mockup {
+  position: fixed;
+  top: 20%;
+  left: 20%;
+  width: 60%;
+  height: 60%;
+  background-color: #1e1e2d;
+  border: 2px #ffffff solid;
+  overflow-y: scroll;
+  padding: 50px;
+  z-index: 12;
 }
 
+.add-channel-mockup .card {
+  border: 2px #ccc solid !important;
+}
 
-.add-channel-mockup{
-    position: fixed;
-    top: 10%;
-    left: 10%;
-    right: 10%;
-    z-index: 10;
+.add-channel-mockup {
+  position: fixed;
+  top: 10%;
+  left: 10%;
+  right: 10%;
+  z-index: 12;
 }
 
 #chonch {
-    min-width: 64px;
+  min-width: 64px;
 }
 
-.channel-btns, .device-btns{
-    justify-content: right;
-    /* position: fixed; */
+.channel-btns,
+.device-btns {
+  justify-content: right;
+  /* position: fixed; */
 }
 
-.channel-btns span, .device-btns span, .struc-save, .struc-close{
-    padding: 8px 12px;
-    margin-left: 10px;
-    cursor: pointer;
-    border: #949494 1px solid;
-    border-radius: 45%;
-    transition: all 0.3s;
+.channel-btns span,
+.device-btns span,
+.struc-save,
+.struc-close {
+  padding: 8px 12px;
+  margin-left: 10px;
+  cursor: pointer;
+  border: #949494 1px solid;
+  border-radius: 45%;
+  transition: all 0.3s;
 }
 
-.channel-btns span:hover, .device-btns span:hover{
-    color: #302d2d;
-    background-color: #949494;
+.channel-btns span:hover,
+.device-btns span:hover {
+  color: #302d2d;
+  background-color: #949494;
 }
 
 /*  */
 
 .container {
-    margin: 50px auto;
-    width: 80%;
-    display: inline;
+  margin: 50px auto;
+  width: 80%;
+  display: inline;
 }
 
 .block {
-    padding: 5px 10px 0;
-    margin-bottom: 10px;
-    cursor: pointer;
+  padding: 5px 10px 0;
+  margin-bottom: 10px;
+  cursor: pointer;
 }
 
-.block-level-1{
-    border: 1px solid #ccc;
+.block-level-1 {
+  border: 1px solid #ccc;
 }
 
-.add-button{
-    color: #fff;
-    font-size: 20px;
-    font-weight: 600;
-    cursor: pointer;
+.add-button {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
-.block .add-button, .delete-button {
-    color: #ccc;
-    padding: 0px 10px;
-    border: none;
-    cursor: pointer;
+.block .add-button,
+.delete-button {
+  color: #ccc;
+  padding: 0px 10px;
+  border: none;
+  cursor: pointer;
 }
 .block .cancel-button {
-    /* color: #007bff; */
-    padding: 5px 10px;
-    border: none;
-    cursor: pointer;
+  /* color: #007bff; */
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
 }
 .block .add-input {
-    width: 200px;
-    padding: 5px;
-    margin-right: 10px;
+  width: 200px;
+  padding: 5px;
+  margin-right: 10px;
 }
-.block-level-2, .block-level-3, .block-level-4 {
-    margin-left: 20px;
-}
-
-.level-select{
-    padding: 5px ;
-    /* align-items: center; */
+.block-level-2,
+.block-level-3,
+.block-level-4 {
+  margin-left: 20px;
 }
 
-.select-lv{
-    min-width: 70px;
+.level-select {
+  padding: 5px;
+  /* align-items: center; */
 }
 
-.menu .device-added{
-    border-bottom: 1px #ccc solid;
-    transition: all ease-in-out 0.4s;
+.select-lv {
+  min-width: 70px;
 }
 
-.color-gray{
-    background-color: #000;
-    color: #ccc;
+.menu .device-added {
+  border-bottom: 1px #ccc solid;
+  transition: all ease-in-out 0.4s;
 }
 
-.device-main{
-    width: 100%;
-    height: 60vh;
-    background-color: #949494;
+.color-gray {
+  background-color: #000;
+  color: #ccc;
 }
 
-.yourCanvas{
-    width: 25%;
+.device-main {
+  width: 100%;
+  height: 60vh;
+  background-color: #949494;
 }
 
-.main-right{
-    justify-content: right;
+.yourCanvas {
+  width: 25%;
 }
 
-.channel-list{
-    position: absolute;
-    right: 13vw;
-    top: 36vh;
-    display: flex;
-    flex-direction: row;
-    width: 45vw;
-    /* height: 30vh; */
+.main-right {
+  justify-content: right;
 }
 
-.PhaseA, .PhaseB, .PhaseC{
-    display: flex;
-    flex-wrap: wrap;
-    width: 30%;
-    margin: 20px 20px;
+.channel-list {
+  position: absolute;
+  right: 13%;
+  top: 36%;
+  display: flex;
+  flex-direction: row;
+  width: 45%;
+  height: 15%;
 }
 
-.Phase{
-    padding-top: 60px;
-    display: flex;
-    flex-wrap: wrap;
-    width: 53%;
-    margin: 15px;
-    justify-content: flex-end;
+.PhaseA,
+.PhaseB,
+.PhaseC {
+  display: flex;
+  flex-wrap: wrap;
+  width: 30%;
+  margin: 20px 20px;
 }
 
-.channel{
-    width: calc(100%/6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: none;
-    font-size: 12px;
-    color: red;
-    font-weight: bold;
-    height: 40px;
+.Phase {
+  padding-top: 60px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 53%;
+  margin: 15px;
+  justify-content: flex-end;
 }
 
-.created{
-    filter: hue-rotate(160deg); 
+.channel {
+  width: calc(100% / 6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: none;
+  font-size: 12px;
+  color: red;
+  font-weight: bold;
+  height: 40px;
+}
+
+.created {
+  filter: hue-rotate(160deg);
 }
 
 .channel img {
-    width: 70%;
-    height: 70%;
-} 
-
-.pha{
-    width: 1000px;
-    height: auto;
+  width: 70%;
+  height: 70%;
 }
 
-.channel-link{
-    width: 74%;
-    height: auto;
+.pha {
+  width: 1000px;
+  height: auto;
+}
+
+.channel-link {
+  width: 74%;
+  height: auto;
 }
 
 .links {
-    display: block;
-    width: calc(100%*1145/1172);
-    /* height: 100px; */ 
+  display: block;
+  width: calc(100% * 1145 / 1172);
+  /* height: 100px; */
 }
 
-.channel-diagram{
-    display: inline-flex;
+.channel-diagram {
+  display: inline-flex;
 }
 
-.no-visible{
-    visibility: hidden;
+.no-visible {
+  visibility: hidden;
 }
 
-.channel-diagram span, .channel-diagram-bot span{
-    padding: 5px;
-    border: 1px #ffffff solid;
-    border-radius: 10px;
-    cursor: pointer;
+.channel-diagram span,
+.channel-diagram-bot span {
+  padding: 5px;
+  border: 1px #ffffff solid;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
-.channel-diagram{
-    padding-bottom: 10px;
+.channel-diagram {
+  padding-bottom: 10px;
 }
 
-.channel1phase{
-    margin: 0 10px;
+.channel1phase {
+  margin: 0 10px;
 }
 
-.related-link{
-    background-color: #949494 !important;
+.related-link {
+  background-color: #949494 !important;
 }
