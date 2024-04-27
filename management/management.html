@@ -19,6 +19,7 @@
       integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
       crossorigin="anonymous"
     ></script>
+
   </head>
   <body>
     <div id="app">
@@ -28,6 +29,7 @@
             <div class="container">
               <nav class="main-navbar">
                 <div class="container">
+                  <img src="./assets/img/logo.png" alt="">
                   <ul>
                     <li class="menu-item">
                       <a href="#" class="menu-link">
@@ -92,7 +94,7 @@
 
         <div class="content-wrapper container">
           <div class="page-heading">
-            <p>Nhà máy vlxd</p>
+            <p>Nhà máy VLXD</p>
           </div>
           <div class="page-content">
             <section class="row">
@@ -101,7 +103,9 @@
                     <div class="col-12">
                       <div class="card">
                           <i class="fa-solid fa-compress"></i>
-                          <img src="./assets/img/test.png" alt="">
+                          <div class="d-flex align-items-center justify-content-center " id="diaSpace" style=" height: 80vh;margin-top: 2.5vh;">
+                            <div id="myholder"></div>
+                          </div>
                       </div>
                     </div>
                   </div>
@@ -110,8 +114,8 @@
                 <div class="row">
                   <div class="col-12 description">
                     <div class="card">
-                        <h6>Nhà máy VLXD</h6>
-                      <img src="./assets/img/test2.png" alt="">
+                      <h6>NHÀ MÁY VLXD</h6>
+                      <div id="heatmap-chart" style="height: 45vh; margin: -2.5vh 0 1vh;"></div>
                     </div>
                   </div>
                 </div>
@@ -143,80 +147,15 @@
             </section>
           </div>
         </div>
-
-        <div class="content-wrapper container">
-          <div class="page-heading">
-            <p>Nhà máy vlxd</p>
-          </div>
-          <div class="page-content">
-            <section class="row">
-              <div class="col-12 col-lg-6">
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="card">
-                          <i class="fa-solid fa-compress"></i>
-                          <img src="./assets/img/test.png" alt="">
-                      </div>
-                      <div class="card-body">
-                        <div id="chart-visitors-profile"></div>
-                      </div>
-                    </div>
-                  </div>
-              </div>
-              <div class="col-12 col-lg-6">
-                <div class="row">
-                  <div class="col-4">
-                    <div class="card">
-                      <div class="card-header">
-                        <h6>Nhà máy VLXD</h6>
-                      </div>
-                      <!-- img here -->
-                    </div>
-                  </div>
-                  <div class="col-8">
-                      <div class="card">
-                        <div class="card-header">
-                          <h6>Nhà máy VLXD</h6>
-                        </div>
-                        <!-- table here -->
-                      </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-12">
-                    <div class="card">
-                      <div class="card-header">
-                        <h6>Nhà máy VLXD</h6>
-                      </div>
-                      <!-- table here -->
-                    </div>
-                  </div>
-                </div>
-                </div>
-              </div>
-            </section>
-          </div>
-        </div>
-
-        <footer>
-          <div class="container">
-            <div class="footer clearfix mb-0 text-muted">
-              <div class="float-start">
-                <p>2023 &copy; Mazer</p>
-              </div>
-              <div class="float-end">
-                <p>
-                  Crafted with
-                  <span class="text-danger"><i class="bi bi-heart"></i></span>
-                  by <a href="https://saugi.me">Saugi</a>
-                </p>
-              </div>
-            </div>
-          </div>
-        </footer>
       </div>
-    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@joint/core@4.0.1/dist/joint.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
     <script src="./assets/js/app.js"></script>
+    <script src="./assets/js/element.js"></script>
+    <script src="./assets/js/management.js"></script>
+    <script src="./assets/js/heatmap.js"></script>
+    <script src="./assets/js/api.js"></script>
   </body>
 </html>

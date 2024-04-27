@@ -1,6 +1,21 @@
 html {
   overflow-x: hidden;
+  font-family: "Courier New", Courier, monospace !important;
 }
+
+h6 {
+  padding: 10px 0 0 10px;
+  font: Courier !important;
+}
+
+#app {
+  margin-bottom: 5vh;
+}
+
+.page-heading {
+  margin-bottom: 0 !important;
+}
+
 .content-wrapper {
   --margin-x: 0vw;
   margin: 0 var(--margin-x) !important;
@@ -14,8 +29,8 @@ html[data-bs-theme="dark"] .row > * {
   flex-shrink: 0;
   width: 100%;
   max-width: 100%;
-  padding-right: calc(var(--bs-gutter-x) * 0.4) !important;
-  padding-left: calc(var(--bs-gutter-x) * 0.4) !important;
+  padding-right: calc(var(--bs-gutter-x) * 0.3) !important;
+  padding-left: calc(var(--bs-gutter-x) * 0.3) !important;
   padding-top: var(--bs-gutter-y);
 }
 
@@ -36,4 +51,27 @@ html[data-bs-theme="dark"] .row > * {
 .fa-compress {
   margin: 10px 10px 0 0;
   align-self: flex-end;
+}
+.description .card {
+  padding-bottom: 5vh;
+}
+
+.card {
+  margin-bottom: 0 !important;
+}
+
+.col-4,
+.col-12 {
+  margin-top: 0 !important;
+}
+
+#diaSpace {
+  width: 93%;
+  min-height: 80vh;
+  margin-left: 1%;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
 }
