@@ -11,7 +11,6 @@ $(document).ready(function () {
       DiagramData = response;
       graph.addCells(DiagramData["total"]);
       scale();
-      console.log(DiagramData);
     } catch (error) {
       console.error("Lỗi khi gửi yêu cầu:", error);
     }
@@ -25,8 +24,6 @@ $(document).ready(function () {
         dataType: "json",
       });
       diaData = response;
-      console.log(diaData);
-      scale();
       loadDiagramData(diaData, DiagramData);
       scale();
     } catch (error) {
@@ -51,6 +48,7 @@ $(document).ready(function () {
   function loadDiagramData(diaData, DiagramData) {
     for (var i = 1; i < diaData.rs.length + 2; i++) {
       DiagramData.total[i].attrs = diaData.rs[i];
+      DiagramData.total[i] = setupOnlineJoinElemen(DiagramData.total[i]);
       removeCell(i);
       graph.addCell(DiagramData.total[i]);
       scale();
@@ -63,6 +61,19 @@ $(document).ready(function () {
       cell.remove();
     }
   }
+
+  setupOnlineJoinElemen = (data) => {
+    let obj = window[data.type.split(".")[1]].prototype.defaults.attrs;
+    let arr = Object.keys(obj);
+    arr.forEach((element) => {
+      if (obj[element]["t"] == "name") {
+        data["attrs"][element] = Object.assign({}, data["attrs"][element], {
+          fill: "white",
+        });
+      }
+    });
+    return data;
+  };
 
   fetchLayoutData();
   fetchDiaData();

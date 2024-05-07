@@ -71,6 +71,10 @@ html[data-bs-theme="dark"] .row > * {
   margin-left: 1%;
 }
 
+.joint-cell {
+  display: block;
+}
+
 .center {
   align-items: center;
   justify-content: center;
