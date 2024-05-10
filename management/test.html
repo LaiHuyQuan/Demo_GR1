@@ -1,59 +1,263 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JointJS Example</title>
-  <!-- Include JointJS library -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jointjs/3.4.1/joint.min.css" />
-  <style>
-    /* Add any custom styling here */
-    #paper {
-      width: 100%;
-      height: 600px; /* Adjust height as needed */
-    }
-  </style>
-</head>
-<body>
-  <div id="paper"></div>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jointjs/3.4.1/joint.min.js"></script>
-  <script src="./assets/js/element.js"></script>
-  <script>
-    // Create a new joint.js Paper instance
-    const paper = new joint.dia.Paper({
-      el: document.getElementById("paper"),
-      model: new joint.dia.Graph(),
-      width: "100%",
-      height: "100%",
-      gridSize: 10,
-      drawGrid: { name: "dot", args: { color: "#E8E8E8", thickness: 1 } },
-    });
+    <link rel="stylesheet" href="./assets/css/management.css" />
+    <link rel="stylesheet" href="./assets/css/app-dark.css" />
+    <link rel="stylesheet" href="./assets/css/app.css" />
+    <link rel="stylesheet" href="./assets/css/iconly.css" />
 
-    // Create instances of your custom elements and add them to the paper
-    const customLayoutData = new CustomLayoutData();
-    customLayoutData.position(100, 100);
-    paper.model.addCell(customLayoutData);
+    <script
+      src="https://kit.fontawesome.com/2878e6014d.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
 
-    const customDiaImg = new CustomDiaImg();
-    customDiaImg.position(300, 100);
-    paper.model.addCell(customDiaImg);
+  </head>
+  <body>
+    <div id="app">
+      <div id="main" class="layout-horizontal">
+        <header>
+          <div class="header-top">
+            <div class="container">
+              <nav class="main-navbar">
+                <div class="container">
+                  <img src="./assets/img/logo.png" alt="">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="#" class="menu-link">
+                        <span><i class="fa-solid fa-sitemap"></i> Quy trình</span>
+                      </a>
+                    </li>
+    
+                    <li class="menu-item">
+                      <a href="#" class="menu-link">
+                        <span><i class="fa-solid fa-bolt-lightning"></i> Điện</span>
+                      </a>
+                    </li>
+    
+                    <li class="menu-item">
+                      <a href="#" class="menu-link">
+                        <span><i class="fa-solid fa-wind"></i> Khí</span>
+                      </a>
+                    </li>
+    
+                    <li class="menu-item">
+                      <a href="#" class="menu-link">
+                        <span><i class="fa-solid fa-person-digging"></i> Than</span
+                        >
+                      </a>
+                    </li>
+    
+                    <li class="menu-item">
+                      <a href="#" class="menu-link">
+                        <span><i class="fa-solid fa-sd-card"></i> ISO50001</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+                <div class="header-top-right">
+                    <div class="dropdown">
+                        <a href="#" id="topbarUserDropdown" class="user-dropdown d-flex align-items-center dropend dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="avatar avatar-md2" >
+                                <img src="./assets/compiled/jpg/1.jpg" alt="Avatar">
+                            </div>
+                            <div class="text">
+                                <h6 class="user-dropdown-name">John Ducky</h6>
+                                <p class="user-dropdown-status text-sm text-muted">Member</p>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-lg" aria-labelledby="topbarUserDropdown">
+                          <li><a class="dropdown-item" href="#">My Account</a></li>
+                          <li><a class="dropdown-item" href="#">Settings</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="auth-login.html">Logout</a></li>
+                        </ul>
+                    </div>
 
-    const customDiaVolt = new CustomDiaVolt();
-    customDiaVolt.position(500, 100);
-    paper.model.addCell(customDiaVolt);
+                    <!-- Burger button responsive -->
+                    <a href="#" class="burger-btn d-block d-xl-none">
+                        <i class="bi bi-justify fs-3"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        </header>
 
-    const customDiaData = new CustomDiaData();
-    customDiaData.position(700, 100);
-    paper.model.addCell(customDiaData);
+        <div class="content-wrapper container">
+          <div class="page-heading">
+            <p>Nhà máy VLXD</p>
+          </div>
+          <div class="page-content">
+            <section class="row">
+              <div class="col-12 col-lg-6">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="card">
+                          <i class="fa-solid fa-compress"></i>
+                          <div class="d-flex align-items-center justify-content-center " id="diaSpace" style=" height: 80vh;margin-top: 2.5vh;">
+                            <div id="myholder"></div>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-12 col-lg-6">
+                <div class="row">
+                  <div class="col-12" style="display: flex;">
+                      <div class=" col-12 col-lg-4">
+                        <img style="display: block; width: 100%;" src="./assets/img/test4.png" alt="">
+                      </div>
+                      <div class="col-12 col-lg-8">
+                        <div class="table-responsive">
+                          <table class="table table-bordered mb-0">
+                              <thead>
+                                  <tr>
+                                      <th>NAME</th>
+                                      <th>RATE</th>
+                                      <th>SKILL</th>
+                                      <th>TYPE</th>
+                                      <th>LOCATION</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <td class="text-bold-500">Michael Right</td>
+                                      <td>$15/hr</td>
+                                      <td class="text-bold-500">UI/UX</td>
+                                      <td>Remote</td>
+                                      <td>Austin,Taxes</td>
+                                  </tr>
+                                  <tr>
+                                      <td class="text-bold-500">Morgan Vanblum</td>
+                                      <td>$13/hr</td>
+                                      <td class="text-bold-500">Graphic concepts</td>
+                                      <td>Remote</td>
+                                      <td>Shangai,China</td>
+                                  </tr>
+                                  <tr>
+                                      <td class="text-bold-500">Tiffani Blogz</td>
+                                      <td>$15/hr</td>
+                                      <td class="text-bold-500">Animation</td>
+                                      <td>Remote</td>
+                                      <td>Austin,Texas</td>
+                                  </tr>
+                                  <tr>
+                                      <td class="text-bold-500">Ashley Boul</td>
+                                      <td>$15/hr</td>
+                                      <td class="text-bold-500">Animation</td>
+                                      <td>Remote</td>
+                                      <td>Austin,Texas</td>
+                                  </tr>
+                                  <tr>
+                                      <td class="text-bold-500">Mikkey Mice</td>
+                                      <td>$15/hr</td>
+                                      <td class="text-bold-500">Animation</td>
+                                      <td>Remote</td>
+                                      <td>Austin,Texas</td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                      </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="table-responsive">
+                      <table class="table table-bordered mb-0">
+                          <thead>
+                              <tr>
+                                  <th>NAME</th>
+                                  <th>RATE</th>
+                                  <th>SKILL</th>
+                                  <th>TYPE</th>
+                                  <th>LOCATION</th>
+                                  <th>ACTION</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td class="text-bold-500">Michael Right</td>
+                                  <td>$15/hr</td>
+                                  <td class="text-bold-500">UI/UX</td>
+                                  <td>Remote</td>
+                                  <td>Austin,Taxes</td>
+                                  <td><a href="#"><i
+                                              class="badge-circle badge-circle-light-secondary font-medium-1"
+                                              data-feather="mail"></i></a></td>
+                              </tr>
+                              <tr>
+                                  <td class="text-bold-500">Morgan Vanblum</td>
+                                  <td>$13/hr</td>
+                                  <td class="text-bold-500">Graphic concepts</td>
+                                  <td>Remote</td>
+                                  <td>Shangai,China</td>
+                                  <td><a href="#"><i
+                                              class="badge-circle badge-circle-light-secondary font-medium-1"
+                                              data-feather="mail"></i></a></td>
+                              </tr>
+                              <tr>
+                                  <td class="text-bold-500">Tiffani Blogz</td>
+                                  <td>$15/hr</td>
+                                  <td class="text-bold-500">Animation</td>
+                                  <td>Remote</td>
+                                  <td>Austin,Texas</td>
+                                  <td><a href="#"><i
+                                              class="badge-circle badge-circle-light-secondary font-medium-1"
+                                              data-feather="mail"></i></a></td>
+                              </tr>
+                              <tr>
+                                  <td class="text-bold-500">Ashley Boul</td>
+                                  <td>$15/hr</td>
+                                  <td class="text-bold-500">Animation</td>
+                                  <td>Remote</td>
+                                  <td>Austin,Texas</td>
+                                  <td><a href="#"><i
+                                              class="badge-circle badge-circle-light-secondary font-medium-1"
+                                              data-feather="mail"></i></a></td>
+                              </tr>
+                              <tr>
+                                  <td class="text-bold-500">Mikkey Mice</td>
+                                  <td>$15/hr</td>
+                                  <td class="text-bold-500">Animation</td>
+                                  <td>Remote</td>
+                                  <td>Austin,Texas</td>
+                                  <td><a href="#"><i
+                                              class="badge-circle badge-circle-light-secondary font-medium-1"
+                                              data-feather="mail"></i></a></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+                  </div>
+                </div>
+                  <div class="card-body">
+                    <div id="chart-visitors-profile"></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
 
-    const customControl = new CustomControl();
-    customControl.position(100, 300);
-    paper.model.addCell(customControl);
+    <script src="https://cdn.jsdelivr.net/npm/@joint/core@4.0.1/dist/joint.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
-    const customLayoutSensor = new CustomLayoutSensor();
-    customLayoutSensor.position(300, 300);
-    paper.model.addCell(customLayoutSensor);
-  </script>
-</body>
+    <script src="./assets/js/app.js"></script>
+    <script src="./assets/js/element.js"></script>
+    <script src="./assets/js/management.js"></script>
+    <script src="./assets/js/heatmap.js"></script>
+    <script src="./assets/js/api.js"></script>
+    <script src="./assets/js/diagram.js"></script>
+  </body>
 </html>
