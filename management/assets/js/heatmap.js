@@ -185,53 +185,54 @@ $(document).ready(function () {
       ApexCharts.exec(id, "updateOptions", { ...optionsHeatmap }, false, true);
     }
   };
-  //   getDataForRealtimeChart = (Arr, type, index = 0) => {
-  //     if (type == "diaMBAData") {
-  //       realtimeChart.type = type;
-  //       realtimeChart.items = doDeepCopy(Arr[index].infor.dbItems).slice(0, -1);
-  //       realtimeChart.ptt = Arr[index].infor.itt;
-  //       realtimeChart.itt = Arr[index].infor.itt;
-  //       realtimeChart.name = Arr[index].infor.dbName;
-  //     } else if (type == "diaData") {
-  //       realtimeChart.type = type;
-  //       realtimeChart.items = doDeepCopy(Arr[index].infor.dbItems);
-  //       realtimeChart.ptt = Arr[index].infor.itt;
-  //       realtimeChart.itt = Arr[index].infor.itt;
-  //       realtimeChart.name = Arr[index].infor.dbName;
-  //     } else {
-  //       realtimeChart.type = "diaDataTotal";
-  //       realtimeChart.items = [];
-  //       realtimeChart.ptt = 0;
-  //       realtimeChart.itt = 0;
-  //       realtimeChart.name = Arr[0].infor.name;
-  //       for (let i = 0; i < Arr.length; i++) {
-  //         if ("type" in Arr[i].infor) {
-  //           if (Arr[i].infor.type == "diaDataTotal") {
-  //             realtimeChart.items = realtimeChart.items.concat(
-  //               Arr[i].infor.dbItems
-  //             );
-  //             realtimeChart.itt = realtimeChart.itt + Arr[i].infor.itt;
-  //             realtimeChart.ptt = realtimeChart.ptt + Arr[i].infor.ptt;
-  //           }
-  //         }
-  //       }
-  //       if (realtimeChart.items.length == 0) {
-  //         for (let i = 0; i < Arr.length; i++) {
-  //           if ("type" in Arr[i].infor) {
-  //             if (Arr[i].infor.type == "diaData") {
-  //               realtimeChart.items.push(Arr[i].infor.dbItems);
-  //               realtimeChart.itt = realtimeChart.itt + Arr[i].infor.itt;
-  //               realtimeChart.ptt = realtimeChart.ptt + Arr[i].infor.ptt;
-  //             } else if (Arr[i].infor.type == "diaMBAData") {
-  //               realtimeChart.items.push(
-  //                 doDeepCopy(Arr[i].infor.dbItems).slice(0, -1)
-  //               );
-  //               realtimeChart.itt = realtimeChart.itt + Arr[i].infor.itt;
-  //               realtimeChart.ptt = realtimeChart.ptt + Arr[i].infor.ptt;
-  //             }
-  //           }
-  //         }
-  //       }
-  //     }
-  //   };
+  // realtime chart
+  getDataForRealtimeChart = (Arr, type, index = 0) => {
+    if (type == "diaMBAData") {
+      realtimeChart.type = type;
+      realtimeChart.items = doDeepCopy(Arr[index].infor.dbItems).slice(0, -1);
+      realtimeChart.ptt = Arr[index].infor.itt;
+      realtimeChart.itt = Arr[index].infor.itt;
+      realtimeChart.name = Arr[index].infor.dbName;
+    } else if (type == "diaData") {
+      realtimeChart.type = type;
+      realtimeChart.items = doDeepCopy(Arr[index].infor.dbItems);
+      realtimeChart.ptt = Arr[index].infor.itt;
+      realtimeChart.itt = Arr[index].infor.itt;
+      realtimeChart.name = Arr[index].infor.dbName;
+    } else {
+      realtimeChart.type = "diaDataTotal";
+      realtimeChart.items = [];
+      realtimeChart.ptt = 0;
+      realtimeChart.itt = 0;
+      realtimeChart.name = Arr[0].infor.name;
+      for (let i = 0; i < Arr.length; i++) {
+        if ("type" in Arr[i].infor) {
+          if (Arr[i].infor.type == "diaDataTotal") {
+            realtimeChart.items = realtimeChart.items.concat(
+              Arr[i].infor.dbItems
+            );
+            realtimeChart.itt = realtimeChart.itt + Arr[i].infor.itt;
+            realtimeChart.ptt = realtimeChart.ptt + Arr[i].infor.ptt;
+          }
+        }
+      }
+      if (realtimeChart.items.length == 0) {
+        for (let i = 0; i < Arr.length; i++) {
+          if ("type" in Arr[i].infor) {
+            if (Arr[i].infor.type == "diaData") {
+              realtimeChart.items.push(Arr[i].infor.dbItems);
+              realtimeChart.itt = realtimeChart.itt + Arr[i].infor.itt;
+              realtimeChart.ptt = realtimeChart.ptt + Arr[i].infor.ptt;
+            } else if (Arr[i].infor.type == "diaMBAData") {
+              realtimeChart.items.push(
+                doDeepCopy(Arr[i].infor.dbItems).slice(0, -1)
+              );
+              realtimeChart.itt = realtimeChart.itt + Arr[i].infor.itt;
+              realtimeChart.ptt = realtimeChart.ptt + Arr[i].infor.ptt;
+            }
+          }
+        }
+      }
+    }
+  };
 });
