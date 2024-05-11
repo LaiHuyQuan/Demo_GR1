@@ -61,7 +61,7 @@ html[data-bs-theme="dark"] .row > * {
 }
 
 .description {
-  height: auto !important;
+  height: 55vh !important;
 }
 
 .fa-compress {
@@ -108,5 +108,5 @@ th {
 }
 
 .chart {
-  height: 35vh;
+  height: 27vh;
 }
