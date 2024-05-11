@@ -12,10 +12,6 @@ h6 {
   font: Courier !important;
 }
 
-#app {
-  margin-bottom: 5vh;
-}
-
 .page-heading {
   margin-bottom: 0 !important;
 }
@@ -24,7 +20,7 @@ h6 {
   --margin-x: 0vw;
   margin: 0 var(--margin-x) !important;
   max-width: calc(100vw - var(--margin-x)) !important;
-  padding: 0 1vw !important;
+  padding: 0 1rem !important;
 }
 
 html[data-bs-theme="dark"] .row > * {
@@ -50,9 +46,14 @@ html[data-bs-theme="dark"] .row > * {
 }
 
 .header-top .container {
-  width: 100vw !important;
-  margin: 0 !important;
+  /* width: 100vw !important; */
+  flex-basis: 1;
+  padding: 0 !important;
   padding-left: 0 !important;
+}
+
+.header-top {
+  width: 100vw !important;
 }
 
 .card-header {
@@ -62,10 +63,12 @@ html[data-bs-theme="dark"] .row > * {
 
 .description {
   height: 55vh !important;
+  overflow: hidden;
 }
 
 .fa-compress {
-  margin: 10px 10px 0 0;
+  margin: 2vh 2vh 0 0;
+  height: 3vh;
   align-self: flex-end;
 }
 
@@ -80,6 +83,9 @@ html[data-bs-theme="dark"] .row > * {
 .col-4,
 .col-12 {
   margin-top: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  height: auto;
 }
 
 #diaSpace {
@@ -103,10 +109,27 @@ html[data-bs-theme="dark"] .row > * {
 
 td,
 th {
+  color: #fff !important;
   height: 10px;
   padding: 5px !important;
+  border: 1px #fff solid !important;
 }
 
 .chart {
-  height: 25vh;
+  /* height: 35vh !important; */
+  display: flex;
+  flex-direction: row !important;
+  overflow: hidden;
+}
+
+.chart-item {
+  /* padding: 0 0.1rem !important; */
+  padding-bottom: 5vh !important;
+}
+
+.table-block {
+  display: flex !important;
+  justify-content: space-between;
+  flex-direction: row;
+  padding: 5px;
 }

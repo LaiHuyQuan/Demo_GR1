@@ -1977,7 +1977,7 @@ html[data-bs-theme="dark"] .container-sm {
   html[data-bs-theme="dark"] .container-md,
   html[data-bs-theme="dark"] .container-sm,
   html[data-bs-theme="dark"] .container {
-    max-width: 1320px;
+    max-width: 100vw;
   }
 }
 html[data-bs-theme="dark"] :root {
