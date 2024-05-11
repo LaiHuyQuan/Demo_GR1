@@ -3,6 +3,10 @@ html {
   font-family: "Courier New", Courier, monospace !important;
 }
 
+li {
+  list-style: none;
+}
+
 h6 {
   padding: 10px 0 0 10px;
   font: Courier !important;
@@ -37,6 +41,17 @@ html[data-bs-theme="dark"] .row > * {
 .main-navbar,
 .header-top {
   background-color: #151521 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.main-navbar .container {
+  justify-content: flex-start !important;
+}
+
+.header-top .container {
+  width: 100vw !important;
+  margin: 0 !important;
 }
 
 .card-header {
@@ -52,6 +67,7 @@ html[data-bs-theme="dark"] .row > * {
   margin: 10px 10px 0 0;
   align-self: flex-end;
 }
+
 .description .card {
   padding-bottom: 5vh;
 }
@@ -78,4 +94,18 @@ html[data-bs-theme="dark"] .row > * {
 .center {
   align-items: center;
   justify-content: center;
+}
+
+.table-responsive {
+  margin: 8px;
+}
+
+td,
+th {
+  height: 10px;
+  padding: 5px !important;
+}
+
+.header-top .container {
+  padding-left: 0 !important;
 }

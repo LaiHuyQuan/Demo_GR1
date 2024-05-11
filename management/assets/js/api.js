@@ -1,6 +1,6 @@
 var diaData;
 var heatmapData;
-var graphData;
+var chartData;
 $(document).ready(function () {
   async function fetchLayoutData() {
     try {
@@ -46,17 +46,17 @@ $(document).ready(function () {
     }
   }
 
-  async function fetchGraphData() {
+  async function fetchChartData() {
     try {
       const response = await $.ajax({
         url: "https://ems.ioteamvn.com/test/rt?json={%22realtimeChart%22:{%22type%22:%22diaDataTotal%22,%22items%22:[[{%22id%22:%22gw44e65437a2_11%22,%22ch%22:%22P1%22},{%22id%22:%22gw44e65437a2_11%22,%22ch%22:%22P2%22},{%22id%22:%22gw44e65437a2_11%22,%22ch%22:%22P3%22}],[{%22id%22:%22gsnl5d4d17ff%22,%22ch%22:%22A11%22},{%22id%22:%22gsnl5d4d17ff%22,%22ch%22:%22A21%22},{%22id%22:%22gsnl5d4d17ff%22,%22ch%22:%22A31%22}],[{%22id%22:%22gsnl7eb883d7%22,%22ch%22:%22A11%22},{%22id%22:%22gsnl7eb883d7%22,%22ch%22:%22A21%22},{%22id%22:%22gsnl7eb883d7%22,%22ch%22:%22A31%22}]],%22NuP%22:3,%22p%22:1,%22name%22:%22Nh%C3%A0%20m%C3%A1y%20VLXD%22,%22ptt%22:6752,%22itt%22:10230},%22token%22:%22O1L486UPS9MVY7jcihhe4idshRBb0TyD%22}",
         method: "GET",
         dataType: "json",
       });
-      graphData = response;
-      renderLoadFactor(graphData.barData);
-      renderRealtime(graphData.curr, "current");
-      renderRealtime(graphData.power, "power");
+      chartData = response;
+      renderLoadFactor(chartData.barData);
+      renderRealtime(chartData.curr, "current");
+      renderRealtime(chartData.power, "power");
     } catch (error) {
       console.error("Lỗi khi gửi yêu cầu:", error);
     }
@@ -173,7 +173,7 @@ $(document).ready(function () {
         enabled: false,
       },
       stroke: {
-        color: ["#0096FF", "#0096FF", "#0096FF"],
+        color: "#0096FF",
         width: [2, 2, 2],
         curve: "smooth",
       },
@@ -184,7 +184,11 @@ $(document).ready(function () {
           sizeOffset: 6,
         },
       },
+      toolbar: {
+        show: false,
+      },
       yaxis: {
+        color: "#000",
         tickAmount: 6,
         labels: {
           formatter: function (val) {
@@ -200,7 +204,8 @@ $(document).ready(function () {
         categories: ["16:07:00"],
         tickAmount: 1,
         labels: {
-          show: false, // Ẩn nhãn trục x
+          align: "center",
+          offsetX: 0,
         },
         axisTicks: {
           show: false, // Ẩn phân vạch trục x
@@ -238,5 +243,5 @@ $(document).ready(function () {
   fetchLayoutData();
   fetchDiaData();
   fetchHeatmapData();
-  fetchGraphData();
+  fetchChartData();
 });
