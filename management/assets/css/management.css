@@ -52,6 +52,7 @@ html[data-bs-theme="dark"] .row > * {
 .header-top .container {
   width: 100vw !important;
   margin: 0 !important;
+  padding-left: 0 !important;
 }
 
 .card-header {
@@ -106,6 +107,6 @@ th {
   padding: 5px !important;
 }
 
-.header-top .container {
-  padding-left: 0 !important;
+.chart {
+  height: 35vh;
 }

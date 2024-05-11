@@ -1,5 +1,6 @@
 var heatmapColor = "#fff";
 var consChart;
+var lineChart = [];
 $(document).ready(function () {
   renderHeatmapChart = ({
     data = [],
@@ -235,6 +236,4 @@ $(document).ready(function () {
       }
     }
   };
-
-  getDataForRealtimeChart()
 });

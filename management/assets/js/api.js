@@ -76,7 +76,6 @@ $(document).ready(function () {
     var options = {
       series: [
         {
-          name: "sales",
           data: [
             {
               x: "Pha A",
@@ -95,32 +94,52 @@ $(document).ready(function () {
       ],
 
       chart: {
+        height: "100%",
         type: "bar",
-        height: 190,
+        background: "transparent",
+        toolbar: {
+          show: false,
+        },
+      },
+      dataLabels: {
+        enabled: true,
+        enabledOnSeries: undefined,
+        formatter: function (val, opts) {
+          return val.toFixed(2) + "%";
+        },
       },
       plotOptions: {
         bar: {
-          borderRadius: 5,
+          borderRadius: 4,
+          distributed: true,
         },
       },
-      xaxis: {
-        type: "category",
-        group: {
-          style: {
-            fontSize: "10px",
-            fontWeight: 700,
+      grid: {
+        borderColor: "#555",
+      },
+      tooltip: {
+        theme: "dark",
+
+        x: {
+          show: true,
+        },
+        y: {
+          title: {
+            formatter: function () {
+              return "";
+            },
           },
         },
       },
+      legend: {
+        show: false,
+      },
       yaxis: {
+        decimalsInFloat: 1,
         min: 0,
         max: 120,
         tickAmount: 6,
-        labels: {
-          formatter: function (val) {
-            return val.toFixed(1) + "%";
-          },
-        },
+        forceNiceScale: false,
       },
     };
 
@@ -132,41 +151,63 @@ $(document).ready(function () {
   }
 
   function renderRealtime(rlData, id) {
-    var data0 = [];
-    for (var i = 0; i < rlData[0].data.length; i++) {
-      data0.push(rlData[0].data[i].y);
-    }
-
-    var data1 = [];
-    for (var i = 0; i < rlData[1].data.length; i++) {
-      data1.push(rlData[1].data[i].y);
-    }
-
-    var data2 = [];
-    for (var i = 0; i < rlData[2].data.length; i++) {
-      data2.push(rlData[2].data[i].y);
+    let anoArr = [];
+    for (let i = 0; i < rlData.length; i++) {
+      if (rlData[i].data.length > 0) {
+        anoArr[i] = {
+          x: new Date(rlData[i].data[rlData[i].data.length - 1].x).getTime(),
+          y: rlData[i].data[rlData[i].data.length - 1].y,
+          marker: {
+            size: 6,
+            strokeColor: chartData.color[i],
+          },
+          label: {
+            offsetX: -20,
+            style: {
+              color: "#fff",
+              background: chartData.color[i],
+            },
+            text:
+              (rlData[i].data[rlData[i].data.length - 1].y / 1000).toFixed(2) +
+              "k",
+          },
+        };
+        if (i > 0) {
+          anoArr[i]["y"] += anoArr[i - 1]["y"];
+        }
+      }
     }
 
     var options = {
+      annotations: {
+        points: anoArr,
+      },
       series: [
         {
-          data: data0,
+          data: rlData[0].data,
           name: rlData[0].name,
         },
         {
-          data: data1,
+          data: rlData[1].data,
           name: rlData[1].name,
         },
         {
-          data: data2,
+          data: rlData[2].data,
           name: rlData[2].name,
         },
       ],
+      noData: {
+        text: "No Data",
+      },
       chart: {
-        height: 190,
+        height: "100%",
         type: "line",
+        background: "transparent",
         zoom: {
           enabled: false,
+        },
+        toolbar: {
+          show: false,
         },
       },
       dataLabels: {
@@ -174,19 +215,21 @@ $(document).ready(function () {
       },
       stroke: {
         color: "#0096FF",
-        width: [2, 2, 2],
+        width: 2.5,
         curve: "smooth",
       },
-      tooltip: {},
-      markers: {
-        size: 0,
-        hover: {
-          sizeOffset: 6,
+      grid: {
+        borderColor: "#555",
+      },
+      tooltip: {
+        shared: true,
+        intersect: false,
+        x: {
+          format: "dd/MM HH:mm",
         },
+        y: {},
       },
-      toolbar: {
-        show: false,
-      },
+
       yaxis: {
         color: "#000",
         tickAmount: 6,
@@ -201,18 +244,19 @@ $(document).ready(function () {
         },
       },
       xaxis: {
-        categories: ["16:07:00"],
-        tickAmount: 1,
+        type: "datetime",
         labels: {
-          align: "center",
-          offsetX: 0,
-        },
-        axisTicks: {
-          show: false, // Ẩn phân vạch trục x
+          datetimeUTC: false,
+          datetimeFormatter: {
+            year: "yyyy",
+            month: "MM/yy",
+            day: "dd/MM",
+            hour: "HH:mm",
+          },
         },
       },
       grid: {
-        borderColor: "#f1f1f1",
+        borderColor: "#555",
       },
     };
 
