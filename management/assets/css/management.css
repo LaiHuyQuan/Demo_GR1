@@ -132,4 +132,5 @@ th {
   justify-content: space-between;
   flex-direction: row;
   padding: 5px;
+  padding-bottom: 3vh !important;
 }
