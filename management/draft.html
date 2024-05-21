@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./assets/css/management.css" />
+    <link rel="stylesheet" href="./assets/css/app-dark.css" />
+    <link rel="stylesheet" href="./assets/css/app.css" />
+    <link rel="stylesheet" href="./assets/css/iconly.css" />
+
+    <script
+      src="https://kit.fontawesome.com/2878e6014d.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+
+  </head>
+  <body>
+    <div id="app">
+      <div id="main" class="layout-horizontal">
+        <header>
+          <div class="header-top">
+            <div class="container">
+              <nav class="main-navbar">
+                <div class="container">
+                  <img src="./assets/img/logo.png" alt="">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="#" class="menu-link">
+                        <span><i class="fa-solid fa-sitemap"></i> Quy trình</span>
+                      </a>
+                    </li>
+    
+                    <li class="menu-item">
+                      <a href="#" class="menu-link">
+                        <span><i class="fa-solid fa-bolt-lightning"></i> Điện</span>
+                      </a>
+                    </li>
+    
+                    <li class="menu-item">
+                      <a href="#" class="menu-link">
+                        <span><i class="fa-solid fa-wind"></i> Khí</span>
+                      </a>
+                    </li>
+    
+                    <li class="menu-item">
+                      <a href="#" class="menu-link">
+                        <span><i class="fa-solid fa-person-digging"></i> Than</span
+                        >
+                      </a>
+                    </li>
+    
+                    <li class="menu-item">
+                      <a href="#" class="menu-link">
+                        <span><i class="fa-solid fa-sd-card"></i> ISO50001</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+                <div class="header-top-right">
+                    <div class="dropdown">
+                        <a href="#" id="topbarUserDropdown" class="user-dropdown d-flex align-items-center dropend dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="avatar avatar-md2" >
+                                <img src="./assets/compiled/jpg/1.jpg" alt="Avatar">
+                            </div>
+                            <div class="text">
+                                <h6 class="user-dropdown-name">John Ducky</h6>
+                                <p class="user-dropdown-status text-sm text-muted">Member</p>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-lg" aria-labelledby="topbarUserDropdown">
+                          <li><a class="dropdown-item" href="#">My Account</a></li>
+                          <li><a class="dropdown-item" href="#">Settings</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="auth-login.html">Logout</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Burger button responsive -->
+                    <a href="#" class="burger-btn d-block d-xl-none">
+                        <i class="bi bi-justify fs-3"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        </header>
+
+        <div class="content-wrapper container">
+          <div class="page-heading">
+            <li class="breadcrumb-item active" aria-current="page">NHÀ MÁY VLXD</li>
+          </div>
+          <div class="page-content1">
+            <div class="left-block">
+              <div class="" style="border-radius: 10px;
+              background-color: #1e1e2d;">
+                <i class="fa-solid fa-compress"></i>
+                <div class="d-flex align-items-center justify-content-center " id="diaSpace" style=" height: 80vh; overflow: hidden;">
+                  <div id="myholder"></div>
+                </div>
+            </div>
+            </div>
+            <div class="right-block">
+              <div class="top-row">
+                <div class="">
+                  <h6 class="card-title pl-1">NHÀ MÁY VLXD</h6>
+                <div class="col-12 table-block">
+                    <div class="col-8">
+                        <div class="table-responsive">
+                          <table class="table table-bordered table-striped mb-0 " style="text-align: center; width: 90%; margin-left: 5%">
+                              <thead>
+                                  <tr>
+                                      <th style="width: 40%;"></th>
+                                      <th style="width: 60%;">TB đóng cắt</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <td class="text-bold-500">Loại</td>
+                                      <td>MCCB</td>
+                                  </tr>
+                                  <tr>
+                                      <td class="text-bold-500">Iđm</td>
+                                      <td>1200A</td>
+                                  </tr>
+                                  <tr>
+                                      <td class="text-bold-500">In</td>
+                                      <td>85kA</td>
+                                  </tr>
+                                  <tr>
+                                      <td class="text-bold-500">Hãng</td>
+                                      <td>Huyndai</td>
+                                  </tr>
+                                  <tr>
+                                      <td class="text-bold-500">Dạng</td>
+                                      <td>1600AF</td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                    </div>
+                  <div class="col-4 center">
+                      <img style="display: block; width: 90%; padding-left:5%" src="./assets/img/test9.png" alt="">
+                    </div>
+                </div>
+                </div>
+              </div>
+              <div class="bot-row">
+                <div class="">
+                  <div class="table-responsive table-bot" >
+                    <table class="table table-bordered table-striped mb-0" style="text-align: center;">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Pha A</th>
+                                <th>Pha B</th>
+                                <th>Pha C</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="font-weight: bold;">U</td>
+                                <td>220.3</td>
+                                <td >220.3</td>
+                                <td>220.3</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">I</td>
+                                <td>845</td>
+                                <td >896</td>
+                                <td>856</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">P</td>
+                                <td>230</td>
+                                <td >245</td>
+                                <td>289</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Pf</td>
+                                <td>0.96</td>
+                                <td >0.93</td>
+                                <td>0.95</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Q</td>
+                                <td>-</td>
+                                <td >-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                              <td style="font-weight: bold;">T</td>
+                              <td colspan="3">45*C</td>
+                            </tr>
+                            <tr>
+                             <td style="font-weight: bold;">STT</td>
+                             <td colspan="2">ON</td>
+                             <td >OFF</td>
+                           </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="page-content" style="padding-bottom: 5vh !important">
+            <section class="row" style="height: 85vh; overflow:hidden">
+              <div class="col-12 col-lg-6" > 
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="card">
+                          <i class="fa-solid fa-compress"></i>
+                          <div class="d-flex align-items-center justify-content-center " id="diaSpace" style=" height: 80vh; overflow: hidden;">
+                            <div id="myholder"></div>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-12 col-lg-6" style="display: flex; flex-direction:column; justify-content:space-between">
+                <div class="row" style="height: 40vh; padding-bottom: 20px">
+                  <div class="col-12">
+                    <div class="card">
+                      <h6 class="card-title pl-1">NHÀ MÁY VLXD</h6>
+                    <div class="col-12 table-block">
+                        <div class="col-8">
+                            <div class="table-responsive">
+                              <table class="table table-bordered table-striped mb-0 " style="text-align: center; width: 90%; margin-left: 5%">
+                                  <thead>
+                                      <tr>
+                                          <th style="width: 40%;"></th>
+                                          <th style="width: 60%;">TB đóng cắt</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr>
+                                          <td class="text-bold-500">Loại</td>
+                                          <td>MCCB</td>
+                                      </tr>
+                                      <tr>
+                                          <td class="text-bold-500">Iđm</td>
+                                          <td>1200A</td>
+                                      </tr>
+                                      <tr>
+                                          <td class="text-bold-500">In</td>
+                                          <td>85kA</td>
+                                      </tr>
+                                      <tr>
+                                          <td class="text-bold-500">Hãng</td>
+                                          <td>Huyndai</td>
+                                      </tr>
+                                      <tr>
+                                          <td class="text-bold-500">Dạng</td>
+                                          <td>1600AF</td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                        </div>
+                      <div class="col-4 center">
+                          <img style="display: block; width: 90%; padding-left:5%" src="./assets/img/test9.png" alt="">
+                        </div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" style="height: 40vh;">
+                  <div class="col-12">
+                    <div class="card">
+                      <div class="table-responsive table-bot" >
+                        <table class="table table-bordered table-striped mb-0" style="text-align: center;">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Pha A</th>
+                                    <th>Pha B</th>
+                                    <th>Pha C</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="font-weight: bold;">U</td>
+                                    <td>220.3</td>
+                                    <td >220.3</td>
+                                    <td>220.3</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;">I</td>
+                                    <td>845</td>
+                                    <td >896</td>
+                                    <td>856</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;">P</td>
+                                    <td>230</td>
+                                    <td >245</td>
+                                    <td>289</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;">Pf</td>
+                                    <td>0.96</td>
+                                    <td >0.93</td>
+                                    <td>0.95</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;">Q</td>
+                                    <td>-</td>
+                                    <td >-</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                  <td style="font-weight: bold;">T</td>
+                                  <td colspan="3">45*C</td>
+                                </tr>
+                                <tr>
+                                 <td style="font-weight: bold;">STT</td>
+                                 <td colspan="2">ON</td>
+                                 <td >OFF</td>
+                               </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+            </section>
+          </div> -->
+        </div>
+      </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@joint/core@4.0.1/dist/joint.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <script src="./assets/js/app.js"></script>
+    <script src="./assets/js/element.js"></script>
+    <script src="./assets/js/management.js"></script>
+    <script src="./assets/js/chart.js"></script>
+    <script src="./assets/js/api.js"></script>
+    <script src="./assets/js/diagram.js"></script>
+  </body>
+</html>

@@ -1,6 +1,9 @@
 var diaData;
 var heatmapData;
 var chartData;
+var phaseColor = ["#ff3838", "#fff200", "#18dcff"];
+var c1name = ["Pha A", "Pha B", "Pha C"];
+var lineChart = {};
 $(document).ready(function () {
   async function fetchLayoutData() {
     try {
@@ -54,9 +57,30 @@ $(document).ready(function () {
         dataType: "json",
       });
       chartData = response;
-      renderLoadFactor(chartData.barData);
-      renderRealtime(chartData.curr, "current");
-      renderRealtime(chartData.power, "power");
+      renderBarChart({
+        data: chartData.barData,
+        name: c1name,
+        color: chartData.color,
+        stack: false,
+        horizontal: false,
+        id: "c1",
+      });
+      renderRTLineChart({
+        data: chartData.curr,
+        name: "curr",
+        type: "I",
+        color: phaseColor,
+        stack: false,
+        id: "c2",
+      });
+      renderRTLineChart({
+        data: chartData.power,
+        name: "curr",
+        type: "P",
+        color: phaseColor,
+        stack: false,
+        id: "c3",
+      });
     } catch (error) {
       console.error("Lỗi khi gửi yêu cầu:", error);
     }
@@ -72,30 +96,36 @@ $(document).ready(function () {
     }
   }
 
-  function renderLoadFactor(data) {
-    var options = {
+  function doConverElectricValue(value, type) {
+    if (type == "I") {
+      return value / 1000 + "kA";
+    } else {
+      return value / 1000 + "kW";
+    }
+  }
+
+  renderBarChart = ({
+    data = [],
+    name = [],
+    color = phaseColor,
+    stack = false,
+    horizontal = false,
+    id = "c1",
+  } = {}) => {
+    let optionsBar = {
       series: [
         {
-          data: [
-            {
-              x: "Pha A",
-              y: data[0].toFixed(2),
-            },
-            {
-              x: "Pha B",
-              y: data[1].toFixed(2),
-            },
-            {
-              x: "Pha C",
-              y: data[2].toFixed(2),
-            },
-          ],
+          data: data,
         },
       ],
-
+      theme: {
+        mode: "dark",
+      },
       chart: {
-        height: "100%",
+        height: $("#" + id).height() - 15,
         type: "bar",
+        id: id,
+        stacked: stack,
         background: "transparent",
         toolbar: {
           show: false,
@@ -111,8 +141,12 @@ $(document).ready(function () {
       plotOptions: {
         bar: {
           borderRadius: 4,
+          horizontal: horizontal,
           distributed: true,
         },
+      },
+      xaxis: {
+        categories: name,
       },
       grid: {
         borderColor: "#555",
@@ -134,113 +168,125 @@ $(document).ready(function () {
       legend: {
         show: false,
       },
+      colors: color,
       yaxis: {
+        // forceNiceScale: true,
         decimalsInFloat: 1,
         min: 0,
         max: 120,
         tickAmount: 6,
         forceNiceScale: false,
+        // labels:
+        // {
+        //     formatter: function (value) {
+        //         return (value).toFixed(1) + "%";
+        //     }
+        // },
       },
     };
+    if (horizontal) {
+      optionsBar.xaxis.labels = {
+        formatter: function (value) {
+          return value.toFixed(1) + "%";
+        },
+      };
+    } else {
+      optionsBar.yaxis.labels = {
+        formatter: function (value) {
+          return value.toFixed(1) + "%";
+        },
+      };
+    }
+    if (lineChart[id] == undefined) {
+      lineChart[id] = new ApexCharts(
+        document.querySelector("#" + id),
+        optionsBar
+      );
+      lineChart[id].render();
+    } else {
+      //
+      ApexCharts.exec(id, "updateOptions", { ...optionsBar }, false, true);
+    }
+  };
 
-    var Loadfactor = new ApexCharts(
-      document.querySelector("#Loadfactor"),
-      options
-    );
-    Loadfactor.render();
-  }
-
-  function renderRealtime(rlData, id) {
+  renderRTLineChart = ({
+    data = [],
+    name = [],
+    type = "I",
+    color = phaseColor,
+    stack = false,
+    id = "c2",
+  } = {}) => {
     let anoArr = [];
-    for (let i = 0; i < rlData.length; i++) {
-      if (rlData[i].data.length > 0) {
-        anoArr[i] = {
-          x: new Date(rlData[i].data[rlData[i].data.length - 1].x).getTime(),
-          y: rlData[i].data[rlData[i].data.length - 1].y,
-          marker: {
-            size: 6,
-            strokeColor: chartData.color[i],
-          },
-          label: {
-            offsetX: -20,
-            style: {
-              color: "#fff",
-              background: chartData.color[i],
+    if (data[0]["data"].length > 0) {
+      for (let i = 0; i < data.length; i++) {
+        if (data[i]["data"].length > 0) {
+          anoArr[i] = {
+            x: new Date(
+              data[i]["data"][data[i]["data"].length - 1]["x"]
+            ).getTime(),
+            y: data[i]["data"][data[i]["data"].length - 1]["y"],
+            marker: {
+              size: 6,
+              strokeColor: color[i],
             },
-            text:
-              (rlData[i].data[rlData[i].data.length - 1].y / 1000).toFixed(2) +
-              "k",
-          },
-        };
-        if (i > 0) {
-          anoArr[i]["y"] += anoArr[i - 1]["y"];
+            label: {
+              offsetX: -20,
+              borderColor: color[i],
+              style: {
+                color: "#fff",
+                background: color[i],
+              },
+              text: doConverElectricValue(
+                data[i]["data"][data[i]["data"].length - 1]["y"].toFixed(1),
+                type
+              ),
+            },
+          };
+          if (stack && i > 0) {
+            anoArr[i]["y"] += anoArr[i - 1]["y"];
+          }
         }
       }
     }
 
-    var options = {
+    let optionsLine = {
       annotations: {
         points: anoArr,
       },
-      series: [
-        {
-          data: rlData[0].data,
-          name: rlData[0].name,
-        },
-        {
-          data: rlData[1].data,
-          name: rlData[1].name,
-        },
-        {
-          data: rlData[2].data,
-          name: rlData[2].name,
-        },
-      ],
+      colors: color,
+      series: data,
+      theme: {
+        mode: "dark",
+      },
       noData: {
         text: "No Data",
       },
+      stroke: { width: 2.5, curve: "smooth" },
       chart: {
-        height: "100%",
-        type: "line",
-        background: "transparent",
-        zoom: {
+        id: id,
+        stacked: stack,
+        animations: {
           enabled: false,
         },
+
+        type: "line",
+        background: "transparent",
+        height: $("#" + id).height() - 15,
         toolbar: {
           show: false,
         },
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        color: "#0096FF",
-        width: 2.5,
-        curve: "smooth",
-      },
-      grid: {
-        borderColor: "#555",
-      },
-      tooltip: {
-        shared: true,
-        intersect: false,
-        x: {
-          format: "dd/MM HH:mm",
+        zoom: {
+          enabled: false,
         },
-        y: {},
       },
-
       yaxis: {
-        color: "#000",
-        tickAmount: 6,
+        // forceNiceScale: true,
+        decimalsInFloat: 1,
         labels: {
-          formatter: function (val) {
-            if (id == "power") {
-              return (val / 1000).toFixed(1) + "kW";
-            } else {
-              return val.toFixed(1) + "A";
-            }
-          },
+          // formatter: function (value) {
+          //     return (value / 1000).toFixed(1) + " kW";
+          // }
         },
       },
       xaxis: {
@@ -255,14 +301,64 @@ $(document).ready(function () {
           },
         },
       },
+      dataLabels: {
+        enabled: false,
+      },
       grid: {
         borderColor: "#555",
       },
+      tooltip: {
+        shared: true,
+        intersect: false,
+        x: {
+          format: "dd/MM HH:mm",
+        },
+        y: {},
+      },
     };
 
-    var current = new ApexCharts(document.querySelector("#" + id), options);
-    current.render();
-  }
+    if (type == "I") {
+      optionsLine.yaxis.labels = {
+        formatter: function (value) {
+          return value.toFixed(1) + " A";
+        },
+      };
+      optionsLine.tooltip.y = {
+        formatter: function (value) {
+          return value.toFixed(1) + " A";
+        },
+      };
+    } else if (type == "P") {
+      optionsLine.yaxis.labels = {
+        formatter: function (value) {
+          if (value < 1000) {
+            return value.toFixed(1) + " W";
+          } else {
+            return (value / 1000).toFixed(1) + " kW";
+          }
+        },
+      };
+      optionsLine.tooltip.y = {
+        formatter: function (value) {
+          if (value < 1000) {
+            return value.toFixed(1) + " W";
+          } else {
+            return (value / 1000).toFixed(1) + " kW";
+          }
+        },
+      };
+    }
+    if (lineChart[id] == undefined) {
+      lineChart[id] = new ApexCharts(
+        document.querySelector("#" + id),
+        optionsLine
+      );
+      lineChart[id].render();
+    } else {
+      //
+      ApexCharts.exec(id, "updateOptions", { ...optionsLine }, false, true);
+    }
+  };
 
   function removeCell(cellId) {
     var cell = graph.getCell(cellId);
