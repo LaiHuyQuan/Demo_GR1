@@ -1,35 +1,157 @@
 {
   "rs": [
     { "icon": { "width": 1700, "xlinkHref": "public/dia/main.svg" } },
-    { "name": { "text": "M\u00e0i CNG" } },
     {
+      "i": { "fill": "#0acf32", "text": "597.0 A" },
+      "name": { "text": "M\u00e0i CNG" },
+      "p": { "fill": "#0acf32", "text": "231.3 kW" },
+      "ptt": { "text": "(1056 kW)" }
+    },
+    {
+      "i": { "fill": "#0acf32", "text": "118.9 A" },
       "name": {
         "text": "Tr\u1ea1m n\u00f3ng, h\u1ea7m s\u1ea5y\nDC1, C.L Nghi\u1ec1n "
-      }
+      },
+      "p": { "fill": "#0acf32", "text": "43.0 kW" },
+      "ptt": { "text": "(660 kW)" }
     },
-    { "name": { "text": "M\u00e1y \u00e9p sacmi\n-keda" } },
-    { "name": { "text": "Chi\u1ebfu s\u00e1ng PX1\n v\u0103n ph\u00f2ng" } },
-    { "name": { "text": "Kh\u00ed than" } },
-    { "name": { "text": "L\u00f2 nung bisquits\n - DC1" } },
-    { "name": { "text": "Tr\u1ea1m kh\u00ed n\u00e9n " } },
-    { "name": { "text": "L\u00f2 nung men DC1" } },
-    { "name": { "text": "Nghi\u1ec1n men" } },
-    { "name": { "text": "S\u1ea5y phun" } },
-    { "name": { "text": "D\u00e2y chuy\u1ec1n DC1" } },
-    { "name": { "text": "Nghi\u1ec1n x\u01b0\u01a1ng" } },
-    { "name": { "text": "L\u00f2 2 t\u1ea7ng" } },
-    { "name": { "text": "M\u00e1y nghi\u1ec1n 60T" } },
-    { "name": { "text": "Nghi\u1ec1n x\u01b0\u01a1ng" } },
-    { "name": { "text": "M\u00e1y \u00e9p litan" } },
-    { "name": { "text": "N\u00e9n kh\u00ed b\u01a1m" } },
-    { "name": { "text": "S\u1ea5y phun" } },
-    { "name": { "text": "L\u00f2 ngu\u1ed9i" } },
-    { "name": { "text": "Nghi\u1ec1n men" } },
-    { "name": { "text": "L\u00f2 nung m\u00e1y m\u00e0i " } },
-    { "name": { "text": "ME.KEDA" } },
-    { "name": { "text": "D\u00e2y chuy\u1ec1n men" } },
-    {},
-    {},
-    {}
+    {
+      "i": { "fill": "#0acf32", "text": "177.5 A" },
+      "name": { "text": "M\u00e1y \u00e9p sacmi\n-keda" },
+      "p": { "fill": "#0acf32", "text": "122.4 kW" },
+      "ptt": { "text": "(660 kW)" }
+    },
+    {
+      "i": { "fill": "#0acf32", "text": "33.3 A" },
+      "name": { "text": "Chi\u1ebfu s\u00e1ng PX1\n v\u0103n ph\u00f2ng" },
+      "p": { "fill": "#0acf32", "text": "22.3 kW" },
+      "ptt": { "text": "(165 kW)" }
+    },
+    {
+      "i": { "fill": "#0acf32", "text": "101.7 A" },
+      "name": { "text": "Kh\u00ed than" },
+      "p": { "fill": "#0acf32", "text": "64.7 kW" },
+      "ptt": { "text": "(416 kW)" }
+    },
+    {
+      "i": { "fill": "#0acf32", "text": "265.4 A" },
+      "name": { "text": "L\u00f2 nung bisquits\n - DC1" },
+      "p": { "fill": "#0acf32", "text": "168.9 kW" },
+      "ptt": { "text": "(416 kW)" }
+    },
+    {
+      "i": { "fill": "#0acf32", "text": "108.1 A" },
+      "name": { "text": "Tr\u1ea1m kh\u00ed n\u00e9n " },
+      "p": { "fill": "#0acf32", "text": "69.7 kW" },
+      "ptt": { "text": "(264 kW)" }
+    },
+    {
+      "i": { "fill": "#0acf32", "text": "135.8 A" },
+      "name": { "text": "L\u00f2 nung men DC1" },
+      "p": { "fill": "#0acf32", "text": "82.3 kW" },
+      "ptt": { "text": "(416 kW)" }
+    },
+    {
+      "i": { "fill": "#0acf32", "text": "0.7 A" },
+      "name": { "text": "Nghi\u1ec1n men" },
+      "p": { "fill": "#0acf32", "text": "0.0 W" },
+      "ptt": { "text": "(660 kW)" }
+    },
+    {
+      "i": { "fill": "#0acf32", "text": "191.7 A" },
+      "name": { "text": "S\u1ea5y phun" },
+      "p": { "fill": "#0acf32", "text": "121.0 kW" },
+      "ptt": { "text": "(264 kW)" }
+    },
+    {
+      "i": { "fill": "#0acf32", "text": "158.4 A" },
+      "name": { "text": "D\u00e2y chuy\u1ec1n DC1" },
+      "p": { "fill": "#0acf32", "text": "69.0 kW" },
+      "ptt": { "text": "(416 kW)" }
+    },
+    {
+      "i": { "fill": "#0acf32", "text": "449.7 A" },
+      "name": { "text": "Nghi\u1ec1n x\u01b0\u01a1ng" },
+      "p": { "fill": "#0acf32", "text": "278.7 kW" },
+      "ptt": { "text": "(1056 kW)" }
+    },
+    {
+      "i": { "fill": "#0acf32", "text": "428.4 A" },
+      "name": { "text": "L\u00f2 2 t\u1ea7ng" },
+      "p": { "fill": "#0acf32", "text": "285.2 kW" },
+      "ptt": { "text": "(416 kW)" }
+    },
+    {
+      "i": { "fill": "#0acf32", "text": "312.3 A" },
+      "name": { "text": "M\u00e1y nghi\u1ec1n 60T" },
+      "p": { "fill": "#0acf32", "text": "200.5 kW" },
+      "ptt": { "text": "(660 kW)" }
+    },
+    {
+      "i": { "fill": "#0acf32", "text": "392.6 A" },
+      "name": { "text": "Nghi\u1ec1n x\u01b0\u01a1ng" },
+      "p": { "fill": "#0acf32", "text": "259.5 kW" },
+      "ptt": { "text": "(792 kW)" }
+    },
+    {
+      "i": { "fill": "#0acf32", "text": "80.0 A" },
+      "name": { "text": "M\u00e1y \u00e9p litan" },
+      "p": { "fill": "#0acf32", "text": "55.7 kW" },
+      "ptt": { "text": "(416 kW)" }
+    },
+    {
+      "i": { "fill": "#0acf32", "text": "76.8 A" },
+      "name": { "text": "N\u00e9n kh\u00ed b\u01a1m" },
+      "p": { "fill": "#0acf32", "text": "49.2 kW" },
+      "ptt": { "text": "(165 kW)" }
+    },
+    {
+      "i": { "fill": "#0acf32", "text": "153.2 A" },
+      "name": { "text": "S\u1ea5y phun" },
+      "p": { "fill": "#0acf32", "text": "91.1 kW" },
+      "ptt": { "text": "(416 kW)" }
+    },
+    {
+      "i": { "fill": "#0acf32", "text": "106.8 A" },
+      "name": { "text": "L\u00f2 ngu\u1ed9i" },
+      "p": { "fill": "#0acf32", "text": "69.2 kW" },
+      "ptt": { "text": "(416 kW)" }
+    },
+    {
+      "i": { "fill": "#0acf32", "text": "143.6 A" },
+      "name": { "text": "Nghi\u1ec1n men" },
+      "p": { "fill": "#0acf32", "text": "87.6 kW" },
+      "ptt": { "text": "(792 kW)" }
+    },
+    {
+      "i": { "fill": "#0acf32", "text": "277.6 A" },
+      "name": { "text": "L\u00f2 nung m\u00e1y m\u00e0i " },
+      "p": { "fill": "#0acf32", "text": "183.8 kW" },
+      "ptt": { "text": "(792 kW)" }
+    },
+    {
+      "i": { "fill": "#0acf32", "text": "190.8 A" },
+      "name": { "text": "ME.KEDA" },
+      "p": { "fill": "#0acf32", "text": "132.9 kW" },
+      "ptt": { "text": "(792 kW)" }
+    },
+    {
+      "i": { "fill": "#0acf32", "text": "131.3 A" },
+      "name": { "text": "D\u00e2y chuy\u1ec1n men" },
+      "p": { "fill": "#0acf32", "text": "54.6 kW" },
+      "ptt": { "text": "(264 kW)" }
+    },
+    {
+      "i": { "fill": "#0acf32", "text": "879.5 A" },
+      "p": { "fill": "#0acf32", "text": "2.6 kW" }
+    },
+    {
+      "i": { "fill": "#0acf32", "text": "1.88 kA" },
+      "p": { "fill": "#0acf32", "text": "5.6 kW" }
+    },
+    {
+      "i": { "fill": "#0acf32", "text": "1.85 kA" },
+      "p": { "fill": "#0acf32", "text": "5.6 kW" }
+    }
   ]
 }

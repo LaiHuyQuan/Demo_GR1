@@ -2,6 +2,7 @@ var heatmapColor = "#fff";
 var consChart;
 var lineChart = [];
 $(document).ready(function () {
+  // heatmap
   renderHeatmapChart = ({
     data = [],
     colorRange = heatmapColor,
@@ -186,6 +187,270 @@ $(document).ready(function () {
       ApexCharts.exec(id, "updateOptions", { ...optionsHeatmap }, false, true);
     }
   };
+  // barchart
+  renderBarChart = ({
+    data = [],
+    name = [],
+    color = phaseColor,
+    stack = false,
+    horizontal = false,
+    id = "c1",
+  } = {}) => {
+    let optionsBar = {
+      series: [
+        {
+          data: data,
+        },
+      ],
+      theme: {
+        mode: "dark",
+      },
+      chart: {
+        height: $("#" + id).height(),
+        type: "bar",
+        id: id,
+        stacked: stack,
+        background: "transparent",
+        toolbar: {
+          show: false,
+        },
+      },
+      dataLabels: {
+        enabled: true,
+        enabledOnSeries: undefined,
+        formatter: function (val, opts) {
+          return val.toFixed(2) + "%";
+        },
+      },
+      plotOptions: {
+        bar: {
+          borderRadius: 4,
+          horizontal: horizontal,
+          distributed: true,
+        },
+      },
+      xaxis: {
+        categories: name,
+      },
+      grid: {
+        borderColor: "#555",
+      },
+      tooltip: {
+        theme: "dark",
+
+        x: {
+          show: true,
+        },
+        y: {
+          title: {
+            formatter: function () {
+              return "";
+            },
+          },
+        },
+      },
+      legend: {
+        show: false,
+      },
+      colors: color,
+      yaxis: {
+        // forceNiceScale: true,
+        decimalsInFloat: 1,
+        min: 0,
+        max: 120,
+        tickAmount: 6,
+        forceNiceScale: false,
+        // labels:
+        // {
+        //     formatter: function (value) {
+        //         return (value).toFixed(1) + "%";
+        //     }
+        // },
+      },
+    };
+    if (horizontal) {
+      optionsBar.xaxis.labels = {
+        formatter: function (value) {
+          return value.toFixed(1) + "%";
+        },
+      };
+    } else {
+      optionsBar.yaxis.labels = {
+        formatter: function (value) {
+          return value.toFixed(1) + "%";
+        },
+      };
+    }
+    if (lineChart[id] == undefined) {
+      lineChart[id] = new ApexCharts(
+        document.querySelector("#" + id),
+        optionsBar
+      );
+      lineChart[id].render();
+    } else {
+      //
+      ApexCharts.exec(id, "updateOptions", { ...optionsBar }, false, true);
+    }
+  };
+  // RTLineChart
+  renderRTLineChart = ({
+    data = [],
+    name = [],
+    type = "I",
+    color = phaseColor,
+    stack = false,
+    id = "c2",
+  } = {}) => {
+    let anoArr = [];
+    if (data[0]["data"].length > 0) {
+      for (let i = 0; i < data.length; i++) {
+        if (data[i]["data"].length > 0) {
+          anoArr[i] = {
+            x: new Date(
+              data[i]["data"][data[i]["data"].length - 1]["x"]
+            ).getTime(),
+            y: data[i]["data"][data[i]["data"].length - 1]["y"],
+            marker: {
+              size: 6,
+              strokeColor: color[i],
+            },
+            label: {
+              offsetX: -20,
+              borderColor: color[i],
+              style: {
+                color: "#fff",
+                background: color[i],
+              },
+              text: doConverElectricValue(
+                data[i]["data"][data[i]["data"].length - 1]["y"].toFixed(1),
+                type
+              ),
+            },
+          };
+          if (stack && i > 0) {
+            anoArr[i]["y"] += anoArr[i - 1]["y"];
+          }
+        }
+      }
+    }
+
+    let optionsLine = {
+      annotations: {
+        points: anoArr,
+      },
+      colors: color,
+      series: data,
+      theme: {
+        mode: "dark",
+      },
+      noData: {
+        text: "No Data",
+      },
+      stroke: { width: 2.5, curve: "smooth" },
+      chart: {
+        id: id,
+        stacked: stack,
+        animations: {
+          enabled: false,
+        },
+
+        type: "line",
+        background: "transparent",
+        height: $("#" + id).height(),
+        toolbar: {
+          show: false,
+        },
+        zoom: {
+          enabled: false,
+        },
+      },
+      yaxis: {
+        // forceNiceScale: true,
+        decimalsInFloat: 1,
+        labels: {
+          // formatter: function (value) {
+          //     return (value / 1000).toFixed(1) + " kW";
+          // }
+        },
+      },
+      xaxis: {
+        type: "datetime",
+        labels: {
+          datetimeUTC: false,
+          datetimeFormatter: {
+            year: "yyyy",
+            month: "MM/yy",
+            day: "dd/MM",
+            hour: "HH:mm",
+          },
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      grid: {
+        borderColor: "#555",
+      },
+      tooltip: {
+        shared: true,
+        intersect: false,
+        x: {
+          format: "dd/MM HH:mm",
+        },
+        y: {},
+      },
+    };
+
+    if (type == "I") {
+      optionsLine.yaxis.labels = {
+        formatter: function (value) {
+          return value.toFixed(1) + " A";
+        },
+      };
+      optionsLine.tooltip.y = {
+        formatter: function (value) {
+          return value.toFixed(1) + " A";
+        },
+      };
+    } else if (type == "P") {
+      optionsLine.yaxis.labels = {
+        formatter: function (value) {
+          if (value < 1000) {
+            return value.toFixed(1) + " W";
+          } else {
+            return (value / 1000).toFixed(1) + " kW";
+          }
+        },
+      };
+      optionsLine.tooltip.y = {
+        formatter: function (value) {
+          if (value < 1000) {
+            return value.toFixed(1) + " W";
+          } else {
+            return (value / 1000).toFixed(1) + " kW";
+          }
+        },
+      };
+    }
+    if (lineChart[id] == undefined) {
+      lineChart[id] = new ApexCharts(
+        document.querySelector("#" + id),
+        optionsLine
+      );
+      lineChart[id].render();
+    } else {
+      //
+      ApexCharts.exec(id, "updateOptions", { ...optionsLine }, false, true);
+    }
+  };
+
+  function doConverElectricValue(value, type) {
+    if (type == "I") {
+      return (value / 1000).toFixed(2) + "kA";
+    } else {
+      return (value / 1000).toFixed(2) + "kW";
+    }
+  }
   // realtime chart
   getDataForRealtimeChart = (Arr, type, index = 0) => {
     if (type == "diaMBAData") {

@@ -1,0 +1,185 @@
+{
+  "total": [
+    {
+      "attrs": {},
+      "id": "a1",
+      "position": { "x": 177, "y": 230 },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": "a27",
+
+      "position": { "x": 318, "y": 230 },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": "a3",
+
+      "position": { "x": 459, "y": 230 },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": "a4",
+
+      "position": { "x": 603, "y": 230 },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": "a5",
+
+      "position": { "x": 731, "y": 230 },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": "a6",
+
+      "position": { "x": 878, "y": 230 },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": "a7",
+
+      "position": { "x": 1015, "y": 230 },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": "a8",
+
+      "position": { "x": 1156, "y": 230 },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": "a9",
+
+      "position": { "x": 1291, "y": 230 },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": "a10",
+
+      "position": { "x": 1430, "y": 230 },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": "a11",
+
+      "position": { "x": 1573, "y": 230 },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": "a12",
+
+      "position": { "x": 56, "y": 825 },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": "a13",
+
+      "position": { "x": 198, "y": 825 },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": "a14",
+
+      "position": { "x": 435, "y": 825 },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": "a15",
+
+      "position": { "x": 573, "y": 825 },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": "a16",
+
+      "position": { "x": 701, "y": 825 },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": "a17",
+
+      "position": { "x": 837, "y": 825 },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": "a18",
+
+      "position": { "x": 969, "y": 825 },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": "a19",
+
+      "position": { "x": 1121, "y": 825 },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": "a20",
+
+      "position": { "x": 1263, "y": 825 },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": "a21",
+
+      "position": { "x": 1397, "y": 825 },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": "a22",
+
+      "position": { "x": 1527, "y": 825 },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": "a23",
+
+      "position": { "x": 1659, "y": 825 },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": "a24",
+
+      "position": { "x": 120, "y": 597 },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": "a25",
+
+      "position": { "x": 1040, "y": 599 },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": "a26",
+
+      "position": { "x": 870, "y": 99 },
+      "type": "examples.CustomDiaData"
+    }
+  ]
+}

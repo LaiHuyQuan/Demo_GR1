@@ -11,7 +11,9 @@ $(document).ready(function () {
 
     timer = setTimeout(() => {
       var cellId = $(this).attr("model-id");
+      if (cellId == 0) return;
       console.log("Cell được nhấn:", cellId);
+      hold();
       isLongPress = true;
     }, 300);
 
@@ -48,4 +50,11 @@ $(document).ready(function () {
     clearTimeout(timer);
     isLongPress = false;
   });
+
+  function hold() {
+    var myModal = new bootstrap.Modal(document.getElementById("Modal"), {
+      keyboard: false,
+    });
+    myModal.show();
+  }
 });
