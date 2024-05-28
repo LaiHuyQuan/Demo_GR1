@@ -3,12 +3,48 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link
+      rel="shortcut icon"
+      href="./icon/png/iot_cut.png"
+      type="image/x-icon"
+    />
+    <link rel="shortcut icon" href="publiciot_cut.png" type="image/png" />
+    <title>Energy monitoring System</title>
 
-    <!-- <link rel="stylesheet" href="./assets/css/management.css" /> -->
-    <link rel="stylesheet" href="./assets/compiled/css/app-dark.css" />
+    <script src="./js/dayjs.min.js"></script>
+    <script>
+      dayjs().format();
+    </script>
+
     <link rel="stylesheet" href="./assets/compiled/css/app.css" />
+    <link rel="stylesheet" href="./assets/compiled/css/app-dark.css" />
     <link rel="stylesheet" href="./assets/compiled/css/iconly.css" />
+
+    <!-- <link rel="stylesheet" href="./mazer/assets/css/main/app.css" />
+  <link rel="stylesheet" href="./mazer/assets/css/main/app-dark.css" />
+  <link rel="stylesheet" href="./css/tree.css">
+  <script src="./mazer/assets/js/bootstrap.js"></script>
+  <script src="./mazer/assets/js/app.js"></script>
+  <script src="./mazer/assets/js/pages/horizontal-layout.js"></script>
+  <link rel="stylesheet" href="./mazer/assets/extensions/toastify-js/src/toastify.css" />
+  <script src="./mazer/assets/extensions/toastify-js/src/toastify.js"></script>
+  <script src="./mazer/assets/js/pages/toastify.js"></script> -->
+
+    <script src="./js/apexcharts.min.js"></script>
+    <script src="./js/mqttws31.js" type="text/javascript"></script>
+
+    <!-- <link rel="stylesheet" href="./mazer/assets/css/shared/iconly.css" /> -->
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script src="./js/lodash.js"></script>
+    <script src="./js/backbone.js"></script>
+    <script src="./js/joint.js"></script>
+    <script src="./js/flatpickr.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/dark.css" />
+    <script src="./js/npmcdn.com_flatpickr@4.6.13_dist_l10n_vn.js"></script>
+    <script src="js/monitoring.js"></script>
+    <script src="./js/v2/monitoring.js"></script>
+    <script src="./js/v2/mqtt.js"></script>
+    <script src="./js/v2/noti.js"></script>
 
     <script
       src="https://kit.fontawesome.com/2878e6014d.js"
@@ -19,24 +55,26 @@
       integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
       crossorigin="anonymous"
     ></script>
-
     <style>
       #myDiv.fullscreen {
         position: absolute;
-        top: 0.625rem;
-        bottom: 0.625rem;
-        left: 0.625rem;
-        right: 0.625rem;
+        top: 10px;
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
         z-index: 1000;
       }
 
       #diaSpace.fullscreen {
-        height: 10rem !important;
-        margin-top: 0.625rem;
+        height: 80vh !important;
+        margin-top: 5vh;
       }
     </style>
   </head>
-  <body>
+
+  <body class="dark">
+    <script src="./assets/static/js/initTheme.js"></script>
+
     <div id="app">
       <div id="main" class="layout-horizontal">
         <header class="mb-2">
@@ -45,7 +83,7 @@
               class="container-fluid d-flex justify-content-between align-items-center"
             >
               <div class="logo">
-                <a href="#"><img src="../../icon/png/logo.png" alt="Logo" /></a>
+                <a href="#"><img src="./icon/png/logo.png" alt="Logo" /></a>
               </div>
               <nav
                 class="main-navbar w-100 d-flex justify-content-evenly align-items-center"
@@ -101,7 +139,7 @@
                     aria-expanded="false"
                   >
                     <div class="avatar avatar-md2">
-                      <img src="../../icon//png/img_avatar.png" alt="Avatar" />
+                      <img src="./icon//png/img_avatar.png" alt="Avatar" />
                     </div>
                     <div class="text">
                       <h6 class="user-dropdown-name">Nhà máy</h6>
@@ -179,11 +217,11 @@
                 <div class="card">
                   <div class="card-content">
                     <div class="card-body">
-                      <h4 id="heatmapname" class="card-title">Nhà máy VLXD</h4>
+                      <h4 id="heatmapname" class="card-title">Carousel</h4>
                     </div>
                     <div class="card-body">
                       <div class="row">
-                        <div class="col-4">
+                        <div class="col-5">
                           <div
                             id="carouselExampleControls"
                             class="carousel slide"
@@ -192,23 +230,58 @@
                             <div class="carousel-inner">
                               <div class="carousel-item active">
                                 <img
-                                  src="./assets/compiled/png/test9.png"
+                                  src="public/IMG/Screenshot_1.png"
                                   class="d-block w-100"
                                   alt="..."
+                                  style="max-height: 30vh; object-fit: contain"
+                                />
+                              </div>
+                              <div class="carousel-item">
+                                <img
+                                  src="public/IMG/Screenshot_2.png"
+                                  class="d-block w-100"
+                                  alt="..."
+                                  style="max-height: 30vh; object-fit: contain"
                                 />
                               </div>
                             </div>
+                            <a
+                              class="carousel-control-prev"
+                              href="#carouselExampleControls"
+                              role="button"
+                              data-bs-slide="prev"
+                            >
+                              <span
+                                class="carousel-control-prev-icon"
+                                aria-hidden="true"
+                              ></span>
+                              <span class="visually-hidden">Previous</span>
+                            </a>
+                            <a
+                              class="carousel-control-next"
+                              href="#carouselExampleControls"
+                              role="button"
+                              data-bs-slide="next"
+                            >
+                              <span
+                                class="carousel-control-next-icon"
+                                aria-hidden="true"
+                              ></span>
+                              <span class="visually-hidden">Next</span>
+                            </a>
                           </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-7">
                           <p class="card-text">
-                            Welcome to our dynamic carousel, where innovation
-                            takes center stage. Take a captivating journey
-                            through our cutting-edge products, groundbreaking
-                            solutions, and the latest advancements in
-                            technology. Each slide invites you to discover
-                            something new and exciting, providing a glimpse into
-                            the future of innovation.
+                            Máy biến áp T3 được sử dụng để cung cấp điện cho hệ
+                            thống dây chuyền sản xuất gạch nung men và hệ thống
+                            nghiền vật liệu đầu vào cho toàn bộ nhà máy Integer
+                            interdum diam eleifend metus lacinia, quis gravida
+                            eros mollis. Fusce non sapien sit amet magna dapibus
+                            ultrices. Morbi tincidunt magna ex, eget faucibus
+                            sapien bibendum non. Duis a mauris ex. Ut finibus
+                            risus sed massa mattis porta. Aliquam sagittis massa
+                            et purus efficitur ultricies.
                           </p>
                         </div>
                       </div>
@@ -244,7 +317,6 @@
                               tabindex="-1"
                               >Thông số hoạt động</a
                             >
-
                             <a
                               class="nav-link"
                               id="v-pills-settings-tab"
@@ -268,39 +340,34 @@
                             >
                               <div class="table-responsive">
                                 <table
-                                  class="table mb-0"
-                                  style="
-                                    text-align: center;
-                                    width: 90%;
-                                    margin-left: 5%;
-                                  "
+                                  class="table table-hover mb-0 table-striped"
                                 >
                                   <thead>
                                     <tr>
-                                      <th style="width: 40%"></th>
-                                      <th style="width: 60%">TB đóng cắt</th>
+                                      <th>#</th>
+                                      <th>Máy biến áp</th>
                                     </tr>
                                   </thead>
                                   <tbody>
                                     <tr>
-                                      <td class="text-bold-500">Loại</td>
-                                      <td>MCCB</td>
+                                      <td class="text-bold-500">Tỉ số</td>
+                                      <td>22kV/0.4kV</td>
                                     </tr>
                                     <tr>
-                                      <td class="text-bold-500">Iđm</td>
-                                      <td>1200A</td>
+                                      <td class="text-bold-500">Công suất</td>
+                                      <td>200kVA</td>
                                     </tr>
                                     <tr>
-                                      <td class="text-bold-500">In</td>
-                                      <td>85kA</td>
+                                      <td class="text-bold-500">Un</td>
+                                      <td>27V</td>
                                     </tr>
                                     <tr>
-                                      <td class="text-bold-500">Hãng</td>
-                                      <td>Huyndai</td>
+                                      <td class="text-bold-500">Po</td>
+                                      <td>600W</td>
                                     </tr>
                                     <tr>
-                                      <td class="text-bold-500">Dạng</td>
-                                      <td>1600AF</td>
+                                      <td class="text-bold-500">Pn</td>
+                                      <td>1200W</td>
                                     </tr>
                                   </tbody>
                                 </table>
@@ -312,58 +379,76 @@
                               role="tabpanel"
                               aria-labelledby="v-pills-profile-tab"
                             >
-                              <div class="table-responsive table-bot">
+                              <div class="table-responsive">
                                 <table
-                                  class="table mb-0"
-                                  style="text-align: center"
+                                  class="table table-hover mb-0 table-striped"
                                 >
                                   <thead>
                                     <tr>
-                                      <th></th>
+                                      <th scope="col">#</th>
                                       <th>Pha A</th>
                                       <th>Pha B</th>
                                       <th>Pha C</th>
+                                      <th>Total</th>
                                     </tr>
                                   </thead>
                                   <tbody>
                                     <tr>
-                                      <td style="font-weight: bold">U</td>
+                                      <td class="text-bold-500" scope="row">
+                                        U
+                                      </td>
                                       <td>220.3</td>
-                                      <td>220.3</td>
-                                      <td>220.3</td>
+                                      <td>223.5</td>
+                                      <td>220.6</td>
+                                      <td>225.5</td>
                                     </tr>
                                     <tr>
-                                      <td style="font-weight: bold">I</td>
-                                      <td>845</td>
-                                      <td>896</td>
-                                      <td>856</td>
+                                      <td class="text-bold-500" scope="row">
+                                        I
+                                      </td>
+                                      <td>150</td>
+                                      <td>176</td>
+                                      <td>173</td>
+                                      <td>171</td>
                                     </tr>
                                     <tr>
-                                      <td style="font-weight: bold">P</td>
-                                      <td>230</td>
-                                      <td>245</td>
-                                      <td>289</td>
+                                      <td class="text-bold-500" scope="row">
+                                        P
+                                      </td>
+                                      <td>69.8</td>
+                                      <td>69.8</td>
+                                      <td>69.8</td>
+                                      <td>69.8</td>
                                     </tr>
                                     <tr>
-                                      <td style="font-weight: bold">Pf</td>
-                                      <td>0.96</td>
-                                      <td>0.93</td>
-                                      <td>0.95</td>
+                                      <td class="text-bold-500" scope="row">
+                                        Q
+                                      </td>
+                                      <td>15.3</td>
+                                      <td>15.3</td>
+                                      <td>15.3</td>
+                                      <td>15.3</td>
                                     </tr>
                                     <tr>
-                                      <td style="font-weight: bold">Q</td>
-                                      <td>-</td>
-                                      <td>-</td>
-                                      <td>-</td>
+                                      <td class="text-bold-500" scope="row">
+                                        H
+                                      </td>
+                                      <td
+                                        style="text-align: center"
+                                        colspan="4"
+                                      >
+                                        97%
+                                      </td>
                                     </tr>
+
                                     <tr>
-                                      <td style="font-weight: bold">T</td>
-                                      <td colspan="3">45*C</td>
-                                    </tr>
-                                    <tr>
-                                      <td style="font-weight: bold">STT</td>
-                                      <td colspan="2">ON</td>
-                                      <td>OFF</td>
+                                      <td class="text-bold-500">Fre</td>
+                                      <td
+                                        colspan="4"
+                                        style="text-align: center"
+                                      >
+                                        50.1Hz
+                                      </td>
                                     </tr>
                                   </tbody>
                                 </table>
@@ -373,67 +458,60 @@
                               class="tab-pane fade"
                               id="v-pills-settings"
                               role="tabpanel"
-                              aria-labelledby="v-pills-settings-tab"
+                              aria-labelledby="v-pills-messages-tab"
                             >
                               <div class="form-group has-icon-left">
-                                <label for="basicInput">Mật khẩu</label>
-                                <div class="input-group col-12">
-                                  <div class="position-relative">
+                                <label for="password-id-icon">Mật khẩu</label>
+                                <div class="position-relative">
+                                  <div class="input-group mb-3">
                                     <input
                                       type="password"
                                       class="form-control"
                                       placeholder="Password"
-                                      id="password-horizontal-icon"
+                                      id="password-id-icon"
                                     />
                                     <div class="form-control-icon">
                                       <i class="bi bi-lock"></i>
                                     </div>
+                                    <button
+                                      class="btn btn-primary"
+                                      type="button"
+                                      id="button-addon1"
+                                    >
+                                      Xác minh
+                                    </button>
                                   </div>
-                                  <button
-                                    class="btn btn-primary"
-                                    type="button"
-                                    id="button-addon2"
-                                  >
-                                    Xác minh
-                                  </button>
-                                </div>
-                              </div>
-                              <label for="basicInput" class="mb-2"
-                                >Điều khiển</label
-                              >
-                              <div class="d-flex flex-row">
-                                <div class="d-flex flex-column col-lg-3 mr-1">
+                                  <p class="text-muted">Điều khiển</p>
                                   <div
-                                    class="btn-group mb-3"
+                                    class="btn-group btn-group-lg"
                                     role="group"
                                     aria-label="Basic example"
                                   >
+                                    <button type="button" class="btn">
+                                      ON
+                                    </button>
                                     <button
                                       type="button"
                                       class="btn btn-primary"
                                     >
-                                      ON
-                                    </button>
-                                    <button type="button" class="btn">
                                       OFF
                                     </button>
                                   </div>
-                                </div>
-                                <div class="d-flex flex-column col-lg-6">
                                   <div
-                                    class="btn-group mb-3"
+                                    class="btn-group btn-group-lg"
                                     role="group"
                                     aria-label="Basic example"
                                   >
+                                    <button type="button" class="btn">
+                                      Mode 1
+                                    </button>
                                     <button
                                       type="button"
                                       class="btn btn-primary"
                                     >
-                                      Mode 1
+                                      Mode 2
                                     </button>
                                     <button type="button" class="btn">
-                                      Mode 2</button
-                                    ><button type="button" class="btn">
                                       Mode 3
                                     </button>
                                   </div>
@@ -470,7 +548,9 @@
               class="btn-close btn-close-white"
               data-bs-dismiss="modal"
               aria-label="Close"
-            ></button>
+            >
+              <i data-feather="x"></i>
+            </button>
           </div>
           <div class="modal-body">
             <div class="input-group">
@@ -488,7 +568,7 @@
               >
                 Preset
               </button>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu" style="">
                 <li>
                   <a class="dropdown-item" href="#" onclick="timeSelect_hour(3)"
                     >3 hours previous</a
@@ -599,15 +679,11 @@
       </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@joint/core@4.0.1/dist/joint.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="./assets/static/js/components/dark.js"></script>
+    <script src="./assets/static/js/pages/horizontal-layout.js"></script>
+    <script src="./assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
     <script src="./assets/compiled/js/app.js"></script>
-    <script src="./assets/compiled/js/element.js"></script>
-    <script src="./assets/compiled/js/chart.js"></script>
-    <script src="./assets/compiled/js/api.js"></script>
-    <script src="./assets/compiled/js/diagram.js"></script>
-    <script src="./assets/compiled/js/control.js"></script>
-    <script src="./assets/compiled/js/management.js"></script>
+    <!-- <script src="assets/js/pages/dashboard.js"></scrip> -->
   </body>
 </html>

@@ -6,9 +6,9 @@
     <title>Document</title>
 
     <!-- <link rel="stylesheet" href="./assets/css/management.css" /> -->
-    <link rel="stylesheet" href="./assets/css/app-dark.css" />
-    <link rel="stylesheet" href="./assets/css/app.css" />
-    <link rel="stylesheet" href="./assets/css/iconly.css" />
+    <link rel="stylesheet" href="./assets/compiled/css/app-dark.css" />
+    <link rel="stylesheet" href="./assets/compiled/css/app.css" />
+    <link rel="stylesheet" href="./assets/compiled/css/iconly.css" />
 
     <script
       src="https://kit.fontawesome.com/2878e6014d.js"
@@ -192,7 +192,7 @@
                             <div class="carousel-inner">
                               <div class="carousel-item active">
                                 <img
-                                  src="./assets/img/tesst7.png"
+                                  src="./assets/compiled/png/tesst7.png"
                                   class="d-block w-100"
                                   alt="..."
                                 />
@@ -392,64 +392,57 @@
                               aria-labelledby="v-pills-settings-tab"
                             >
                               <div class="form-group has-icon-left">
-                                <label for="basicInput">Mật khẩu</label>
-                                <div class="input-group col-12">
-                                  <div class="position-relative">
+                                <label for="password-id-icon">Mật khẩu</label>
+                                <div class="position-relative">
+                                  <div class="input-group mb-3">
                                     <input
                                       type="password"
                                       class="form-control"
                                       placeholder="Password"
-                                      id="password-horizontal-icon"
+                                      id="password-id-icon"
                                     />
                                     <div class="form-control-icon">
                                       <i class="bi bi-lock"></i>
                                     </div>
+                                    <button
+                                      class="btn btn-primary"
+                                      type="button"
+                                      id="button-addon1"
+                                    >
+                                      Xác minh
+                                    </button>
                                   </div>
-                                  <button
-                                    class="btn btn-primary"
-                                    type="button"
-                                    id="button-addon2"
-                                  >
-                                    Xác minh
-                                  </button>
-                                </div>
-                              </div>
-                              <label for="basicInput" class="mb-2"
-                                >Điều khiển</label
-                              >
-                              <div class="d-flex flex-row">
-                                <div class="d-flex flex-column col-lg-3 mr-1">
+                                  <p class="text-muted">Điều khiển</p>
                                   <div
-                                    class="btn-group mb-3"
+                                    class="btn-group btn-group-lg"
                                     role="group"
                                     aria-label="Basic example"
                                   >
+                                    <button type="button" class="btn">
+                                      ON
+                                    </button>
                                     <button
                                       type="button"
                                       class="btn btn-primary"
                                     >
-                                      ON
-                                    </button>
-                                    <button type="button" class="btn">
                                       OFF
                                     </button>
                                   </div>
-                                </div>
-                                <div class="d-flex flex-column col-lg-">
                                   <div
-                                    class="btn-group mb-3"
+                                    class="btn-group btn-group-lg"
                                     role="group"
                                     aria-label="Basic example"
                                   >
+                                    <button type="button" class="btn">
+                                      Mode 1
+                                    </button>
                                     <button
                                       type="button"
                                       class="btn btn-primary"
                                     >
-                                      Mode 1
+                                      Mode 2
                                     </button>
                                     <button type="button" class="btn">
-                                      Mode 2</button
-                                    ><button type="button" class="btn">
                                       Mode 3
                                     </button>
                                   </div>
@@ -618,12 +611,12 @@
     <script src="https://cdn.jsdelivr.net/npm/@joint/core@4.0.1/dist/joint.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
-    <script src="./assets/js/app.js"></script>
-    <script src="./assets/js/element.js"></script>
-    <script src="./assets/js/chart.js"></script>
-    <script src="./assets/js/api.js"></script>
-    <script src="./assets/js/diagram.js"></script>
-    <script src="./assets/js/control.js"></script>
-    <script src="./assets/js/management.js"></script>
+    <script src="./assets/compiled/js/app.js"></script>
+    <script src="./assets/compiled/js/element.js"></script>
+    <script src="./assets/compiled/js/chart.js"></script>
+    <script src="./assets/compiled/js/api.js"></script>
+    <script src="./assets/compiled/js/diagram.js"></script>
+    <script src="./assets/compiled/js/control.js"></script>
+    <script src="./assets/compiled/js/management.js"></script>
   </body>
 </html>
