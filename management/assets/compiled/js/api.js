@@ -1,9 +1,9 @@
-var diaData;
-var heatmapData;
-var chartData;
-var phaseColor = ["#ff3838", "#fff200", "#18dcff"];
-var c1name = ["Pha A", "Pha B", "Pha C"];
-var lineChart = {};
+var diaData; // Biến lưu trữ thông tin đồ thị
+var heatmapData; //Biến lưu thông tin heatmap
+var chartData;  //Biến lưu trữ thông tin biểu đồ
+var phaseColor = ["#ff3838", "#fff200", "#18dcff"]; // màu của đồ thị
+var c1name = ["Pha A", "Pha B", "Pha C"]; 
+var lineChart = {}; //trạng thái đồ thị
 var selectCells = [
   { x: 167, y: 250, id: "a1" },
   { x: 308, y: 250, id: "a2" },

@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CMS</title>
+    <link rel="stylesheet" href="assets/css/main/app.css" />
+    <link rel="stylesheet" href="assets/css/main/app-dark.css" />
+    <link
+      rel="shortcut icon"
+      href="assets/images/logo/iot_cut.png"
+      type="image/png"
+    />
+    <link rel="stylesheet" href="assets/css/shared/iconly.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.4.1/backbone.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jointjs/3.7.5/joint.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+
+    <script
+      type="text/javascript"
+      src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"
+    ></script>
+    <script src="assets/js/bootstrap.js"></script>
+    <script src="config.js"></script>
+    <script src="main.js"></script>
+    <script src="./assets/js/loadData.js"></script>
+  </head>
+
+  <body class="theme-dark">
+    <script type="text/template" id="template-sdnl">
+      <div class=" px-4 py-2 border border-secondary rounded-4" id="${id}" type="sdnl" jname="${jName}" jpre="${jPreLevel}" jurl="${jUrl}" jwidth="${jWidth}">
+          <div class="row">
+              <div class="col-sm-6 ">
+                  <div class="name ms-1">
+                      <h6>SĐNL</h6>
+                  </div>
+              </div>
+              <div class="col-sm-2 edit">
+                  <i class="bi bi-pencil-square text-gray-600 fs-5 "></i>
+              </div>
+
+              <div class="col-sm-2 remove">
+                  <i class="bi bi-x-square text-gray-600 fs-5 "></i>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-sm-6">
+                  <input  type="number" class="form-control imgWith" placeholder="Độ rộng"
+                      aria-label="Sizing example input"
+                      aria-describedby="inputGroup-sizing-sm" value="${width}">
+              </div>
+              <div class="col-sm-6">
+                  <input  type="text" class="form-control imgUrl" placeholder="URL"
+                      aria-label="Sizing example input"
+                      aria-describedby="inputGroup-sizing-sm" value="${url}">
+              </div>
+          </div>
+          <div class="d-none data">
+              ${data}
+          </div>
+      </div>
+    </script>
+
+    <script type="text/template" id="template-tsda">
+      <div class=" px-4 py-2 border border-secondary rounded-4" id="${id}" type="tsda">
+
+          <div class="row">
+              <div class="col-sm-6">
+                  <div class="name ms-1">
+                      <h6>TS điện áp</h6>
+                  </div>
+              </div>
+              <div class="col-sm-2 edit">
+                  <i class="bi bi-pencil-square text-gray-600 fs-5"></i>
+
+              </div>
+
+              <div class="col-sm-2 remove">
+                  <i class="bi bi-x-square text-gray-600 fs-5"></i>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-sm-6 ">
+                  <div class="input-group">
+                      <span class="input-group-text" >X</span>
+                      <input type="number" class="form-control posx"
+                          aria-label="Sizing example input"
+                          aria-describedby="inputGroup-sizing-sm" value=${Ux}>
+                  </div>
+              </div>
+              <div class="col-sm-6">
+                  <div class="input-group">
+                      <span class="input-group-text" >Y</span>
+                      <input type="number" class="form-control posy"
+                          aria-label="Sizing example input"
+                          aria-describedby="inputGroup-sizing-sm" value=${Uy}>
+                  </div>
+              </div>
+          </div>
+          <div class="d-none data">
+              ${data}
+          </div>
+      </div>
+    </script>
+
+    <script type="text/template" id="template-tst">
+      <div class=" px-4 py-2 border border-secondary rounded-4" id="${id}" type="tst">
+
+          <div class="row">
+              <div class="col-sm-6">
+                  <div class="name ms-1">
+                      <h6>TS tổng</h6>
+                  </div>
+              </div>
+              <div class="col-sm-2 edit">
+                  <i class="bi bi-pencil-square text-gray-600 fs-5"></i>
+              </div>
+
+              <div class="col-sm-2 remove">
+                  <i class="bi bi-x-square text-gray-600 fs-5"></i>
+              </div>
+
+          </div>
+          <div class="row">
+              <div class="col-sm-6 ">
+                  <div class="input-group">
+                      <span class="input-group-text" >X</span>
+                      <input type="number" class="form-control posx"
+                          aria-label="Sizing example input"
+                          aria-describedby="inputGroup-sizing-sm" value=${x}>
+                  </div>
+              </div>
+              <div class="col-sm-6">
+                  <div class="input-group">
+                      <span class="input-group-text" >Y</span>
+                      <input type="number" class="form-control posy"
+                          aria-label="Sizing example input"
+                          aria-describedby="inputGroup-sizing-sm" value=${y}>
+                  </div>
+              </div>
+          </div>
+          <div class="d-none data">
+              ${data}
+          </div>
+      </div>
+    </script>
+
+    <script type="text/template" id="template-tsn">
+      <div class=" px-4 py-2 border border-secondary rounded-4" id="${id}" type="tsn">
+
+          <div class="row">
+              <div class="col-sm-6 ">
+                  <div class="name ms-1">
+                      <h6>TS nhánh : ${name}</h6>
+                  </div>
+              </div>
+              <div class="col-sm-2 edit">
+                  <i class="bi bi-pencil-square text-gray-600 fs-5"></i>
+              </div>
+              <div class="col-sm-2 remove">
+                  <i class="bi bi-x-square text-gray-600 fs-5"></i>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-sm-6 ">
+                  <div class="input-group">
+                      <span class="input-group-text" >X</span>
+                      <input type="number" class="form-control posx"
+                          aria-label="Sizing example input"
+                          aria-describedby="inputGroup-sizing-sm" value=${x}>
+                  </div>
+              </div>
+              <div class="col-sm-6 ">
+                  <div class="input-group">
+                      <span class="input-group-text" >Y</span>
+                      <input type="number" class="form-control posy"
+                          aria-label="Sizing example input"
+                          aria-describedby="inputGroup-sizing-sm" value=${y}>
+                  </div>
+              </div>
+              <div class="d-none data">
+                  ${data}
+              </div>
+          </div>
+    </script>
+
+    <!-- Thêm các element thông số nhánh vào modal thông số tổng -->
+    <script type="text/template" id="branchEle">
+      <div class="row mb-2" id="${id}" type="tsn">
+          <div class="col-sm-2 " style="display: flex; align-items: center; justify-content: center;">
+              <input class="form-check-input checkbox" type="checkbox" value=""
+                  aria-label="Checkbox for following text input">
+          </div>
+          <div class="col-sm-10 ">
+              <div class="input-group">
+                  <span class="input-group-text" >Name</span>
+                  <input type="text" class="form-control"
+                      aria-label="Sizing example input"
+                      aria-describedby="inputGroup-sizing-sm"
+                      value="${branchNameSave}">
+              </div>
+          </div>
+          <div class="d-none data">
+              ${data}
+              </div>
+      </div>
+    </script>
+
+    <div id="app">
+      <div id="main" class="layout-horizontal">
+        <div class="content-wrapper px-4 py-5">
+          <div class="page-content px-4">
+            <section class="row">
+              <div class="col-12 col-lg-9">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="card">
+                      <div class="card-header">
+                        <h4 id="">Sơ đồ nguyên lý</h4>
+                      </div>
+                      <div
+                        class="d-flex align-items-center justify-content-center"
+                        id="diaSpace"
+                        style="height: 60vh"
+                      >
+                        <div id="myholder"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-lg-3">
+                <div class="card">
+                  <div class="card-header" style="padding-bottom: 0">
+                    <h4>Elements</h4>
+                  </div>
+
+                  <div class="card-content pb-4">
+                    <div class="row" style="margin-bottom: 10px">
+                      <div class="col-sm-2 mb-1">
+                        <button
+                          type="button"
+                          class="btn btn-link"
+                          id="reload"
+                          data-bs-toggle="modal"
+                          data-bs-target="#showModalButton"
+                        >
+                          <i
+                            class="bi bi-arrow-clockwise text-gray-200 fs-4"
+                          ></i>
+                        </button>
+                      </div>
+                      <div class="col-sm-2 mb-1">
+                        <button
+                          type="button"
+                          class="btn btn-link"
+                          id="addElemment"
+                          data-bs-toggle="modal"
+                          data-bs-target="#showModalButton"
+                        >
+                          <i
+                            class="bi bi-plus-square bi-sub text-gray-200 fs-4"
+                          ></i>
+                        </button>
+                      </div>
+                      <div class="col-sm-7 btn-group mb-1">
+                        <select
+                          class="form-select"
+                          aria-label="Default select example"
+                          id="optionModal"
+                        >
+                          <option value="sdnl" selected>Sơ đồ nguyên lý</option>
+                          <option value="U">Thông số điện áp</option>
+                          <option value="TST">Thông số tổng</option>
+                          <option value="TSN">Thông số nhánh</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div
+                      class="px-3 py-1"
+                      style="
+                        margin-bottom: 5px;
+                        margin-left: 5px;
+                        margin-right: 5px;
+                        overflow: auto;
+                        max-height: 70vh;
+                      "
+                      id="box"
+                    ></div>
+
+                    <div class="px-4 py-2">
+                      <button
+                        id="saveButton"
+                        class="btn btn-block btn-light-primary font-bold mt-3"
+                      >
+                        Save
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Sơ đồ nguyên lý -->
+      <div
+        class="modal fade"
+        id="modalSDNL"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">
+                Sơ đồ nguyên lý
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="card-content">
+                <div class="card-body">
+                  <form class="form form-horizontal" id="form-sdnl">
+                    <div class="form-body">
+                      <div class="row">
+                        <div class="col-6">
+                          <div class="input-group form-group">
+                            <span class="input-group-text">Tên</span>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="nameModal"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="input-group form-group">
+                            <span class="input-group-text">preLevel</span>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="preLevelModal"
+                            />
+                          </div>
+                        </div>
+
+                        <div class="col-6">
+                          <div class="input-group form-group">
+                            <span class="input-group-text">URL</span>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="urlModal"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="input-group form-group">
+                            <span class="input-group-text">Độ rộng</span>
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="widthModal"
+                              value="1000"
+                            />
+                          </div>
+                        </div>
+
+                        <div class="col-sm-12 d-flex justify-content-end">
+                          <button
+                            class="btn btn-primary me-1 mb-1"
+                            id="saveModal-sdnl"
+                          >
+                            Save
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Thông số điện áp -->
+      <div
+        class="modal fade"
+        id="modalU"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">
+                Thông số điện áp
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="card-content">
+                <div class="card-body">
+                  <form class="form form-horizontal" id="form-tsda">
+                    <div class="form-body">
+                      <div class="row">
+                        <div class="col-2">
+                          <label for="first-name-horizontal">P1</label>
+                        </div>
+                        <div class="col-5 form-group">
+                          <select
+                            type="text"
+                            id="idP1"
+                            class="form-control"
+                            name="fname"
+                            placeholder="Thiết bị"
+                          >
+                            <option value="">Thiết bị</option>
+                          </select>
+                        </div>
+                        <div class="col-5 form-group">
+                          <select
+                            type="text"
+                            id="chP1"
+                            class="form-control"
+                            name="fname"
+                            placeholder="Channel"
+                          >
+                            <option value="">Channel</option>
+                          </select>
+                        </div>
+
+                        <!-- <div class="col-2">
+                          <label for="first-name-horizontal">P2</label>
+                        </div>
+                        <div class="col-5 form-group">
+                          <input
+                            type="text"
+                            id="idP2"
+                            class="form-control"
+                            name="fname"
+                            placeholder="Thiết bị"
+                          />
+                        </div>
+                        <div class="col-5 form-group">
+                          <input
+                            type="text"
+                            id="chP2"
+                            class="form-control"
+                            name="fname"
+                            placeholder="Channel"
+                          />
+                        </div>
+
+                        <div class="col-2">
+                          <label for="first-name-horizontal">P3</label>
+                        </div>
+                        <div class="col-5 form-group">
+                          <input
+                            type="text"
+                            id="idP3"
+                            class="form-control"
+                            name="fname"
+                            placeholder="Thiết bị"
+                          />
+                        </div>
+                        <div class="col-5 form-group">
+                          <input
+                            type="text"
+                            id="chP3"
+                            class="form-control"
+                            name="fname"
+                            placeholder="Channel"
+                          />
+                        </div> -->
+
+                        <div class="col-6">
+                          <div class="input-group form-group">
+                            <span class="input-group-text">X</span>
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="U-x-modal"
+                              value="0"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="input-group form-group">
+                            <span class="input-group-text">Y</span>
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="U-y-modal"
+                              value="0"
+                            />
+                          </div>
+                        </div>
+
+                        <div class="col-sm-12 d-flex justify-content-end">
+                          <button
+                            type="submit"
+                            class="btn btn-primary me-1 mb-1"
+                            id="saveModal-tsda"
+                          >
+                            Save
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal thông số tổng -->
+      <div
+        class="modal fade"
+        id="modalTST"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">
+                Thông số tổng
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="card-content">
+                <div class="card-body">
+                  <form class="form form-horizontal" id="form-tst">
+                    <div class="form-body">
+                      <div class="row">
+                        <div class="col-6">
+                          <div class="input-group">
+                            <span class="input-group-text">X</span>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="sum-x-modal"
+                              value="0"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="input-group form-group">
+                            <span class="input-group-text">Y</span>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="sum-y-modal"
+                              value="0"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="input-group form-group">
+                            <span class="input-group-text">Itt</span>
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="sum-Itt-modal"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="input-group form-group">
+                            <span class="input-group-text">Ptt</span>
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="sum-Ptt-modal"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row" id="childbox"></div>
+                    </div>
+                    <div class="col-sm-12 d-flex justify-content-end">
+                      <button
+                        type="submit"
+                        class="btn btn-primary me-1 mb-1"
+                        id="saveModal-tst"
+                      >
+                        Save
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal thông số nhánh -->
+      <div
+        class="modal fade"
+        id="modalTSN"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">
+                Thông số nhánh
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="card-content">
+                <div class="card-body">
+                  <form class="form form-horizontal" id="form-tsn">
+                    <div class="form-body">
+                      <div class="row">
+                        <div class="col-2">
+                          <label for="first-name-horizontal">P1</label>
+                        </div>
+                        <div class="col-5 form-group">
+                          <select
+                            type="text"
+                            id="idP1-branch"
+                            class="form-control"
+                            name="fname"
+                            placeholder="Thiết bị"
+                          >
+                            <option value="">Thiết bị</option>
+                          </select>
+                        </div>
+                        <div class="col-5 form-group">
+                          <select
+                            type="text"
+                            id="chP1-branch"
+                            class="form-control"
+                            name="fname"
+                            placeholder="Channel"
+                          >
+                            <option value="">Channel</option>
+                          </select>
+                        </div>
+
+                        <div class="col-6">
+                          <div class="input-group">
+                            <span class="input-group-text">X</span>
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="branch-x-modal"
+                              value="0"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="input-group form-group">
+                            <span class="input-group-text">Y</span>
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="branch-y-modal"
+                              value="0"
+                            />
+                          </div>
+                        </div>
+
+                        <div class="col-6">
+                          <div class="input-group form-group">
+                            <span class="input-group-text">Itt</span>
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="branch-Itt-modal"
+                              value=""
+                            />
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="input-group form-group">
+                            <span class="input-group-text">Ptt</span>
+                            <input
+                              type="number"
+                              class="form-control"
+                              id="branch-Ptt-modal"
+                              value=""
+                            />
+                          </div>
+                        </div>
+
+                        <div class="col-6">
+                          <div class="input-group form-group">
+                            <span class="input-group-text">Tên</span>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="nameBranch"
+                              value=""
+                            />
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="input-group form-group">
+                            <span class="input-group-text">nextLevel</span>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="nextLevelBranch"
+                            />
+                          </div>
+                        </div>
+
+                        <div class="col-sm-12 d-flex justify-content-end">
+                          <button
+                            type="button"
+                            class="btn btn-primary me-1 mb-1"
+                            id="saveModal-tsn"
+                          >
+                            Save
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--endmodal-->
+    </div>
+  </body>
+</html>
