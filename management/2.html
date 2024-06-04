@@ -148,7 +148,7 @@
               <div class="col-12 col-lg-6 p-1">
                 <div class="card" id="myDiv">
                   <div class="card-content">
-                    <div class="card-body p-1">
+                    <div class="card-body mb-8">
                       <div class="row">
                         <div class="col-12">
                           <div
@@ -160,11 +160,11 @@
                             ></a>
                           </div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 mb-5">
                           <div
                             class="d-flex align-items-center justify-content-center"
                             id="diaSpace"
-                            style="height: 70vh; margin-top: 2.5vh"
+                            style="height: 70vh"
                           >
                             <div id="myholder"></div>
                           </div>
@@ -178,12 +178,14 @@
               <div class="col-12 col-lg-6 p-1">
                 <div class="card">
                   <div class="card-content">
-                    <div class="card-body">
-                      <h4 id="heatmapname" class="card-title">Nhà máy VLXD</h4>
+                    <div class="card-body p-4">
+                      <h4 id="heatmapname" class="card-title mb-1">
+                        Nhà máy VLXD
+                      </h4>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body p-3">
                       <div class="row">
-                        <div class="col-4">
+                        <div class="col-5">
                           <div
                             id="carouselExampleControls"
                             class="carousel slide"
@@ -195,13 +197,14 @@
                                   src="./assets/compiled/png/tesst7.png"
                                   class="d-block w-100"
                                   alt="..."
+                                  style="height: 35vh; object-fit: contain"
                                 />
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="col-6">
-                          <p class="card-text">
+                        <div class="col-7 ">
+                          <p class="card-text overflow-auto" style="height: 35vh">
                             Welcome to our dynamic carousel, where innovation
                             takes center stage. Take a captivating journey
                             through our cutting-edge products, groundbreaking
@@ -213,7 +216,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body p-3">
                       <div class="row">
                         <div class="col-3">
                           <div
@@ -222,17 +225,6 @@
                             role="tablist"
                             aria-orientation="vertical"
                           >
-                            <a
-                              class="nav-link active"
-                              id="v-pills-home-tab"
-                              data-bs-toggle="pill"
-                              href="#v-pills-home"
-                              role="tab"
-                              aria-controls="v-pills-home"
-                              aria-selected="false"
-                              tabindex="-1"
-                              >Thông số thiết kế</a
-                            >
                             <a
                               class="nav-link"
                               id="v-pills-profile-tab"
@@ -256,60 +248,25 @@
                               tabindex="-1"
                               >Thiết lập, điều khiển</a
                             >
+                            <a
+                              class="nav-link active"
+                              id="v-pills-home-tab"
+                              data-bs-toggle="pill"
+                              href="#v-pills-home"
+                              role="tab"
+                              aria-controls="v-pills-home"
+                              aria-selected="false"
+                              tabindex="-1"
+                              >Thông số thiết kế</a
+                            >
                           </div>
                         </div>
                         <div class="col-9">
-                          <div class="tab-content" id="v-pills-tabContent">
-                            <div
-                              class="tab-pane fade active show"
-                              id="v-pills-home"
-                              role="tabpanel"
-                              aria-labelledby="v-pills-home-tab"
-                            >
-                              <div class="table-responsive">
-                                <table
-                                  class="table mb-0"
-                                  style="
-                                    text-align: center;
-                                    width: 90%;
-                                    margin-left: 5%;
-                                  "
-                                >
-                                  <thead>
-                                    <tr>
-                                      <th style="width: 40%"></th>
-                                      <th style="width: 60%">Tủ điện</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr>
-                                      <td class="text-bold-500">Ptt</td>
-                                      <td>79kW</td>
-                                    </tr>
-                                    <tr>
-                                      <td class="text-bold-500">Số lộ</td>
-                                      <td>11</td>
-                                    </tr>
-                                    <tr>
-                                      <td class="text-bold-500">Tên tủ</td>
-                                      <td>MĐV.1</td>
-                                    </tr>
-                                    <tr>
-                                      <td class="text-bold-500">
-                                        Loại tải chính
-                                      </td>
-                                      <td>Điều hoà</td>
-                                    </tr>
-                                    <tr>
-                                      <td class="text-bold-500">
-                                        Hệ số đồng thời
-                                      </td>
-                                      <td>0.6</td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </div>
-                            </div>
+                          <div
+                            class="tab-content overflow-auto"
+                            style="height: 35vh"
+                            id="v-pills-tabContent"
+                          >
                             <div
                               class="tab-pane fade"
                               id="v-pills-profile"
@@ -318,8 +275,7 @@
                             >
                               <div class="table-responsive table-bot">
                                 <table
-                                  class="table mb-0"
-                                  style="text-align: center"
+                                  class="table table-hover mb-0 table-striped"
                                 >
                                   <thead>
                                     <tr>
@@ -376,7 +332,10 @@
                                       <td style="font-weight: bold">STATUS</td>
                                       <td
                                         colspan="3"
-                                        style="background-color: #209935"
+                                        style="
+                                          background-color: #209935;
+                                          text-align: center;
+                                        "
                                       >
                                         OK
                                       </td>
@@ -447,6 +406,51 @@
                                     </button>
                                   </div>
                                 </div>
+                              </div>
+                            </div>
+                            <div
+                              class="tab-pane fade active show"
+                              id="v-pills-home"
+                              role="tabpanel"
+                              aria-labelledby="v-pills-home-tab"
+                            >
+                              <div class="table-responsive">
+                                <table
+                                  class="table table-hover mb-0 table-striped"
+                                >
+                                  <thead>
+                                    <tr>
+                                      <th style="width: 40%"></th>
+                                      <th style="width: 60%">Tủ điện</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td class="text-bold-500">Ptt</td>
+                                      <td>79kW</td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-bold-500">Số lộ</td>
+                                      <td>11</td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-bold-500">Tên tủ</td>
+                                      <td>MĐV.1</td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-bold-500">
+                                        Loại tải chính
+                                      </td>
+                                      <td>Điều hoà</td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-bold-500">
+                                        Hệ số đồng thời
+                                      </td>
+                                      <td>0.6</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
                               </div>
                             </div>
                           </div>
