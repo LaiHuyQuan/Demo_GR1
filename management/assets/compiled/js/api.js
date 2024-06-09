@@ -1,50 +1,98 @@
 var diaData; // Biến lưu trữ thông tin đồ thị
 var heatmapData; //Biến lưu thông tin heatmap
 var chartData; //Biến lưu trữ thông tin biểu đồ
+var Daycap = [];
+var Bienap = [];
 var phaseColor = ["#ff3838", "#fff200", "#18dcff"]; // màu của đồ thị
 var c1name = ["Pha A", "Pha B", "Pha C"];
 var lineChart = {}; //trạng thái đồ thị
 var selectCells = [
-  { x: 147, y: 250, id: "a1" },
-  { x: 288, y: 250, id: "a2" },
-  { x: 429, y: 250, id: "a3" },
-  { x: 573, y: 250, id: "a4" },
-  { x: 701, y: 250, id: "a5" },
-  { x: 848, y: 250, id: "a6" },
-  { x: 985, y: 250, id: "a7" },
-  { x: 1126, y: 250, id: "a8" },
-  { x: 1261, y: 250, id: "a9" },
-  { x: 1400, y: 250, id: "a10" },
-  { x: 1543, y: 250, id: "a11" },
-  { x: 26, y: 750, id: "a12" },
-  { x: 168, y: 750, id: "a13" },
-  { x: 405, y: 750, id: "a14" },
-  { x: 543, y: 750, id: "a15" },
-  { x: 671, y: 750, id: "a16" },
-  { x: 807, y: 750, id: "a17" },
-  { x: 939, y: 750, id: "a18" },
-  { x: 1091, y: 750, id: "a19" },
-  { x: 1233, y: 750, id: "a20" },
-  { x: 1367, y: 750, id: "a21" },
-  { x: 1497, y: 750, id: "a22" },
-  { x: 1629, y: 750, id: "a23" },
-  { x: 90, y: 615, id: "a24" },
-  { x: 1010, y: 613, id: "a25" },
-  { x: 840, y: 119, id: "a26" },
-  { x: 812, y: 40, id: "a27" },
-  { x: 980, y: 540, id: "a28" },
-  { x: 70, y: 540, id: "a29" },
+  { x: 147, y: 250, w: 70, h: 50, id: "a1" },
+  { x: 288, y: 250, w: 70, h: 50, id: "a2" },
+  { x: 429, y: 250, w: 70, h: 50, id: "a3" },
+  { x: 573, y: 250, w: 70, h: 50, id: "a4" },
+  { x: 701, y: 250, w: 70, h: 50, id: "a5" },
+  { x: 848, y: 250, w: 70, h: 50, id: "a6" },
+  { x: 985, y: 250, w: 70, h: 50, id: "a7" },
+  { x: 1126, y: 250, w: 70, h: 50, id: "a8" },
+  { x: 1261, y: 250, w: 70, h: 50, id: "a9" },
+  { x: 1400, y: 250, w: 70, h: 50, id: "a10" },
+  { x: 1543, y: 250, w: 70, h: 50, id: "a11" },
+  { x: 26, y: 750, w: 70, h: 50, id: "a12" },
+  { x: 168, y: 750, w: 70, h: 50, id: "a13" },
+  { x: 405, y: 750, w: 70, h: 50, id: "a14" },
+  { x: 543, y: 750, w: 70, h: 50, id: "a15" },
+  { x: 671, y: 750, w: 70, h: 50, id: "a16" },
+  { x: 807, y: 750, w: 70, h: 50, id: "a17" },
+  { x: 939, y: 750, w: 70, h: 50, id: "a18" },
+  { x: 1091, y: 750, w: 70, h: 50, id: "a19" },
+  { x: 1233, y: 750, w: 70, h: 50, id: "a20" },
+  { x: 1367, y: 750, w: 70, h: 50, id: "a21" },
+  { x: 1497, y: 750, w: 70, h: 50, id: "a22" },
+  { x: 1629, y: 750, w: 70, h: 50, id: "a23" },
+  { x: 90, y: 615, w: 70, h: 50, id: "a24" },
+  { x: 1010, y: 613, w: 70, h: 50, id: "a25" },
+  { x: 840, y: 119, w: 70, h: 50, id: "a26" },
+  { x: 812, y: 40, w: 70, h: 50, id: "a27" },
+  { x: 980, y: 540, w: 70, h: 50, id: "a28" },
+  { x: 70, y: 540, w: 70, h: 50, id: "a29" },
+  { x: 110, y: 205, w: 1500, h: 15, id: "a30" },
+  { x: 0, y: 702, w: 225, h: 15, id: "a31" },
+  { x: 365, y: 702, w: 1335, h: 15, id: "a32" },
 ];
 
-var selectLines = [
-  { x: 110, y: 205, w: 1500, id: "a30" },
-  { x: 0, y: 702, w: 225, id: "a31" },
-  { x: 365, y: 702, w: 1335, id: "a32" },
+var selectCellsLayout = [
+  { x: 955, y: 245, w: 175, h: 85, id: "a27" },
+  { x: 955, y: 525, w: 175, h: 85, id: "a28" },
+  { x: 955, y: 810, w: 175, h: 85, id: "a29" },
+  { x: 1010, y: 1100, w: 185, h: 245, id: "a4" },
+  { x: 1350, y: 1125, w: 135, h: 180, id: "a5" },
+  { x: 0, y: 1505, w: 1105, h: 15, id: "a32" },
 ];
+
+var Layout = {
+  attrs: {
+    icon: {
+      width: 1700,
+      xlinkHref: "public/dia/layout.svg",
+    },
+  },
+  id: 0,
+  infor: {
+    name: "Nhà máy VLXD",
+    preLevel: "",
+    type: "img",
+  },
+  position: {
+    x: 0,
+    y: 0,
+  },
+  type: "examples.CustomDiaImg",
+};
+
+var map = {
+  attrs: {
+    icon: {
+      width: 1700,
+      xlinkHref: "public/dia/map.jpg",
+    },
+  },
+  id: 0,
+  infor: {
+    name: "Nhà máy VLXD",
+    preLevel: "",
+    type: "img",
+  },
+  position: {
+    x: 0,
+    y: 0,
+  },
+  type: "examples.CustomDiaImg",
+};
 
 $(document).ready(function () {
   var rectCells = createRectCells(selectCells);
-  var lineCells = createRectLines(selectLines);
+  var rectCellsLayout = createRectCells(selectCellsLayout);
   function addCellsToGraph(graph, cells) {
     cells.forEach(function (cell) {
       graph.addCell(cell); // Thêm ô vào sơ đồ
@@ -62,7 +110,6 @@ $(document).ready(function () {
       // graph.addCell(cell1);
       graph.addCells(DiagramData["total"]);
       addCellsToGraph(graph, rectCells);
-      addCellsToGraph(graph, lineCells);
       scale();
     } catch (error) {
       console.error("Lỗi khi gửi yêu cầu:", error);
@@ -135,6 +182,32 @@ $(document).ready(function () {
     }
   }
 
+  async function fetchDaycapData() {
+    try {
+      const response = await $.ajax({
+        url: "data/daycap.json",
+        method: "GET",
+        dataType: "json",
+      });
+      Daycap = response;
+    } catch (error) {
+      console.error("Lỗi khi gửi yêu cầu:", error);
+    }
+  }
+
+  async function fetchBienapData() {
+    try {
+      const response = await $.ajax({
+        url: "data/bienap.json",
+        method: "GET",
+        dataType: "json",
+      });
+      Bienap = response;
+    } catch (error) {
+      console.error("Lỗi khi gửi yêu cầu:", error);
+    }
+  }
+
   function loadDiagramData(diaData, DiagramData) {
     for (var i = 1; i < diaData.rs.length + 2; i++) {
       DiagramData.total[i].attrs = diaData.rs[i];
@@ -171,7 +244,7 @@ $(document).ready(function () {
     positions.forEach(function (position) {
       var rect = new joint.shapes.standard.Rectangle({
         position: { x: position.x, y: position.y },
-        size: { width: 70, height: 50 },
+        size: { width: position.w, height: position.h },
         attrs: {
           body: { fill: "blue", opacity: 0.25, cursor: "pointer" },
           label: { text: "", fill: "transperment" },
@@ -184,28 +257,32 @@ $(document).ready(function () {
     return cells;
   }
 
-  function createRectLines(positions) {
-    var lines = [];
-
-    positions.forEach(function (position) {
-      var rect = new joint.shapes.standard.Rectangle({
-        position: { x: position.x, y: position.y },
-        size: { width: position.w, height: 15 },
-        attrs: {
-          body: { fill: "blue", opacity: 0.25, cursor: "pointer" },
-          label: { text: "", fill: "transperment" },
-        },
-      });
-      rect.set("id", position.id);
-      lines.push(rect);
-    });
-
-    return lines;
+  function createLayout() {
+    graph.addCell(Layout);
+    // scale();
+    addCellsToGraph(graph, rectCellsLayout);
   }
 
-  fetchDiaData();
-  fetchLayoutData();
-  // getSelectCell();
+  function createMap() {
+    graph.addCell(map);
+    scale();
+  }
+
+  if ($("#myDiv").find("#layout").length) {
+    createLayout();
+    scale();
+  } else if ($("#myDiv").find("#map").length) {
+    createMap();
+    scale();
+  } else {
+    fetchDiaData();
+    fetchLayoutData();
+  }
+
   fetchHeatmapData();
   fetchChartData();
+  scale();
+
+  fetchDaycapData();
+  fetchBienapData();
 });

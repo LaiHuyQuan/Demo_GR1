@@ -65,12 +65,12 @@ $(document).ready(function () {
     if (bienapID.includes(cellId)) {
       rmShow();
       $("#bienap").removeClass("d-sm-none");
-      addCarousel("#bienap");
+      addCarousel("#bienap", cellId);
     }
     if (daycapID.includes(cellId)) {
       rmShow();
       $("#daycap").removeClass("d-sm-none");
-      addCarousel("#daycap");
+      addCarousel("#daycap", cellId);
     }
   }
 
@@ -81,7 +81,7 @@ $(document).ready(function () {
     $("#daycap").addClass("d-sm-none");
   }
 
-  function addCarousel(ID) {
+  function addCarousel(type, ID) {
     var newCarousel =
       '<div class="card-body p-3" id="newCarousel">' +
       '<div class="row">' +
@@ -186,17 +186,14 @@ $(document).ready(function () {
       "</div>" +
       "</div>";
 
-    $(ID).find(".card").append(newCarousel);
+    $(type).find(".card").append(newCarousel);
 
-    switch (ID) {
+    switch (type) {
       case "#daycap":
-        addTableForDaycap1(ID);
-        addTableForDaycap(ID);
-        console.log(1);
+        addTableForDaycap(type, ID);
         break;
       case "#bienap":
-        addTableForBienap1(ID);
-        addTableForBienap(ID);
+        addTableForBienap(type, ID);
         break;
       default:
         console.log("ID không hợp lệ");
@@ -204,10 +201,20 @@ $(document).ready(function () {
     }
   }
 
-  function addTableForDaycap1(ID) {
+  function addTableForDaycap(type, ID) {
+    var data;
+    for (var i = 0; i < Daycap.length; i++) {
+      if (Daycap[i].id == ID) {
+        data = Daycap[i];
+      }
+    }
+
+    var hoatdong = data.hoatdong;
+    var thietke = data.thietke;
+
     var newTable =
       '<div class="table-responsive">' +
-      '<table class="table table-hover mb-0 table-striped">' +
+      '<table class="table table-hover mb-0 table-striped" style="text-align:center">' +
       "<thead>" +
       "<tr>" +
       "<th></th>" +
@@ -219,51 +226,83 @@ $(document).ready(function () {
       "<tbody>" +
       "<tr>" +
       '<td style="font-weight: bold">U</td>' +
-      "<td>220.3</td>" +
-      "<td>220.3</td>" +
-      "<td>220.3</td>" +
+      "<td>" +
+      hoatdong.U[0] +
+      "</td>" +
+      "<td>" +
+      hoatdong.U[1] +
+      "</td>" +
+      "<td>" +
+      hoatdong.U[2] +
+      "</td>" +
       "</tr>" +
       "<tr>" +
       '<td style="font-weight: bold">I</td>' +
-      "<td>845</td>" +
-      "<td>896</td>" +
-      "<td>856</td>" +
+      "<td>" +
+      hoatdong.I[0] +
+      "</td>" +
+      "<td>" +
+      hoatdong.I[1] +
+      "</td>" +
+      "<td>" +
+      hoatdong.I[2] +
+      "</td>" +
       "</tr>" +
       "<tr>" +
       '<td style="font-weight: bold">P</td>' +
-      "<td>230</td>" +
-      "<td>245</td>" +
-      "<td>289</td>" +
+      "<td>" +
+      hoatdong.P[0] +
+      "</td>" +
+      "<td>" +
+      hoatdong.P[1] +
+      "</td>" +
+      "<td>" +
+      hoatdong.P[2] +
+      "</td>" +
       "</tr>" +
       "<tr>" +
       '<td style="font-weight: bold">Pf</td>' +
-      "<td>0.96</td>" +
-      "<td>0.93</td>" +
-      "<td>0.95</td>" +
+      "<td>" +
+      hoatdong.Pf[0] +
+      "</td>" +
+      "<td>" +
+      hoatdong.Pf[1] +
+      "</td>" +
+      "<td>" +
+      hoatdong.Pf[2] +
+      "</td>" +
       "</tr>" +
       "<tr>" +
       '<td style="font-weight: bold">Q</td>' +
-      "<td>-</td>" +
-      "<td>-</td>" +
-      "<td>-</td>" +
+      "<td>" +
+      hoatdong.Q[0] +
+      "</td>" +
+      "<td>" +
+      hoatdong.Q[1] +
+      "</td>" +
+      "<td>" +
+      hoatdong.Q[2] +
+      "</td>" +
       "</tr>" +
       "<tr>" +
       '<td style="font-weight: bold">T</td>' +
-      '<td colspan="3">55&deg;C</td>' +
+      '<td colspan="3">' +
+      hoatdong.T +
+      "&deg;C</td>" +
       "</tr>" +
       "<tr>" +
       '<td style="font-weight: bold">Pre</td>' +
-      '<td colspan="3">50.1 Hz</td>' +
+      '<td colspan="3">' +
+      hoatdong.Pre +
+      " Hz</td>" +
       "</tr>" +
       "</tbody>" +
       "</table>" +
       "</div>";
 
-    $(ID).find("#v-pills-profile").append(newTable);
-  }
+    $(type).find("#v-pills-profile").append(newTable);
 
-  function addTableForDaycap(ID) {
-    var newTable =
+    var newTable1 =
       '<div class="table-responsive">' +
       '<table class="table table-hover mb-0 table-striped">' +
       "<thead>" +
@@ -275,33 +314,54 @@ $(document).ready(function () {
       "<tbody>" +
       "<tr>" +
       '<td class="text-bold-500">Cỡ dây</td>' +
-      "<td>2x2.5mm</td>" +
+      "<td>" +
+      thietke.coday +
+      "mm</td>" +
       "</tr>" +
       "<tr>" +
       '<td class="text-bold-500">Số lõi</td>' +
-      "<td>3</td>" +
+      "<td>" +
+      thietke.soloi +
+      "</td>" +
       "</tr>" +
       "<tr>" +
       '<td class="text-bold-500">Iđm</td>' +
-      "<td>200A</td>" +
+      "<td>" +
+      thietke.idm +
+      "A</td>" +
       "</tr>" +
       "<tr>" +
       '<td class="text-bold-500">Độ dài</td>' +
-      "<td>65m</td>" +
+      "<td>" +
+      thietke.dodai +
+      "m</td>" +
       "</tr>" +
       "<tr>" +
       '<td class="text-bold-500">Hãng</td>' +
-      "<td>CADIVI</td>" +
+      "<td>" +
+      thietke.hang +
+      "</td>" +
       "</tr>" +
       "</tbody>" +
       "</table>" +
       "</div>";
 
-    $(ID).find("#v-pills-home").append(newTable);
+    $(type).find("#v-pills-home").append(newTable1);
   }
 
-  function addTableForBienap(ID) {
-    var newTable = `
+  function addTableForBienap(type, ID) {
+    var data;
+    for (var i = 0; i < Bienap.length; i++) {
+      if (Bienap[i].id == ID) {
+        data = Bienap[i];
+      }
+    }
+    console.log(data);
+
+    var hoatdong = data.hoatdong;
+    var thietke = data.thietke;
+    var newTable =
+      `
 <div class="table-responsive table-bot">
     <div class="table-responsive">
         <table class="table table-hover mb-0 table-striped">
@@ -316,49 +376,87 @@ $(document).ready(function () {
             <tbody>
                 <tr>
                     <td style="font-weight: bold">U</td>
-                    <td>220.3</td>
-                    <td>220.3</td>
-                    <td>220.3</td>
+                    <td>` +
+      hoatdong.U[0] +
+      `</td>
+                    <td>` +
+      hoatdong.U[1] +
+      `</td>
+                    <td>` +
+      hoatdong.U[2] +
+      `</td>
                 </tr>
                 <tr>
                     <td style="font-weight: bold">I</td>
-                    <td>845</td>
-                    <td>896</td>
-                    <td>856</td>
+                    <td>` +
+      hoatdong.I[0] +
+      `</td>
+                    <td>` +
+      hoatdong.I[1] +
+      `</td>
+                    <td>` +
+      hoatdong.I[2] +
+      `</td>
                 </tr>
                 <tr>
                     <td style="font-weight: bold">P</td>
-                    <td>230</td>
-                    <td>245</td>
-                    <td>289</td>
+                    <td>` +
+      hoatdong.P[0] +
+      `</td>
+                    <td>` +
+      hoatdong.P[1] +
+      `</td>
+                    <td>` +
+      hoatdong.P[2] +
+      `</td>
                 </tr>
                 <tr>
                     <td style="font-weight: bold">Pf</td>
-                    <td>0.96</td>
-                    <td>0.93</td>
-                    <td>0.95</td>
+                    <td>` +
+      hoatdong.Pf[0] +
+      `</td>
+                    <td>` +
+      hoatdong.Pf[1] +
+      `</td>
+                    <td>` +
+      hoatdong.Pf[2] +
+      `</td>
                 </tr>
                 <tr>
                     <td style="font-weight: bold">Q</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
+                    <td>` +
+      hoatdong.Q[0] +
+      `</td>
+                    <td>` +
+      hoatdong.Q[1] +
+      `</td>
+                    <td>` +
+      hoatdong.Q[2] +
+      `</td>
                 </tr>
                 <tr>
                     <td style="font-weight: bold">T</td>
-                    <td colspan="3" style="text-align: center">55&deg;C</td>
+                    <td colspan="3" style="text-align: center">` +
+      hoatdong.T +
+      `&deg;C</td>
                 </tr>
                 <tr>
                     <td style="font-weight: bold">H</td>
-                    <td colspan="3" style="text-align: center">97%</td>
+                    <td colspan="3" style="text-align: center">` +
+      hoatdong.H +
+      `%</td>
                 </tr>
                 <tr>
                     <td style="font-weight: bold">Pre</td>
-                    <td colspan="3" style="text-align: center">50.1 Hz</td>
+                    <td colspan="3" style="text-align: center">` +
+      hoatdong.Pre +
+      ` Hz</td>
                 </tr>
                 <tr>
                     <td style="font-weight: bold">STATUS</td>
-                    <td colspan="3" style="background-color: #209935; text-align: center;">OK</td>
+                    <td colspan="3" style="background-color: #209935; text-align: center;">` +
+      hoatdong.STATUS +
+      `</td>
                 </tr>
             </tbody>
         </table>
@@ -366,11 +464,10 @@ $(document).ready(function () {
 </div>
 `;
 
-    $(ID).find("#v-pills-profile").append(newTable);
-  }
+    $(type).find("#v-pills-profile").append(newTable);
 
-  function addTableForBienap1(ID) {
-    var newTable = `
+    var newTable1 =
+      `
     <div class="table-responsive">
         <table class="table table-hover mb-0 table-striped">
             <thead>
@@ -382,29 +479,39 @@ $(document).ready(function () {
             <tbody>
                 <tr>
                     <td class="text-bold-500">Tỉ số</td>
-                    <td>22kV/0.4kV</td>
+                    <td>` +
+      thietke.tiso +
+      `</td>
                 </tr>
                 <tr>
                     <td class="text-bold-500">Công suất</td>
-                    <td>200kVA</td>
+                    <td>` +
+      thietke.congsuat +
+      `kVA</td>
                 </tr>
                 <tr>
                     <td class="text-bold-500">Un</td>
-                    <td>27V</td>
+                    <td>` +
+      thietke.Un +
+      `V</td>
                 </tr>
                 <tr>
                     <td class="text-bold-500">Po</td>
-                    <td>600W</td>
+                    <td>` +
+      thietke.Po +
+      `W</td>
                 </tr>
                 <tr>
                     <td class="text-bold-500">Pn</td>
-                    <td>1200W</td>
+                    <td>` +
+      thietke.Pn +
+      `W</td>
                 </tr>
             </tbody>
         </table>
     </div>
     `;
 
-    $(ID).find("#v-pills-home").append(newTable);
+    $(type).find("#v-pills-home").append(newTable1);
   }
 });

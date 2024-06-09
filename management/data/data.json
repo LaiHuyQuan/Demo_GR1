@@ -1,0 +1,809 @@
+{
+  "total": [
+    {
+      "attrs": {
+        "icon": {
+          "width": 1700,
+          "xlinkHref": "public/dia/main.svg"
+        }
+      },
+      "id": 0,
+      "infor": {
+        "name": "Nhà máy VLXD",
+        "preLevel": "",
+        "type": "img"
+      },
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "type": "examples.CustomDiaImg"
+    },
+    {
+      "attrs": {},
+      "id": 1,
+      "infor": {
+        "dbItems": [
+          {
+            "ch": "A12",
+            "id": "gsnl7eb883d7"
+          },
+          {
+            "ch": "A22",
+            "id": "gsnl7eb883d7"
+          },
+          {
+            "ch": "A32",
+            "id": "gsnl7eb883d7"
+          }
+        ],
+        "dbName": "Mài CNG",
+        "itt": "1600",
+        "nextLevel": "",
+        "ptt": "1056",
+        "type": "diaData"
+      },
+      "position": {
+        "x": 177,
+        "y": 328
+      },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": 27,
+      "infor": {
+        "dbItems": [
+          {
+            "ch": "A11",
+            "id": "gsnl58efea8f"
+          },
+          {
+            "ch": "A21",
+            "id": "gsnl58efea8f"
+          },
+          {
+            "ch": "A31",
+            "id": "gsnl58efea8f"
+          }
+        ],
+        "dbName": "Trạm nóng, hầm sấy\nDC1, C.L Nghiền ",
+        "itt": "1000",
+        "nextLevel": "",
+        "ptt": "660",
+        "type": "diaData"
+      },
+      "position": {
+        "x": 318,
+        "y": 328
+      },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": 3,
+      "infor": {
+        "dbItems": [
+          {
+            "ch": "A12",
+            "id": "gsnl58efea8f"
+          },
+          {
+            "ch": "A22",
+            "id": "gsnl58efea8f"
+          },
+          {
+            "ch": "A32",
+            "id": "gsnl58efea8f"
+          }
+        ],
+        "dbName": "Máy ép sacmi\n-keda",
+        "itt": "1000",
+        "nextLevel": "",
+        "ptt": "660",
+        "type": "diaData"
+      },
+      "position": {
+        "x": 459,
+        "y": 328
+      },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": 4,
+      "infor": {
+        "dbItems": [
+          {
+            "ch": "A13",
+            "id": "gsnl58efea8f"
+          },
+          {
+            "ch": "A23",
+            "id": "gsnl58efea8f"
+          },
+          {
+            "ch": "A33",
+            "id": "gsnl58efea8f"
+          }
+        ],
+        "dbName": "Chiếu sáng PX1\n văn phòng",
+        "itt": "250",
+        "nextLevel": "",
+        "ptt": "165",
+        "type": "diaData"
+      },
+      "position": {
+        "x": 603,
+        "y": 328
+      },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": 5,
+      "infor": {
+        "dbItems": [
+          {
+            "ch": "A14",
+            "id": "gsnl58efea8f"
+          },
+          {
+            "ch": "A24",
+            "id": "gsnl58efea8f"
+          },
+          {
+            "ch": "A34",
+            "id": "gsnl58efea8f"
+          }
+        ],
+        "dbName": "Khí than",
+        "itt": "630",
+        "nextLevel": "",
+        "ptt": "416",
+        "type": "diaData"
+      },
+      "position": {
+        "x": 731,
+        "y": 328
+      },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": 6,
+      "infor": {
+        "dbItems": [
+          {
+            "ch": "A15",
+            "id": "gsnl58efea8f"
+          },
+          {
+            "ch": "A25",
+            "id": "gsnl58efea8f"
+          },
+          {
+            "ch": "A35",
+            "id": "gsnl58efea8f"
+          }
+        ],
+        "dbName": "Lò nung bisquits\n - DC1",
+        "itt": "630",
+        "nextLevel": "",
+        "ptt": "416",
+        "type": "diaData"
+      },
+      "position": {
+        "x": 878,
+        "y": 328
+      },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": 7,
+      "infor": {
+        "dbItems": [
+          {
+            "ch": "A16",
+            "id": "gsnl58efea8f"
+          },
+          {
+            "ch": "A26",
+            "id": "gsnl58efea8f"
+          },
+          {
+            "ch": "A36",
+            "id": "gsnl58efea8f"
+          }
+        ],
+        "dbName": "Trạm khí nén ",
+        "itt": "400",
+        "nextLevel": "",
+        "ptt": "264",
+        "type": "diaData"
+      },
+      "position": {
+        "x": 1015,
+        "y": 328
+      },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": 8,
+      "infor": {
+        "dbItems": [
+          {
+            "ch": "A41",
+            "id": "gsnl58efea8f"
+          },
+          {
+            "ch": "A51",
+            "id": "gsnl58efea8f"
+          },
+          {
+            "ch": "A61",
+            "id": "gsnl58efea8f"
+          }
+        ],
+        "dbName": "Lò nung men DC1",
+        "itt": "630",
+        "nextLevel": "",
+        "ptt": "416",
+        "type": "diaData"
+      },
+      "position": {
+        "x": 1156,
+        "y": 328
+      },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": 9,
+      "infor": {
+        "dbItems": [
+          {
+            "ch": "A42",
+            "id": "gsnl58efea8f"
+          },
+          {
+            "ch": "A52",
+            "id": "gsnl58efea8f"
+          },
+          {
+            "ch": "A62",
+            "id": "gsnl58efea8f"
+          }
+        ],
+        "dbName": "Nghiền men",
+        "itt": "1000",
+        "nextLevel": "",
+        "ptt": "660",
+        "type": "diaData"
+      },
+      "position": {
+        "x": 1291,
+        "y": 328
+      },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": 10,
+      "infor": {
+        "dbItems": [
+          {
+            "ch": "A43",
+            "id": "gsnl58efea8f"
+          },
+          {
+            "ch": "A53",
+            "id": "gsnl58efea8f"
+          },
+          {
+            "ch": "A63",
+            "id": "gsnl58efea8f"
+          }
+        ],
+        "dbName": "Sấy phun",
+        "itt": "400",
+        "nextLevel": "",
+        "ptt": "264",
+        "type": "diaData"
+      },
+      "position": {
+        "x": 1430,
+        "y": 328
+      },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": 11,
+      "infor": {
+        "dbItems": [
+          {
+            "ch": "A44",
+            "id": "gsnl58efea8f"
+          },
+          {
+            "ch": "A54",
+            "id": "gsnl58efea8f"
+          },
+          {
+            "ch": "A64",
+            "id": "gsnl58efea8f"
+          }
+        ],
+        "dbName": "Dây chuyền DC1",
+        "itt": "630",
+        "nextLevel": "",
+        "ptt": "416",
+        "type": "diaData"
+      },
+      "position": {
+        "x": 1573,
+        "y": 328
+      },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": 12,
+      "infor": {
+        "dbItems": [
+          {
+            "ch": "P1",
+            "id": "gw44e65437a2_10"
+          },
+          {
+            "ch": "P2",
+            "id": "gw44e65437a2_10"
+          },
+          {
+            "ch": "P3",
+            "id": "gw44e65437a2_10"
+          }
+        ],
+        "dbName": "Nghiền xương",
+        "itt": "1600",
+        "nextLevel": "",
+        "ptt": "1056",
+        "type": "diaData"
+      },
+      "position": {
+        "x": 56,
+        "y": 825
+      },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": 13,
+      "infor": {
+        "dbItems": [
+          {
+            "ch": "P1",
+            "id": "gw44e65437a2_lo2"
+          },
+          {
+            "ch": "P2",
+            "id": "gw44e65437a2_lo2"
+          },
+          {
+            "ch": "P3",
+            "id": "gw44e65437a2_lo2"
+          }
+        ],
+        "dbName": "Lò 2 tầng",
+        "itt": "630",
+        "nextLevel": "",
+        "ptt": "416",
+        "type": "diaData"
+      },
+      "position": {
+        "x": 198,
+        "y": 825
+      },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": 14,
+      "infor": {
+        "dbItems": [
+          {
+            "ch": "A12",
+            "id": "gsnl5d4d17ff"
+          },
+          {
+            "ch": "A22",
+            "id": "gsnl5d4d17ff"
+          },
+          {
+            "ch": "A32",
+            "id": "gsnl5d4d17ff"
+          }
+        ],
+        "dbName": "Máy nghiền 60T",
+        "itt": "1000",
+        "nextLevel": "",
+        "ptt": "660",
+        "type": "diaData"
+      },
+      "position": {
+        "x": 435,
+        "y": 825
+      },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": 15,
+      "infor": {
+        "dbItems": [
+          {
+            "ch": "A11",
+            "id": "gsnl6d880b65"
+          },
+          {
+            "ch": "A21",
+            "id": "gsnl6d880b65"
+          },
+          {
+            "ch": "A31",
+            "id": "gsnl6d880b65"
+          }
+        ],
+        "dbName": "Nghiền xương",
+        "itt": "1200",
+        "nextLevel": "",
+        "ptt": "792",
+        "type": "diaData"
+      },
+      "position": {
+        "x": 573,
+        "y": 825
+      },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": 16,
+      "infor": {
+        "dbItems": [
+          {
+            "ch": "A12",
+            "id": "gsnl6d880b65"
+          },
+          {
+            "ch": "A22",
+            "id": "gsnl6d880b65"
+          },
+          {
+            "ch": "A32",
+            "id": "gsnl6d880b65"
+          }
+        ],
+        "dbName": "Máy ép litan",
+        "itt": "630",
+        "nextLevel": "",
+        "ptt": "416",
+        "type": "diaData"
+      },
+      "position": {
+        "x": 701,
+        "y": 825
+      },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": 17,
+      "infor": {
+        "dbItems": [
+          {
+            "ch": "A13",
+            "id": "gsnl6d880b65"
+          },
+          {
+            "ch": "A23",
+            "id": "gsnl6d880b65"
+          },
+          {
+            "ch": "A33",
+            "id": "gsnl6d880b65"
+          }
+        ],
+        "dbName": "Nén khí bơm",
+        "itt": "250",
+        "nextLevel": "",
+        "ptt": "165",
+        "type": "diaData"
+      },
+      "position": {
+        "x": 837,
+        "y": 825
+      },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": 18,
+      "infor": {
+        "dbItems": [
+          {
+            "ch": "A14",
+            "id": "gsnl6d880b65"
+          },
+          {
+            "ch": "A24",
+            "id": "gsnl6d880b65"
+          },
+          {
+            "ch": "A34",
+            "id": "gsnl6d880b65"
+          }
+        ],
+        "dbName": "Sấy phun",
+        "itt": "630",
+        "nextLevel": "",
+        "ptt": "416",
+        "type": "diaData"
+      },
+      "position": {
+        "x": 969,
+        "y": 825
+      },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": 19,
+      "infor": {
+        "dbItems": [
+          {
+            "ch": "A15",
+            "id": "gsnl6d880b65"
+          },
+          {
+            "ch": "A25",
+            "id": "gsnl6d880b65"
+          },
+          {
+            "ch": "A35",
+            "id": "gsnl6d880b65"
+          }
+        ],
+        "dbName": "Lò nguội",
+        "itt": "630",
+        "nextLevel": "",
+        "ptt": "416",
+        "type": "diaData"
+      },
+      "position": {
+        "x": 1121,
+        "y": 825
+      },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": 20,
+      "infor": {
+        "dbItems": [
+          {
+            "ch": "A16",
+            "id": "gsnl6d880b65"
+          },
+          {
+            "ch": "A26",
+            "id": "gsnl6d880b65"
+          },
+          {
+            "ch": "A36",
+            "id": "gsnl6d880b65"
+          }
+        ],
+        "dbName": "Nghiền men",
+        "itt": "1200",
+        "nextLevel": "",
+        "ptt": "792",
+        "type": "diaData"
+      },
+      "position": {
+        "x": 1263,
+        "y": 825
+      },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": 21,
+      "infor": {
+        "dbItems": [
+          {
+            "ch": "A41",
+            "id": "gsnl6d880b65"
+          },
+          {
+            "ch": "A51",
+            "id": "gsnl6d880b65"
+          },
+          {
+            "ch": "A61",
+            "id": "gsnl6d880b65"
+          }
+        ],
+        "dbName": "Lò nung máy mài ",
+        "itt": "1200",
+        "nextLevel": "",
+        "ptt": "792",
+        "type": "diaData"
+      },
+      "position": {
+        "x": 1397,
+        "y": 825
+      },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": 22,
+      "infor": {
+        "dbItems": [
+          {
+            "ch": "A42",
+            "id": "gsnl6d880b65"
+          },
+          {
+            "ch": "A52",
+            "id": "gsnl6d880b65"
+          },
+          {
+            "ch": "A62",
+            "id": "gsnl6d880b65"
+          }
+        ],
+        "dbName": "ME.KEDA",
+        "itt": "1200",
+        "nextLevel": "",
+        "ptt": "792",
+        "type": "diaData"
+      },
+      "position": {
+        "x": 1527,
+        "y": 825
+      },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": 23,
+      "infor": {
+        "dbItems": [
+          {
+            "ch": "A43",
+            "id": "gsnl6d880b65"
+          },
+          {
+            "ch": "A53",
+            "id": "gsnl6d880b65"
+          },
+          {
+            "ch": "A63",
+            "id": "gsnl6d880b65"
+          }
+        ],
+        "dbName": "Dây chuyền men",
+        "itt": "400",
+        "nextLevel": "",
+        "ptt": "264",
+        "type": "diaData"
+      },
+      "position": {
+        "x": 1659,
+        "y": 825
+      },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": 24,
+      "infor": {
+        "dbItems": [
+          [
+            {
+              "ch": "P1",
+              "id": "gw44e65437a2_11"
+            },
+            {
+              "ch": "P2",
+              "id": "gw44e65437a2_11"
+            },
+            {
+              "ch": "P3",
+              "id": "gw44e65437a2_11"
+            }
+          ]
+        ],
+        "dbName": ["Nghiền xương", "Lò 2 tầng"],
+        "itt": 2230,
+        "nextLevel": "",
+        "ptt": 1472,
+        "type": "diaDataTotal"
+      },
+      "position": {
+        "x": -25,
+        "y": 597
+      },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": 25,
+      "infor": {
+        "dbItems": [
+          [
+            {
+              "ch": "A11",
+              "id": "gsnl5d4d17ff"
+            },
+            {
+              "ch": "A21",
+              "id": "gsnl5d4d17ff"
+            },
+            {
+              "ch": "A31",
+              "id": "gsnl5d4d17ff"
+            }
+          ]
+        ],
+        "dbName": ["Trạm 3"],
+        "itt": 4000,
+        "nextLevel": "",
+        "ptt": 2640,
+        "type": "diaDataTotal"
+      },
+      "position": {
+        "x": 865,
+        "y": 599
+      },
+      "type": "examples.CustomDiaData"
+    },
+    {
+      "attrs": {},
+      "id": 26,
+      "infor": {
+        "dbItems": [
+          [
+            {
+              "ch": "A11",
+              "id": "gsnl7eb883d7"
+            },
+            {
+              "ch": "A21",
+              "id": "gsnl7eb883d7"
+            },
+            {
+              "ch": "A31",
+              "id": "gsnl7eb883d7"
+            }
+          ]
+        ],
+        "dbName": ["Trạm 1"],
+        "itt": 4000,
+        "nextLevel": "",
+        "ptt": 2640,
+        "type": "diaDataTotal"
+      },
+      "position": {
+        "x": 725,
+        "y": 99
+      },
+      "type": "examples.CustomDiaData"
+    }
+  ]
+}

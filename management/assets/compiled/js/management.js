@@ -2,6 +2,7 @@ var DiagramData = [];
 var namespace = joint.shapes;
 var graph;
 var paper;
+var paper1;
 $(document).ready(function () {
   graph = new joint.dia.Graph({}, { cellNamespace: namespace });
 
