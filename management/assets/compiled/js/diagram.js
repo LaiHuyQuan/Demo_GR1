@@ -4,8 +4,10 @@ let isLongPress = false;
 let notLongPress;
 let clickCount = 0;
 let clickTimeout;
-var bienapID = ["a27", "a28", "a29"];
-var daycapID = ["a30", "a31", "a32"];
+var bienapID = [];
+var daycapID = [];
+var tudienID = [];
+var dongcatID = [];
 $(document).ready(function () {
   // click
   $(document).on("mousedown", ".joint-cell", async function () {
@@ -13,7 +15,10 @@ $(document).ready(function () {
 
     timer = setTimeout(() => {
       var cellId = $(this).attr("model-id");
-      if (cellId == 0) return;
+      if (cellId == 0) {
+        rmShow();
+        $("#heatmap").removeClass("d-sm-none");
+      }
       console.log("Cell được nhấn:", cellId);
       hold();
       isLongPress = true;
@@ -54,6 +59,37 @@ $(document).ready(function () {
     isLongPress = false;
   });
 
+  // paper.on("cell:dblclick", function (elementView) {
+  //   const element = elementView.model;
+  //   alert("Element double-clicked: " + element.id);
+  // });
+
+  // // paper.on("click", ".joint-cell", function () {
+  // //   console.log(1);
+  // //   var cellId = $(this).attr("model-id");
+  // //   console.log("Cell được click:", cellId);
+  // //   checkClickCells(cellId);
+  // // });
+
+  // paper.on("element:click", function (elementView) {
+  //   // Xử lý sự kiện click cho phần tử
+  //   console.log(elementView);
+  // });
+
+  // paper.on("dbclick", function () {
+  //   var cellId = $(this).attr("model-id");
+  //   console.log("Double click:", cellId);
+  // });
+
+  // paper.on("blank:pointerclick", function () {
+  //   rmShow();
+  //   $("#heatmap").removeClass("d-sm-none");
+  // });
+
+  // paper.on("element: pointerdown", function () {});
+
+  // paper.on("element: pointerdown", function () {});
+
   function hold() {
     var myModal = new bootstrap.Modal(document.getElementById("Modal"), {
       keyboard: false,
@@ -72,6 +108,16 @@ $(document).ready(function () {
       $("#daycap").removeClass("d-sm-none");
       addCarousel("#daycap", cellId);
     }
+    if (tudienID.includes(cellId)) {
+      rmShow();
+      $("#tudien").removeClass("d-sm-none");
+      addCarousel("#tudien", cellId);
+    }
+    if (dongcatID.includes(cellId)) {
+      rmShow();
+      $("#dongcat").removeClass("d-sm-none");
+      addCarousel("#dongcat", cellId);
+    }
   }
 
   function rmShow() {
@@ -79,6 +125,8 @@ $(document).ready(function () {
     $("#heatmap").addClass("d-sm-none");
     $("#bienap").addClass("d-sm-none");
     $("#daycap").addClass("d-sm-none");
+    $("#tudien").addClass("d-sm-none");
+    $("#dongcat").addClass("d-sm-none");
   }
 
   function addCarousel(type, ID) {
@@ -194,6 +242,12 @@ $(document).ready(function () {
         break;
       case "#bienap":
         addTableForBienap(type, ID);
+        break;
+      case "#tudien":
+        addTableForTudien(type, ID);
+        break;
+      case "#dongcat":
+        addTableForDongcat(type, ID);
         break;
       default:
         console.log("ID không hợp lệ");
@@ -364,7 +418,7 @@ $(document).ready(function () {
       `
 <div class="table-responsive table-bot">
     <div class="table-responsive">
-        <table class="table table-hover mb-0 table-striped">
+        <table class="table table-hover mb-0 table-striped" style="text-align: center">
             <thead>
                 <tr>
                     <th></th>
@@ -513,5 +567,328 @@ $(document).ready(function () {
     `;
 
     $(type).find("#v-pills-home").append(newTable1);
+  }
+
+  function addTableForTudien(type, ID) {
+    var data;
+    for (var i = 0; i < Tudien.length; i++) {
+      if (Tudien[i].id == ID) {
+        data = Tudien[i];
+      }
+    }
+
+    var hoatdong = data.hoatdong;
+    var thietke = data.thietke;
+
+    var newTable =
+      `
+<div class="table-responsive table-bot">
+    <div class="table-responsive">
+        <table class="table table-hover mb-0 table-striped" style="text-align: center">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Pha A</th>
+                    <th>Pha B</th>
+                    <th>Pha C</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="font-weight: bold">U</td>
+                    <td>` +
+      hoatdong.U[0] +
+      `</td>
+                    <td>` +
+      hoatdong.U[1] +
+      `</td>
+                    <td>` +
+      hoatdong.U[2] +
+      `</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold">I</td>
+                    <td>` +
+      hoatdong.I[0] +
+      `</td>
+                    <td>` +
+      hoatdong.I[1] +
+      `</td>
+                    <td>` +
+      hoatdong.I[2] +
+      `</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold">P</td>
+                    <td>` +
+      hoatdong.P[0] +
+      `</td>
+                    <td>` +
+      hoatdong.P[1] +
+      `</td>
+                    <td>` +
+      hoatdong.P[2] +
+      `</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold">Pf</td>
+                    <td>` +
+      hoatdong.Pf[0] +
+      `</td>
+                    <td>` +
+      hoatdong.Pf[1] +
+      `</td>
+                    <td>` +
+      hoatdong.Pf[2] +
+      `</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold">Q</td>
+                    <td>` +
+      hoatdong.Q[0] +
+      `</td>
+                    <td>` +
+      hoatdong.Q[1] +
+      `</td>
+                    <td>` +
+      hoatdong.Q[2] +
+      `</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold">T</td>
+                    <td colspan="3" style="text-align: center">` +
+      hoatdong.T +
+      `&deg;C</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold">H</td>
+                    <td colspan="3" style="text-align: center">` +
+      hoatdong.H +
+      `%</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold">Pre</td>
+                    <td colspan="3" style="text-align: center">` +
+      hoatdong.Pre +
+      ` Hz</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold">STATUS</td>
+                    <td colspan="3" style="background-color: #209935; text-align: center;">` +
+      hoatdong.STATUS +
+      `</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+`;
+
+    $(type).find("#v-pills-profile").append(newTable);
+
+    var newTable1 =
+      `<div class="table-responsive">
+                                <table
+                                  class="table table-hover mb-0 table-striped"
+                                >
+                                  <thead>
+                                    <tr>
+                                      <th style="width: 40%"></th>
+                                      <th style="width: 60%">Tủ điện</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td class="text-bold-500">Ptt</td>
+                                      <td>` +
+      thietke.Ptt +
+      `kW</td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-bold-500">Số lộ</td>
+                                      <td>` +
+      thietke.solo +
+      `</td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-bold-500">Tên tủ</td>
+                                      <td>` +
+      thietke.ten +
+      `</td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-bold-500">
+                                        Loại tải chính
+                                      </td>
+                                      <td>` +
+      thietke.Loaitaichinh +
+      `</td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-bold-500">
+                                        Hệ số đồng thời
+                                      </td>
+                                      <td>` +
+      thietke.hesodongthoi +
+      `</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>`;
+
+    $(type).find("#v-pills-home").append(newTable1);
+  }
+
+  function addTableForDongcat(type, ID) {
+    var data;
+    for (var i = 0; i < Dongcat.length; i++) {
+      if (Dongcat[i].id == ID) {
+        data = Dongcat[i];
+      }
+    }
+
+    var hoatdong = data.hoatdong;
+    var thietke = data.thietke;
+    var newTable =
+      `<div class="table-responsive">
+                                <table
+                                  class="table table-hover mb-0 table-striped"
+                                >
+                                  <thead>
+                                    <tr>
+                                      <th style="width: 40%"></th>
+                                      <th style="width: 60%">TB đóng cắt</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td class="text-bold-500">Loại</td>
+                                      <td>` +
+      thietke.Loai +
+      `</td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-bold-500">Iđm</td>
+                                      <td>` +
+      thietke.Idm +
+      `A</td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-bold-500">In</td>
+                                      <td>` +
+      thietke.In +
+      `kA</td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-bold-500">Hãng</td>
+                                      <td>` +
+      thietke.Hang +
+      `</td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-bold-500">Dạng</td>
+                                      <td>` +
+      thietke.Dang +
+      `AF</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>`;
+    $(type).find("#v-pills-home").append(newTable);
+
+    var newTable1 =
+      `<div class="table-responsive" style= "text-align:center">
+                                <table
+                                class="table table-hover mb-0 table-striped"
+                                >
+                                  <thead>
+                                    <tr>
+                                      <th></th>
+                                      <th>Pha A</th>
+                                      <th>Pha B</th>
+                                      <th>Pha C</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td style="font-weight: bold">U</td>
+                                      <td>` +
+      hoatdong.U[0] +
+      `</td>
+                                      <td>` +
+      hoatdong.U[1] +
+      `</td>
+                                      <td>` +
+      hoatdong.U[2] +
+      `</td>
+                                    </tr>
+                                    <tr>
+                                      <td style="font-weight: bold">I</td>
+                                      <td>` +
+      hoatdong.I[0] +
+      `</td>
+                                      <td>` +
+      hoatdong.I[1] +
+      `</td>
+                                      <td>` +
+      hoatdong.I[2] +
+      `</td>
+                                    </tr>
+                                    <tr>
+                                      <td style="font-weight: bold">P</td>
+                                      <td>` +
+      hoatdong.P[0] +
+      `</td>
+                                      <td>` +
+      hoatdong.P[1] +
+      `</td>
+                                      <td>` +
+      hoatdong.P[2] +
+      `</td>
+                                    </tr>
+                                    <tr>
+                                      <td style="font-weight: bold">Pf</td>
+                                      <td>` +
+      hoatdong.Pf[0] +
+      `</td>
+                                      <td>` +
+      hoatdong.Pf[1] +
+      `</td>
+                                      <td>` +
+      hoatdong.Pf[2] +
+      `</td>
+                                    </tr>
+                                    <tr>
+                                      <td style="font-weight: bold">Q</td>
+                                      <td>` +
+      hoatdong.Q[0] +
+      `</td>
+                                      <td>` +
+      hoatdong.Q[1] +
+      `</td>
+                                      <td>` +
+      hoatdong.Q[2] +
+      `</td>
+                                    </tr>
+                                    <tr>
+                                      <td style="font-weight: bold">T</td>
+                                      <td colspan="3">` +
+      hoatdong.T +
+      `&degC</td>
+                                    </tr>
+                                    <tr>
+                                      <td style="font-weight: bold">STT</td>
+                                      <td colspan="2" style= "text-align:left">` +
+      hoatdong.STT[0] +
+      `</td>
+                                      <td>` +
+      hoatdong.STT[1] +
+      `</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>`;
+
+    $(type).find("#v-pills-profile").append(newTable1);
   }
 });

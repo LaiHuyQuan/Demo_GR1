@@ -3,6 +3,8 @@ var heatmapData; //Biến lưu thông tin heatmap
 var chartData; //Biến lưu trữ thông tin biểu đồ
 var Daycap = [];
 var Bienap = [];
+var Tudien = [];
+var Dongcat = [];
 var phaseColor = ["#ff3838", "#fff200", "#18dcff"]; // màu của đồ thị
 var c1name = ["Pha A", "Pha B", "Pha C"];
 var lineChart = {}; //trạng thái đồ thị
@@ -33,21 +35,21 @@ var selectCells = [
   { x: 90, y: 615, w: 70, h: 50, id: "a24" },
   { x: 1010, y: 613, w: 70, h: 50, id: "a25" },
   { x: 840, y: 119, w: 70, h: 50, id: "a26" },
-  { x: 812, y: 40, w: 70, h: 50, id: "a27" },
-  { x: 980, y: 540, w: 70, h: 50, id: "a28" },
-  { x: 70, y: 540, w: 70, h: 50, id: "a29" },
-  { x: 110, y: 205, w: 1500, h: 15, id: "a30" },
-  { x: 0, y: 702, w: 225, h: 15, id: "a31" },
-  { x: 365, y: 702, w: 1335, h: 15, id: "a32" },
+  { x: 812, y: 40, w: 70, h: 50, id: "ba1" },
+  { x: 980, y: 540, w: 70, h: 50, id: "ba2" },
+  { x: 70, y: 540, w: 70, h: 50, id: "ba3" },
+  { x: 110, y: 205, w: 1500, h: 15, id: "dc1" },
+  { x: 0, y: 702, w: 225, h: 15, id: "dc2" },
+  { x: 365, y: 702, w: 1335, h: 15, id: "dc3" },
 ];
 
 var selectCellsLayout = [
-  { x: 955, y: 245, w: 175, h: 85, id: "a27" },
-  { x: 955, y: 525, w: 175, h: 85, id: "a28" },
-  { x: 955, y: 810, w: 175, h: 85, id: "a29" },
-  { x: 1010, y: 1100, w: 185, h: 245, id: "a4" },
-  { x: 1350, y: 1125, w: 135, h: 180, id: "a5" },
-  { x: 0, y: 1505, w: 1105, h: 15, id: "a32" },
+  { x: 955, y: 245, w: 175, h: 85, id: "td1" },
+  { x: 955, y: 525, w: 175, h: 85, id: "td2" },
+  { x: 955, y: 810, w: 175, h: 85, id: "td3" },
+  { x: 1010, y: 1100, w: 185, h: 245, id: "td4" },
+  { x: 1350, y: 1125, w: 135, h: 180, id: "td5" },
+  { x: 0, y: 1505, w: 1105, h: 15, id: "dc1" },
 ];
 
 var Layout = {
@@ -189,6 +191,9 @@ $(document).ready(function () {
         method: "GET",
         dataType: "json",
       });
+      for (var i = 0; i < response.length; i++) {
+        daycapID.push(response[i].id);
+      }
       Daycap = response;
     } catch (error) {
       console.error("Lỗi khi gửi yêu cầu:", error);
@@ -202,7 +207,42 @@ $(document).ready(function () {
         method: "GET",
         dataType: "json",
       });
+      for (var i = 0; i < response.length; i++) {
+        bienapID.push(response[i].id);
+      }
       Bienap = response;
+    } catch (error) {
+      console.error("Lỗi khi gửi yêu cầu:", error);
+    }
+  }
+
+  async function fetchTudienData() {
+    try {
+      const response = await $.ajax({
+        url: "data/tudien.json",
+        method: "GET",
+        dataType: "json",
+      });
+      for (var i = 0; i < response.length; i++) {
+        tudienID.push(response[i].id);
+      }
+      Tudien = response;
+    } catch (error) {
+      console.error("Lỗi khi gửi yêu cầu:", error);
+    }
+  }
+
+  async function fetchDongcatData() {
+    try {
+      const response = await $.ajax({
+        url: "data/dongcat.json",
+        method: "GET",
+        dataType: "json",
+      });
+      for (var i = 0; i < response.length; i++) {
+        dongcatID.push(response[i].id);
+      }
+      Dongcat = response;
     } catch (error) {
       console.error("Lỗi khi gửi yêu cầu:", error);
     }
@@ -259,13 +299,12 @@ $(document).ready(function () {
 
   function createLayout() {
     graph.addCell(Layout);
-    // scale();
     addCellsToGraph(graph, rectCellsLayout);
+    // scale();
   }
 
   function createMap() {
     graph.addCell(map);
-    scale();
   }
 
   if ($("#myDiv").find("#layout").length) {
@@ -285,4 +324,6 @@ $(document).ready(function () {
 
   fetchDaycapData();
   fetchBienapData();
+  fetchTudienData();
+  fetchDongcatData();
 });
