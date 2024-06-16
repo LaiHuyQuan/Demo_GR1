@@ -1,3 +1,51 @@
+async function fetchLayoutData() {
+  try {
+    const response = await $.ajax({
+      url: "assets/data/structure.json",
+      method: "GET",
+      dataType: "json",
+    });
+    jsonStructure = response;
+    // console.log(jsonStructure);
+    buildStructure(jsonStructure);
+  } catch (error) {
+    console.error("Lỗi khi gửi yêu cầu:", error);
+  }
+}
+
+fetchLayoutData();
+
+function buildStructure(data) {
+  const container = $(".block-level-0");
+
+  data.level1.forEach((level1Item) => {
+    const level1Block = createBlock(level1Item, 1);
+    container.append(level1Block);
+  });
+}
+
+function createBlock(item, level) {
+  const block = $(`<div class="block block-level-${level}">`);
+  block.append(`${item.name} (code: ${item.code})`);
+  block.append(
+    `<i class="fa-solid fa-plus fa-sm add-button" aria-hidden="true"></i>`
+  );
+  block.append(
+    `<i class="fa-solid fa-minus fa-sm delete-button" aria-hidden="true"></i>`
+  );
+
+  const nextLevel = level + 1;
+  const nextLevelKey = `Level${nextLevel}`;
+  if (item[nextLevelKey] && item[nextLevelKey].length > 0) {
+    item[nextLevelKey].forEach((nextLevelItem) => {
+      const childBlock = createBlock(nextLevelItem, nextLevel);
+      block.append(childBlock);
+    });
+  }
+
+  return block;
+}
+
 //mockup structure
 // mở
 $("#add-project").on("click", ".structure", function () {
@@ -193,7 +241,7 @@ $(".container").on("click", ".block-level-4", function (event) {
 });
 
 function SaveStructure() {
-  jsonStructure.level0 = [];
+  jsonStructure.level1 = [];
 
   $(".container")
     .find(".block-level-1")
@@ -201,10 +249,10 @@ function SaveStructure() {
       var levelInfo = $(this).contents().first().text().trim();
       var match = levelInfo.match(/^(.+?)\s*\(code:\s*(.+?)\)$/);
 
-      jsonStructure.level0.push({
+      jsonStructure.level1.push({
         name: match[1],
         code: match[2],
-        children: [],
+        Level2: [],
       });
 
       $(this)
@@ -212,10 +260,10 @@ function SaveStructure() {
         .each(function () {
           var levelInfo = $(this).contents().first().text().trim();
           var match2 = levelInfo.match(/^(.+?)\s*\(code:\s*(.+?)\)$/);
-          jsonStructure.level0[jsonStructure.level0.length - 1].children.push({
+          jsonStructure.level1[jsonStructure.level1.length - 1].Level2.push({
             name: match2[1],
             code: match2[2],
-            children: [],
+            Level3: [],
           });
 
           $(this)
@@ -224,14 +272,14 @@ function SaveStructure() {
               var levelInfo = $(this).contents().first().text().trim();
               var match3 = levelInfo.match(/^(.+?)\s*\(code:\s*(.+?)\)$/);
               var lastLevel2 =
-                jsonStructure.level0[jsonStructure.level0.length - 1].children
+                jsonStructure.level1[jsonStructure.level1.length - 1].Level2
                   .length - 1;
-              jsonStructure.level0[jsonStructure.level0.length - 1].children[
+              jsonStructure.level1[jsonStructure.level1.length - 1].Level2[
                 lastLevel2
-              ].children.push({
+              ].Level3.push({
                 name: match3[1],
                 code: match3[2],
-                children: [],
+                Level4: [],
               });
 
               $(this)
@@ -240,11 +288,11 @@ function SaveStructure() {
                   var levelInfo = $(this).contents().first().text().trim();
                   var match4 = levelInfo.match(/^(.+?)\s*\(code:\s*(.+?)\)$/);
                   var lastLevel3 =
-                    jsonStructure.level0[jsonStructure.level0.length - 1]
-                      .children[lastLevel2].children.length - 1;
-                  jsonStructure.level0[
-                    jsonStructure.level0.length - 1
-                  ].children[lastLevel2].children[lastLevel3].children.push({
+                    jsonStructure.level1[jsonStructure.level1.length - 1]
+                      .Level2[lastLevel2].Level3.length - 1;
+                  jsonStructure.level1[jsonStructure.level1.length - 1].Level2[
+                    lastLevel2
+                  ].Level3[lastLevel3].Level4.push({
                     name: match4[1],
                     code: match4[2],
                   });

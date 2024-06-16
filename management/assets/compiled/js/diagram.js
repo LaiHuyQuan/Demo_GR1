@@ -10,85 +10,101 @@ var tudienID = [];
 var dongcatID = [];
 $(document).ready(function () {
   // click
-  $(document).on("mousedown", ".joint-cell", async function () {
-    notLongPress = false;
+  // $(document).on("mousedown", ".joint-cell", async function () {
+  //   notLongPress = false;
 
-    timer = setTimeout(() => {
-      var cellId = $(this).attr("model-id");
-      if (cellId == 0) {
-        rmShow();
-        $("#heatmap").removeClass("d-sm-none");
+  //   timer = setTimeout(() => {
+  //     var cellId = $(this).attr("model-id");
+  //     if (cellId == 0) {
+  //       rmShow();
+  //       $("#heatmap").removeClass("d-sm-none");
+  //     }
+  //     console.log("Cell được nhấn:", cellId);
+  //     hold();
+  //     isLongPress = true;
+  //   }, 300);
+
+  //   await new Promise((resolve) => {
+  //     setTimeout(() => {
+  //       if (!isLongPress) {
+  //         notLongPress = true;
+  //       }
+  //       resolve();
+  //     }, 300);
+  //   });
+
+  //   clickCount++;
+  //   if (clickCount === 1) {
+  //     clickTimeout = setTimeout(() => {
+  //       if (clickCount === 1) {
+  //         if (notLongPress) {
+  //           var cellId = $(this).attr("model-id");
+  //           console.log("Cell được click:", cellId);
+  //           checkClickCells(cellId);
+  //         }
+  //       } else {
+  //         console.log("Double click");
+  //       }
+  //       clickCount = 0;
+  //     }, 200);
+  //   } else if (clickCount === 2) {
+  //     clearTimeout(clickTimeout);
+  //     clickCount = 0;
+  //     console.log("Double click");
+  //   }
+  // });
+
+  // $(document).on("mouseup", ".joint-cell", function () {
+  //   clearTimeout(timer);
+  //   isLongPress = false;
+  // });
+
+  var clickTimeout;
+  var holdTimeout;
+
+  paper.on("cell:pointerclick", function (elementView) {
+    var element = elementView.model;
+
+    // Xóa bộ đếm thời gian nếu có
+    clearTimeout(clickTimeout);
+    clearTimeout(holdTimeout);
+
+    // Thiết lập bộ đếm thời gian mới cho click
+    clickTimeout = setTimeout(function () {
+      // alert("Element clicked: " + element.id);
+      checkClickCells(element.id);
+    }, 300); // Độ trễ 300ms để xác định double click
+  });
+
+  paper.on("cell:pointerdblclick", function (elementView) {
+    var element = elementView.model;
+
+    // Xóa bộ đếm thời gian sự kiện click
+    clearTimeout(clickTimeout);
+
+    alert("Element double-clicked: " + element.id);
+    console.log("Double Clicked", element.id);
+  });
+
+  paper.on("element:pointerdown", function (elementView) {
+    var element = elementView.model;
+
+    // Thiết lập bộ đếm thời gian cho hold
+    holdTimeout = setTimeout(function () {
+      // alert("Element held: " + element.id);
+      if (element.id != 0) {
+        hold();
       }
-      console.log("Cell được nhấn:", cellId);
-      hold();
-      isLongPress = true;
-    }, 300);
+    }, 300); // Giữ chuột trong 1 giây
 
-    await new Promise((resolve) => {
-      setTimeout(() => {
-        if (!isLongPress) {
-          notLongPress = true;
-        }
-        resolve();
-      }, 300);
+    paper.on("element:pointerup", function () {
+      clearTimeout(holdTimeout);
     });
 
-    clickCount++;
-    if (clickCount === 1) {
-      clickTimeout = setTimeout(() => {
-        if (clickCount === 1) {
-          if (notLongPress) {
-            var cellId = $(this).attr("model-id");
-            console.log("Cell được click:", cellId);
-            checkClickCells(cellId);
-          }
-        } else {
-          console.log("Double click");
-        }
-        clickCount = 0;
-      }, 200);
-    } else if (clickCount === 2) {
-      clearTimeout(clickTimeout);
-      clickCount = 0;
-      console.log("Double click");
-    }
+    paper.on("element:pointermove", function () {
+      clearTimeout(holdTimeout);
+    });
   });
-
-  $(document).on("mouseup", ".joint-cell", function () {
-    clearTimeout(timer);
-    isLongPress = false;
-  });
-
-  // paper.on("cell:dblclick", function (elementView) {
-  //   const element = elementView.model;
-  //   alert("Element double-clicked: " + element.id);
-  // });
-
-  // // paper.on("click", ".joint-cell", function () {
-  // //   console.log(1);
-  // //   var cellId = $(this).attr("model-id");
-  // //   console.log("Cell được click:", cellId);
-  // //   checkClickCells(cellId);
-  // // });
-
-  // paper.on("element:click", function (elementView) {
-  //   // Xử lý sự kiện click cho phần tử
-  //   console.log(elementView);
-  // });
-
-  // paper.on("dbclick", function () {
-  //   var cellId = $(this).attr("model-id");
-  //   console.log("Double click:", cellId);
-  // });
-
-  // paper.on("blank:pointerclick", function () {
-  //   rmShow();
-  //   $("#heatmap").removeClass("d-sm-none");
-  // });
-
-  // paper.on("element: pointerdown", function () {});
-
-  // paper.on("element: pointerdown", function () {});
 
   function hold() {
     var myModal = new bootstrap.Modal(document.getElementById("Modal"), {

@@ -49,10 +49,10 @@ $(".add-channel-mockup").on("click", ".channel-save", function () {
     lv4code: $(".level4-inputs").find("option:selected").data("code"),
   };
 
-  for (var i = 0; i < projectData.devices.length; i++) {
-    var device = projectData.devices[i];
-    if (device.code == deviceID) {
-      projectData.devices[i].channels.push(channel);
+  for (var i = 0; i < projectData.Devices.length; i++) {
+    var device = projectData.Devices[i];
+    if (device.deviceCode == deviceID) {
+      projectData.Devices[i].Channels.push(channel);
       break; // Thoát khỏi vòng lặp sau khi thêm kênh
     }
   }
@@ -108,10 +108,10 @@ $(".add-device").on("click", ".edit-channel-btn", function () {
     .find(".card-title")
     .text("Channel " + channelID);
 
-  for (var i = 0; i < projectData.devices.length; i++) {
-    var device = projectData.devices[i];
-    for (var j = 0; j < device.channels.length; j++) {
-      var channel = device.channels[j];
+  for (var i = 0; i < projectData.Devices.length; i++) {
+    var device = projectData.Devices[i];
+    for (var j = 0; j < device.Channels.length; j++) {
+      var channel = device.Channels[j];
       if (channel.chonch == channelID) {
         $('input[name="itt"]').val(channel.itt);
         $('input[name="ptt"]').val(channel.ptt);
@@ -147,10 +147,10 @@ $(".add-device").on("click", ".edit-channel-btn", function () {
 $(".add-channel-mockup").on("click", ".edit-channel-save", function () {
   var deviceID = $(this).data("info");
   var channelID = $(this).data("chonch");
-  for (var i = 0; i < projectData.devices.length; i++) {
-    var device = projectData.devices[i];
-    for (var j = 0; j < device.channels.length; j++) {
-      var channel = device.channels[j];
+  for (var i = 0; i < projectData.Devices.length; i++) {
+    var device = projectData.Devices[i];
+    for (var j = 0; j < device.Channels.length; j++) {
+      var channel = device.Channels[j];
       if (channel.chonch === channelID) {
         channel.itt = $('input[name="itt"]').val();
         channel.ptt = $('input[name="ptt"]').val();
@@ -202,12 +202,12 @@ $(".add-device-main").on("click", ".delete-channel-btn", function () {
   var channelID = $(this).data("info");
   var deviceID = $(this).data("deviceid");
   if (confirm("Bạn có chắc chắn muốn xóa kênh này không?")) {
-    for (var i = 0; i < projectData.devices.length; i++) {
-      var device = projectData.devices[i];
-      if (device.code == deviceID) {
-        for (var j = 0; j < device.channels.length; j++) {
-          if (device.channels[j].chonch == channelID) {
-            device.channels.splice(j, 1);
+    for (var i = 0; i < projectData.Devices.length; i++) {
+      var device = projectData.Devices[i];
+      if (device.deviceCode == deviceID) {
+        for (var j = 0; j < device.Channels.length; j++) {
+          if (device.Channels[j].chonch == channelID) {
+            device.Channels.splice(j, 1);
             break;
           }
         }
@@ -272,13 +272,13 @@ function addChannel(deviceID, chonch, chonpha) {
 // tạo bảng kênh
 function createchannelTable(deviceID) {
   var newDevice = "";
-  for (var i = 0; i < projectData.devices.length; i++) {
-    if (projectData.devices[i].code == deviceID) {
-      var foundDevice = projectData.devices[i];
+  for (var i = 0; i < projectData.Devices.length; i++) {
+    if (projectData.Devices[i].deviceCode == deviceID) {
+      var foundDevice = projectData.Devices[i];
       newDevice +=
         "<div>" +
         '<table class="table table-lg ' +
-        foundDevice.code +
+        foundDevice.deviceCode +
         '" >' +
         "<thead>" +
         "<tr>" +
@@ -296,7 +296,7 @@ function createchannelTable(deviceID) {
         "<tbody>";
 
       // Thêm dữ liệu của các kênh vào bảng
-      foundDevice.channels.forEach(function (channel, index) {
+      foundDevice.Channels.forEach(function (channel, index) {
         newDevice +=
           "<tr>" +
           '<td class="text-bold-500">' +
@@ -323,14 +323,14 @@ function createchannelTable(deviceID) {
           '<td class="edit-channel-btn" data-info="' +
           channel.chonch +
           '" data-deviceID="' +
-          foundDevice.code +
+          foundDevice.deviceCode +
           '" data-type="' +
           foundDevice.deviceType +
           '">sửa</td>' +
           '<td class="delete-channel-btn" data-info="' +
           channel.chonch +
           '" data-deviceID="' +
-          foundDevice.code +
+          foundDevice.deviceCode +
           '">xóa</td>' +
           "</tr>";
 
@@ -344,12 +344,12 @@ function createchannelTable(deviceID) {
 
 function createSelectInputsForLevels(blockName) {
   var container = $(blockName);
-  var level0Data = jsonStructure.level0;
+  var level1Data = jsonStructure.level1;
 
-  var selectBlock = $('<div class = "mockup">');
+  var selectBlock = $('<div class="mockup">');
 
   // Tạo ô lựa chọn cho cấp độ 1
-  var level1Select = createSelectInputs(1, level0Data);
+  var level1Select = createSelectInputs(1, level1Data);
   selectBlock.append('<label class="level-select" for="lv1">lv1</label>');
   selectBlock.append(level1Select);
   selectBlock.append("</br>");
@@ -419,31 +419,30 @@ function getDataForLevel(selectedValue, level) {
   var dataForLevel = [];
   switch (level) {
     case 2:
-      var level1Data = jsonStructure.level0;
-      level1Data.forEach(function (item) {
-        if (item.name === selectedValue && item.children) {
-          dataForLevel = item.children;
+      jsonStructure.level1.forEach(function (item) {
+        if (item.name === selectedValue && item.Level2) {
+          dataForLevel = item.Level2;
         }
       });
       break;
     case 3:
-      var level2Data = jsonStructure.level0.flatMap(
-        (level1) => level1.children
-      );
-      level2Data.forEach(function (item) {
-        if (item.name === selectedValue && item.children) {
-          dataForLevel = item.children;
-        }
+      jsonStructure.level1.forEach(function (level1) {
+        level1.Level2.forEach(function (item) {
+          if (item.name === selectedValue && item.Level3) {
+            dataForLevel = item.Level3;
+          }
+        });
       });
       break;
     case 4:
-      var level3Data = jsonStructure.level0
-        .flatMap((level1) => level1.children)
-        .flatMap((level2) => level2.children);
-      level3Data.forEach(function (item) {
-        if (item.name === selectedValue && item.children) {
-          dataForLevel = item.children;
-        }
+      jsonStructure.level1.forEach(function (level1) {
+        level1.Level2.forEach(function (level2) {
+          level2.Level3.forEach(function (item) {
+            if (item.name === selectedValue && item.Level4) {
+              dataForLevel = item.Level4;
+            }
+          });
+        });
       });
       break;
     default:

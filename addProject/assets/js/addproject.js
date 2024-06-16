@@ -2,12 +2,12 @@
 var projectData = {
   projectCode: "",
   projectName: "",
-  devices: [],
+  Devices: [],
 };
 
 // structure dự án
 var jsonStructure = {
-  level0: [],
+  level1: [],
 };
 
 //mapping
@@ -40,6 +40,127 @@ for (var key in mapping) {
 }
 
 $(document).ready(function () {
+  async function fetchLayoutData() {
+    try {
+      const response = await $.ajax({
+        url: "assets/data/project_data.JSON",
+        method: "GET",
+        dataType: "json",
+      });
+      projectData = transformData(response);
+      console.log(projectData);
+      createDeviceElements(projectData.Devices);
+      $("#main").find(".device-added").remove();
+      $("#ProjectName").val(projectData.projectName);
+      $("#ProjectCode").val(projectData.projectCode);
+      // buildStructure(jsonStructure);
+    } catch (error) {
+      console.error("Lỗi khi gửi yêu cầu:", error);
+    }
+  }
+
+  function transformData(originalData) {
+    const transformedData = {
+      projectCode: originalData.Project[0].projectCode,
+      projectName: originalData.Project[0].projectName,
+      Devices: [],
+    };
+
+    const channelsMap = {};
+
+    originalData.Channels.forEach((channel) => {
+      if (!channelsMap[channel.deviceID]) {
+        channelsMap[channel.deviceID] = [];
+      }
+      channelsMap[channel.deviceID].push({
+        chonpha: channel.pha || "1 pha",
+        chonch: channel.chonch,
+        itt: channel.itt,
+        ptt: channel.ptt,
+        ct: channel.ct,
+        type: channel.type,
+        name: channel.name,
+        sourceFr: channel.sourceFr,
+        lv1: channel.lv1name,
+        lv2: channel.lv2name,
+        lv3: channel.lv3name,
+        lv4: channel.lv4name,
+        includeS: channel.includeS,
+        includeL: channel.includeL,
+        source: channel.source,
+        lv1code: channel.lv1Code,
+        lv2code: channel.lv2Code,
+        lv3code: channel.lv3Code,
+        lv4code: channel.lv4Code,
+      });
+    });
+
+    originalData.Devices.forEach((device) => {
+      transformedData.Devices.push({
+        deviceCode: device.deviceCode,
+        cabinet: device.cabinet,
+        date: device.date,
+        lv1: device.lv1name,
+        lv2: device.lv2name,
+        lv3: device.lv3name,
+        lv4: device.lv4name,
+        lv1code: device.lv1Code,
+        lv2code: device.lv2Code,
+        lv3code: device.lv3Code,
+        lv4code: device.lv4Code,
+        deviceType: device.deviceType,
+        Channels: channelsMap[device.deviceCode] || [],
+      });
+    });
+
+    return transformedData;
+  }
+
+  function createDeviceElements(Devices) {
+    Devices.forEach((device) => {
+      var newDevices =
+        '<li class="sidebar-item  ">' +
+        '<div class="device-added device-added-' +
+        device.deviceCode +
+        '">' +
+        '<div class="device-hd" data-info="' +
+        device.deviceCode +
+        '" data-type="' +
+        device.deviceType +
+        '">' +
+        "<span>" +
+        device.deviceCode +
+        " - " +
+        device.deviceType +
+        "</span>" +
+        "</li>";
+      $(".menu").append(newDevices);
+
+      // $(".color-gray").removeClass("color-gray");
+      // $(this).toggleClass("color-gray");
+      $("#main").find(".device-added").remove();
+      addProject(device);
+
+      switch (device.deviceType) {
+        case "1k3p":
+          addChannelList1k3p(device.deviceCode);
+          break;
+        case "6k1p":
+          addChannelList6k1p(device.deviceCode);
+          break;
+        case "6k3p":
+          addChannelList6k3p(device.deviceCode);
+          break;
+        case "12k3p":
+          addChannelList12k3p(device.deviceCode);
+          break;
+      }
+
+      initializeTooltips();
+      // addProject(device);
+    });
+  }
+
   // mockup thêm thiết bị
   // mở
   $("#add-project").on("click", ".add-device-btn", function () {
@@ -64,7 +185,7 @@ $(document).ready(function () {
     }
 
     var device = {
-      code: $("#ma").val(),
+      deviceCode: $("#ma").val(),
       cabinet: $("#cabinet").val() || 0,
       date: $("#ngay").val() || 0,
       lv1: $(".level1-inputs").val() || 0,
@@ -76,33 +197,33 @@ $(document).ready(function () {
       lv3code: $(".level3-inputs").find("option:selected").data("code"),
       lv4code: $(".level4-inputs").find("option:selected").data("code"),
       deviceType: $("#loaitb").val(),
-      channels: [],
+      Channels: [],
     };
 
     // kiểm tra mã thiết bị
-    for (var i = 0; i < projectData.devices.length; i++) {
-      var check = projectData.devices[i];
-      if (device.code == check.code) {
+    for (var i = 0; i < projectData.Devices.length; i++) {
+      var check = projectData.Devices[i];
+      if (device.deviceCode == check.deviceCode) {
         alert("Mã thiết bị đã tồn tại");
         return;
       }
     }
 
     // thêm thiết bị vào data
-    projectData.devices.push(device);
+    projectData.Devices.push(device);
 
     var newDevices =
       '<li class="sidebar-item  ">' +
       '<div class="device-added device-added-' +
-      device.code +
+      device.deviceCode +
       '">' +
       '<div class="device-hd" data-info="' +
-      device.code +
+      device.deviceCode +
       '" data-type="' +
       device.deviceType +
       '">' +
       "<span>" +
-      device.code +
+      device.deviceCode +
       " - " +
       device.deviceType +
       "</span>" +
@@ -116,16 +237,16 @@ $(document).ready(function () {
 
     switch (device.deviceType) {
       case "1k3p":
-        addChannelList1k3p(device.code);
+        addChannelList1k3p(device.deviceCode);
         break;
       case "6k1p":
-        addChannelList6k1p(device.code);
+        addChannelList6k1p(device.deviceCode);
         break;
       case "6k3p":
-        addChannelList6k3p(device.code);
+        addChannelList6k3p(device.deviceCode);
         break;
       case "12k3p":
-        addChannelList12k3p(device.code);
+        addChannelList12k3p(device.deviceCode);
         break;
     }
 
@@ -151,10 +272,10 @@ $(document).ready(function () {
 
     var deviceCode = $(this).data("info");
     createSelectInputsForLevels(".device-lv");
-    for (var i = 0; i < projectData.devices.length; i++) {
-      var device = projectData.devices[i];
-      if (device.code == deviceCode) {
-        $("#ma").val(device.code);
+    for (var i = 0; i < projectData.Devices.length; i++) {
+      var device = projectData.Devices[i];
+      if (device.deviceCode == deviceCode) {
+        $("#ma").val(device.deviceCode);
         $("#cabinet").val(device.cabinet);
         $("#ngay").val(device.date);
         $(".level1-inputs").val(device.lv1);
@@ -179,10 +300,10 @@ $(document).ready(function () {
   $(".add-device-mockup").on("click", ".edit-device-save", function () {
     var deviceCode = $(".editing").data("info");
     $(".add-device-mockup").find(".loaitb").prop("disabled", false);
-    for (var i = 0; i < projectData.devices.length; i++) {
-      var device = projectData.devices[i];
-      if (device.code == deviceCode) {
-        device.code = $("#ma").val();
+    for (var i = 0; i < projectData.Devices.length; i++) {
+      var device = projectData.Devices[i];
+      if (device.deviceCode == deviceCode) {
+        device.deviceCode = $("#ma").val();
         device.cabinet = $("#cabinet").val();
         device.date = $("#ngay").val();
         device.lv1 = $(".level1-inputs").val();
@@ -219,10 +340,10 @@ $(document).ready(function () {
     } else {
       return;
     }
-    for (var i = 0; i < projectData.devices.length; i++) {
-      var device = projectData.devices[i];
-      if (device.code == deviceID) {
-        projectData.devices.splice(i, 1);
+    for (var i = 0; i < projectData.Devices.length; i++) {
+      var device = projectData.Devices[i];
+      if (device.deviceCode == deviceID) {
+        projectData.Devices.splice(i, 1);
         break;
       }
     }
@@ -238,9 +359,9 @@ $(document).ready(function () {
     var deviceID = $(this).data("info");
     var deviceType = $(this).data("type");
     $("#main").find(".device-added").remove();
-    for (var i = 0; i < projectData.devices.length; i++) {
-      var device = projectData.devices[i];
-      if (device.code == deviceID) {
+    for (var i = 0; i < projectData.Devices.length; i++) {
+      var device = projectData.Devices[i];
+      if (device.deviceCode == deviceID) {
         addProject(device);
       }
     }
@@ -259,21 +380,21 @@ $(document).ready(function () {
         break;
     }
     // khởi tạo danh sách thiết bị
-    if (device.channels && device.channels.length > 0) {
-      $(".device-added-" + device.code)
+    if (device.Channels && device.Channels.length > 0) {
+      $(".device-added-" + device.deviceCode)
         .find("table")
         .remove();
       $("#main")
-        .find(".device-added-" + device.code)
-        .append(createchannelTable(device.code));
+        .find(".device-added-" + device.deviceCode)
+        .append(createchannelTable(device.deviceCode));
     }
 
-    for (var i = 0; i < projectData.devices.length; i++) {
-      if (projectData.devices[i].code == deviceID) {
-        var foundDevice = projectData.devices[i];
-        for (var j = 0; j < foundDevice.channels.length; j++) {
-          if (mapping.hasOwnProperty(foundDevice.channels[j].chonch)) {
-            var Values = mapping[foundDevice.channels[j].chonch];
+    for (var i = 0; i < projectData.Devices.length; i++) {
+      if (projectData.Devices[i].deviceCode == deviceID) {
+        var foundDevice = projectData.Devices[i];
+        for (var j = 0; j < foundDevice.Channels.length; j++) {
+          if (mapping.hasOwnProperty(foundDevice.Channels[j].chonch)) {
+            var Values = mapping[foundDevice.Channels[j].chonch];
             for (var k = 0; k < Values.length; k++) {
               $("#main")
                 .find(".device-added-" + deviceID)
@@ -283,7 +404,7 @@ $(document).ready(function () {
           }
           $("#main")
             .find(".device-added-" + deviceID)
-            .find(".channel-" + foundDevice.channels[j].chonch)
+            .find(".channel-" + foundDevice.Channels[j].chonch)
             .addClass("created");
         }
       }
@@ -307,21 +428,21 @@ $(document).ready(function () {
   function addProject(device) {
     var newDevice =
       '<div class="device-added device-added-' +
-      device.code +
+      device.deviceCode +
       '" data-info="' +
-      device.code +
+      device.deviceCode +
       '">' +
       '<div style="border:1px #fff solid; padding-top:20px">' +
       '<div class="channel-diagram"></div>' +
       '<div class="channel-list" data-info="' +
-      device.code +
+      device.deviceCode +
       '"></div>' +
       "</div>" +
       '<div class="device-hd" data-info="' +
-      device.code +
+      device.deviceCode +
       '">' +
       "<span>" +
-      device.code +
+      device.deviceCode +
       " - " +
       device.cabinet +
       " - " +
@@ -330,23 +451,23 @@ $(document).ready(function () {
       device.deviceType +
       "</span>" +
       '<span class="edit-device-btn" data-info="' +
-      device.code +
+      device.deviceCode +
       '"><i class="fa-solid fa-pen-to-square"></i> Edit Device</span>' +
       '<span class="delete-device-btn" data-info="' +
-      device.code +
+      device.deviceCode +
       '"><i class="fa-solid fa-trash"></i> Delete Device</span>';
     // '<span class="add-channel-btn" style="margin-right:10px" data-info="' + device.code + '" data-type="' + device.deviceType + '"><i class="fa-solid fa-plus"></i> Add channel</span>' +
     // '<i class="fa-solid fa-caret-down" data-info="' + device.code + '"></i>';
 
     // Thêm đối tượng mới vào DOM
     $(".add-device-main").append(newDevice);
-    if (device.channels && device.channels.length > 0) {
-      $(".device-added-" + device.code)
+    if (device.Channels && device.Channels.length > 0) {
+      $(".device-added-" + device.deviceCode)
         .find("table")
         .remove();
       $("#main")
-        .find(".device-added-" + device.code)
-        .append(createchannelTable(device.code));
+        .find(".device-added-" + device.deviceCode)
+        .append(createchannelTable(device.deviceCode));
     }
   }
 
@@ -602,4 +723,6 @@ $(document).ready(function () {
     }, 200);
   });
   // end
+
+  fetchLayoutData();
 });

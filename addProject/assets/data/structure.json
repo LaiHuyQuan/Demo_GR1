@@ -1,0 +1,58 @@
+{
+  "level1": [
+    {
+      "name": "1231",
+      "code": "123123",
+      "Level2": [
+        {
+          "name": "qưeq",
+          "code": "qưeq",
+          "Level3": [
+            {
+              "name": "qưeqwe",
+              "code": "qưeqw",
+              "Level4": [
+                {
+                  "name": "qưeqw",
+                  "code": "qưeqw"
+                }
+              ]
+            },
+            {
+              "name": "qưeqwe3",
+              "code": "1231232",
+              "Level4": []
+            }
+          ]
+        },
+        {
+          "name": "123123",
+          "code": "123123",
+          "Level3": []
+        }
+      ]
+    },
+    {
+      "name": "13123",
+      "code": "13123123",
+      "Level2": [
+        {
+          "name": "13123",
+          "code": "123123",
+          "Level3": [
+            {
+              "name": "1231231",
+              "code": "123123",
+              "Level4": []
+            },
+            {
+              "name": "12312",
+              "code": "1231233",
+              "Level4": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
