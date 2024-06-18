@@ -1826,7 +1826,9 @@ function addTableForDongcat(type, ID) {
 ```
 
 ## 5. Các element (element.js)
+
 ## 6. Các thao các chính (management.js)
+
 ### 6.1: Khởi tạo jointjs
 
 ```
@@ -1864,4 +1866,3 @@ scale = () => {
     paper.scaleContentToFit();
   };
 ```
-

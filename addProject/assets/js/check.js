@@ -60,15 +60,41 @@ function checkDuplicateNameAndCodeInBlock(block, inputText, inputCode) {
       names[match[1]] = true;
       codes[match[2]] = true;
     }
+    console.log(match);
+    if (
+      inputText === "" ||
+      names[inputText] ||
+      inputCode === "" ||
+      codes[inputCode]
+    ) {
+      hasDuplicates = true;
+    }
   });
 
-  if (
-    inputText === "" ||
-    names[inputText] ||
-    inputCode === "" ||
-    codes[inputCode]
-  ) {
-    hasDuplicates = true;
-  }
+  return hasDuplicates;
+}
+
+// Kiểm tra cấp độ 1
+
+function checkDuplicateNameAndCodeForLevel1(inputText, inputCode) {
+  var names = {};
+  var codes = {};
+  var hasDuplicates = false;
+
+  jsonStructure.level1.forEach(function (item) {
+    var lvName = item.name;
+    var lvCode = item.code;
+    names[lvName] = true;
+    codes[lvCode] = true;
+    if (
+      inputText === "" ||
+      names[inputText] ||
+      inputCode === "" ||
+      codes[inputCode]
+    ) {
+      hasDuplicates = true;
+    }
+  });
+
   return hasDuplicates;
 }

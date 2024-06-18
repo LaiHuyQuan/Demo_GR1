@@ -105,12 +105,17 @@ $(".container").on("click", ".ok-button", function (event) {
   var level = parseInt(parentBlock.attr("class").match(/block-level-(\d+)/)[1]);
   var newBlock;
 
-  if (
-    checkDuplicateNameAndCodeInBlock($(this).parent(), inputText, inputCode)
-  ) {
-    alert("không hợp lệ");
-    return; // Nếu có trùng lặp hoặc giá trị rỗng, dừng lại
-  } else console.log("ok");
+  if (!parentBlock.hasClass("block-level-0")) {
+    if (checkDuplicateNameAndCodeInBlock(parentBlock, inputText, inputCode)) {
+      alert("không hợp lệ");
+      return; // Nếu có trùng lặp hoặc giá trị rỗng, dừng lại
+    } else console.log("ok");
+  } else {
+    if (checkDuplicateNameAndCodeForLevel1(inputText, inputCode)) {
+      alert("không hợp lệ");
+      return; // Nếu có trùng lặp hoặc giá trị rỗng, dừng lại
+    } else console.log("ok");
+  }
 
   if (level < 3) {
     newBlock =
@@ -173,7 +178,19 @@ $(".container").on("keydown", ".add-code", function (event) {
     // Kiểm tra nếu phím Enter được nhấn
     var inputText = $(this).prev(".add-input").val();
     var inputCode = $(this).val(); // Lấy mã cấp độ từ input mã
+    var parentBlock = $(this).parent();
 
+    if (!parentBlock.hasClass("block-level-0")) {
+      if (checkDuplicateNameAndCodeInBlock(parentBlock, inputText, inputCode)) {
+        alert("không hợp lệ");
+        return; // Nếu có trùng lặp hoặc giá trị rỗng, dừng lại
+      } else console.log("ok");
+    } else {
+      if (checkDuplicateNameAndCodeForLevel1(inputText, inputCode)) {
+        alert("không hợp lệ");
+        return; // Nếu có trùng lặp hoặc giá trị rỗng, dừng lại
+      } else console.log("ok");
+    }
     var level = parseInt(
       $(this)
         .parent()

@@ -3,16 +3,19 @@
 Trang cập nhật thông tin dự án và thiết bị
 
 # Cấu trúc
+
 **/assset/css**
+
 ```
 app.css
 app-dark.css
 iconly.css
 style.css
-addProject.css 
+addProject.css
 ```
 
 **/asset/js**
+
 ```
 app.js          // default
 addProject.js   // các thao tác với thiết bị (CRUD)
@@ -22,11 +25,51 @@ check.js        // các hàm kiểm tra
 export.js       // xuất dữ liệu
 ```
 
+# Hướng dẫn sử dụng
+
+## 1. Nhập thông tin dự án
+
+![](./assets/img/huongdan/9.png)
+
+## 2. Thêm cấu trúc
+
+Mở giao diện thêm cấu trúc
+![](./assets/img/huongdan/3.png)
+Lựa chọn thêm cấp độ
+![](./assets/img/huongdan/4.png)
+Nhập vào thông tin
+![](./assets/img/huongdan/5.png)
+Cập nhật
+![](./assets/img/huongdan/6.png)
+
+## 3.Thêm thiết bị mới
+
+Mở giao diện thêm thiết bị
+![](./assets/img/huongdan/1.png)
+Nhập thông tin và cập nhật
+![](./assets/img/huongdan/2.png)
+
+## 4. Thêm kênh
+
+Chọn kênh
+![](./assets/img/huongdan/7.png)
+Thêm thông tin và cập nhật
+![](./assets/img/huongdan/8.png)
+
+## 5.Lưu và xuất dữ liệu
+
+![](./assets/img/huongdan/10.png)
+
 # Hướng dẫn bảo trì
+
 ## 1. Thao tác với thiết bị (addProject.js)
+
 ### 1.1: Dữ liệu
+
 #### 1.1.1: Biến lưu trữ dự án
+
 Gồm thông tin về dự án và các thiết bị bên trong
+
 ```bash
 var projectData = {
     "projectCode": '',
@@ -34,15 +77,21 @@ var projectData = {
     "devices": []
 }
 ```
+
 #### 1.1.2: Biến lưu trữ cấu trúc dự án
+
 Lưu trữ các level và dữ liệu liên quan (levelName, levelCode)
+
 ```bash
 var jsonStructure = {
     "level0": []
 }
 ```
+
 #### 1.1.3: Mảng lưu trữ kênh
-Ánh xạ các kênh 
+
+Ánh xạ các kênh
+
 ```bash
 var mapping = {
     "CH1": ["A11", "A21", "A31", "P1", "P2", "P3"],
@@ -59,7 +108,9 @@ var mapping = {
     "CH12": ["A46", "A56", "A66"]
 };
 ```
+
 Ánh xạ ngược
+
 ```bash
 var reversedMapping = {};
 for (var key in mapping) {
@@ -77,10 +128,13 @@ for (var key in mapping) {
 ```
 
 ### 1.2 Sự kiện
+
 #### 1.2.1: Mở mockup
+
 -Hiển thị mockup đã bị ẩn đi
 -Khởi tạo ô chọn cấu trúc
 -Khởi tạo nút `Save`
+
 ```bash
 $('#add-project').on('click', '.add-device-btn', function () {
         $('.add-device-mockup').removeClass('hide');
@@ -90,13 +144,16 @@ $('#add-project').on('click', '.add-device-btn', function () {
         $('#ma').focus();
     })
 ```
+
 ### 1.2.2: Thêm thiết bị
+
 -Đọc dữ liệu từ form
 -Kiểm tra `Mã thiết bị` và `Loại thiết bị`
 -Thêm thiết bị vào `projectData`
 -Khởi tạo trang thông tin dự án
 -Đặt giá trị form về mặc định
 -Ẩn mockup
+
 ```bash
     $('.add-device-mockup').on('click', '.device-add', function () {
         // đọc dữ liệu
@@ -170,12 +227,15 @@ $('#add-project').on('click', '.add-device-btn', function () {
         $('.add-device-mockup').addClass('hide');
     })
 ```
+
 ### 1.2.3: Chỉnh sửa thiết bị
+
 -Thêm trạng thái `editing` cho thiết bị
 -Hiển thị mockup
 -Khởi tạo ô chọn cấu trúc
 -Tìm và truyền thông tin thiết bị từ `projectData` và truyền vào form
 -Khởi tạo nút `Save`
+
 ```bash
 $('.add-device').on('click', '.edit-device-btn', function () {
         $(this).parent().addClass('editing')
@@ -205,11 +265,14 @@ $('.add-device').on('click', '.edit-device-btn', function () {
         $('.device-btns').append(editDeviceIndex)
     })
 ```
+
 ### 1.2.4: Lưu bản chỉnh sửa thiết bị
+
 -Tìm thiết bị đang chỉnh sửa
 -Lưu dữ liệu đọc từ form
 -Xóa trạng thái `editing`
 -Ẩn mockup
+
 ```bash
 $('.add-device-mockup').on('click', '.edit-device-save', function () {
         var deviceCode = $('.editing').data('info');
@@ -237,10 +300,13 @@ $('.add-device-mockup').on('click', '.edit-device-save', function () {
         $('.device-lv').find('.mockup').remove();
     });
 ```
+
 ### 1.2.5: Xóa thiết bị
+
 -Xác nhận xóa
 -Xóa thiết bị trong `projectData`
 -Xóa trang thông tin thiết bị
+
 ```bash
 $('.add-device').on('click', '.delete-device-btn', function () {
         var deviceID = $(this).data('info')
@@ -261,10 +327,13 @@ $('.add-device').on('click', '.delete-device-btn', function () {
         $('.menu').find('.device-added-' + deviceID).remove();
     })
 ```
+
 ### 1.2.6: Chọn thiết bị
+
 -Đánh dấu thiết bị trên danh sách
 -Khởi tạo trang thông tin thiết bị
 -Khởi tạo danh sách kênh
+
 ```bash
     $('.menu').on('click', '.device-hd', function () {
         $('.color-gray').removeClass('color-gray');
@@ -314,10 +383,13 @@ $('.add-device').on('click', '.delete-device-btn', function () {
         initializeTooltips();
     })
 ```
+
 ### 1.2.7: Đóng mockup
+
 -Xóa các nút đã được khởi tạo
 -Xóa ô chọn cấu trúc
 -Ẩn mockup
+
 ```bash
 $('.add-device-mockup').on('click', '.device-close', function (event) {
         event.preventDefault()
@@ -328,9 +400,13 @@ $('.add-device-mockup').on('click', '.device-close', function (event) {
         $('.device-lv').find('.mockup').remove();
     })
 ```
+
 ### 1.2.8: Các hàm sử dụng
+
 #### 1.2.8.1: addProject (device)
+
 -Khởi tạo trang thông tin thiết bị
+
 ```bash
 function addProject(device) {
         var newDevice = '<div class="device-added device-added-' + device.code + '" data-info="' + device.code + '">' +
@@ -353,8 +429,11 @@ function addProject(device) {
         }
     }
 ```
+
 #### 1.2.8.2: Hàm tạo danh sách kênh (addChannelList)
+
 1k3p
+
 ```bash
 function addChannelList1k3p(deviceID) {
         var list = ['CH1'];
@@ -375,7 +454,9 @@ function addChannelList1k3p(deviceID) {
         $('.channel-list').parent().append(img)
     }
 ```
+
 6k1p
+
 ```bash
 function addChannelList6k1p(deviceID) {
         var channelList = ['C6', 'C5', 'C4', 'C3', 'C2', 'C1']
@@ -390,7 +471,9 @@ function addChannelList6k1p(deviceID) {
         $('.channel-list').parent().append(img)
     }
 ```
+
 6k3p
+
 ```bash
 function addChannelList6k3p(deviceID) {
         var list = ['CH1', 'CH2', 'CH3', 'CH4', 'CH5', 'CH6'];
@@ -425,7 +508,9 @@ function addChannelList6k3p(deviceID) {
         $('.channel-list').parent().append(img)
     }
 ```
+
 12k3p
+
 ```bash
 function addChannelList12k3p(deviceID) {
         var list = ['CH1', 'CH2', 'CH3', 'CH4', 'CH5', 'CH6', 'CH7', 'CH8', 'CH9', 'CH10', 'CH11', 'CH12'];
@@ -483,7 +568,9 @@ function createChannelLink(i, chonch, deviceID) {
         return html;
     }
 ```
+
 #### 1.2.8.3: Hàm tạo nút chọn kênh (createSVGButton)
+
 ```Bash
 function createSVGButton(deviceID, chonch, text) {
         var div = $('<div></div>')
@@ -523,8 +610,11 @@ function createSVGButtonBot(deviceID, chonch, text) {
         return div;
     }
 ```
+
 ### 1.2.9: Hiệu ứng
+
 #### 1.2.9.1: Xóa hiệu ứng mặc định của form `Bootstrap`
+
 ```bash
 $('input').on('keypress keydown', function (event) {
         if (event.which === 13) {
@@ -532,7 +622,9 @@ $('input').on('keypress keydown', function (event) {
         }
     });
 ```
+
 #### 1.2.9.2: Kích hoạt tooltip
+
 ```bash
 function initializeTooltips() {
         $('#main').children().each(function () {
@@ -545,7 +637,9 @@ function initializeTooltips() {
         });
     }
 ```
+
 #### 1.2.9.3: Hover danh sách kênh
+
 ```bash
 var hoverTimer;
     $('#main').on('mouseenter', '.channel1phase', function () {
@@ -572,10 +666,13 @@ var hoverTimer;
 ```
 
 ## 2. Thao tác với kênh (channel.js)
+
 ### 2.1: Mở mockup
+
 -Tìm thiết bị trong projectData
 -Kiểm tra kênh tồn tại
 -Thêm kênh
+
 ```bash
 $('#main').on('click', '.channel', function () {
     var deviceID = $(this).data('deviceid')
@@ -603,11 +700,14 @@ $('#main').on('click', '.channel1phase', function () {
     addChannel(deviceID, chonch, chonpha);
 })
 ```
+
 ### 2.2: Thêm kênh
+
 -Đọc dữ liệu, lưu vào thiết bị
 -Đặt form về mặc định
 -Thêm kênh vào bảng kênh
 -Ẩn mockup
+
 ```bash
 // lưu
 $('.add-channel-mockup').on('click', '.channel-save', function () {
@@ -676,10 +776,13 @@ $('.add-channel-mockup').on('click', '.channel-save', function () {
     $('.add-channel-mockup').addClass('hide');
 });
 ```
+
 ### 2.3: Sửa kênh
+
 -Mở mockup
 -Tìm và thêm thông tin kênh vào form
 -Khởi tạo nút `Save`
+
 ```bash
 $('.add-device').on('click', '.edit-channel-btn', function () {
     $('.add-channel-mockup').removeClass('hide');
@@ -718,7 +821,9 @@ $('.add-device').on('click', '.edit-channel-btn', function () {
     $('.channel-btns').append(channelSavebtn);
 });
 ```
+
 ### 2.4: Lưu bản chỉnh sửa kênh
+
 -Tìm và sửa thông tin kênh trong projectData
 -Sửa thông tin trong bảng kênh
 -Ẩn mockup
@@ -765,10 +870,13 @@ $('.add-channel-mockup').on('click', '.edit-channel-save', function () {
     $('.add-channel-mockup').addClass('hide');
 });
 ```
+
 ### 2.5: Xóa kênh
+
 -Xác nhận xóa kênh
 -Tìm và xóa thông tin kênh trong projectData
 -Xóa thông tin kênh trong bảng
+
 ```bash
 $('.add-device-main').on('click', '.delete-channel-btn', function () {
     var channelID = $(this).data('info');
@@ -806,9 +914,12 @@ $('.add-device-main').on('click', '.delete-channel-btn', function () {
     }
 });
 ```
+
 ### 2.6: Đóng mockup
+
 -Xóa các nút đã khởi tạo
 -Ẩn mockup
+
 ```bash
 $('.add-channel-mockup').on('click', '.channel-close', function (event) {
     // $('.channel-save').attr('data-info', "");
@@ -821,11 +932,15 @@ $('.add-channel-mockup').on('click', '.channel-close', function (event) {
     $('.add-channel-mockup').addClass('hide');
 });
 ```
+
 ### 2.7: Các hàm sử dụng
+
 #### 2.7.1: Hàm thêm kênh (addChannel)
+
 -Khởi tạo ô chọn cấu trúc
 -Khởi tạo nút `Save`
 -Thêm vào mockup
+
 ```bash
 function addChannel(deviceID, chonch, chonpha) {
     $('.channel-lv').find('.mockup').remove();
@@ -837,7 +952,9 @@ function addChannel(deviceID, chonch, chonpha) {
     $('.channel-btns').append(channelSavebtn);
 }
 ```
+
 #### 2.7.2: Hàm tạo bảng kênh (createchannelTable)
+
 ```bash
 function createchannelTable(deviceID) {
     var newDevice = '';
@@ -886,7 +1003,9 @@ function createchannelTable(deviceID) {
     return newDevice;
 }
 ```
+
 #### 2.7.3: Hàm tạo ô chọn cấu trúc
+
 ```bash
 function createSelectInputsForLevels(blockName) {
     var container = $(blockName);
@@ -942,7 +1061,9 @@ function createSelectInputs(level, data) {
     return selectInputs;
 }
 ```
+
 #### 2.7.4: Hàm cập nhật ô lựa chọn (populateSelectOptionsForLevel)
+
 ```bash
 function populateSelectOptionsForLevel(selectedValue, level) {
     var dataForLevel = getDataForLevel(selectedValue, level);
@@ -964,7 +1085,9 @@ function populateSelectOptionsForLevel(selectedValue, level) {
     }
 }
 ```
+
 #### 2.7.5: Hàm lấy dữ liệu cho ô lựa chọn (getDataForLevel)
+
 ```bash
 function getDataForLevel(selectedValue, level) {
     var dataForLevel = [];
@@ -999,7 +1122,9 @@ function getDataForLevel(selectedValue, level) {
     return dataForLevel;
 }
 ```
-### 2.8: Sự kiện thay đổi lựa chọn 
+
+### 2.8: Sự kiện thay đổi lựa chọn
+
 ```bash
 $('.mockup').on('change', '.select-lv', function () {
     var selectedValue = $(this).val();
@@ -1015,26 +1140,34 @@ $('.mockup').on('change', '.select-lv', function () {
 ```
 
 ## 3: Thao tác với cấu trúc (struture.js)
+
 ### 3.1: Mở mockup
+
 ```bash
 $('#add-project').on('click', '.structure', function () {
         $('.structure-mockup').removeClass('hide');
     })
 ```
+
 ### 3.2: Đóng mockup
+
 ```bash
 $('.structure-mockup').on('click', '.struc-close', function () {
         $('.structure-mockup').addClass('hide');
     })
 ```
+
 ### 3.3: Lưu structure
+
 ```bash
     $('.structure-mockup').on('click', '.struc-save', function () {
         $('.structure-mockup').addClass('hide');
         SaveStructure();
     })
 ```
+
 ### 3.4: Thêm các cấp độ
+
 ```bash
 var isAdding = false; // Biến để kiểm tra trạng thái đang thêm mới hay không
     $('.container').on('click', '.add-button', function () {
@@ -1059,6 +1192,7 @@ var isAdding = false; // Biến để kiểm tra trạng thái đang thêm mới
         $('.add-input').first().focus(); // Focus vào input mới (tên)
     });
 ```
+
 ```bash
 $('.container').on('click', '.ok-button', function (event) {
         event.stopPropagation(); // Ngăn chặn sự kiện click từ nút thêm input truyền vào
@@ -1094,7 +1228,9 @@ $('.container').on('click', '.ok-button', function (event) {
         isAdding = false; // Trở lại trạng thái không thêm mới
     });
 ```
+
 Hủy
+
 ```bash
 $('.container').on('click', '.cancel-button', function (event) {
         event.stopPropagation(); // Ngăn chặn sự kiện click lan truyền tới các khối cha
@@ -1105,16 +1241,22 @@ $('.container').on('click', '.cancel-button', function (event) {
         isAdding = false; // Trở lại trạng thái không thêm mới
     });
 ```
+
 ### 3.5: Xóa cấp độ
+
 ```bash
 $('.container').on('click', '.delete-button', function (event) {
         event.stopPropagation(); // Ngăn chặn sự kiện click lan truyền tới các khối cha
         $(this).parent().remove(); // Xóa cấp độ hiện tại khi nút xóa được nhấn
     });
 ```
+
 ### 3.6: Sự kiện:
+
 #### 3.6.1: Nhập dữ liệu cấp độ
+
 Nhập tên cấp độ
+
 ```bash
 $('.container').on('keydown', '.add-input', function (event) {
         if (event.keyCode === 13) { // Kiểm tra nếu là phím Enter
@@ -1122,7 +1264,9 @@ $('.container').on('keydown', '.add-input', function (event) {
         }
     });
 ```
+
 Nhập mã cấp độ
+
 ```bash
 $('.container').on('keydown', '.add-code', function (event) {
         event.stopPropagation(); // Ngăn chặn sự kiện click từ nút thêm input truyền vào
@@ -1152,7 +1296,9 @@ $('.container').on('keydown', '.add-code', function (event) {
         }
     });
 ```
+
 #### 3.6.2: Ẩn-hiện level
+
 ```bash
 $('.container').on('click', '.block', function () {
         if (!isAdding) {
@@ -1160,6 +1306,7 @@ $('.container').on('click', '.block', function () {
         }
     });
 ```
+
 ```bash
 $('.container').on('click', '.block-level-2', function (event) {
         event.stopPropagation();
@@ -1173,6 +1320,7 @@ $('.container').on('click', '.block-level-2', function (event) {
         }
     });
 ```
+
 ```bash
 $('.container').on('click', '.block-level-3', function (event) {
         event.stopPropagation();
@@ -1181,26 +1329,29 @@ $('.container').on('click', '.block-level-3', function (event) {
         }
     });
 ```
+
 ```bash
 $('.container').on('click', '.block-level-4', function (event) {
         event.stopPropagation();
     });
 ```
+
 ### 3.7: Hàm lưu cấu trúc (SaveStructure)
+
 ```bash
-function SaveStructure() {    
+function SaveStructure() {
         jsonStructure.level0 = [];
-    
+
         $('.container').find('.block-level-1').each(function () {
             var levelInfo = $(this).contents().first().text().trim();
             var match = levelInfo.match(/^(.+?)\s*\(code:\s*(.+?)\)$/);
-    
+
             jsonStructure.level0.push({
                 "name": match[1],
                 "code": match[2],
                 "children": []
             });
-    
+
             $(this).find('.block-level-2').each(function () {
                 var levelInfo = $(this).contents().first().text().trim();
                 var match2 = levelInfo.match(/^(.+?)\s*\(code:\s*(.+?)\)$/);
@@ -1209,7 +1360,7 @@ function SaveStructure() {
                     "code": match2[2],
                     "children": []
                 });
-    
+
                 $(this).find('.block-level-3').each(function () {
                     var levelInfo = $(this).contents().first().text().trim();
                     var match3 = levelInfo.match(/^(.+?)\s*\(code:\s*(.+?)\)$/);
@@ -1219,7 +1370,7 @@ function SaveStructure() {
                         "code": match3[2],
                         "children": []
                     });
-    
+
                     $(this).find('.block-level-4').each(function () {
                         var levelInfo = $(this).contents().first().text().trim();
                         var match4 = levelInfo.match(/^(.+?)\s*\(code:\s*(.+?)\)$/);
@@ -1234,9 +1385,13 @@ function SaveStructure() {
         });
     }
 ```
+
 ## 4: Thao tác kiểm tra (check.js)
+
 ### 4.1: Kiểm tra danh sách kênh (checkChannel)
+
 kiểm tra kênh và các ánh xạ đã tồn tại chưa
+
 ```bash
 function checkChannel(channelID, deviceID) {
     var Values = mapping[channelID];
@@ -1270,8 +1425,11 @@ function checkChannel(channelID, deviceID) {
     return true;
 }
 ```
+
 ### 4.2: Kiểm tra chọn kênh (checkChannelExistence)
+
 Kiểm tra kênh đã tồn tại hay chưa
+
 ```bash
 function checkChannelExistence(selectedValue, deviceID) {
     for (var i = 0; i < projectData.devices.length; i++) {
@@ -1288,7 +1446,9 @@ function checkChannelExistence(selectedValue, deviceID) {
     return true;
 }
 ```
+
 ### 4.3: Kiểm tra tên và code của cấp độ (checkDuplicateNameAndCodeInBlock)
+
 ```bash
 function checkDuplicateNameAndCodeInBlock(block, inputText, inputCode) {
     var names = {};
@@ -1311,7 +1471,9 @@ function checkDuplicateNameAndCodeInBlock(block, inputText, inputCode) {
 ```
 
 ## 5: Thao tác xuất dữ liệu (export.js)
+
 ### 5.1: Thao tác `Save`
+
 ```bash
 $('#add-project').on('click', '.save', function () {
     saveProject();
@@ -1323,22 +1485,29 @@ $('#add-project').on('click', '.save', function () {
     download('projectData.txt', jsonData);
 })
 ```
+
 ### 5.2: Thao tác `Export`
+
 ```bash
 $('#add-project').on('click', '.export', function () {
     saveProject();
     downloadProjectData();
 })
 ```
+
 ### 5.3: Các hàm sử dụng
+
 #### 5.3.1: Hàm lưu dự án (saveProject)
+
 ```bash
 function saveProject() {
         projectData.projectName = $('#ProjectName').val();
         projectData.projectCode = $('#ProjectCode').val();
     }
 ```
+
 #### 5.3.2: Hàm xuất dữ liệu (downloadProjectData)
+
 ```bash
 function downloadProjectData() {
         var mappingchannel = {
@@ -1446,7 +1615,9 @@ function downloadProjectData() {
     }
 
 ```
+
 ### 5.3.3: Hàm tải file (download)
+
 ```bash
 function download(filename, text) {
         var element = document.createElement('a');
