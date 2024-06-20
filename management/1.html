@@ -555,6 +555,29 @@
       </div>
     </div>
 
+    <script>
+      function toggleFullscreen() {
+        var elem = document.getElementById("myDiv");
+        elem.classList.toggle("fullscreen");
+        var diaSpace = document.getElementById("diaSpace");
+        diaSpace.classList.toggle("fullscreen");
+        //scale(); // Gọi hàm scale() sau khi thay đổi chế độ toàn màn hình
+        if (elem.classList.contains("fullscreen")) {
+          scale();
+          diaSpace.style.display = "none";
+          $("i.bi-arrows-angle-expand").replaceWith(
+            '<i class="bi bi-arrows-angle-contract"></i>'
+          );
+        } else {
+          diaSpace.style.display = "flex";
+          $("i.bi-arrows-angle-contract").replaceWith(
+            '<i class="bi bi-arrows-angle-expand"></i>'
+          );
+          scale();
+        }
+      }
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/@joint/core@4.0.1/dist/joint.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 

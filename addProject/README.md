@@ -60,6 +60,11 @@ Thêm thông tin và cập nhật
 
 ![](./assets/img/huongdan/10.png)
 
+
+## 6.Kết nối với CMS
+Dữ liệu xuất ra, copy sang project_data.JSON và sử dụng bình thường
+![](./assets/img/huongdan/11.png)
+
 # Hướng dẫn bảo trì
 
 ## 1. Thao tác với thiết bị (addProject.js)
